@@ -4,16 +4,29 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Synthelyst — Catalyst Board Games | Eco-Strategy Bioplastics Game</title>
 <meta name="description" content="Synthelyst — competitive eco-strategy board game. Race to produce bioplastics from corn, algae, milk and sugarcane. Save the Earth. By Catalyst Board Games, Oxford.">
-<meta name="keywords" content="synthelyst board game,bioplastics game,eco strategy board game,sustainability board game,science board game,catalyst board games oxford">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-:root{--s:#2a9d5c;--s2:#3ab06a;--s3:#1a6b3a;--sbg:#061208;}
+:root{--s:#2a9d5c;--s2:#3ab06a;--sbg:#061208;}
 .game-hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end;}
-.game-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;}
-.game-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,10,5,0.97) 0%,rgba(4,10,5,0.35) 55%,rgba(4,10,5,0.05) 100%);}
-.game-hero-content{position:relative;z-index:2;padding:0 60px 80px;width:100%;}
+.game-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 1s ease,filter 1s ease;}
+.game-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,10,5,0.97) 0%,rgba(4,10,5,0.35) 55%,rgba(4,10,5,0.05) 100%);transition:opacity 0.8s;}
+.hero-cards-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.6s 0.2s;}
+.hero-card-fan{position:relative;width:360px;height:260px;}
+.hcf-card{position:absolute;width:130px;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.8);transition:all 0.7s cubic-bezier(0.34,1.3,0.64,1);}
+.hcf-1{left:0;top:20px;transform:rotate(-10deg) translateY(40px);z-index:1;transition-delay:0.05s;}
+.hcf-2{left:50%;transform:translateX(-50%) translateY(40px);z-index:3;transition-delay:0.1s;}
+.hcf-3{right:0;top:20px;transform:rotate(10deg) translateY(40px);z-index:1;transition-delay:0.15s;}
+.hero-zoomed .game-hero-bg{transform:scale(1.15);filter:brightness(0.3) blur(3px);}
+.hero-zoomed .game-hero-overlay{opacity:0.7;}
+.hero-zoomed .hero-cards-stage{opacity:1;}
+.hero-zoomed .hcf-1{transform:rotate(-10deg) translateY(0);}
+.hero-zoomed .hcf-2{transform:translateX(-50%) translateY(0);}
+.hero-zoomed .hcf-3{transform:rotate(10deg) translateY(0);}
+.hero-scroll-hint{position:absolute;bottom:140px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);display:flex;flex-direction:column;align-items:center;gap:8px;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,0.4),transparent);}
+.game-hero-content{position:relative;z-index:10;padding:0 60px 80px;width:100%;}
 .game-hero-back{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:32px;transition:color 0.2s;}
 .game-hero-back:hover{color:var(--s2);}
 .eyebrow-s{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--s2);margin-bottom:12px;}
@@ -28,10 +41,8 @@
 .intro-b{flex:1;font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8;}
 .gc{max-width:1240px;margin:0 auto;padding:80px 60px;}
 .gs-lbl-s{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--s2);margin-bottom:12px;}
-.gs-title-s{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);letter-spacing:0.03em;line-height:0.9;margin-bottom:0;}
-.gs-dark-s{background:#061208;}
-.gs-light-s{background:#f0f5f0;}
-.gs-mid-s{background:var(--bg);}
+.gs-title-d{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);letter-spacing:0.03em;line-height:0.9;color:#fff;}
+.gs-title-l{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);letter-spacing:0.03em;line-height:0.9;color:var(--ink);}
 /* ORIGIN */
 .origin-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
 .o-img{width:100%;height:440px;object-fit:cover;display:block;}
@@ -39,61 +50,61 @@
 .o-body p{margin-bottom:16px;}
 .o-body strong{color:var(--s2);}
 .o-highlight{background:rgba(42,157,92,0.1);border:1px solid rgba(42,157,92,0.25);padding:24px 28px;margin-top:24px;}
-.o-hl-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--s2);margin-bottom:10px;}
-.o-hl p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin:0;}
-/* EARTH HEALTH VISUAL */
+.oh-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--s2);margin-bottom:10px;}
+.oh-p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin:0;}
+/* EARTH SPLIT */
 .earth-split{display:grid;grid-template-columns:1fr 1fr;}
-.earth-img-col{min-height:500px;overflow:hidden;}
-.earth-img-col img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s;}
-.earth-img-col:hover img{transform:scale(1.04);}
-.earth-text-col{background:#061208;padding:64px 56px;display:flex;flex-direction:column;justify-content:center;}
-.earth-text-col h3{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:0.04em;color:#fff;line-height:0.9;margin-bottom:20px;}
-.earth-text-col p{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:14px;}
+.earth-img{min-height:500px;overflow:hidden;}
+.earth-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s;}
+.earth-img:hover img{transform:scale(1.04);}
+.earth-text{background:#061208;padding:60px 52px;display:flex;flex-direction:column;justify-content:center;}
+.earth-text h3{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.04em;color:#fff;line-height:0.9;margin-bottom:20px;}
+.earth-text p{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:14px;}
 /* COMPANIES */
 .companies-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;}
-.company-card{padding:28px 20px;border:1.5px solid rgba(58,176,106,0.2);background:rgba(42,157,92,0.04);transition:all 0.3s;text-align:center;}
+.company-card{padding:24px 16px;border:1.5px solid rgba(58,176,106,0.18);background:rgba(42,157,92,0.03);transition:all 0.3s;text-align:center;}
 .company-card:hover{border-color:var(--s2);background:rgba(42,157,92,0.1);transform:translateY(-4px);}
-.company-flag{font-size:32px;margin-bottom:12px;display:block;}
-.company-name{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;letter-spacing:0.08em;margin-bottom:4px;}
-.company-loc{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.15em;text-transform:uppercase;}
-/* PHASES */
+.company-flag{font-size:28px;margin-bottom:10px;display:block;}
+.company-name{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#fff;letter-spacing:0.06em;margin-bottom:4px;}
+.company-loc{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.12em;text-transform:uppercase;}
+/* PHASES — minimal */
 .phases-grid-s{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;}
-.phase-s{padding:28px 20px;border:1.5px solid var(--rule);background:var(--bg3);transition:border-color 0.3s;}
+.phase-s{padding:26px 18px;border:1.5px solid var(--rule);background:var(--bg3);transition:border-color 0.3s;}
 .phase-s:hover{border-color:var(--s);}
 .phase-s-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;}
-.phase-s-icon{font-size:24px;margin-bottom:10px;display:block;}
+.phase-s-icon{font-size:22px;margin-bottom:10px;display:block;}
 .phase-s-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.06em;color:var(--ink);margin-bottom:6px;}
 .phase-s-desc{font-size:12px;color:var(--ink3);line-height:1.6;}
-/* MATERIALS */
-.materials-img{width:100%;height:460px;object-fit:cover;display:block;margin-bottom:2px;}
+/* FEEDSTOCKS */
 .feedstocks{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;}
-.fs-card{padding:24px 16px;border:1.5px solid var(--rule);background:var(--bg3);text-align:center;transition:all 0.3s;}
+.fs-card{padding:22px 14px;border:1.5px solid var(--rule);background:var(--bg3);text-align:center;transition:all 0.3s;}
 .fs-card:hover{border-color:var(--s);transform:translateY(-3px);}
-.fs-icon{font-size:36px;margin-bottom:10px;display:block;}
-.fs-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.06em;color:var(--ink);margin-bottom:6px;}
+.fs-icon{font-size:32px;margin-bottom:10px;display:block;}
+.fs-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.06em;color:var(--ink);margin-bottom:6px;}
 .fs-desc{font-size:11px;color:var(--ink3);line-height:1.5;}
 /* CARDS */
-.section-scroll-label{max-width:1240px;margin:0 auto;padding:60px 60px 24px;display:flex;align-items:flex-end;justify-content:space-between;}
-.scroll-hint{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3);}
+.scroll-head{max-width:1240px;margin:0 auto;padding:60px 60px 24px;display:flex;align-items:flex-end;justify-content:space-between;}
+.scroll-hint-txt{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3);}
 /* USP */
 .usp-grid-s{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
-.usp-s{padding:32px 28px;background:var(--bg3);border:1.5px solid var(--rule);transition:all 0.3s;}
+.usp-s{padding:28px 24px;background:var(--bg3);border:1.5px solid var(--rule);transition:all 0.3s;}
 .usp-s:hover{border-color:var(--s);transform:translateY(-4px);}
-.usp-s-icon{font-size:28px;margin-bottom:12px;display:block;}
+.usp-s-icon{font-size:26px;margin-bottom:12px;display:block;}
 .usp-s-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px;}
 .usp-s-text{font-size:13px;color:var(--ink3);line-height:1.7;}
 /* PROGRESS */
-.progress-s{background:#061208;padding:80px 60px;}
+.progress-s{background:#061208;padding:72px 60px;}
 .pw{max-width:1240px;margin:0 auto;}
-.prog-bar-row{display:flex;gap:2px;margin:32px 0;}
-.prog-step{flex:1;padding:20px 14px;border:1px solid rgba(255,255,255,0.07);transition:background 0.3s;}
+.prog-bar-row{display:flex;gap:2px;margin:28px 0;}
+.prog-step{flex:1;padding:18px 12px;border:1px solid rgba(255,255,255,0.07);transition:background 0.3s;}
 .prog-step.done{background:rgba(42,157,92,0.12);}
 .prog-step.active{background:rgba(42,157,92,0.22);border-color:var(--s2);}
 .prog-step-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.25);margin-bottom:6px;}
-.prog-step-name{font-family:'Bebas Neue',sans-serif;font-size:15px;color:rgba(255,255,255,0.4);letter-spacing:0.07em;}
+.prog-step-name{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.07em;}
 .prog-step.done .prog-step-name{color:var(--s2);}
 .prog-step.active .prog-step-name{color:#fff;}
-.btn-green{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#fff;background:var(--s);padding:14px 32px;text-decoration:none;display:inline-block;transition:background 0.2s;border:none;}
+.prog-step:not(.done):not(.active) .prog-step-name{color:rgba(255,255,255,0.3);}
+.btn-green{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#fff;background:var(--s);padding:14px 32px;text-decoration:none;display:inline-block;transition:background 0.2s;}
 .btn-green:hover{background:var(--s2);}
 @media(max-width:960px){
   .game-hero-content{padding:0 20px 48px;}
@@ -101,14 +112,15 @@
   .intro-strip{flex-direction:column;gap:24px;padding:32px 20px;}
   .gc{padding:48px 20px;}
   .origin-grid,.earth-split{grid-template-columns:1fr;}
-  .earth-img-col{min-height:260px;}
+  .earth-img{min-height:260px;}
   .companies-grid{grid-template-columns:repeat(2,1fr);}
   .phases-grid-s{grid-template-columns:1fr;}
   .feedstocks{grid-template-columns:repeat(2,1fr);}
   .usp-grid-s{grid-template-columns:1fr;}
   .prog-bar-row{flex-direction:column;}
-  .section-scroll-label{padding:40px 20px 16px;}
+  .scroll-head{padding:40px 20px 16px;}
   .progress-s{padding:48px 20px;}
+  .hero-cards-stage{display:none;}
 }
 </style>
 </head>
@@ -119,7 +131,7 @@
   <a href="#origin" onclick="mT()">Origin</a>
   <a href="#howtoplay" onclick="mT()">How to Play</a>
   <a href="#cards" onclick="mT()">Cards</a>
-  <a href="index.html#contact" onclick="mT()">Contact</a>
+  <a href="index.html#publishers" onclick="mT()">Contact</a>
 </div>
 <nav>
   <a href="index.html" class="nav-logo"><span class="nav-dot"></span>CATALYST</a>
@@ -128,15 +140,23 @@
     <li><a href="#origin">Origin</a></li>
     <li><a href="#howtoplay">How to Play</a></li>
     <li><a href="#cards">Cards</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="index.html#publishers">Contact</a></li>
   </ul>
   <a href="mailto:duo.boardgame.design@gmail.com" class="nav-cta">For Publishers</a>
   <button class="nav-toggle" onclick="mT()"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="game-hero">
-  <img src="synthelyst_hero_bg.png" alt="Synthelyst — bioplastics factory" class="game-hero-img">
+<div class="game-hero" id="gameHero">
+  <img src="synthelyst_hero_bg.png" alt="Synthelyst — bioplastics factory" class="game-hero-bg">
   <div class="game-hero-overlay"></div>
+  <div class="hero-cards-stage">
+    <div class="hero-card-fan">
+      <img src="synthelyst_card1.png" alt="" class="hcf-card hcf-1">
+      <img src="synthelyst_card2.png" alt="" class="hcf-card hcf-2">
+      <img src="synthelyst_card3.png" alt="" class="hcf-card hcf-3">
+    </div>
+  </div>
+  <div class="hero-scroll-hint"><span>SCROLL</span><div class="scroll-line"></div></div>
   <div class="game-hero-content">
     <a href="index.html" class="game-hero-back">← Back to Catalyst</a>
     <div class="eyebrow-s">Game 002 · Mid-Heavy Eurogame · Seeking Publisher</div>
@@ -153,123 +173,115 @@
 </div>
 
 <div class="intro-strip reveal">
-  <p class="intro-q">"Harvest bioplastics from nature's feedstocks. Build power plants. Resolve global crises. Save the Earth — or watch it collapse while someone else wins."</p>
+  <p class="intro-q">"Harvest bioplastics from nature's feedstocks. Build your energy network. Resolve global crises. Save the Earth — or watch it collapse while someone else claims victory."</p>
   <p class="intro-b">Synthelyst is a cooperative-competitive eco-strategy game set in 2035. Everyone must keep Earth Health above zero. But only one player — the most VP among the survivors — wins. Science, industry, and ecology in tension across 10 rounds.</p>
 </div>
 
-<!-- ORIGIN -->
 <section id="origin" style="background:#061208;">
 <div class="gc">
-  <div style="margin-bottom:56px;" class="reveal"><div class="gs-lbl-s">The Origin Story</div><h2 class="gs-title-s" style="color:#fff;">WHY<br>SYNTHELYST?</h2></div>
+  <div style="margin-bottom:48px;" class="reveal"><div class="gs-lbl-s">The Origin Story</div><h2 class="gs-title-d">WHY<br>SYNTHELYST?</h2></div>
   <div class="origin-grid">
     <div class="reveal-left"><img src="synthelyst_materials.png" alt="Bioplastic feedstocks" class="o-img"></div>
     <div class="o-body reveal-right">
-      <p>Mehrad works in a company focused on producing <strong>biodegradable bioplastics from sustainable feedstocks</strong>. During the fundraising process, he encountered the full complexity of what building a green industry actually means: competing companies jockeying for the same raw materials, government regulations that lag a decade behind the science, investors demanding returns on technology that hasn't scaled yet, and ecological systems that degrade if you harvest too aggressively.</p>
-      <p>He realised this wasn't just an industry. It was a game — with real stakes, real trade-offs, and no easy answers. <strong>Could he capture that tension on a board?</strong></p>
-      <p>Anita brought her statistical expertise and extensive board game experience to the mechanics. She stress-tested every interaction, optimised the Earth Health system, and helped design the Catalyst Deck — the engine-building heart of the game.</p>
+      <p>Mehrad works in a company focused on producing <strong>biodegradable bioplastics from sustainable feedstocks</strong>. During the fundraising and development process, he encountered the full complexity of what building a green industry actually means — competing companies, government regulations, investor pressures, and ecological systems that degrade if you harvest too aggressively.</p>
+      <p>He realised this wasn't just an industry. It was a game — with real stakes, real trade-offs, and no easy answers. <strong>Could he capture that tension on a board?</strong> Anita brought statistical expertise and deep board game experience to shape the mechanics and ensure every interaction held up under competitive pressure.</p>
       <div class="o-highlight">
-        <div class="o-hl-title">Unique Market Position</div>
-        <p class="o-hl">Synthelyst can be positioned as a sustainability ambassador — showing players in visceral, strategic terms how plastic pollution works, how bioplastics can change the equation, and how hard collective action really is. Ideal for school curricula and corporate sustainability programmes.</p>
+        <div class="oh-title">Unique Market Position</div>
+        <p class="oh-p">Synthelyst can be positioned as a sustainability ambassador — showing players in visceral, strategic terms how plastic pollution works, how bioplastics can change the equation, and how hard collective action really is. Ideal for school curricula and corporate sustainability programmes.</p>
       </div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- EARTH HEALTH SPLIT -->
 <div class="earth-split">
-  <div class="earth-img-col reveal-left"><img src="synthelyst_earth.png" alt="Pristine nature vs industrial pollution — the stakes of Synthelyst"></div>
-  <div class="earth-text-col reveal-right">
+  <div class="earth-img reveal-left"><img src="synthelyst_earth.png" alt="Pristine nature vs industrial pollution"></div>
+  <div class="earth-text reveal-right">
     <div class="gs-lbl-s">The Stakes</div>
     <h3>KEEP EARTH<br>HEALTH ABOVE 0.</h3>
-    <p>Earth Health starts at 25 and drops with every unresolved Crisis, every CO₂ token, every round that passes without cooperation. If it reaches zero — all players lose. Immediately. No exceptions.</p>
-    <p>This is Synthelyst's central tension: you are competing fiercely against other players for VP, while simultaneously depending on them to avert global catastrophe. Free-riding is fatal. Hoarding resources triggers cascading crises. The game models real-world collective action problems — with devastating accuracy.</p>
+    <p>Earth Health starts at 25 and drops with every unresolved Crisis and unchecked pollution. If it reaches zero — all players lose immediately. No exceptions.</p>
+    <p>This is Synthelyst's central tension: you're competing fiercely for VP while simultaneously depending on your rivals to avert global catastrophe. The game models real-world collective action problems with uncomfortable accuracy.</p>
     <p>Only the player with the most VP who has resolved at least one Crisis wins. Winning at the expense of the planet is not an option.</p>
-    <div style="margin-top:28px;"><a href="index.html#contact" class="btn-light">Request Rulebook →</a></div>
+    <div style="margin-top:28px;"><a href="index.html#publishers" class="btn-light">Request Rulebook →</a></div>
   </div>
 </div>
 
-<!-- THE COMPANIES -->
 <section id="howtoplay" style="background:#061208;">
 <div class="gc">
-  <div style="margin-bottom:48px;" class="reveal"><div class="gs-lbl-s">The Players</div><h2 class="gs-title-s" style="color:#fff;">FIVE GLOBAL<br>COMPANIES</h2></div>
+  <div style="margin-bottom:40px;" class="reveal"><div class="gs-lbl-s">The Players</div><h2 class="gs-title-d">FIVE GLOBAL<br>COMPANIES</h2></div>
   <div class="companies-grid reveal">
+    <div class="company-card"><span class="company-flag">🇮🇳</span><div class="company-name">Atlas BioLabs</div><div class="company-loc">India</div></div>
     <div class="company-card"><span class="company-flag">🇺🇸</span><div class="company-name">Cornova Plastics</div><div class="company-loc">USA</div></div>
-    <div class="company-card"><span class="company-flag">🇧🇷</span><div class="company-name">Sweet Carbon Co.</div><div class="company-loc">Brazil</div></div>
-    <div class="company-card"><span class="company-flag">🇮🇳</span><div class="company-name">Casein Labs</div><div class="company-loc">India</div></div>
-    <div class="company-card"><span class="company-flag">🇨🇳</span><div class="company-name">Algaryx Materials</div><div class="company-loc">China</div></div>
-    <div class="company-card"><span class="company-flag">🇩🇪</span><div class="company-name">Strachline Polymers</div><div class="company-loc">Germany</div></div>
+    <div class="company-card"><span class="company-flag">🇩🇪</span><div class="company-name">Origin Polymer</div><div class="company-loc">Germany</div></div>
+    <div class="company-card"><span class="company-flag">🇧🇷</span><div class="company-name">TerraCycle</div><div class="company-loc">Brazil</div></div>
+    <div class="company-card"><span class="company-flag">🇨🇳</span><div class="company-name">Horizon Bio</div><div class="company-loc">China</div></div>
   </div>
-  <p style="font-size:14px;color:rgba(255,255,255,0.4);margin-top:24px;max-width:700px;">Each company has unique Core Abilities (once per round) and Big Bet abilities (once per game). No two companies play the same way.</p>
+  <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:20px;max-width:600px;">Each company has a unique Core ability (once per round) and a Big Bet ability (once per game). No two companies play the same way.</p>
 </div>
 </section>
 
-<!-- 5 PHASES -->
 <section style="background:var(--bg);">
 <div class="gc">
-  <div style="margin-bottom:48px;" class="reveal"><div class="gs-lbl-s">Round Structure</div><h2 class="gs-title-s">5 PHASES.<br>10 ROUNDS.</h2></div>
-  <p style="font-size:16px;color:var(--ink2);max-width:720px;line-height:1.85;margin-bottom:48px;">Each of Synthelyst's 10 rounds flows through five distinct phases — covering the full industrial cycle from raw material to finished product, from individual action to global consequence. Every phase introduces meaningful decisions that interact with all the others. The order matters. The timing matters. And the planet is always watching.</p>
+  <div style="margin-bottom:40px;" class="reveal"><div class="gs-lbl-s">Round Structure</div><h2 class="gs-title-l">5 PHASES.<br>10 ROUNDS.</h2></div>
+  <p style="font-size:16px;color:var(--ink2);max-width:720px;line-height:1.85;margin-bottom:44px;">Each of Synthelyst's 10 rounds flows through five distinct phases — covering the full industrial cycle from raw material to global consequence. Every phase demands decisions that interact with all the others. The order matters. The timing matters. And the planet is always watching.</p>
   <div class="phases-grid-s">
-    <div class="phase-s reveal"><div class="phase-s-num">Phase 1</div><span class="phase-s-icon">🌾</span><div class="phase-s-name">WORK</div><p class="phase-s-desc">Gather the raw materials your company needs from shared ecosystems. Resources are limited — and what you take affects what others can access.</p></div>
-    <div class="phase-s reveal"><div class="phase-s-num">Phase 2</div><span class="phase-s-icon">⚡</span><div class="phase-s-name">POWER</div><p class="phase-s-desc">Build and operate your energy infrastructure. Every energy decision has an environmental cost — some choices come back to haunt everyone.</p></div>
-    <div class="phase-s reveal"><div class="phase-s-num">Phase 3</div><span class="phase-s-icon">♻️</span><div class="phase-s-name">PRODUCTION</div><p class="phase-s-desc">Convert your materials into bioplastics. This is where your investment in resources and energy pays off — or exposes the gaps in your strategy.</p></div>
-    <div class="phase-s reveal"><div class="phase-s-num">Phase 4</div><span class="phase-s-icon">🌍</span><div class="phase-s-name">GLOBAL EVENT</div><p class="phase-s-desc">A crisis strikes. Some are manageable alone. Others demand collective action. Ignoring them costs everyone — including you.</p></div>
-    <div class="phase-s reveal"><div class="phase-s-num">Phase 5</div><span class="phase-s-icon">📈</span><div class="phase-s-name">STOCK</div><p class="phase-s-desc">Invest, play cards, and build toward your long-term engine. The decisions made here compound across every subsequent round.</p></div>
+    <div class="phase-s reveal"><div class="phase-s-num">Phase 1</div><span class="phase-s-icon">🌾</span><div class="phase-s-name">WORK</div><p class="phase-s-desc">Gather raw bioplastic feedstocks from shared ecosystems. Resources are finite — how you harvest affects what others can access.</p></div>
+    <div class="phase-s reveal"><div class="phase-s-num">Phase 2</div><span class="phase-s-icon">⚡</span><div class="phase-s-name">POWER</div><p class="phase-s-desc">Build and run your energy infrastructure. Every energy choice has an environmental footprint — and some choices compound across rounds.</p></div>
+    <div class="phase-s reveal"><div class="phase-s-num">Phase 3</div><span class="phase-s-icon">♻️</span><div class="phase-s-name">PRODUCTION</div><p class="phase-s-desc">Convert your materials into bioplastics and use them to resolve Crises. This is where your strategy either pays off — or falls short.</p></div>
+    <div class="phase-s reveal"><div class="phase-s-num">Phase 4</div><span class="phase-s-icon">🌍</span><div class="phase-s-name">EVENT</div><p class="phase-s-desc">A global headline strikes. Some crises can be faced alone. Others demand collective action. Ignoring them costs everyone.</p></div>
+    <div class="phase-s reveal"><div class="phase-s-num">Phase 5</div><span class="phase-s-icon">📈</span><div class="phase-s-name">CATALYST</div><p class="phase-s-desc">Play cards from your Catalyst Deck to build long-term engines and market advantages. The decisions made here compound over 10 rounds.</p></div>
   </div>
 </div>
 </section>
 
-<!-- FEEDSTOCKS -->
 <section style="background:var(--bg3);">
-<img src="synthelyst_materials.png" alt="Bioplastic feedstocks lab" class="materials-img reveal-scale">
+<img src="synthelyst_materials.png" alt="Bioplastic feedstocks lab" style="width:100%;height:420px;object-fit:cover;display:block;" class="reveal-scale">
 <div class="gc" style="padding-top:48px;">
-  <div style="margin-bottom:40px;" class="reveal"><div class="gs-lbl-s">The Raw Materials</div><h2 class="gs-title-s">FIVE<br>FEEDSTOCKS</h2></div>
+  <div style="margin-bottom:36px;" class="reveal"><div class="gs-lbl-s">The Raw Materials</div><h2 class="gs-title-l">FIVE<br>FEEDSTOCKS</h2></div>
   <div class="feedstocks">
-    <div class="fs-card reveal"><span class="fs-icon">🌽</span><div class="fs-name">Corn</div><p class="fs-desc">PLA bioplastic. High yield, widely grown. First feedstock to deplete under competition.</p></div>
-    <div class="fs-card reveal"><span class="fs-icon">🥔</span><div class="fs-name">Potato</div><p class="fs-desc">Thermoplastic starch. Abundant but energy-intensive to process into stable polymer.</p></div>
-    <div class="fs-card reveal"><span class="fs-icon">🥛</span><div class="fs-name">Milk</div><p class="fs-desc">Casein bioplastic. Rare and valuable. Produces premium polymers with high VP yield.</p></div>
-    <div class="fs-card reveal"><span class="fs-icon">🌾</span><div class="fs-name">Sugarcane</div><p class="fs-desc">Bio-polyethylene. Brazil's advantage. Fastest production cycle in the game.</p></div>
-    <div class="fs-card reveal"><span class="fs-icon">🦠</span><div class="fs-name">Algae</div><p class="fs-desc">PHA bioplastic. Hardest to harvest but zero ecosystem damage. The clean energy of feedstocks.</p></div>
+    <div class="fs-card reveal"><span class="fs-icon">🌽</span><div class="fs-name">Corn</div><p class="fs-desc">Widely available and fast-producing. First feedstock to face competition pressure.</p></div>
+    <div class="fs-card reveal"><span class="fs-icon">🥔</span><div class="fs-name">Potato</div><p class="fs-desc">Abundant but demands more energy to process into stable polymer.</p></div>
+    <div class="fs-card reveal"><span class="fs-icon">🥛</span><div class="fs-name">Milk</div><p class="fs-desc">Rare and valuable. Produces premium polymers with high VP yield.</p></div>
+    <div class="fs-card reveal"><span class="fs-icon">🌾</span><div class="fs-name">Sugarcane</div><p class="fs-desc">Brazil's home advantage. Fastest production cycle in the game.</p></div>
+    <div class="fs-card reveal"><span class="fs-icon">🦠</span><div class="fs-name">Algae</div><p class="fs-desc">Hardest to harvest but zero ecosystem damage. The cleanest option.</p></div>
   </div>
 </div>
 </section>
 
-<!-- CARDS -->
 <section id="cards" style="background:var(--bg);">
-<div class="section-scroll-label reveal">
-  <div><div class="gs-lbl-s">Components</div><h2 class="gs-title-s">CARDS &amp;<br>BOARD</h2></div>
-  <div class="scroll-hint">← Scroll to browse →</div>
+<div class="scroll-head reveal">
+  <div><div class="gs-lbl-s">Components</div><h2 class="gs-title-l" style="font-size:clamp(36px,4vw,56px);">CARDS &amp;<br>BOARD</h2></div>
+  <div class="scroll-hint-txt">← Scroll →</div>
 </div>
 <div class="card-scroll-wrap">
   <div class="card-scroll">
     <div class="card-item reveal"><img src="synthelyst_box.png" alt="Synthelyst box art"><div class="card-item-label">Box Cover Art</div></div>
     <div class="card-item reveal"><img src="synthelyst_board.png" alt="Synthelyst main world board"><div class="card-item-label">Main World Board</div></div>
-    <div class="card-item reveal"><img src="synthelyst_card1.png" alt="Synthelyst catalyst card — Petrochemical Backers"><div class="card-item-label">Catalyst Card</div></div>
+    <div class="card-item reveal"><img src="synthelyst_card1.png" alt="Synthelyst catalyst card"><div class="card-item-label">Catalyst Card — Petrochemical Backers</div></div>
+    <div class="card-item reveal"><img src="synthelyst_card2.png" alt="Synthelyst crisis card"><div class="card-item-label">Crisis Card — Waste Management Collapse</div></div>
+    <div class="card-item reveal"><img src="synthelyst_card3.png" alt="Synthelyst catalyst card 2"><div class="card-item-label">Catalyst Card — Adaptive Hybrid Network</div></div>
     <div class="card-item reveal"><img src="synthelyst_earth.png" alt="Earth Health stakes"><div class="card-item-label">Earth Health — The Stakes</div></div>
-    <div class="card-item reveal"><img src="synthelyst_materials.png" alt="Bioplastic feedstocks"><div class="card-item-label">Feedstock Materials</div></div>
   </div>
 </div>
 </section>
 
-<!-- USP -->
 <section style="background:var(--bg3);">
 <div class="gc">
-  <div style="margin-bottom:48px;" class="reveal"><div class="gs-lbl-s">Unique Value</div><h2 class="gs-title-s">WHY<br>SYNTHELYST?</h2></div>
+  <div style="margin-bottom:40px;" class="reveal"><div class="gs-lbl-s">Unique Value</div><h2 class="gs-title-l">WHY<br>SYNTHELYST?</h2></div>
   <div class="usp-grid-s">
     <div class="usp-s reveal"><span class="usp-s-icon">🌱</span><div class="usp-s-title">Sustainability Ambassador</div><p class="usp-s-text">Synthelyst communicates — through play — exactly why plastic pollution is so hard to solve and why bioplastics matter. A natural partnership for environmental organisations and green brands.</p></div>
-    <div class="usp-s reveal"><span class="usp-s-icon">🎓</span><div class="usp-s-title">Educational Applications</div><p class="usp-s-text">Perfect for GCSE and A-level chemistry curricula covering polymer science, sustainability, and industrial chemistry. Playable in a single school period.</p></div>
+    <div class="usp-s reveal"><span class="usp-s-icon">🎓</span><div class="usp-s-title">Educational Applications</div><p class="usp-s-text">Perfect for GCSE and A-level chemistry curricula covering polymer science, sustainability, and industrial chemistry. Playable in a single session.</p></div>
     <div class="usp-s reveal"><span class="usp-s-icon">🏆</span><div class="usp-s-title">No Competition</div><p class="usp-s-text">No comparable game exists — a competitive eurogame grounded in real bioplastics science and genuine ecological systems thinking. Entirely novel category.</p></div>
-    <div class="usp-s reveal"><span class="usp-s-icon">🤝</span><div class="usp-s-title">Corporate Partnerships</div><p class="usp-s-text">Sustainability-focused companies (bioplastics producers, chemical companies) could co-brand Synthelyst as a CSR and marketing tool — reaching consumers in a memorable, engaging way.</p></div>
+    <div class="usp-s reveal"><span class="usp-s-icon">🤝</span><div class="usp-s-title">Corporate Partnerships</div><p class="usp-s-text">Sustainability-focused companies could co-brand Synthelyst as a CSR and marketing tool — reaching consumers in a memorable, engaging way.</p></div>
   </div>
 </div>
 </section>
 
-<!-- PROGRESS -->
 <section class="progress-s">
 <div class="pw">
   <div class="gs-lbl-s">Development Status</div>
   <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:#fff;letter-spacing:0.04em;line-height:0.9;margin-bottom:8px;">SEEKING A<br>PUBLISHER</h2>
-  <p style="font-size:15px;color:rgba(255,255,255,0.4);margin-bottom:0;">Prototype complete. Art ready. Rulebook finalised. Actively seeking the right publishing partner.</p>
+  <p style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:0;">Prototype complete. Art ready. Rulebook finalised. Actively seeking the right publishing partner.</p>
   <div class="prog-bar-row reveal">
     <div class="prog-step done"><div class="prog-step-num">01</div><div class="prog-step-name">Concept</div></div>
     <div class="prog-step done"><div class="prog-step-num">02</div><div class="prog-step-name">Mechanics</div></div>
@@ -278,7 +290,7 @@
     <div class="prog-step done"><div class="prog-step-num">05</div><div class="prog-step-name">Art Ready</div></div>
     <div class="prog-step active"><div class="prog-step-num">06</div><div class="prog-step-name">Publisher</div></div>
   </div>
-  <a href="index.html#contact" class="btn-green">Contact Us About Synthelyst →</a>
+  <a href="index.html#publishers" class="btn-green">Contact Us About Synthelyst →</a>
 </div>
 </section>
 
@@ -288,12 +300,19 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="jabir.html">Jabir</a></li>
     <li><a href="latherwork.html">Latherwork</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="index.html#publishers">Contact</a></li>
   </ul>
   <span class="f-copy">© 2025 CATALYST · SYNTHELYST</span>
 </footer>
 <script>
 function mT(){document.getElementById('mobMenu').classList.toggle('open');}
+const hero=document.getElementById('gameHero');
+let zoomed=false;
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY;
+  if(s>80&&!zoomed){zoomed=true;hero.classList.add('hero-zoomed');}
+  if(s<20&&zoomed){zoomed=false;hero.classList.remove('hero-zoomed');}
+});
 const obs=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('visible'),i*55);});},{threshold:0.06});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
 </script>
