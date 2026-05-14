@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CATALYST Board Game Design | Mehrad Niasari & Anita Mansouri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0ede8;
+    --bg2: #e8e4dc;
+    --bg3: #ffffff;
+    --ink: #1a1814;
+    --ink2: #3a3630;
+    --ink3: #6b6560;
+    --gold: #b8860b;
+    --gold2: #d4a017;
+    --rule: rgba(26,24,20,0.12);
+    --grid: rgba(26,24,20,0.055);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(240,237,232,0.94);
+    backdrop-filter: blur(16px);
+    border-bottom: 1.5px solid var(--rule);
+    padding: 0 60px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+    letter-spacing: 0.12em; color: var(--ink); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .nav-dot { width: 8px; height: 8px; background: var(--gold2); border-radius: 50%; display: inline-block; }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink2); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--bg); background: var(--ink); padding: 10px 22px;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold); }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; z-index: 1; overflow: hidden; }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 60px 80px; border-right: 1.5px solid var(--rule);
+  }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 2px; background: var(--gold2); }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 9vw, 130px);
+    line-height: 0.88; letter-spacing: 0.02em; color: var(--ink); margin-bottom: 36px;
+  }
+  .hero-title .outline { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+
+  .hero-desc {
+    font-size: 17px; color: var(--ink2); max-width: 440px; line-height: 1.75;
+    margin-bottom: 48px; border-left: 3px solid var(--gold2); padding-left: 20px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--bg); background: var(--ink); padding: 16px 36px; text-decoration: none;
+    border: 2px solid var(--ink); transition: all 0.25s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
+
+  .btn-outline {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink); background: transparent; padding: 16px 36px; text-decoration: none;
+    border: 2px solid var(--rule); transition: all 0.25s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--ink); }
+
+  .hero-right { position: relative; background: var(--ink); overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+
+  .hero-right-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .hero-tiles { position: relative; z-index: 2; width: 100%; }
+
+  .hero-tile {
+    border-bottom: 1px solid rgba(255,255,255,0.08); padding: 32px 48px;
+    display: flex; align-items: center; gap: 24px; transition: background 0.3s;
+  }
+  .hero-tile:hover { background: rgba(255,255,255,0.04); }
+  .hero-tile:last-child { border-bottom: none; }
+
+  .tile-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.2); width: 28px; flex-shrink: 0; }
+  .tile-bar { width: 3px; height: 44px; flex-shrink: 0; border-radius: 2px; }
+  .bar-j { background: #d4820a; }
+  .bar-s { background: #3ab06a; }
+  .bar-l { background: #4a82d4; }
+  .tile-info { flex: 1; }
+  .tile-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.08em; color: #fff; line-height: 1.1; }
+  .tile-sub { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.38); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+  .tile-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px;
+  }
+  .badge-art  { background: rgba(212,160,23,0.18); color: #d4a017; border: 1px solid rgba(212,160,23,0.3); }
+  .badge-pub  { background: rgba(58,176,106,0.18); color: #3ab06a; border: 1px solid rgba(58,176,106,0.3); }
+  .badge-des  { background: rgba(74,130,212,0.18); color: #6a9ce4; border: 1px solid rgba(74,130,212,0.3); }
+
+  .hero-stat-row { position: absolute; bottom: 36px; left: 48px; right: 48px; display: flex; gap: 32px; z-index: 3; }
+  .h-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #fff; line-height: 1; }
+  .h-stat-label { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 4px; }
+
+  /* SECTIONS */
+  .sec { position: relative; z-index: 1; }
+
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 60px; }
+
+  .sec-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    padding: 80px 0 56px; border-bottom: 1.5px solid var(--rule); margin-bottom: 64px; gap: 40px;
+  }
+
+  .sec-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+
+  .sec-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 80px); letter-spacing: 0.03em; color: var(--ink); line-height: 0.9; }
+  .sec-title .ol { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+
+  .sec-desc { font-size: 16px; color: var(--ink3); max-width: 420px; line-height: 1.75; align-self: flex-end; }
+
+  /* ABOUT */
+  #about { background: var(--bg3); border-top: 1.5px solid var(--rule); border-bottom: 1.5px solid var(--rule); }
+
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; padding-bottom: 80px; align-items: start; }
+
+  .about-body p { font-size: 16px; color: var(--ink2); line-height: 1.85; margin-bottom: 18px; }
+  .about-body p strong { color: var(--ink); font-weight: 700; }
+
+  .about-callout {
+    background: var(--ink); color: rgba(255,255,255,0.85); padding: 36px 40px;
+    font-size: 20px; font-family: 'DM Serif Display', serif; font-style: italic; line-height: 1.5;
+    position: relative; margin-top: 32px;
+  }
+  .about-callout::before { content: '\201C'; position: absolute; top: 8px; left: 24px; font-size: 80px; color: var(--gold2); opacity: 0.25; line-height: 1; font-family: 'DM Serif Display', serif; }
+
+  .designers { display: flex; flex-direction: column; gap: 2px; }
+
+  .d-card {
+    border: 1.5px solid var(--rule); background: var(--bg); padding: 32px 36px;
+    position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s;
+  }
+  .d-card:hover { border-color: var(--gold2); transform: translateX(4px); }
+  .d-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--gold2); }
+
+  .d-initials { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(26,24,20,0.08); line-height: 1; margin-bottom: 10px; }
+  .d-name { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .d-role { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .d-bio { font-size: 14px; color: var(--ink3); line-height: 1.7; }
+
+  /* GAMES */
+  #games { background: var(--bg); border-bottom: 1.5px solid var(--rule); }
+
+  .game-card { display: grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--rule); margin-bottom: 2px; overflow: hidden; background: var(--bg3); transition: border-color 0.3s; }
+  .game-card:hover { border-color: var(--ink); }
+  .game-card.rev { direction: rtl; }
+  .game-card.rev > * { direction: ltr; }
+
+  .game-img-col { position: relative; min-height: 560px; overflow: hidden; }
+  .game-img-col img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 0.6s; }
+  .game-card:hover .game-img-col img { transform: scale(1.04); }
+  .game-img-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%); padding: 32px 28px 24px; }
+  .game-img-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.18); padding: 5px 12px; display: inline-block; backdrop-filter: blur(8px); }
+
+  .game-info-col {
+    padding: 52px 52px; display: flex; flex-direction: column; justify-content: space-between;
+    border-left: 1.5px solid var(--rule);
+  }
+  .game-card.rev .game-info-col { border-left: none; border-right: 1.5px solid var(--rule); }
+
+  .g-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.3em; color: var(--ink3); margin-bottom: 12px; }
+  .g-name { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 0.04em; line-height: 0.9; color: var(--ink); margin-bottom: 8px; }
+  .g-tagline { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 17px; color: var(--gold); margin-bottom: 24px; }
+  .g-desc { font-size: 15px; color: var(--ink2); line-height: 1.8; margin-bottom: 28px; }
+
+  .g-meta { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--rule); border: 1.5px solid var(--rule); margin-bottom: 24px; }
+  .g-meta-cell { background: var(--bg); padding: 14px 10px; text-align: center; }
+  .g-meta-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700; letter-spacing: 0.2em; color: var(--ink3); text-transform: uppercase; margin-bottom: 4px; }
+  .g-meta-val { font-size: 14px; font-weight: 700; color: var(--ink); }
+
+  .g-prog { margin-bottom: 24px; }
+  .g-prog-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .g-prog-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; color: var(--ink3); text-transform: uppercase; }
+  .g-prog-pct { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--ink); }
+  .g-prog-track { height: 4px; background: var(--rule); position: relative; margin-bottom: 12px; }
+  .g-prog-fill { height: 100%; position: relative; }
+  .g-prog-fill::after { content: ''; position: absolute; right: -5px; top: -5px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--bg3); }
+  .fill-j { background: #d4820a; } .fill-j::after { background: #d4820a; }
+  .fill-s { background: #3ab06a; } .fill-s::after { background: #3ab06a; }
+  .fill-l { background: #4a82d4; } .fill-l::after { background: #4a82d4; }
+
+  .g-phases { display: flex; gap: 4px; }
+  .g-phase { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .g-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--rule); background: transparent; }
+  .g-dot.done { background: var(--ink); border-color: var(--ink); }
+  .g-dot.cur-j { border-color: #d4820a; box-shadow: 0 0 6px #d4820a; }
+  .g-dot.cur-s { border-color: #3ab06a; box-shadow: 0 0 6px #3ab06a; }
+  .g-dot.cur-l { border-color: #4a82d4; box-shadow: 0 0 6px #4a82d4; }
+  .g-phase-lbl { font-family: 'JetBrains Mono', monospace; font-size: 7px; font-weight: 700; letter-spacing: 0.06em; color: var(--ink3); text-align: center; text-transform: uppercase; }
+  .g-phase-lbl.cur { color: var(--ink); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); border: 1.5px solid var(--rule); padding: 4px 10px; background: var(--bg); transition: all 0.2s; }
+  .tag:hover { border-color: var(--ink); }
+
+  /* GALLERY */
+  .gallery { display: flex; gap: 2px; margin-top: 2px; margin-bottom: 64px; }
+  .gallery img { flex: 1; width: 0; min-width: 0; height: 200px; object-fit: cover; transition: flex 0.4s ease, filter 0.3s; filter: grayscale(15%); cursor: zoom-in; }
+  .gallery img:hover { flex: 2.8; filter: grayscale(0%); }
+
+  /* PHILOSOPHY */
+  #philosophy { background: var(--ink); padding: 100px 0; position: relative; overflow: hidden; z-index: 1; }
+  #philosophy::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 48px 48px; }
+
+  .phil-wrap { max-width: 1240px; margin: 0 auto; padding: 0 60px; position: relative; z-index: 1; }
+  .phil-lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.3em; color: var(--gold2); text-transform: uppercase; margin-bottom: 48px; }
+  .phil-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start; }
+  .phil-quote { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 3.5vw, 46px); font-style: italic; color: #fff; line-height: 1.35; margin-bottom: 36px; }
+  .phil-quote em { color: var(--gold2); font-style: normal; }
+  .phil-body { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+  .phil-pillars { display: flex; flex-direction: column; gap: 2px; }
+  .pillar { padding: 26px 28px; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.02); display: flex; gap: 18px; transition: background 0.3s; }
+  .pillar:hover { background: rgba(255,255,255,0.05); }
+  .p-icon { width: 34px; height: 34px; border: 1px solid rgba(212,160,23,0.3); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+  .p-title { font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #fff; margin-bottom: 5px; }
+  .p-text { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+  /* CONTACT */
+  #contact { background: var(--bg3); border-top: 1.5px solid var(--rule); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding-bottom: 100px; }
+  .contact-body p { font-size: 16px; color: var(--ink2); line-height: 1.8; margin-bottom: 36px; }
+  .contact-links { display: flex; flex-direction: column; gap: 2px; }
+  .c-link { display: flex; align-items: center; gap: 18px; padding: 20px 24px; border: 1.5px solid var(--rule); background: var(--bg); text-decoration: none; color: var(--ink); transition: all 0.25s; position: relative; }
+  .c-link::after { content: '→'; position: absolute; right: 24px; font-size: 16px; color: var(--ink3); transition: transform 0.2s, color 0.2s; }
+  .c-link:hover { border-color: var(--ink); background: var(--ink); }
+  .c-link:hover .c-lbl, .c-link:hover .c-val { color: rgba(255,255,255,0.9) !important; }
+  .c-link:hover::after { color: var(--gold2); transform: translateX(4px); }
+  .c-icon { width: 40px; height: 40px; border: 1.5px solid var(--rule); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+  .c-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink3); margin-bottom: 3px; }
+  .c-val { font-size: 15px; font-weight: 600; color: var(--ink); }
+
+  .pub-box { background: var(--ink); padding: 48px; }
+  .pub-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold2); margin-bottom: 18px; }
+  .pub-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 0.05em; color: #fff; line-height: 1; margin-bottom: 20px; }
+  .pub-box p { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+  .pub-list { list-style: none; margin: 20px 0 28px; }
+  .pub-list li { font-size: 13px; color: rgba(255,255,255,0.45); padding: 8px 0 8px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; }
+  .pub-list li::before { content: '▸'; position: absolute; left: 0; color: var(--gold2); font-size: 10px; top: 10px; }
+  .btn-gold { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); background: var(--gold2); padding: 14px 32px; text-decoration: none; display: inline-block; transition: background 0.2s; }
+  .btn-gold:hover { background: #fff; }
+
+  /* FOOTER */
+  footer { background: var(--ink); padding: 44px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1.5px solid rgba(255,255,255,0.07); position: relative; z-index: 1; }
+  .f-logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.12em; color: #fff; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .f-nav { display: flex; gap: 28px; list-style: none; }
+  .f-nav a { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+  .f-nav a:hover { color: var(--gold2); }
+  .f-copy { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.18); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* MOBILE MENU */
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); }
+  .mob-menu { display: none; position: fixed; inset: 0; background: rgba(240,237,232,0.98); z-index: 998; flex-direction: column; align-items: center; justify-content: center; gap: 28px; }
+  .mob-menu.open { display: flex; }
+  .mob-menu a { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 0.1em; color: var(--ink); text-decoration: none; }
+  .mob-menu a:hover { color: var(--gold); }
+  .mob-close { position: absolute; top: 24px; right: 28px; font-size: 28px; color: var(--ink); cursor: pointer; background: none; border: none; }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 96px 24px 40px; }
+    .hero-right { min-height: 55vh; }
+    .hero-stat-row { display: none; }
+    .container { padding: 0 24px; }
+    .about-grid, .contact-grid, .phil-grid { grid-template-columns: 1fr; gap: 40px; }
+    .game-card, .game-card.rev { grid-template-columns: 1fr; direction: ltr; }
+    .game-info-col { border-left: none !important; border-right: none !important; border-top: 1.5px solid var(--rule); padding: 32px 24px; }
+    .g-meta { grid-template-columns: repeat(2,1fr); }
+    .game-img-col { min-height: 300px; }
+    .gallery { overflow-x: auto; flex-wrap: nowrap; }
+    .gallery img { flex: none; width: 260px; height: 180px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 36px 24px; }
+    .f-nav { flex-wrap: wrap; justify-content: center; }
+    .sec-header { flex-direction: column; gap: 16px; }
+    .hero-tile { padding: 22px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="mobileToggle()">✕</button>
+  <a href="#about" onclick="mobileToggle()">About</a>
+  <a href="#games" onclick="mobileToggle()">Games</a>
+  <a href="#philosophy" onclick="mobileToggle()">Philosophy</a>
+  <a href="#contact" onclick="mobileToggle()">Contact</a>
+</div>
+
+<nav>
+  <a href="#hero" class="nav-logo"><span class="nav-dot"></span>CATALYST</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#games">Games</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:duo.boardgame.design@gmail.com" class="nav-cta">For Publishers</a>
+  <button class="nav-toggle" onclick="mobileToggle()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left reveal">
+    <div class="hero-eyebrow">Board Game Design Studio</div>
+    <h1 class="hero-title">CATALYST<br><span class="outline">DESIGN</span></h1>
+    <p class="hero-desc">We build strategy games where chemistry is the core mechanic — scientific systems that teach players how the real world actually works, one turn at a time.</p>
+    <div class="hero-actions">
+      <a href="#games" class="btn-primary">View Our Games</a>
+      <a href="#contact" class="btn-outline">Publisher Info</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-grid"></div>
+    <div class="hero-tiles">
+      <div class="hero-tile">
+        <span class="tile-num">01</span>
+        <div class="tile-bar bar-j"></div>
+        <div class="tile-info">
+          <div class="tile-name">JABIR: THE PERFUMER</div>
+          <div class="tile-sub">Chemistry of Perfumery · 2–6 Players · Heavy</div>
+        </div>
+        <span class="tile-badge badge-art">Final Art</span>
+      </div>
+      <div class="hero-tile">
+        <span class="tile-num">02</span>
+        <div class="tile-bar bar-s"></div>
+        <div class="tile-info">
+          <div class="tile-name">SYNTHELYST</div>
+          <div class="tile-sub">Competitive Eco-Strategy · 2–5 Players · Mid-Heavy</div>
+        </div>
+        <span class="tile-badge badge-pub">Seeking Publisher</span>
+      </div>
+      <div class="hero-tile">
+        <span class="tile-num">03</span>
+        <div class="tile-bar bar-l"></div>
+        <div class="tile-info">
+          <div class="tile-name">LATHERWORK</div>
+          <div class="tile-sub">Fabric Science Game · 2–4 Players · Medium</div>
+        </div>
+        <span class="tile-badge badge-des">Mechanics Design</span>
+      </div>
+    </div>
+    <div class="hero-stat-row">
+      <div><div class="h-stat-num">3</div><div class="h-stat-label">Games in Portfolio</div></div>
+      <div><div class="h-stat-num">94+</div><div class="h-stat-label">Unique Ingredients</div></div>
+      <div><div class="h-stat-num">14+</div><div class="h-stat-label">Age Rating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div>
+        <div class="sec-label">About the Studio</div>
+        <h2 class="sec-title">MEHRAD<br><span class="ol">&amp; ANITA</span></h2>
+      </div>
+      <p class="sec-desc">Two designers. One shared conviction: the most profound scientific ideas in the world deserve to be explored through play.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p>We are <strong>Catalyst Board Game Design</strong>, an independent studio founded by <strong>Mehrad Niasari</strong> and <strong>Anita Mansouri</strong>. Every game we make is grounded in real science — the chemistry of fragrance, the engineering of sustainable plastics, the physics of textile care.</p>
+        <p>Our philosophy is simple: a great game is a <strong>working model of something true</strong>. When players understand why the rules exist — because enzymes denature silk proteins, because CO₂ accumulates when fossil plants run — they don't just win. They learn.</p>
+        <p>We design for the <strong>curious adult</strong>: players who want more than entertainment. Players who leave the table knowing something real — and wanting to play again immediately.</p>
+        <div class="about-callout">
+          "Science and strategy are not opposites. The best decisions emerge from understanding systems — and that is exactly what games are made of."
+        </div>
+      </div>
+      <div class="designers reveal">
+        <div class="d-card">
+          <div class="d-initials">MN</div>
+          <div class="d-name">Mehrad Niasari</div>
+          <div class="d-role">Co-Designer · Studio Lead</div>
+          <p class="d-bio">Mehrad drives the mechanical architecture and scientific research behind each game. He ensures every rule is grounded in real-world chemistry — making the science not just accurate, but playable, surprising, and genuinely illuminating.</p>
+        </div>
+        <div class="d-card">
+          <div class="d-initials">AM</div>
+          <div class="d-name">Anita Mansouri</div>
+          <div class="d-role">Co-Designer · Creative Direction</div>
+          <p class="d-bio">Anita shapes the narrative and aesthetic dimension of each project — transforming abstract chemical processes into rich, inhabitable game worlds where every card tells a story and every decision feels meaningful at the table.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section id="games" class="sec">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div>
+        <div class="sec-label">Our Portfolio</div>
+        <h2 class="sec-title">THREE<br><span class="ol">GAMES</span></h2>
+      </div>
+      <p class="sec-desc">Each game inhabits a distinct scientific domain. All share the same commitment: mechanics that reflect real processes, and discovery that feels genuinely earned.</p>
+    </div>
+  </div>
+
+  <!-- JABIR -->
+  <div class="container">
+    <div class="game-card reveal">
+      <div class="game-img-col">
+        <img src="jabir_box.png" alt="Jabir: The Perfumer — box art">
+        <div class="game-img-overlay"><span class="game-img-badge">⚗️ &nbsp; Perfumery Chemistry · Paris, a Century Ago</span></div>
+      </div>
+      <div class="game-info-col">
+        <div>
+          <div class="g-num">GAME 001 — JABIR: THE PERFUMER</div>
+          <div class="g-name">JABIR:<br>THE PERFUMER</div>
+          <div class="g-tagline">The Chemistry of Perfumery</div>
+          <p class="g-desc">A heavy strategic eurogame. Each player leads a fragrance house, travelling through 6 global growing regions — Tropical, Temperate, Boreal, Arid, Wetlands, Alpine — to harvest 94 unique botanical scents. Process raw materials through 4 authentic extraction methods (steam distillation, cold-pressing, solvent extraction, supercritical CO₂), age extracts to peak Maturity, visit 6 synthetic labs for aromatic molecules, and assemble secret Perfume Cards across Top, Heart, and Base note layers. Upgrade your alcohol grade from 70% to 99% for bonus VP. The player with the most VP after 10 rounds is crowned Grand Alchemist.</p>
+          <div class="g-meta">
+            <div class="g-meta-cell"><div class="g-meta-lbl">Players</div><div class="g-meta-val">2–6</div></div>
+            <div class="g-meta-cell"><div class="g-meta-lbl">Duration</div><div class="g-meta-val">90–150 min</div></div>
+            <div class="g-meta-cell"><div class="g-meta-lbl">Age</div><div class="g-meta-val">14+</div></div>
+            <div class="g-meta-cell"><div class="g-meta-lbl">Weight</div><div class="g-meta-val">Heavy</div></div>
+          </div>
+          <div class="g-prog">
+            <div class="g-prog-top"><span class="g-prog-lbl">Development Progress</span><span class="g-prog-pct">90%</span></div>
+            <div class="g-prog-track"><div class="g-prog-fill fill-j" style="width:90%"></div></div>
+            <div class="g-phases">
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Concept</span></div>
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Design</span></div>
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Prototype</span></div>
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Playtest</span></div>
+              <div class="g-phase"><div class="g-dot cur-j"></div><span class="g-phase-lbl cur">Final Art</span></div>
+              <div class="g-phase"><div class="g-dot"></div><span class="g-phase-lbl">Publisher</span></div>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">Resource Management</span>
+            <span class="tag">Engine Building</span>
+            <span class="tag">Set Collection</span>
+            <span class="tag">Worker Placement</span>
+            <span class="tag">Deck Building</span>
+            <span class="tag">Historical</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gallery reveal">
+      <img src="jabir_box.png" alt="Jabir box cover">
+      <img src="jabir_distillary.png" alt="Jabir distillation board">
+      <img src="jabir_card.png" alt="Jabir perfume card — Earl Grey Garden">
+    </div>
+
+    <!-- SYNTHELYST -->
+    <div class="game-card rev reveal">
+      <div class="game-img-col">
+        <img src="synthelyst_box.png" alt="Synthelyst — box art">
+        <div class="game-img-overlay"><span class="game-img-badge">🌿 &nbsp; Bioplastics Engineering · Year 2035</span></div>
+      </div>
+      <div class="game-info-col">
+        <div>
+          <div class="g-num">GAME 002 — SYNTHELYST</div>
+          <div class="g-name">SYNTHE-<br>LYST</div>
+          <div class="g-tagline">A Competitive Eco-Strategy Game</div>
+          <p class="g-desc">The year is 2035. You are the CEO of a pioneering bioplastics firm racing to produce sustainable polymers from corn, milk, algae, potato, and sugarcane instead of crude oil. Harvest resources from fragile ecosystems, build energy systems (wind, solar, hydro, fossil), polymerise bioplastics, and resolve 8–20 global Crisis Cards — all while the shared Earth Health tracker ticks downward. Everyone must cooperate to stop planetary collapse. Only one player wins by having the most VP. Variable company powers, engine building, and a ticking ecological clock make every game different.</p>
+          <div class="g-meta">
+            <div class="g-meta-cell"><div class="g-meta-lbl">Players</div><div class="g-meta-val">2–5</div></div>
+            <div class="g-meta-cell"><div class="g-meta-lbl">Duration</div><div class="g-meta-val">60–90 min</div></div>
+            <div class="g-meta-cell"><div class="g-meta-lbl">Age</div><div class="g-meta-val">14+</div></div>
+            <div class="g-meta-cell"><div class="g-meta-lbl">Weight</div><div class="g-meta-val">Mid-Heavy</div></div>
+          </div>
+          <div class="g-prog">
+            <div class="g-prog-top"><span class="g-prog-lbl">Development Progress</span><span class="g-prog-pct">85%</span></div>
+            <div class="g-prog-track"><div class="g-prog-fill fill-s" style="width:85%"></div></div>
+            <div class="g-phases">
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Concept</span></div>
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Design</span></div>
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Prototype</span></div>
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Playtest</span></div>
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Art Ready</span></div>
+              <div class="g-phase"><div class="g-dot cur-s"></div><span class="g-phase-lbl cur">Publisher</span></div>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">Cooperative + Competitive</span>
+            <span class="tag">Deck Building</span>
+            <span class="tag">Engine Building</span>
+            <span class="tag">Resource Management</span>
+            <span class="tag">Variable Powers</span>
+            <span class="tag">Eco-Strategy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gallery reveal">
+      <img src="synthelyst_box.png" alt="Synthelyst box cover">
+      <img src="synthelyst_board.png" alt="Synthelyst main board">
+      <img src="synthelyst_card1.png" alt="Synthelyst Catalyst card">
+    </div>
+
+    <!-- LATHERWORK -->
+    <div class="game-card reveal">
+      <div class="game-img-col">
+        <img src="latherwork_box.png" alt="Latherwork — box art">
+        <div class="game-img-overlay"><span class="game-img-badge">🫧 &nbsp; Textile Chemistry · The Fabric Science Game</span></div>
+      </div>
+      <div class="game-info-col">
+        <div>
+          <div class="g-num">GAME 003 — LATHERWORK</div>
+          <div class="g-name">LATHER-<br>WORK</div>
+          <div class="g-tagline">The Fabric Science Game</div>
+          <p class="g-desc">Each player operates a professional textile care laboratory. Garment Mission Cards arrive with real fibre compositions (silk, wool, elastane, cotton, polyester blends) and precise science-grounded care requirements. Build the perfect wash formula: the right detergent chemistry, pH range, water temperature, wash cycle, and additives. Resources flow through the rotating central Wash Wheel market. Crisis Events — hard water, enzyme shortages, colour bleeds, energy rationing — disrupt your plans. Choose one of four Lab specialisations (Chemist, Ecologist, Specialist, Innovator) and advance your Research Track for end-game bonuses.</p>
+          <div class="g-meta">
+            <div class="g-meta-cell"><div class="g-meta-lbl">Players</div><div class="g-meta-val">2–4</div></div>
+            <div class="g-meta-cell"><div class="g-meta-lbl">Duration</div><div class="g-meta-val">90–120 min</div></div>
+            <div class="g-meta-cell"><div class="g-meta-lbl">Age</div><div class="g-meta-val">14+</div></div>
+            <div class="g-meta-cell"><div class="g-meta-lbl">Weight</div><div class="g-meta-val">Medium</div></div>
+          </div>
+          <div class="g-prog">
+            <div class="g-prog-top"><span class="g-prog-lbl">Development Progress</span><span class="g-prog-pct">35%</span></div>
+            <div class="g-prog-track"><div class="g-prog-fill fill-l" style="width:35%"></div></div>
+            <div class="g-phases">
+              <div class="g-phase"><div class="g-dot done"></div><span class="g-phase-lbl">Concept</span></div>
+              <div class="g-phase"><div class="g-dot cur-l"></div><span class="g-phase-lbl cur">Mechanics</span></div>
+              <div class="g-phase"><div class="g-dot"></div><span class="g-phase-lbl">Prototype</span></div>
+              <div class="g-phase"><div class="g-dot"></div><span class="g-phase-lbl">Playtest</span></div>
+              <div class="g-phase"><div class="g-dot"></div><span class="g-phase-lbl">Final Art</span></div>
+              <div class="g-phase"><div class="g-dot"></div><span class="g-phase-lbl">Publisher</span></div>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">Cooperative-Competitive</span>
+            <span class="tag">Card Deck Building</span>
+            <span class="tag">Strategic</span>
+            <span class="tag">Deduction</span>
+            <span class="tag">Resource Management</span>
+            <span class="tag">Fabric Science</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gallery reveal" style="margin-bottom: 80px;">
+      <img src="latherwork_box.png" alt="Latherwork box cover">
+      <img src="latherwork_board.png" alt="Latherwork Wash Wheel board">
+      <img src="latherwork_card1.png" alt="Latherwork garment card — Evening Dress">
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" class="sec">
+  <div class="phil-wrap">
+    <div class="phil-lbl reveal">Our Design Philosophy</div>
+    <div class="phil-grid">
+      <div class="reveal">
+        <p class="phil-quote">Games where you win by <em>understanding</em> — not just by optimising.</p>
+        <p class="phil-body">Every Catalyst title is built on one foundational conviction: the deepest fun comes from the moment a system clicks in your mind. When you understand why your silk garment must be washed cold — because protein fibres denature above 30°C — the rule stops feeling arbitrary. It becomes knowledge. That knowledge is the game.</p>
+      </div>
+      <div class="phil-pillars reveal">
+        <div class="pillar"><div class="p-icon">⚗️</div><div><div class="p-title">Scientific Integrity</div><p class="p-text">Every mechanism is anchored in real science. We research exhaustively so gameplay reflects genuine processes — and players leave more knowledgeable than when they sat down.</p></div></div>
+        <div class="pillar"><div class="p-icon">🌿</div><div><div class="p-title">Emergent Systems</div><p class="p-text">Stories emerge from the interaction of rules, not from scripts. Our games create genuine drama through the collision of strategy, ecology, and consequence.</p></div></div>
+        <div class="pillar"><div class="p-icon">🔬</div><div><div class="p-title">Purposeful Play</div><p class="p-text">Entertainment and education are not opposites. We build for curious adults who want the table to matter — and leave feeling the world is a richer place.</p></div></div>
+        <div class="pillar"><div class="p-icon">♻️</div><div><div class="p-title">Thematic Depth</div><p class="p-text">From the fragrance pyramid of perfumery to the polymer chains of bioplastics — our themes are not cosmetic. They are structural. Science is the mechanic.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div>
+        <div class="sec-label">Get in Touch</div>
+        <h2 class="sec-title">LET'S<br><span class="ol">TALK</span></h2>
+      </div>
+      <p class="sec-desc">We welcome publishers, distributors, collaborators, and press. Full press kits, prototype access, and design documentation available on request.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="contact-body"><p>Mehrad Niasari and Anita Mansouri are available for publisher meetings, convention demos, and press. Our three games occupy a distinctive niche in the hobby — science-driven eurogames with real IP depth, genuine thematic integrity, and replayability rooted in systems rather than randomness.</p></div>
+        <div class="contact-links">
+          <a href="mailto:duo.boardgame.design@gmail.com" class="c-link">
+            <div class="c-icon">✉️</div>
+            <div><div class="c-lbl">Email</div><div class="c-val">duo.boardgame.design@gmail.com</div></div>
+          </a>
+          <a href="https://instagram.com/catalyst.boardgame" target="_blank" class="c-link">
+            <div class="c-icon">📷</div>
+            <div><div class="c-lbl">Instagram</div><div class="c-val">@catalyst.boardgame</div></div>
+          </a>
+          <a href="tel:+447541178881" class="c-link">
+            <div class="c-icon">📞</div>
+            <div><div class="c-lbl">Phone / WhatsApp</div><div class="c-val">+44 7541 178 881</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="pub-box reveal">
+        <div class="pub-lbl">A Note to Publishers</div>
+        <h3>READY TO<br>COLLABORATE</h3>
+        <p>We design for the part of the market that's underserved: thoughtful adult players who want games that mean something. Our titles aren't educational supplements — they are first-rate games that happen to teach real science.</p>
+        <ul class="pub-list">
+          <li>Full rulebooks and design documents available immediately</li>
+          <li>Jabir: The Perfumer — final art phase, prototype ready</li>
+          <li>Synthelyst — actively seeking a publishing partner</li>
+          <li>Science dossiers and thematic research included with each title</li>
+          <li>Open to co-development, licensing, and convention demos</li>
+          <li>Available for Spiel Essen, UK Games Expo, and Cannes</li>
+        </ul>
+        <a href="mailto:duo.boardgame.design@gmail.com" class="btn-gold">Request Press Kit →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#hero" class="f-logo"><span class="nav-dot"></span>CATALYST</a>
+  <ul class="f-nav">
+    <li><a href="#about">About</a></li>
+    <li><a href="#games">Games</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="f-copy">© 2025 CATALYST · MEHRAD NIASARI &amp; ANITA MANSOURI</span>
+</footer>
+
+<script>
+  function mobileToggle() { document.getElementById('mobMenu').classList.toggle('open'); }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 55);
+    });
+  }, { threshold: 0.07 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
