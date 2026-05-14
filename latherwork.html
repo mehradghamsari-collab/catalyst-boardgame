@@ -3,133 +3,110 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Latherwork — Catalyst Board Games | The Fabric Science Game</title>
-<meta name="description" content="Latherwork — the fabric science board game. Build perfect wash formulas for real garments using textile chemistry. By Catalyst Board Games, Oxford.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta name="description" content="Latherwork — the fabric science board game. Build perfect wash formulas for real garments using textile chemistry.">
 <link rel="stylesheet" href="style.css">
 <style>
-:root{--l:#2a5caa;--l2:#4a82d4;--lbg:#060c18;}
-.game-hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end;}
-.game-hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 1s ease,filter 1s ease;}
-.game-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,8,18,0.97) 0%,rgba(4,8,18,0.35) 55%,rgba(4,8,18,0.05) 100%);transition:opacity 0.8s;}
-.hero-cards-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.6s 0.2s;}
-.hero-card-fan{position:relative;width:360px;height:260px;}
-.hcf-card{position:absolute;width:130px;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.8);transition:all 0.7s cubic-bezier(0.34,1.3,0.64,1);}
-.hcf-1{left:0;top:20px;transform:rotate(-10deg) translateY(40px);z-index:1;transition-delay:0.05s;}
-.hcf-2{left:50%;transform:translateX(-50%) translateY(40px);z-index:3;transition-delay:0.1s;}
-.hcf-3{right:0;top:20px;transform:rotate(10deg) translateY(40px);z-index:1;transition-delay:0.15s;}
-.hero-zoomed .game-hero-bg{transform:scale(1.15);filter:brightness(0.3) blur(3px);}
-.hero-zoomed .game-hero-overlay{opacity:0.7;}
-.hero-zoomed .hero-cards-stage{opacity:1;}
-.hero-zoomed .hcf-1{transform:rotate(-10deg) translateY(0);}
-.hero-zoomed .hcf-2{transform:translateX(-50%) translateY(0);}
-.hero-zoomed .hcf-3{transform:rotate(10deg) translateY(0);}
-.hero-scroll-hint{position:absolute;bottom:140px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);display:flex;flex-direction:column;align-items:center;gap:8px;}
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,0.4),transparent);}
-.game-hero-content{position:relative;z-index:10;padding:0 60px 80px;width:100%;}
-.game-hero-back{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:32px;transition:color 0.2s;}
-.game-hero-back:hover{color:var(--l2);}
-.eyebrow-l{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--l2);margin-bottom:12px;}
-.hero-title-l{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,10vw,140px);line-height:0.85;letter-spacing:0.03em;color:#fff;margin-bottom:16px;}
-.hero-sub-l{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(18px,2.5vw,28px);color:rgba(255,255,255,0.6);margin-bottom:36px;}
-.hero-meta{display:flex;gap:32px;flex-wrap:wrap;}
-.hm-item{display:flex;flex-direction:column;gap:4px;}
-.hm-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
-.hm-val{font-size:15px;font-weight:700;color:#fff;}
-.intro-strip{background:#08101e;border-bottom:1px solid rgba(74,130,212,0.15);padding:48px 60px;display:flex;gap:60px;}
-.intro-q{flex:1.5;font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(20px,2.5vw,30px);color:rgba(255,255,255,0.9);line-height:1.45;border-left:3px solid var(--l2);padding-left:28px;}
-.intro-b{flex:1;font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8;}
-.gc{max-width:1240px;margin:0 auto;padding:80px 60px;}
-.gs-lbl-l{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--l2);margin-bottom:12px;}
-.gs-title-d{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);letter-spacing:0.03em;line-height:0.9;color:#fff;}
-.gs-title-l{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);letter-spacing:0.03em;line-height:0.9;color:var(--ink);}
-/* ORIGIN */
-.origin-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-.o-img{width:100%;height:440px;object-fit:cover;display:block;}
-.o-body{color:rgba(255,255,255,0.7);font-size:15px;line-height:1.85;}
-.o-body p{margin-bottom:16px;}
-.o-body strong{color:var(--l2);}
-.o-highlight{background:rgba(42,92,170,0.12);border:1px solid rgba(74,130,212,0.25);padding:24px 28px;margin-top:24px;}
-.oh-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--l2);margin-bottom:10px;}
-.oh-p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;margin:0;}
-/* WAREHOUSE */
-.wh-split{display:grid;grid-template-columns:1fr 1fr;}
-.wh-img{min-height:480px;overflow:hidden;}
-.wh-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s;}
-.wh-img:hover img{transform:scale(1.04);}
-.wh-text{background:#06101e;padding:60px 52px;display:flex;flex-direction:column;justify-content:center;}
-.wh-text h3{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.04em;color:#fff;line-height:0.9;margin-bottom:20px;}
-.wh-text p{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:14px;}
-/* SCIENCE CONCEPT TILES */
-.sci-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:32px;}
-.sci-tile{padding:22px 18px;border:1.5px solid var(--rule);background:var(--bg);}
-.sci-tile-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--l2);margin-bottom:8px;}
-.sci-tile p{font-size:13px;color:var(--ink3);line-height:1.7;margin:0;}
-/* PHASES */
-.phases-l{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
-.phase-l{padding:26px 20px;border:1.5px solid var(--rule);background:var(--bg3);transition:border-color 0.3s;}
-.phase-l:hover{border-color:var(--l);}
-.phase-l-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:8px;}
-.phase-l-icon{font-size:22px;margin-bottom:10px;display:block;}
-.phase-l-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.06em;color:var(--ink);margin-bottom:6px;}
-.phase-l-desc{font-size:12px;color:var(--ink3);line-height:1.6;}
-/* WASH WHEEL */
+:root{--ac:#4a8fff;--ac2:#7ab5ff;--ac-glow:rgba(74,143,255,0.15);}
+.gh{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end;}
+.gh-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 1.2s var(--ease-out),filter 1.2s;}
+.gh-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,6,18,0.98) 0%,rgba(4,6,18,0.45) 55%,rgba(4,6,18,0.05) 100%);}
+.hero-cards{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity 0.5s 0.15s;z-index:4;}
+.card-fan{position:relative;width:380px;height:280px;}
+.fc{position:absolute;width:120px;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,0.9);transition:all 0.65s var(--ease-elastic);}
+.fc1{left:10px;top:20px;transform:rotate(-12deg) translateY(40px);z-index:1;transition-delay:0.04s;}
+.fc2{left:50%;transform:translateX(-50%) translateY(40px);z-index:3;transition-delay:0.1s;}
+.fc3{right:10px;top:20px;transform:rotate(12deg) translateY(40px);z-index:2;transition-delay:0.16s;}
+.gh.zoomed .gh-bg{transform:scale(1.18);filter:brightness(0.25) blur(4px);}
+.gh.zoomed .hero-cards{opacity:1;}
+.gh.zoomed .fc1{transform:rotate(-12deg) translateY(0);}
+.gh.zoomed .fc2{transform:translateX(-50%) translateY(0);}
+.gh.zoomed .fc3{transform:rotate(12deg) translateY(0);}
+.gh-body{position:relative;z-index:5;padding:0 var(--space-lg) var(--space-xl);}
+.back-link{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--space-md);transition:color 0.2s;}
+.back-link:hover{color:var(--ac);}
+.g-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--ac);margin-bottom:10px;}
+.g-hero-title{font-family:'Cinzel',serif;font-size:clamp(56px,11vw,130px);font-weight:900;line-height:0.82;letter-spacing:0.04em;color:#fff;margin-bottom:16px;}
+.g-hero-sub{font-family:'Cinzel',serif;font-style:italic;font-size:clamp(16px,2.5vw,24px);color:rgba(255,255,255,0.45);margin-bottom:var(--space-lg);}
+.meta-row{display:flex;gap:var(--space-lg);flex-wrap:wrap;}
+.meta-i{display:flex;flex-direction:column;gap:4px;}
+.meta-l{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.meta-v{font-size:15px;font-weight:600;color:#fff;font-family:'Cinzel',serif;}
+.scroll-hint{position:absolute;bottom:var(--space-lg);left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:6;}
+.sh-txt{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+.sh-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(74,143,255,0.5),transparent);}
+.intro-band{background:#040810;border-bottom:1px solid rgba(74,143,255,0.1);padding:var(--space-xl) var(--space-lg);display:flex;gap:var(--space-2xl);}
+.ib-q{flex:1.4;font-family:'Cinzel',serif;font-style:italic;font-size:clamp(18px,2.5vw,28px);color:rgba(255,255,255,0.85);line-height:1.45;border-left:2px solid var(--ac);padding-left:var(--space-md);}
+.ib-b{flex:1;font-size:var(--text-base);color:var(--text-secondary);line-height:1.85;}
+.gc{max-width:1320px;margin:0 auto;padding:var(--space-2xl) var(--space-lg);}
+.s-lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--ac);margin-bottom:12px;display:block;}
+.s-title-d{font-family:'Cinzel',serif;font-size:clamp(36px,5vw,64px);font-weight:700;letter-spacing:0.03em;line-height:0.9;color:#fff;}
+.s-title-l{font-family:'Cinzel',serif;font-size:clamp(36px,5vw,64px);font-weight:700;letter-spacing:0.03em;line-height:0.9;color:var(--text-primary);}
+.og{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl);align-items:start;}
+.o-img{width:100%;height:460px;object-fit:cover;display:block;border:1px solid rgba(74,143,255,0.12);}
+.o-body{color:var(--text-secondary);font-size:var(--text-base);line-height:1.85;}
+.o-body p{margin-bottom:var(--space-md);}
+.o-body strong{color:var(--ac2);}
+.o-box{background:rgba(74,143,255,0.05);border:1px solid rgba(74,143,255,0.18);padding:28px;margin-top:var(--space-md);}
+.o-box-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--ac);margin-bottom:10px;display:block;}
+.o-box p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0;}
+.split{display:grid;grid-template-columns:1fr 1fr;}
+.split-img{min-height:500px;overflow:hidden;}
+.split-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s;}
+.split-img:hover img{transform:scale(1.06);}
+.split-text{background:#040810;padding:var(--space-xl) var(--space-lg);display:flex;flex-direction:column;justify-content:center;}
+.split-text h3{font-family:'Cinzel',serif;font-size:clamp(28px,4vw,52px);letter-spacing:0.04em;color:#fff;line-height:0.9;margin-bottom:var(--space-md);}
+.split-text p{font-size:var(--text-base);color:var(--text-secondary);line-height:1.85;margin-bottom:var(--space-sm);}
+.sci-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.sci-cell{padding:var(--space-md);border:1px solid var(--border);background:var(--surface);}
+.sci-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ac);margin-bottom:8px;display:block;}
+.sci-cell p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin:0;}
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.phase{padding:var(--space-md);border:1px solid var(--border);background:var(--surface);transition:all 0.35s;}
+.phase:hover{border-color:rgba(74,143,255,0.3);transform:translateY(-4px);box-shadow:0 16px 60px rgba(74,143,255,0.07);}
+.phase-icon{font-size:26px;margin-bottom:12px;display:block;}
+.phase-name{font-family:'Cinzel',serif;font-size:14px;letter-spacing:0.05em;color:var(--text-primary);margin-bottom:6px;}
+.phase-desc{font-size:12px;color:var(--text-secondary);line-height:1.65;}
 .ww-split{display:grid;grid-template-columns:1fr 1fr;}
 .ww-img{min-height:480px;overflow:hidden;}
 .ww-img img{width:100%;height:100%;object-fit:cover;display:block;}
-.ww-text{background:var(--bg3);padding:60px 52px;display:flex;flex-direction:column;justify-content:center;border-left:1.5px solid var(--rule);}
-.ww-text h3{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:0.04em;color:var(--ink);line-height:0.9;margin-bottom:20px;}
-.ww-text p{font-size:15px;color:var(--ink2);line-height:1.8;margin-bottom:14px;}
-/* LAB BOARDS */
-.labs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
-.lab-card{padding:22px 18px;border:1.5px solid var(--rule);background:var(--bg3);transition:all 0.3s;text-align:center;}
-.lab-card:hover{border-color:var(--l);transform:translateY(-4px);}
-.lab-icon{font-size:26px;margin-bottom:10px;display:block;}
-.lab-name{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--ink);margin-bottom:4px;letter-spacing:0.06em;}
-.lab-ability{font-size:11px;color:var(--l2);font-weight:600;margin-bottom:6px;}
-.lab-desc{font-size:11px;color:var(--ink3);line-height:1.6;}
-/* CARDS */
-.scroll-head{max-width:1240px;margin:0 auto;padding:60px 60px 24px;display:flex;align-items:flex-end;justify-content:space-between;}
-.scroll-hint-txt{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink3);}
-/* USP */
-.usp-grid-l{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
-.usp-l{padding:28px 24px;background:var(--bg3);border:1.5px solid var(--rule);transition:all 0.3s;}
-.usp-l:hover{border-color:var(--l);transform:translateY(-4px);}
-.usp-l-icon{font-size:26px;margin-bottom:12px;display:block;}
-.usp-l-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px;}
-.usp-l-text{font-size:13px;color:var(--ink3);line-height:1.7;}
-/* PROGRESS */
-.progress-l{background:#060c18;padding:72px 60px;}
-.pw{max-width:1240px;margin:0 auto;}
-.prog-bar-row{display:flex;gap:2px;margin:28px 0;}
-.prog-step{flex:1;padding:18px 12px;border:1px solid rgba(255,255,255,0.07);transition:background 0.3s;}
-.prog-step.done{background:rgba(42,92,170,0.12);}
-.prog-step.active{background:rgba(42,92,170,0.22);border-color:var(--l2);}
-.prog-step-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.25);margin-bottom:6px;}
-.prog-step-name{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.07em;}
-.prog-step.done .prog-step-name{color:var(--l2);}
-.prog-step.active .prog-step-name{color:#fff;}
-.prog-step:not(.done):not(.active) .prog-step-name{color:rgba(255,255,255,0.3);}
-.btn-blue{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#fff;background:var(--l);padding:14px 32px;text-decoration:none;display:inline-block;transition:background 0.2s;}
-.btn-blue:hover{background:var(--l2);}
+.ww-text{background:var(--surface);padding:var(--space-xl) var(--space-lg);display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border);}
+.ww-text h3{font-family:'Cinzel',serif;font-size:clamp(24px,3.5vw,44px);letter-spacing:0.04em;color:var(--text-primary);line-height:0.9;margin-bottom:var(--space-md);}
+.ww-text p{font-size:var(--text-base);color:var(--text-secondary);line-height:1.85;margin-bottom:var(--space-sm);}
+.labs{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.lab{padding:var(--space-md);border:1px solid var(--border);background:var(--surface);text-align:center;transition:all 0.35s;}
+.lab:hover{border-color:rgba(74,143,255,0.3);transform:translateY(-4px);}
+.lab-icon{font-size:28px;margin-bottom:10px;display:block;}
+.lab-name{font-family:'Cinzel',serif;font-size:14px;color:var(--text-primary);margin-bottom:6px;letter-spacing:0.04em;}
+.lab-ability{font-size:11px;color:var(--ac);font-weight:500;margin-bottom:6px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.1em;}
+.lab-desc{font-size:11px;color:var(--text-secondary);line-height:1.6;}
+.usps{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.usp{padding:var(--space-lg) var(--space-md);background:var(--surface);border:1px solid var(--border);transition:all 0.4s var(--ease-out);}
+.usp:hover{border-color:rgba(74,143,255,0.3);transform:translateY(-5px);box-shadow:0 20px 60px rgba(74,143,255,0.07);}
+.usp-icon{font-size:28px;margin-bottom:var(--space-sm);display:block;}
+.usp-title{font-family:'Cinzel',serif;font-size:14px;letter-spacing:0.05em;color:var(--text-primary);margin-bottom:8px;}
+.usp-text{font-size:13px;color:var(--text-secondary);line-height:1.7;}
+.prog-sec{background:#040810;padding:var(--space-xl) var(--space-lg);border-top:1px solid rgba(74,143,255,0.08);}
+.prog-wrap{max-width:1320px;margin:0 auto;}
+.prog-bar{display:flex;gap:2px;margin:var(--space-md) 0 var(--space-lg);}
+.ps-l.done{background:rgba(74,143,255,0.08);border-color:rgba(74,143,255,0.18);}
+.ps-l.active{background:rgba(74,143,255,0.15);border-color:var(--ac);}
+.ps-l.done .prog-step-name{color:var(--ac);}
+.ps-l.active .prog-step-name{color:var(--ac2);}
 @media(max-width:960px){
-  .game-hero-content{padding:0 20px 48px;}
-  .hero-title-l{font-size:clamp(54px,14vw,90px);}
-  .intro-strip{flex-direction:column;gap:24px;padding:32px 20px;}
-  .gc{padding:48px 20px;}
-  .origin-grid,.wh-split,.ww-split{grid-template-columns:1fr;}
-  .wh-img,.ww-img{min-height:260px;}
-  .ww-text{border-left:none;border-top:1.5px solid var(--rule);}
-  .phases-l,.labs-grid{grid-template-columns:1fr 1fr;}
-  .usp-grid-l,.sci-tiles{grid-template-columns:1fr;}
-  .prog-bar-row{flex-direction:column;}
-  .scroll-head{padding:40px 20px 16px;}
-  .progress-l{padding:48px 20px;}
-  .hero-cards-stage{display:none;}
+  .intro-band{flex-direction:column;gap:var(--space-md);padding:var(--space-lg) var(--space-md);}
+  .gc{padding:var(--space-lg) var(--space-md);}
+  .og,.split,.ww-split{grid-template-columns:1fr;}
+  .split-img,.ww-img{min-height:280px;}
+  .ww-text{border-left:none;border-top:1px solid var(--border);}
+  .sci-grid,.phases,.labs,.usps{grid-template-columns:1fr 1fr;}
+  .prog-bar{flex-direction:column;}
+  .gh-body{padding:0 var(--space-md) var(--space-lg);}
+  .hero-cards{display:none;}
 }
 </style>
 </head>
 <body>
+<div class="cursor" id="cur"></div><div class="cursor-ring" id="curRing"></div>
 <div class="mob-menu" id="mobMenu">
   <button class="mob-close" onclick="mT()">✕</button>
   <a href="index.html" onclick="mT()">Home</a>
@@ -138,8 +115,8 @@
   <a href="#cards" onclick="mT()">Cards</a>
   <a href="index.html#publishers" onclick="mT()">Contact</a>
 </div>
-<nav>
-  <a href="index.html" class="nav-logo"><span class="nav-dot"></span>CATALYST</a>
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-brand"><span class="nav-brand-dot"></span>CATALYST</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="#origin">Origin</a></li>
@@ -151,183 +128,176 @@
   <button class="nav-toggle" onclick="mT()"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="game-hero" id="gameHero">
-  <img src="latherwork_hero_bg.png" alt="Latherwork — fashion warehouse industrial laundry" class="game-hero-bg">
-  <div class="game-hero-overlay"></div>
-  <div class="hero-cards-stage">
-    <div class="hero-card-fan">
-      <img src="latherwork_card1.png" alt="" class="hcf-card hcf-1">
-      <img src="latherwork_card2.png" alt="" class="hcf-card hcf-2">
-      <img src="latherwork_board.png" alt="" class="hcf-card hcf-3">
+<div class="gh" id="gh">
+  <img src="latherwork_hero_bg.png" alt="Latherwork" class="gh-bg">
+  <div class="gh-ov"></div>
+  <div class="hero-cards">
+    <div class="card-fan">
+      <img src="latherwork_card1.png" class="fc fc1" alt="">
+      <img src="latherwork_card2.png" class="fc fc2" alt="">
+      <img src="latherwork_board.png" class="fc fc3" alt="">
     </div>
   </div>
-  <div class="hero-scroll-hint"><span>SCROLL</span><div class="scroll-line"></div></div>
-  <div class="game-hero-content">
-    <a href="index.html" class="game-hero-back">← Back to Catalyst</a>
-    <div class="eyebrow-l">Game 003 · Medium Eurogame · In Mechanics Design</div>
-    <h1 class="hero-title-l">LATHER-<br>WORK</h1>
-    <p class="hero-sub-l">The Fabric Science Game</p>
-    <div class="hero-meta">
-      <div class="hm-item"><span class="hm-lbl">Players</span><span class="hm-val">2–4</span></div>
-      <div class="hm-item"><span class="hm-lbl">Duration</span><span class="hm-val">90–120 min</span></div>
-      <div class="hm-item"><span class="hm-lbl">Age</span><span class="hm-val">14+</span></div>
-      <div class="hm-item"><span class="hm-lbl">Weight</span><span class="hm-val">Medium</span></div>
+  <div class="scroll-hint" id="sh"><span class="sh-txt">Scroll</span><div class="sh-line"></div></div>
+  <div class="gh-body">
+    <a href="index.html" class="back-link">← Catalyst</a>
+    <div class="g-eyebrow">Game 003 · Medium Eurogame · In Mechanics Design</div>
+    <h1 class="g-hero-title">LATHER-<br>WORK</h1>
+    <p class="g-hero-sub">The Fabric Science Game</p>
+    <div class="meta-row">
+      <div class="meta-i"><span class="meta-l">Players</span><span class="meta-v">2–4</span></div>
+      <div class="meta-i"><span class="meta-l">Duration</span><span class="meta-v">90–120 min</span></div>
+      <div class="meta-i"><span class="meta-l">Age</span><span class="meta-v">14+</span></div>
+      <div class="meta-i"><span class="meta-l">Weight</span><span class="meta-v">Medium</span></div>
     </div>
   </div>
 </div>
 
-<div class="intro-strip reveal">
-  <p class="intro-q">"Every garment that arrives carries a secret. Read the chemistry correctly — and wash it perfectly."</p>
-  <p class="intro-b">Latherwork is a strategic card-deck-building eurogame set in a high-end industrial fashion laundry. Build precise wash formulas using real textile chemistry. Compete through the rotating Wash Wheel market. Survive Crisis Events that disrupt everything.</p>
+<div class="intro-band reveal">
+  <p class="ib-q">"Every garment that arrives carries a secret. Read the chemistry — and wash it perfectly."</p>
+  <p class="ib-b">Latherwork is a strategic card-deck-building eurogame set in a high-end industrial fashion laundry. Build precise wash formulas using real textile chemistry, compete through the rotating Wash Wheel market, and survive Crisis Events that disrupt everything.</p>
 </div>
 
-<section id="origin" style="background:#060c18;">
+<section id="origin" style="background:var(--deep);border-top:1px solid var(--border);">
 <div class="gc">
-  <div style="margin-bottom:48px;" class="reveal"><div class="gs-lbl-l">The Origin Story</div><h2 class="gs-title-d">WHY<br>LATHERWORK?</h2></div>
-  <div class="origin-grid">
+  <div style="margin-bottom:var(--space-xl);" class="reveal"><span class="s-lbl">The Origin Story</span><h2 class="s-title-d">WHY<br>LATHERWORK?</h2></div>
+  <div class="og">
     <div class="reveal-left"><img src="latherwork_chemistry.png" alt="Textile chemistry lab" class="o-img"></div>
     <div class="o-body reveal-right">
-      <p>The idea began with a carpet. Mehrad was trying to wash a small rug at home and had no idea what the right approach was. He picked up the care label — and found a world he hadn't noticed before. <strong>Temperature ranges. Chemistry requirements. Agitation warnings.</strong> A whole science encoded in tiny symbols that most people ignore entirely.</p>
-      <p>"What if people understood this?" he thought. Not just "wash cold" — but why. These aren't arbitrary rules. They're chemistry. And when you ignore them, your clothes suffer — and eventually end up in landfill.</p>
-      <p>The deeper message of Latherwork is sustainability: <strong>when you understand how to care for your garments correctly, they last longer</strong> — reducing the overconsumption that makes textile waste one of the world's largest environmental problems.</p>
-      <div class="o-highlight">
-        <div class="oh-title">Unique Market Position</div>
-        <p class="oh-p">Latherwork is the only strategy game about the science of textile care. It can partner with detergent brands, fashion houses, and sustainability organisations — and belongs in every school teaching chemistry or environmental science.</p>
-      </div>
+      <p>The idea began with a carpet. Mehrad was trying to wash a small rug at home and had no idea what the right approach was. He picked up the care label — and found a world he hadn't noticed before. <strong>Temperature ranges. Chemistry requirements. Agitation warnings.</strong> A whole science encoded in tiny symbols that most people ignore.</p>
+      <p>"What if people actually understood this?" he thought. Not just "wash cold" — but why. These aren't arbitrary rules. They're chemistry. And when you ignore them, your clothes suffer — and eventually end up in landfill. <strong>When you understand how to care for your garments correctly, they last longer.</strong></p>
+      <div class="o-box"><span class="o-box-lbl">Unique Market Position</span><p>Latherwork is the only strategy game about the science of textile care. It can partner with detergent brands, fashion houses, and sustainability organisations — and belongs in every school teaching chemistry or environmental science.</p></div>
     </div>
   </div>
 </div>
 </section>
 
-<div class="wh-split">
-  <div class="wh-img reveal-left"><img src="latherwork_hero_bg.png" alt="Industrial fashion laundry warehouse"></div>
-  <div class="wh-text reveal-right">
-    <div class="gs-lbl-l">The Setting</div>
-    <h3>AN INDUSTRIAL<br>FASHION LAUNDRY.</h3>
-    <p>Your players' boards represent specialist textile care operations in a high-end fashion warehouse — silk evening gowns hanging beside sportswear; steel drums steaming beside chemistry benches. Every garment that arrives is a puzzle requiring the right scientific approach.</p>
+<div class="split">
+  <div class="split-img reveal-left"><img src="latherwork_hero_bg.png" alt="Fashion warehouse laundry"></div>
+  <div class="split-text reveal-right">
+    <span class="s-lbl">The Setting</span>
+    <h3>An Industrial<br>Fashion Laundry.</h3>
+    <p>Your board represents a specialist textile care operation in a high-end fashion warehouse — silk evening gowns hanging beside sportswear; steel drums steaming beside chemistry benches. Every garment that arrives is a puzzle requiring precise scientific treatment.</p>
     <p>The Wash Wheel — the central rotating card market — is the game's beating heart. Resources rotate constantly, creating a shifting economy. Timing the wheel is as important as knowing your fabric chemistry.</p>
-    <div style="margin-top:28px;"><a href="index.html#publishers" class="btn-light">Follow Development →</a></div>
+    <div style="margin-top:var(--space-lg);"><a href="index.html#publishers" class="btn btn-ghost" style="border-color:rgba(74,143,255,0.3);color:var(--ac);">Follow Development →</a></div>
   </div>
 </div>
 
-<section style="background:var(--bg3);">
+<section style="background:var(--deep);border-top:1px solid var(--border);">
 <div class="gc">
-  <div style="margin-bottom:32px;" class="reveal"><div class="gs-lbl-l">The Science</div><h2 class="gs-title-l">REAL TEXTILE<br>CHEMISTRY</h2></div>
-  <p style="font-size:16px;color:var(--ink2);max-width:760px;line-height:1.85;">Every garment has a chemical profile — a fibre composition that determines exactly how it must be treated. Latherwork puts you in the role of the expert who reads those signals and acts on them.</p>
-  <div class="sci-tiles">
-    <div class="sci-tile reveal"><div class="sci-tile-lbl">Temperature</div><p>Each fibre type responds differently to heat. Reading the dominant fibre — and accounting for minority fibres — determines your safe operating range.</p></div>
-    <div class="sci-tile reveal"><div class="sci-tile-lbl">Chemistry</div><p>Different fibres require different chemical environments to be cleaned safely. Choosing the wrong approach can cause permanent and irreversible damage.</p></div>
-    <div class="sci-tile reveal"><div class="sci-tile-lbl">Agitation &amp; Cycle</div><p>Mechanical force that works perfectly on robust fabrics can permanently distort or shrink delicate ones. The right cycle is as critical as the right chemistry.</p></div>
+  <div style="margin-bottom:var(--space-lg);" class="reveal"><span class="s-lbl">The Science</span><h2 class="s-title-l">Real Textile<br>Chemistry</h2></div>
+  <p style="font-size:var(--text-lg);color:var(--text-secondary);max-width:760px;line-height:1.85;margin-bottom:var(--space-lg);">Every garment has a chemical profile. The right approach depends on fibre composition, and Latherwork puts you in the role of the expert who reads those signals and acts on them.</p>
+  <div class="sci-grid">
+    <div class="sci-cell reveal"><span class="sci-lbl">Temperature</span><p>Each fibre responds differently to heat. The dominant fibre sets the primary range — minority fibres can restrict your options further.</p></div>
+    <div class="sci-cell reveal"><span class="sci-lbl">Chemistry</span><p>Different fibres require different chemical environments to be cleaned safely. The wrong choice causes permanent, irreversible damage.</p></div>
+    <div class="sci-cell reveal"><span class="sci-lbl">Agitation &amp; Cycle</span><p>Mechanical force that works on robust fabrics can permanently distort delicate ones. The right cycle is as critical as the right chemistry.</p></div>
   </div>
-  <p style="font-size:13px;color:var(--ink3);margin-top:16px;font-style:italic;">Every player receives a science reference card. Learning to read it faster than your opponents is the game.</p>
 </div>
 </section>
 
-<section style="background:var(--bg);">
-<img src="latherwork_fabrics.png" alt="Luxury fabric swatches" style="width:100%;height:380px;object-fit:cover;display:block;" class="reveal-scale">
+<section style="background:var(--void);border-top:1px solid var(--border);">
+<img src="latherwork_fabrics.png" alt="Fabric swatches" style="width:100%;height:380px;object-fit:cover;display:block;filter:brightness(0.85);" class="reveal-scale">
 </section>
 
-<section id="howtoplay" style="background:var(--bg3);">
+<section id="howtoplay" style="background:var(--deep);border-top:1px solid var(--border);">
 <div class="gc">
-  <div style="margin-bottom:40px;" class="reveal"><div class="gs-lbl-l">Game Mechanics</div><h2 class="gs-title-l">HOW TO<br>PLAY</h2></div>
-  <p style="font-size:16px;color:var(--ink2);max-width:700px;line-height:1.85;margin-bottom:44px;">Each round flows through four phases. The rotating Wash Wheel market creates constant competition — what's available changes each round, and every player's choice affects everyone else's options.</p>
-  <div class="phases-l">
-    <div class="phase-l reveal"><div class="phase-l-num">Phase 1</div><span class="phase-l-icon">⚠️</span><div class="phase-l-name">CRISIS</div><p class="phase-l-desc">An unexpected event disrupts the market or your resources. Crisis cards demand adaptation — flexible strategies survive; rigid ones suffer.</p></div>
-    <div class="phase-l reveal"><div class="phase-l-num">Phase 2</div><span class="phase-l-icon">🎡</span><div class="phase-l-name">ACQUISITION</div><p class="phase-l-desc">Take one action: acquire from the Wash Wheel, submit a formula, advance your research, or pass. Every choice shapes what remains for everyone else.</p></div>
-    <div class="phase-l reveal"><div class="phase-l-num">Phase 3</div><span class="phase-l-icon">🧪</span><div class="phase-l-name">FORMULA</div><p class="phase-l-desc">Build and submit your wash formula against a garment card. Scientific precision is rewarded — and errors are penalised.</p></div>
-    <div class="phase-l reveal"><div class="phase-l-num">Phase 4</div><span class="phase-l-icon">🔄</span><div class="phase-l-name">END OF ROUND</div><p class="phase-l-desc">The market shifts. Resources rotate. When the garment pile runs low, the final scoring round begins.</p></div>
+  <div style="margin-bottom:var(--space-xl);" class="reveal"><span class="s-lbl">Game Mechanics</span><h2 class="s-title-l">How to<br>Play</h2></div>
+  <p style="font-size:var(--text-lg);color:var(--text-secondary);max-width:700px;line-height:1.85;margin-bottom:var(--space-xl);">Each round flows through four phases. The rotating Wash Wheel market creates constant competition — what's available changes every round, and every player's choice shapes what remains for others.</p>
+  <div class="phases">
+    <div class="phase reveal"><span class="phase-icon">⚠️</span><div class="phase-name">Crisis</div><p class="phase-desc">An unexpected event disrupts the market or resources. Crisis cards demand adaptation — flexible strategies survive; rigid ones suffer.</p></div>
+    <div class="phase reveal"><span class="phase-icon">🎡</span><div class="phase-name">Acquisition</div><p class="phase-desc">Take one action — acquire from the Wash Wheel, submit a formula, advance your research, or pass. Every choice reshapes what's available to everyone.</p></div>
+    <div class="phase reveal"><span class="phase-icon">🧪</span><div class="phase-name">Formula</div><p class="phase-desc">Build and submit your wash formula against a garment. Scientific precision is rewarded. An incorrect formula wastes your resources.</p></div>
+    <div class="phase reveal"><span class="phase-icon">🔄</span><div class="phase-name">End of Round</div><p class="phase-desc">The market shifts. Resources rotate. When the garment pile runs low, the final scoring round begins.</p></div>
   </div>
 </div>
 </section>
 
 <div class="ww-split">
-  <div class="ww-img reveal-left"><img src="latherwork_board.png" alt="Latherwork Wash Wheel central board"></div>
+  <div class="ww-img reveal-left"><img src="latherwork_board.png" alt="Wash Wheel board"></div>
   <div class="ww-text reveal-right">
-    <div class="gs-lbl-l">Central Mechanic</div>
-    <h3>THE WASH<br>WHEEL MARKET</h3>
-    <p>12 slots. 4 zones. Constantly rotating. The Wash Wheel is the shared resource market — and the engine of competition. Different zones offer different pricing advantages. Cards that no one takes eventually fall off the wheel entirely.</p>
-    <p>Reading the wheel is as important as reading your fabric chemistry. Timing an acquisition one turn earlier than your opponent — before the wheel rotates past the card you need — is often the margin between scoring and missing out entirely.</p>
+    <span class="s-lbl">Central Mechanic</span>
+    <h3>The Wash<br>Wheel Market</h3>
+    <p>12 slots. 4 zones. Constantly rotating. The Wash Wheel is the shared resource market — different zones offer different pricing advantages. Cards that no one claims eventually fall off the wheel entirely.</p>
+    <p>Reading the wheel is as important as reading your fabric chemistry. Timing an acquisition one turn ahead of your opponent is often the margin between scoring and missing entirely.</p>
   </div>
 </div>
 
-<section style="background:var(--bg);">
+<section style="background:var(--void);border-top:1px solid var(--border);">
 <div class="gc">
-  <div style="margin-bottom:40px;" class="reveal"><div class="gs-lbl-l">Player Specialisations</div><h2 class="gs-title-l">FOUR LAB<br>BOARDS</h2></div>
-  <div class="labs-grid">
-    <div class="lab-card reveal"><span class="lab-icon">🧬</span><div class="lab-name">The Chemist</div><div class="lab-ability">Formula flexibility</div><p class="lab-desc">A special once-per-round ability that gives extra flexibility with formula card management.</p></div>
-    <div class="lab-card reveal"><span class="lab-icon">🌿</span><div class="lab-name">The Ecologist</div><div class="lab-ability">Eco-efficiency bonus</div><p class="lab-desc">Rewards low-temperature, sustainable wash choices with additional resources each round.</p></div>
-    <div class="lab-card reveal"><span class="lab-icon">🎯</span><div class="lab-name">The Specialist</div><div class="lab-ability">Fibre mastery</div><p class="lab-desc">Gains advantages on specific fibre types through research progression and mastery tracks.</p></div>
-    <div class="lab-card reveal"><span class="lab-icon">💡</span><div class="lab-name">The Innovator</div><div class="lab-ability">Free acquisition</div><p class="lab-desc">Once per round: acquire one card from the Wash Wheel at no cost into your holding space.</p></div>
+  <div style="margin-bottom:var(--space-xl);" class="reveal"><span class="s-lbl">Player Specialisations</span><h2 class="s-title-l">Four Lab<br>Boards</h2></div>
+  <div class="labs">
+    <div class="lab reveal"><span class="lab-icon">🧬</span><div class="lab-name">The Chemist</div><div class="lab-ability">Formula Flexibility</div><p class="lab-desc">A once-per-round ability giving extra flexibility with formula card management.</p></div>
+    <div class="lab reveal"><span class="lab-icon">🌿</span><div class="lab-name">The Ecologist</div><div class="lab-ability">Eco-Efficiency Bonus</div><p class="lab-desc">Rewards low-temperature, sustainable wash choices with additional resources.</p></div>
+    <div class="lab reveal"><span class="lab-icon">🎯</span><div class="lab-name">The Specialist</div><div class="lab-ability">Fibre Mastery</div><p class="lab-desc">Gains advantages on specific fibre types through research progression tracks.</p></div>
+    <div class="lab reveal"><span class="lab-icon">💡</span><div class="lab-name">The Innovator</div><div class="lab-ability">Free Acquisition</div><p class="lab-desc">Once per round: acquire one card from the Wash Wheel at no cost.</p></div>
   </div>
 </div>
 </section>
 
-<section id="cards" style="background:var(--bg3);">
-<div class="scroll-head reveal">
-  <div><div class="gs-lbl-l">Cards &amp; Components</div><h2 class="gs-title-l" style="font-size:clamp(36px,4vw,56px);">GAME<br>COMPONENTS</h2></div>
-  <div class="scroll-hint-txt">← Scroll →</div>
+<section id="cards" style="background:var(--deep);border-top:1px solid var(--border);">
+<div style="max-width:1320px;margin:0 auto;padding:var(--space-xl) var(--space-lg) var(--space-md);display:flex;align-items:flex-end;justify-content:space-between;" class="reveal">
+  <div><span class="s-lbl">Cards &amp; Components</span><h2 class="s-title-l" style="font-size:clamp(28px,4vw,48px);">Game<br>Components</h2></div>
+  <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);">← Scroll →</span>
 </div>
-<div class="card-scroll-wrap">
-  <div class="card-scroll">
-    <div class="card-item reveal"><img src="latherwork_box.png" alt="Latherwork box art"><div class="card-item-label">Box Cover Art</div></div>
-    <div class="card-item reveal"><img src="latherwork_board.png" alt="Latherwork Wash Wheel board"><div class="card-item-label">Wash Wheel Board</div></div>
-    <div class="card-item reveal"><img src="latherwork_card1.png" alt="Garment card — Evening Dress"><div class="card-item-label">Garment Card — Evening Dress</div></div>
-    <div class="card-item reveal"><img src="latherwork_card2.png" alt="Detergent card — Bio Detergent"><div class="card-item-label">Detergent Card — Bio Detergent</div></div>
-    <div class="card-item reveal"><img src="latherwork_fabrics.png" alt="Fabric swatches"><div class="card-item-label">Fabric Library</div></div>
-    <div class="card-item reveal"><img src="latherwork_chemistry.png" alt="Textile chemistry lab"><div class="card-item-label">Chemistry Reference Lab</div></div>
-  </div>
+<div class="card-scroll">
+  <div class="card-item reveal"><img src="latherwork_box.png" alt="Box art"><div class="card-item-label">Box Cover Art</div></div>
+  <div class="card-item reveal"><img src="latherwork_board.png" alt="Wash Wheel"><div class="card-item-label">Wash Wheel Board</div></div>
+  <div class="card-item reveal"><img src="latherwork_card1.png" alt="Evening Dress"><div class="card-item-label">Garment Card — Evening Dress</div></div>
+  <div class="card-item reveal"><img src="latherwork_card2.png" alt="Bio Detergent"><div class="card-item-label">Detergent Card — Bio Detergent</div></div>
+  <div class="card-item reveal"><img src="latherwork_fabrics.png" alt="Fabrics"><div class="card-item-label">Fabric Library</div></div>
+  <div class="card-item reveal"><img src="latherwork_chemistry.png" alt="Chemistry lab"><div class="card-item-label">Chemistry Reference Lab</div></div>
 </div>
 </section>
 
-<section style="background:var(--bg);">
+<section style="background:var(--void);border-top:1px solid var(--border);">
 <div class="gc">
-  <div style="margin-bottom:40px;" class="reveal"><div class="gs-lbl-l">Unique Value</div><h2 class="gs-title-l">WHY<br>LATHERWORK?</h2></div>
-  <div class="usp-grid-l">
-    <div class="usp-l reveal"><span class="usp-l-icon">👗</span><div class="usp-l-title">Fashion Industry Partnerships</div><p class="usp-l-text">Latherwork can partner with detergent brands, luxury fashion houses, and sustainable textile companies — a natural co-branding opportunity that extends far beyond the hobby.</p></div>
-    <div class="usp-l reveal"><span class="usp-l-icon">♻️</span><div class="usp-l-title">Sustainability Message</div><p class="usp-l-text">Clothes that are washed correctly last longer. Latherwork embeds this lesson in every game action, making sustainability tangible, personal, and memorable.</p></div>
-    <div class="usp-l reveal"><span class="usp-l-icon">🎓</span><div class="usp-l-title">Educational Applications</div><p class="usp-l-text">Textile science and chemistry content that maps directly to school curricula — in a format students will actually remember. Ideal for domestic science and environmental studies.</p></div>
-    <div class="usp-l reveal"><span class="usp-l-icon">🏆</span><div class="usp-l-title">No Competition</div><p class="usp-l-text">No other game uses textile chemistry as a core mechanic. Latherwork is completely novel — with massive crossover appeal beyond traditional board game audiences.</p></div>
+  <div style="margin-bottom:var(--space-xl);" class="reveal"><span class="s-lbl">Unique Value</span><h2 class="s-title-l">WHY LATHERWORK?</h2></div>
+  <div class="usps">
+    <div class="usp reveal"><span class="usp-icon">👗</span><div class="usp-title">Fashion Industry Partnerships</div><p class="usp-text">Latherwork can partner with detergent brands, luxury fashion houses, and sustainable textile companies — a natural co-branding opportunity far beyond the hobby.</p></div>
+    <div class="usp reveal"><span class="usp-icon">♻️</span><div class="usp-title">Sustainability Message</div><p class="usp-text">Clothes washed correctly last longer. Latherwork embeds this lesson in every game action, making sustainability tangible, personal, and memorable.</p></div>
+    <div class="usp reveal"><span class="usp-icon">🎓</span><div class="usp-title">Educational Applications</div><p class="usp-text">Textile science and chemistry content that maps directly to school curricula — in a format students will remember long after the lesson.</p></div>
+    <div class="usp reveal"><span class="usp-icon">🏆</span><div class="usp-title">No Competition</div><p class="usp-text">No other game uses textile chemistry as its core mechanic. Latherwork is completely novel — with massive crossover appeal beyond traditional board game audiences.</p></div>
   </div>
 </div>
 </section>
 
-<section class="progress-l">
-<div class="pw">
-  <div class="gs-lbl-l">Development Status</div>
-  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:#fff;letter-spacing:0.04em;line-height:0.9;margin-bottom:8px;">IN MECHANICS<br>DESIGN</h2>
-  <p style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:0;">Core concept locked. Mechanics design in progress. Follow us on Instagram for development updates.</p>
-  <div class="prog-bar-row reveal">
-    <div class="prog-step done"><div class="prog-step-num">01</div><div class="prog-step-name">Concept</div></div>
-    <div class="prog-step active"><div class="prog-step-num">02</div><div class="prog-step-name">Mechanics</div></div>
-    <div class="prog-step"><div class="prog-step-num">03</div><div class="prog-step-name">Prototype</div></div>
-    <div class="prog-step"><div class="prog-step-num">04</div><div class="prog-step-name">Playtesting</div></div>
-    <div class="prog-step"><div class="prog-step-num">05</div><div class="prog-step-name">Final Art</div></div>
-    <div class="prog-step"><div class="prog-step-num">06</div><div class="prog-step-name">Publisher</div></div>
+<section class="prog-sec">
+<div class="prog-wrap">
+  <span class="s-lbl" style="color:var(--ac);">Development Status</span>
+  <h2 style="font-family:'Cinzel',serif;font-size:clamp(28px,5vw,56px);color:#fff;letter-spacing:0.04em;line-height:0.9;margin-bottom:8px;">In Mechanics Design</h2>
+  <p style="font-size:13px;color:var(--text-muted);">Core concept locked · Mechanics design in progress · Follow us on Instagram for updates</p>
+  <div class="prog-bar reveal">
+    <div class="prog-step ps-l done"><div class="prog-step-num">01</div><div class="prog-step-name">Concept</div></div>
+    <div class="prog-step ps-l active"><div class="prog-step-num">02</div><div class="prog-step-name">Mechanics</div></div>
+    <div class="prog-step ps-l"><div class="prog-step-num">03</div><div class="prog-step-name">Prototype</div></div>
+    <div class="prog-step ps-l"><div class="prog-step-num">04</div><div class="prog-step-name">Playtesting</div></div>
+    <div class="prog-step ps-l"><div class="prog-step-num">05</div><div class="prog-step-name">Final Art</div></div>
+    <div class="prog-step ps-l"><div class="prog-step-num">06</div><div class="prog-step-name">Publisher</div></div>
   </div>
-  <a href="index.html#publishers" class="btn-blue">Follow Latherwork Development →</a>
+  <a href="index.html#publishers" class="btn" style="background:var(--ac);color:var(--void);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;padding:16px 36px;text-decoration:none;display:inline-flex;box-shadow:0 0 30px rgba(74,143,255,0.25);">Follow Latherwork Development</a>
 </div>
 </section>
 
 <footer>
-  <a href="index.html" class="f-logo"><span class="nav-dot"></span>CATALYST</a>
-  <ul class="f-nav">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="jabir.html">Jabir</a></li>
-    <li><a href="synthelyst.html">Synthelyst</a></li>
-    <li><a href="index.html#publishers">Contact</a></li>
-  </ul>
+  <a href="index.html" class="f-logo"><span class="nav-brand-dot"></span>CATALYST</a>
+  <ul class="f-nav"><li><a href="index.html">Home</a></li><li><a href="jabir.html">Jabir</a></li><li><a href="synthelyst.html">Synthelyst</a></li><li><a href="index.html#publishers">Contact</a></li></ul>
   <span class="f-copy">© 2025 CATALYST · LATHERWORK</span>
 </footer>
 <script>
+const cur=document.getElementById('cur'),ring=document.getElementById('curRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;if(cur)cur.style.cssText=`left:${mx}px;top:${my}px;`;});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;if(ring)ring.style.cssText=`left:${rx}px;top:${ry}px;`;requestAnimationFrame(animRing);}
+animRing();
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('scrolled',scrollY>40));
 function mT(){document.getElementById('mobMenu').classList.toggle('open');}
-const hero=document.getElementById('gameHero');
+const gh=document.getElementById('gh'),sh=document.getElementById('sh');
 let zoomed=false;
 window.addEventListener('scroll',()=>{
-  const s=window.scrollY;
-  if(s>80&&!zoomed){zoomed=true;hero.classList.add('hero-zoomed');}
-  if(s<20&&zoomed){zoomed=false;hero.classList.remove('hero-zoomed');}
+  if(scrollY>80&&!zoomed){zoomed=true;gh.classList.add('zoomed');if(sh)sh.style.opacity='0';}
+  if(scrollY<20&&zoomed){zoomed=false;gh.classList.remove('zoomed');if(sh)sh.style.opacity='1';}
 });
-const obs=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('visible'),i*55);});},{threshold:0.06});
+const obs=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('visible'),i*60);});},{threshold:0.06});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
 </script>
 </body>
