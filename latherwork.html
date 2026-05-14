@@ -46,17 +46,6 @@
 .wh-text-col{background:#06101e;padding:64px 56px;display:flex;flex-direction:column;justify-content:center;}
 .wh-text-col h3{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:0.04em;color:#fff;line-height:0.9;margin-bottom:20px;}
 .wh-text-col p{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:14px;}
-/* SCIENCE TABLE */
-.sci-table{width:100%;border-collapse:collapse;margin-top:24px;}
-.sci-table th{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--l2);border-bottom:2px solid var(--rule);padding:10px 12px;text-align:left;background:var(--bg3);}
-.sci-table td{font-size:13px;color:var(--ink2);padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:middle;}
-.sci-table tr:hover td{background:#f5f0ff;}
-.fibre-chip{display:inline-block;padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;margin-right:4px;}
-.fc-cotton{background:#e8f5e0;color:#2a6a10;}
-.fc-wool{background:#fff0e0;color:#8b4500;}
-.fc-silk{background:#fce4ff;color:#6a0080;}
-.fc-poly{background:#e0eeff;color:#1a3a80;}
-.fc-ela{background:#e0fff8;color:#006644;}
 /* WASH WHEEL */
 .wash-wheel-section{display:grid;grid-template-columns:1fr 1fr;}
 .ww-img{min-height:500px;overflow:hidden;}
@@ -116,7 +105,6 @@
   .prog-bar-row{flex-direction:column;}
   .section-scroll-label{padding:40px 20px 16px;}
   .progress-l{padding:48px 20px;}
-  .sci-table th:nth-child(n+4),.sci-table td:nth-child(n+4){display:none;}
 }
 </style>
 </head>
@@ -200,19 +188,13 @@
 <section style="background:var(--bg3);">
 <div class="gc">
   <div style="margin-bottom:40px;" class="reveal"><div class="gs-lbl-l">The Science</div><h2 class="gs-title-l">REAL TEXTILE<br>CHEMISTRY</h2></div>
-  <p style="font-size:15px;color:var(--ink2);margin-bottom:28px;max-width:700px;">Every game decision is grounded in this reference table — which appears on every player's reference card. The dominant fibre sets the primary constraints. Minority fibres add additional restrictions.</p>
-  <div style="overflow-x:auto;" class="reveal-scale">
-  <table class="sci-table">
-    <tr><th>Fibre</th><th>pH Range</th><th>Max Temp</th><th>Ideal Detergent</th><th>Vulnerable To</th></tr>
-    <tr><td><span class="fibre-chip fc-cotton">Cotton</span></td><td>Alkaline OK</td><td>30–90°C</td><td>Bio / Heavy-Duty</td><td>Prolonged bleach</td></tr>
-    <tr><td><span class="fibre-chip fc-wool">Wool</span></td><td>Acidic 5–6</td><td>Cold–30°C</td><td>Wool &amp; Silk Wash</td><td>Heat, alkaline, agitation</td></tr>
-    <tr><td><span class="fibre-chip fc-poly">Polyester</span></td><td>Neutral–mild alk</td><td>30–60°C</td><td>Colour-Care</td><td>High heat (melt)</td></tr>
-    <tr><td><span class="fibre-chip fc-silk">Silk</span></td><td>Neutral 6–7</td><td>Cold–30°C</td><td>Wool &amp; Silk Wash</td><td>Bleach, alkaline, agitation</td></tr>
-    <tr><td><span class="fibre-chip fc-ela">Elastane</span></td><td>Neutral</td><td>Cold–30°C</td><td>Non-Bio / Colour</td><td>Chlorine bleach, heat</td></tr>
-    <tr><td>Linen</td><td>Alkaline OK</td><td>40–90°C</td><td>Bio / Heavy-Duty</td><td>Tumble-dry heat</td></tr>
-    <tr><td>Viscose</td><td>Neutral 6–7</td><td>Cold–30°C</td><td>Non-Bio gentle</td><td>Heat, agitation, alkaline</td></tr>
-  </table>
+  <p style="font-size:16px;color:var(--ink2);margin-bottom:28px;max-width:760px;line-height:1.85;">Every garment in Latherwork has a precise chemical profile — a fibre composition that determines exactly how it must be washed. Temperature, pH, detergent type, agitation level, and wash cycle all interact in ways that real textile science has established over decades. Get it wrong and the garment is damaged. Get it right and you score — and learn something that stays with you long after the game ends.</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;" class="reveal-scale">
+    <div style="padding:24px 20px;border:1.5px solid var(--rule);background:var(--bg);"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--l2);margin-bottom:8px;">Temperature</div><p style="font-size:13px;color:var(--ink3);line-height:1.7;">Each fibre type responds differently to heat. The right temperature range depends on the dominant fibre — and minority fibres can restrict your options further.</p></div>
+    <div style="padding:24px 20px;border:1.5px solid var(--rule);background:var(--bg);"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--l2);margin-bottom:8px;">pH &amp; Detergent</div><p style="font-size:13px;color:var(--ink3);line-height:1.7;">Some fibres tolerate alkaline conditions. Others require strict neutral or acidic chemistry. Choosing the wrong detergent class can cause irreversible damage.</p></div>
+    <div style="padding:24px 20px;border:1.5px solid var(--rule);background:var(--bg);"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--l2);margin-bottom:8px;">Agitation &amp; Cycle</div><p style="font-size:13px;color:var(--ink3);line-height:1.7;">Mechanical agitation that cleans cotton efficiently can permanently distort delicate fibres. The right cycle is as important as the right chemistry.</p></div>
   </div>
+  <p style="font-size:14px;color:var(--ink3);margin-top:20px;font-style:italic;">Every player receives a reference card. The science is on it. Learning to read it — and apply it faster than your opponents — is the game.</p>
 </div>
 </section>
 
@@ -230,10 +212,10 @@
 <div class="gc">
   <div style="margin-bottom:48px;" class="reveal"><div class="gs-lbl-l">Game Mechanics</div><h2 class="gs-title-l">HOW TO<br>PLAY</h2></div>
   <div class="phases-l">
-    <div class="phase-l reveal"><div class="phase-l-num">Phase 1</div><span class="phase-l-icon">⚠️</span><div class="phase-l-name">CRISIS</div><p class="phase-l-desc">From Round 3, draw a Crisis Event card — Hard Water Alert, Energy Rationing, Enzyme Shortage, Market Rush. Effects last two rounds.</p></div>
-    <div class="phase-l reveal"><div class="phase-l-num">Phase 2</div><span class="phase-l-icon">🎡</span><div class="phase-l-name">ACQUISITION</div><p class="phase-l-desc">Take one action: acquire a card from the Wash Wheel, submit your formula against a garment, advance your Research Track, or pass to rotate the wheel and gain 1 Water token.</p></div>
-    <div class="phase-l reveal"><div class="phase-l-num">Phase 3</div><span class="phase-l-icon">🧪</span><div class="phase-l-name">FORMULA</div><p class="phase-l-desc">Build your wash formula: 1 Detergent + 1 Temperature + 1 Cycle + up to 2 Additives. Submit it against a garment to score VP. Precision Bonuses reward perfect scientific matches.</p></div>
-    <div class="phase-l reveal"><div class="phase-l-num">Phase 4</div><span class="phase-l-icon">🔄</span><div class="phase-l-name">END OF ROUND</div><p class="phase-l-desc">Advance the Round Marker. Check if the Garment Draw Pile has 5 or fewer cards — if so, announce the Final Round. Pass the first player token clockwise.</p></div>
+    <div class="phase-l reveal"><div class="phase-l-num">Phase 1</div><span class="phase-l-icon">⚠️</span><div class="phase-l-name">CRISIS</div><p class="phase-l-desc">An unexpected event hits the market. Crisis cards disrupt the shared economy in different ways each round — forcing every player to adapt their strategy on the fly.</p></div>
+    <div class="phase-l reveal"><div class="phase-l-num">Phase 2</div><span class="phase-l-icon">🎡</span><div class="phase-l-name">ACQUISITION</div><p class="phase-l-desc">Take one action — acquire from the Wash Wheel, submit your formula, develop your lab, or advance your research. Every choice shapes what's available to everyone else.</p></div>
+    <div class="phase-l reveal"><div class="phase-l-num">Phase 3</div><span class="phase-l-icon">🧪</span><div class="phase-l-name">FORMULA</div><p class="phase-l-desc">Build and submit your wash formula against a garment. Science-backed precision is rewarded. A correct formula scores VP. An incorrect one doesn't — and wastes your resources.</p></div>
+    <div class="phase-l reveal"><div class="phase-l-num">Phase 4</div><span class="phase-l-icon">🔄</span><div class="phase-l-name">END OF ROUND</div><p class="phase-l-desc">The round closes. The market shifts. Time moves forward. When the garment pile runs low, the final round begins — and scoring becomes everything.</p></div>
   </div>
 </div>
 </section>
