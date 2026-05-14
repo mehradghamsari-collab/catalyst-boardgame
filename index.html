@@ -411,14 +411,158 @@
 .c-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px; }
 .c-val { font-size: 13px; font-weight: 500; color: var(--text-primary); }
 
-/* RESPONSIVE */
-@media(max-width:960px){
-  .about-grid,.phil-grid,.pub-bottom{grid-template-columns:1fr;gap:var(--space-lg);}
-  .games-grid,.pub-games{grid-template-columns:1fr;}
-  .game-showcase{height:380px;}
-  .card-peek-stage{display:none;}
-  .pub-card-img{height:220px;}
+
+/* ── GAME PROGRESS BARS ── */
+.game-progress {
+  background: rgba(5,8,15,0.92);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 14px 24px 16px;
+  position: relative; z-index: 5;
 }
+.gp-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28); margin-bottom: 8px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.gp-stage { color: rgba(255,255,255,0.55); }
+.gp-track {
+  height: 3px; background: rgba(255,255,255,0.08);
+  position: relative; border-radius: 2px; overflow: visible;
+}
+.gp-fill {
+  height: 100%; border-radius: 2px;
+  position: relative;
+  transition: width 1.4s cubic-bezier(0.16,1,0.3,1);
+}
+.gp-fill::after {
+  content: '';
+  position: absolute; right: -5px; top: -5px;
+  width: 13px; height: 13px; border-radius: 50%;
+  border: 2px solid rgba(5,8,15,0.9);
+  transition: box-shadow 0.4s;
+}
+.gf-j { background: linear-gradient(to right, #7a3800, #d4820a); }
+.gf-j::after { background: #d4820a; box-shadow: 0 0 8px #d4820a; }
+.gf-s { background: linear-gradient(to right, #0a4a22, #2dd88a); }
+.gf-s::after { background: #2dd88a; box-shadow: 0 0 8px #2dd88a; }
+.gf-l { background: linear-gradient(to right, #0a1a4a, #4a8fff); }
+.gf-l::after { background: #4a8fff; box-shadow: 0 0 8px #4a8fff; }
+.gp-steps {
+  display: flex; gap: 3px; margin-top: 8px;
+}
+.gp-step {
+  flex: 1; height: 2px; border-radius: 1px;
+  background: rgba(255,255,255,0.07);
+  transition: background 0.4s;
+}
+.gp-step.done-j { background: rgba(212,130,10,0.5); }
+.gp-step.done-s { background: rgba(45,216,138,0.5); }
+.gp-step.done-l { background: rgba(74,143,255,0.5); }
+.gp-step.cur-j { background: #d4820a; box-shadow: 0 0 6px #d4820a; }
+.gp-step.cur-s { background: #2dd88a; box-shadow: 0 0 6px #2dd88a; }
+.gp-step.cur-l { background: #4a8fff; box-shadow: 0 0 6px #4a8fff; }
+
+/* ── CHEMICAL SCROLL BAND ── */
+#chem-band {
+  position: relative; height: 180px; overflow: hidden;
+  background: var(--void);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+#chem-canvas { position: absolute; inset: 0; }
+.chem-band-label {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
+  color: rgba(200,168,75,0.35); pointer-events: none;
+}
+
+/* ── PUBLISHER EMAIL BUTTONS ── */
+.pub-email-row {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+  margin-bottom: var(--space-lg);
+}
+.pub-email-btn {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 10px; padding: 20px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  text-decoration: none; color: var(--text-primary);
+  transition: all 0.35s var(--ease-out);
+  position: relative; overflow: hidden;
+}
+.pub-email-btn::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.pub-email-btn-j::before { background: var(--j-color); }
+.pub-email-btn-s::before { background: var(--s-color); }
+.pub-email-btn-l::before { background: var(--l-color); }
+.pub-email-btn-j:hover { border-color: rgba(212,130,10,0.4); box-shadow: 0 8px 40px rgba(212,130,10,0.1); }
+.pub-email-btn-s:hover { border-color: rgba(45,216,138,0.4); box-shadow: 0 8px 40px rgba(45,216,138,0.08); }
+.pub-email-btn-l:hover { border-color: rgba(74,143,255,0.4); box-shadow: 0 8px 40px rgba(74,143,255,0.08); }
+.pub-email-btn:hover::before { transform: scaleX(1); }
+.pub-email-btn:hover { transform: translateY(-4px); }
+.peb-icon { font-size: 22px; }
+.peb-game { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.06em; color: var(--text-primary); }
+.peb-action { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; }
+.peb-action-j { color: var(--j-color); }
+.peb-action-s { color: var(--s-color); }
+.peb-action-l { color: var(--l-color); }
+
+/* ── MOBILE FIRST RESPONSIVE ── */
+@media(max-width:640px){
+  :root{
+    --space-lg: 32px;
+    --space-xl: 56px;
+    --space-2xl: 80px;
+    --space-3xl: 100px;
+  }
+  .nav { padding: 0 16px; }
+  .hero-title { font-size: clamp(48px, 16vw, 80px); }
+  .hero-desc { font-size: 15px; }
+  .section-title { font-size: clamp(36px, 10vw, 56px); }
+  .games-grid { grid-template-columns: 1fr; gap: 2px; }
+  .game-showcase { height: 440px; cursor: auto; }
+  .card-peek-stage { display: none; }
+  .about-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .d-photo { width: 80px; height: 100px; }
+  .d-info { padding: 16px 18px; }
+  .d-bio { display: none; }
+  .phil-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .pub-games { grid-template-columns: 1fr; gap: 12px; }
+  .pub-email-row { grid-template-columns: 1fr; gap: 8px; }
+  .pub-bottom { grid-template-columns: 1fr; gap: 12px; }
+  .pub-card-img { height: 200px; }
+  #wow { height: 420px; }
+  .wow-title { font-size: clamp(28px, 10vw, 48px); }
+  footer { flex-direction: column; gap: 16px; padding: 24px 16px; text-align: center; }
+  .f-nav { justify-content: center; flex-wrap: wrap; gap: 12px; }
+  .container { padding: 0 16px; }
+  .btn { padding: 14px 24px; font-size: 10px; }
+  .game-title-big { font-size: clamp(22px, 6vw, 32px); }
+  .hero-cta { flex-direction: column; align-items: center; }
+  #chem-band { height: 140px; }
+  .pub-info { padding: var(--space-md); }
+  .pub-contact { padding: var(--space-md); }
+  .pub-contact h3 { font-size: var(--text-xl); }
+}
+@media(min-width:641px) and (max-width:960px){
+  .games-grid { grid-template-columns: 1fr; }
+  .game-showcase { height: 480px; }
+  .about-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .phil-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .pub-games { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pub-email-row { grid-template-columns: 1fr; gap: 8px; }
+  .pub-bottom { grid-template-columns: 1fr; gap: 12px; }
+  .card-peek-stage { display: none; }
+  #chem-band { height: 160px; }
+}
+
 </style>
 </head>
 <body>
@@ -476,8 +620,8 @@
   <div class="container" style="padding-bottom:var(--space-xl);">
     <div class="section-header reveal" style="text-align:center;max-width:700px;margin:0 auto var(--space-xl);">
       <span class="label">Our Portfolio</span>
-      <h2 class="section-title" style="margin-top:var(--space-sm);">THREE<br><span class="outline">WORLDS</span></h2>
-      <p class="section-body" style="margin:var(--space-md) auto 0;">Each game is a distinct scientific universe. Hover to preview the cards. Click to enter the world.</p>
+      <h2 class="section-title" style="margin-top:var(--space-sm);">A Growing<br><span class="outline">Universe</span></h2>
+      <p class="section-body" style="margin:var(--space-md) auto 0;">Each game is a distinct scientific world. We are actively designing more titles. Hover to preview. Click to enter.</p>
     </div>
   </div>
   <div class="games-grid reveal">
@@ -499,6 +643,15 @@
         <div class="game-cta-link game-cta-link-j">Enter the Laboratory →</div>
       </div>
       <div class="game-accent-bar bar-j"></div>
+      <div class="game-progress">
+        <div class="gp-label"><span>Development</span><span class="gp-stage">Seeking Publisher</span></div>
+        <div class="gp-track"><div class="gp-fill gf-j" style="width:88%" id="gp-j"></div></div>
+        <div class="gp-steps">
+          <div class="gp-step done-j"></div><div class="gp-step done-j"></div>
+          <div class="gp-step done-j"></div><div class="gp-step done-j"></div>
+          <div class="gp-step cur-j"></div><div class="gp-step"></div>
+        </div>
+      </div>
     </a>
     <!-- SYNTHELYST -->
     <a href="synthelyst.html" class="game-showcase">
@@ -518,6 +671,15 @@
         <div class="game-cta-link game-cta-link-s">Save the Earth →</div>
       </div>
       <div class="game-accent-bar bar-s"></div>
+      <div class="game-progress">
+        <div class="gp-label"><span>Development</span><span class="gp-stage">Seeking Publisher</span></div>
+        <div class="gp-track"><div class="gp-fill gf-s" style="width:83%" id="gp-s"></div></div>
+        <div class="gp-steps">
+          <div class="gp-step done-s"></div><div class="gp-step done-s"></div>
+          <div class="gp-step done-s"></div><div class="gp-step done-s"></div>
+          <div class="gp-step done-s"></div><div class="gp-step cur-s"></div>
+        </div>
+      </div>
     </a>
     <!-- LATHERWORK -->
     <a href="latherwork.html" class="game-showcase">
@@ -537,9 +699,25 @@
         <div class="game-cta-link game-cta-link-l">Enter the Lab →</div>
       </div>
       <div class="game-accent-bar bar-l"></div>
+      <div class="game-progress">
+        <div class="gp-label"><span>Development</span><span class="gp-stage">Mechanics Design</span></div>
+        <div class="gp-track"><div class="gp-fill gf-l" style="width:25%" id="gp-l"></div></div>
+        <div class="gp-steps">
+          <div class="gp-step done-l"></div><div class="gp-step cur-l"></div>
+          <div class="gp-step"></div><div class="gp-step"></div>
+          <div class="gp-step"></div><div class="gp-step"></div>
+        </div>
+      </div>
     </a>
   </div>
 </section>
+
+
+<!-- ═══ CHEMICAL SCROLL BAND ═══ -->
+<div id="chem-band">
+  <canvas id="chem-canvas"></canvas>
+  <div class="chem-band-label">C₆H₁₂O₆ · CH₂=CH₂ · C₁₀H₁₆O · NH₃ · H₂O · C₂H₅OH · C₃H₈O₃</div>
+</div>
 
 <!-- ═══ ABOUT ═══ -->
 <section id="about" class="section">
@@ -578,21 +756,7 @@
             </div>
           </div>
         </div>
-        <!-- stat strip -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px;">
-          <div style="padding:20px;border:1px solid var(--border);background:var(--surface);text-align:center;">
-            <div style="font-family:'Cinzel',serif;font-size:32px;color:var(--gold);line-height:1;">3</div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-top:4px;">Games</div>
-          </div>
-          <div style="padding:20px;border:1px solid var(--border);background:var(--surface);text-align:center;">
-            <div style="font-family:'Cinzel',serif;font-size:32px;color:var(--gold);line-height:1;">41+</div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-top:4px;">Extracts</div>
-          </div>
-          <div style="padding:20px;border:1px solid var(--border);background:var(--surface);text-align:center;">
-            <div style="font-family:'Cinzel',serif;font-size:18px;color:var(--gold);line-height:1;padding-top:6px;">Oxford</div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-top:8px;">Based</div>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -607,7 +771,7 @@
       <span class="line1">Science Is</span>
       <span class="line2">The Mechanic</span>
     </h2>
-    <p class="wow-sub">Three games · Three chemical worlds · One studio</p>
+    <p class="wow-sub">Science-driven games · Actively growing · Oxford</p>
   </div>
 </section>
 
@@ -639,8 +803,26 @@
   <div class="container">
     <div class="pub-header reveal">
       <span class="label" style="display:block;margin-bottom:var(--space-sm);">For Publishers &amp; Partners</span>
-      <h2 class="section-title">Three Games.<br><span class="outline">One Studio.</span></h2>
+      <h2 class="section-title">Catalyst<br><span class="outline">Portfolio</span></h2>
       <p class="section-body">Science-driven eurogames for thoughtful adults — and for the next generation discovering that chemistry is one of the greatest games ever played.</p>
+    </div>
+    <!-- PUBLISHER EMAIL BUTTONS -->
+    <div class="pub-email-row reveal">
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%20The%20Perfumer&body=Hello%20Catalyst%20team%2C%0A%0AI%20am%20interested%20in%20learning%20more%20about%20Jabir%3A%20The%20Perfumer%20for%20potential%20publishing.%0A%0APlease%20send%20me%20your%20press%20kit%20and%20rulebook.%0A%0AThank%20you." class="pub-email-btn pub-email-btn-j">
+        <span class="peb-icon">⚗️</span>
+        <span class="peb-game">Jabir: The Perfumer</span>
+        <span class="peb-action peb-action-j">✉ Enquire About This Game</span>
+      </a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%20team%2C%0A%0AI%20am%20interested%20in%20learning%20more%20about%20Synthelyst%20for%20potential%20publishing.%0A%0APlease%20send%20me%20your%20press%20kit%20and%20rulebook.%0A%0AThank%20you." class="pub-email-btn pub-email-btn-s">
+        <span class="peb-icon">🌿</span>
+        <span class="peb-game">Synthelyst</span>
+        <span class="peb-action peb-action-s">✉ Enquire About This Game</span>
+      </a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Latherwork&body=Hello%20Catalyst%20team%2C%0A%0AI%20am%20interested%20in%20learning%20more%20about%20Latherwork%20for%20potential%20publishing.%0A%0APlease%20send%20me%20your%20press%20kit%20and%20rulebook.%0A%0AThank%20you." class="pub-email-btn pub-email-btn-l">
+        <span class="peb-icon">🫧</span>
+        <span class="peb-game">Latherwork</span>
+        <span class="peb-action peb-action-l">✉ Enquire About This Game</span>
+      </a>
     </div>
     <div class="pub-games reveal">
       <a href="jabir.html" class="pub-card pub-card-j">
@@ -716,7 +898,9 @@
         <span class="label" style="display:block;margin-bottom:var(--space-md);">Get in Touch</span>
         <h3>Ready to<br>Collaborate</h3>
         <p style="margin-top:var(--space-sm);">Science-driven eurogames for thoughtful adults — and the next generation discovering chemistry.</p>
-        <div class="contact-links" style="margin-top:var(--space-md);">
+        <a href="mailto:duo.boardgame.design@gmail.com?subject=General%20Publisher%20Enquiry%20%E2%80%94%20Catalyst%20Board%20Games&body=Hello%20Catalyst%20team%2C%0A%0AI%20would%20like%20to%20request%20your%20press%20kit%20and%20learn%20more%20about%20your%20portfolio.%0A%0AThank%20you." class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:var(--space-sm);">✉ Request Full Press Kit</a>
+<a href="mailto:duo.boardgame.design@gmail.com?subject=Convention%20Demo%20Request%20%E2%80%94%20Catalyst&body=Hello%20Catalyst%20team%2C%0A%0AI%20would%20like%20to%20arrange%20a%20prototype%20demo%20or%20meeting.%0A%0AThank%20you." class="btn btn-ghost" style="width:100%;justify-content:center;margin-bottom:var(--space-md);border-color:rgba(200,168,75,0.3);color:var(--gold);">📋 Request Prototype Demo</a>
+<div class="contact-links" style="margin-top:var(--space-md);">
           <a href="mailto:duo.boardgame.design@gmail.com" class="c-link"><div class="c-icon">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">duo.boardgame.design@gmail.com</div></div></a>
           <a href="https://instagram.com/catalyst.boardgame" target="_blank" class="c-link"><div class="c-icon">📷</div><div><div class="c-lbl">Instagram</div><div class="c-val">@catalyst.boardgame</div></div></a>
           <a href="tel:+447541178881" class="c-link"><div class="c-icon">📞</div><div><div class="c-lbl">Phone / WhatsApp</div><div class="c-val">+44 7541 178 881</div></div></a>
@@ -848,6 +1032,137 @@ document.querySelectorAll('.game-showcase').forEach(el=>{
   });
   el.addEventListener('mouseleave',()=>{el.style.transform='';});
 });
+
+
+// ── CHEMICAL SCROLL BAND ──
+(function(){
+  const c=document.getElementById('chem-canvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let W,H,scrollY_val=0;
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  window.addEventListener('scroll',()=>{scrollY_val=window.scrollY;});
+
+  // Chemical structures: benzene, ethanol, water, ammonia as simplified node graphs
+  const STRUCTS=[
+    // Benzene ring - 6 carbons in hexagon
+    {nodes:[
+      {l:'C',c:'#c8a84b'},{l:'C',c:'#c8a84b'},{l:'C',c:'#c8a84b'},
+      {l:'C',c:'#c8a84b'},{l:'C',c:'#c8a84b'},{l:'C',c:'#c8a84b'}
+    ],bonds:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0]],
+    ox:0.1,oy:0.5,spread:28},
+    // Water H2O
+    {nodes:[
+      {l:'O',c:'#4a8fff'},{l:'H',c:'rgba(200,200,255,0.8)'},{l:'H',c:'rgba(200,200,255,0.8)'}
+    ],bonds:[[0,1],[0,2]],
+    ox:0.28,oy:0.35,spread:22},
+    // Ethanol
+    {nodes:[
+      {l:'C',c:'#c8a84b'},{l:'C',c:'#c8a84b'},{l:'O',c:'#4a8fff'},{l:'H',c:'rgba(200,200,255,0.6)'}
+    ],bonds:[[0,1],[1,2],[2,3]],
+    ox:0.46,oy:0.6,spread:28},
+    // Ammonia NH3
+    {nodes:[
+      {l:'N',c:'#ff8c42'},{l:'H',c:'rgba(200,200,255,0.8)'},{l:'H',c:'rgba(200,200,255,0.8)'},{l:'H',c:'rgba(200,200,255,0.8)'}
+    ],bonds:[[0,1],[0,2],[0,3]],
+    ox:0.65,oy:0.4,spread:22},
+    // CO2
+    {nodes:[
+      {l:'O',c:'#4a8fff'},{l:'C',c:'#c8a84b'},{l:'O',c:'#4a8fff'}
+    ],bonds:[[0,1],[1,2]],
+    ox:0.82,oy:0.55,spread:28},
+  ];
+
+  // Compute node positions for each structure
+  STRUCTS.forEach(s=>{
+    const n=s.nodes.length;
+    s.nodes.forEach((nd,i)=>{
+      if(n===6){ // hexagon
+        const a=(i/6)*Math.PI*2-Math.PI/2;
+        nd.rx=Math.cos(a)*s.spread; nd.ry=Math.sin(a)*s.spread;
+      } else if(n===3&&s.bonds.length===2&&s.nodes[0].l==='O'){
+        const angles=[-Math.PI/4,Math.PI/4];
+        if(i===0){nd.rx=0;nd.ry=0;}
+        else{nd.rx=Math.cos(angles[i-1])*s.spread;nd.ry=Math.sin(angles[i-1])*s.spread;}
+      } else {
+        nd.rx=(i-(n-1)/2)*s.spread; nd.ry=(i%2===0?-1:1)*8;
+      }
+    });
+  });
+
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    t+=0.012;
+    const scroll_factor = scrollY_val*0.0003;
+
+    STRUCTS.forEach((s,si)=>{
+      const bx = (s.ox + scroll_factor*(0.05+si*0.03)) % 1.1 - 0.05;
+      const by = s.oy + Math.sin(t*0.7+si)*0.06;
+      const cx2 = bx*W, cy2 = by*H;
+      const rot = t*0.3+si*1.2;
+
+      // Draw bonds
+      s.bonds.forEach(([a,b])=>{
+        const na=s.nodes[a],nb=s.nodes[b];
+        const ax2=cx2+na.rx*Math.cos(rot)-na.ry*Math.sin(rot);
+        const ay2=cy2+na.rx*Math.sin(rot)+na.ry*Math.cos(rot);
+        const bx2=cx2+nb.rx*Math.cos(rot)-nb.ry*Math.sin(rot);
+        const by2=cy2+nb.rx*Math.sin(rot)+nb.ry*Math.cos(rot);
+        const g=ctx.createLinearGradient(ax2,ay2,bx2,by2);
+        g.addColorStop(0,na.c.replace('rgb','rgba').replace(')',',0.5)').replace('#','rgba('+parseInt(na.c.slice(1,3),16)+','+parseInt(na.c.slice(3,5),16)+','+parseInt(na.c.slice(5,7),16)+',')+'0.4)');
+        g.addColorStop(1,nb.c.replace('#','rgba('+parseInt(nb.c.slice(1,3),16)+','+parseInt(nb.c.slice(3,5),16)+','+parseInt(nb.c.slice(5,7),16)+',')+'0.4)');
+        ctx.beginPath();ctx.moveTo(ax2,ay2);ctx.lineTo(bx2,by2);
+        ctx.strokeStyle='rgba(200,168,75,0.25)';ctx.lineWidth=1.2;ctx.stroke();
+      });
+
+      // Draw atoms
+      s.nodes.forEach(nd=>{
+        const ax2=cx2+nd.rx*Math.cos(rot)-nd.ry*Math.sin(rot);
+        const ay2=cy2+nd.rx*Math.sin(rot)+nd.ry*Math.cos(rot);
+        const r=nd.l==='H'?5:8;
+        // glow
+        const gl=ctx.createRadialGradient(ax2,ay2,0,ax2,ay2,r*2.5);
+        const col=nd.c.startsWith('#')?nd.c:'#c8a84b';
+        gl.addColorStop(0,col+'22');gl.addColorStop(1,'transparent');
+        ctx.beginPath();ctx.arc(ax2,ay2,r*2.5,0,Math.PI*2);
+        ctx.fillStyle=gl;ctx.fill();
+        // circle
+        ctx.beginPath();ctx.arc(ax2,ay2,r,0,Math.PI*2);
+        ctx.fillStyle=col+'18';ctx.fill();
+        ctx.strokeStyle=col+'88';ctx.lineWidth=1;ctx.stroke();
+        // label
+        if(r>5){
+          ctx.font=`bold ${r*1.1}px IBM Plex Mono,monospace`;
+          ctx.fillStyle=col+'cc';ctx.textAlign='center';ctx.textBaseline='middle';
+          ctx.fillText(nd.l,ax2,ay2);
+        }
+      });
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── ANIMATE PROGRESS BARS ON SCROLL ──
+(function(){
+  const bars=[
+    {id:'gp-j',w:'88%'},{id:'gp-s',w:'83%'},{id:'gp-l',w:'25%'}
+  ];
+  bars.forEach(b=>{
+    const el=document.getElementById(b.id);
+    if(!el)return;
+    el.style.width='0%';
+    const obs2=new IntersectionObserver(entries=>{
+      if(entries[0].isIntersecting){
+        setTimeout(()=>{el.style.width=b.w;},200);
+        obs2.disconnect();
+      }
+    },{threshold:0.3});
+    obs2.observe(el.parentElement);
+  });
+})();
 
 // ── REVEAL ──
 const obs=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('visible'),i*80);});},{threshold:0.07});
