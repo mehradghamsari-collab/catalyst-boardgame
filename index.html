@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CATALYST Board Games | Mehrad Niasari & Anita Mansouri — Oxford</title>
+<meta name="description" content="CATALYST Board Game Design studio by Mehrad Niasari and Anita Mansouri, Oxford. Science-driven strategy games: Jabir The Perfumer, Synthelyst, Latherwork.">
+<meta name="keywords" content="catalyst board games,jabir the perfumer board game,synthelyst board game,latherwork board game,science board games,oxford board game designer,euro strategy games,chemistry board game">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;z-index:1;overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:120px 60px 80px;border-right:1.5px solid var(--rule);}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;gap:12px;}
+.hero-eyebrow::before{content:'';display:inline-block;width:32px;height:2px;background:var(--gold2);}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,9vw,130px);line-height:0.88;letter-spacing:0.02em;color:var(--ink);margin-bottom:36px;}
+.hero-title .ol{-webkit-text-stroke:2px var(--ink);color:transparent;}
+.hero-desc{font-size:17px;color:var(--ink2);max-width:440px;line-height:1.75;margin-bottom:48px;border-left:3px solid var(--gold2);padding-left:20px;}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.hero-right{position:relative;background:var(--ink);overflow:hidden;display:flex;flex-direction:column;justify-content:center;min-height:100vh;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:48px 48px;}
+.hero-tiles{position:relative;z-index:2;width:100%;}
+.hero-tile{border-bottom:1px solid rgba(255,255,255,0.08);padding:28px 40px;display:flex;align-items:center;gap:18px;transition:background 0.3s;text-decoration:none;}
+.hero-tile:hover{background:rgba(255,255,255,0.05);}
+.hero-tile:last-child{border-bottom:none;}
+.tile-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:rgba(255,255,255,0.2);width:26px;flex-shrink:0;}
+.tile-bar{width:3px;height:44px;flex-shrink:0;border-radius:2px;}
+.bar-j{background:#d4820a;}.bar-s{background:#3ab06a;}.bar-l{background:#4a82d4;}
+.tile-info{flex:1;}
+.tile-name{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.08em;color:#fff;line-height:1.1;}
+.tile-sub{font-size:11px;font-weight:500;color:rgba(255,255,255,0.38);letter-spacing:0.06em;text-transform:uppercase;margin-top:3px;}
+.tile-arrow{font-size:18px;color:rgba(255,255,255,0.25);transition:transform 0.2s,color 0.2s;}
+.hero-tile:hover .tile-arrow{transform:translateX(6px);color:var(--gold2);}
+.tile-badge{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 9px;border-radius:2px;}
+.badge-art{background:rgba(212,160,23,0.18);color:#d4a017;border:1px solid rgba(212,160,23,0.3);}
+.badge-pub{background:rgba(58,176,106,0.18);color:#3ab06a;border:1px solid rgba(58,176,106,0.3);}
+.badge-des{background:rgba(74,130,212,0.18);color:#6a9ce4;border:1px solid rgba(74,130,212,0.3);}
+.hero-stat-row{position:absolute;bottom:32px;left:40px;right:40px;display:flex;gap:28px;z-index:3;border-top:1px solid rgba(255,255,255,0.08);padding-top:20px;}
+.h-stat-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;line-height:1;}
+.h-stat-label{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:3px;}
+.sec-wrap{position:relative;z-index:1;}
+.sec-header{display:flex;align-items:flex-start;justify-content:space-between;padding:80px 0 56px;border-bottom:1.5px solid var(--rule);margin-bottom:64px;gap:40px;}
+.sec-desc-h{font-size:16px;color:var(--ink3);max-width:420px;line-height:1.75;align-self:flex-end;}
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;padding-bottom:80px;}
+.about-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:18px;}
+.about-body p strong{color:var(--ink);font-weight:700;}
+.studio-img{width:100%;height:300px;object-fit:cover;display:block;margin-top:32px;}
+.about-callout{background:var(--ink);color:rgba(255,255,255,0.85);padding:32px 36px;font-size:18px;font-family:'DM Serif Display',serif;font-style:italic;line-height:1.5;position:relative;margin-top:24px;}
+.about-callout::before{content:'\201C';position:absolute;top:4px;left:20px;font-size:72px;color:var(--gold2);opacity:0.22;line-height:1;font-family:'DM Serif Display',serif;}
+.designers{display:flex;flex-direction:column;gap:2px;}
+.d-card{border:1.5px solid var(--rule);background:var(--bg);padding:26px 28px;position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.3s;}
+.d-card:hover{border-color:var(--gold2);transform:translateX(4px);}
+.d-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold2);}
+.d-initials{font-family:'Bebas Neue',sans-serif;font-size:40px;color:rgba(26,24,20,0.07);line-height:1;margin-bottom:6px;}
+.d-name{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.d-role{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.d-affil{font-size:11px;color:var(--ink3);margin-bottom:10px;font-style:italic;}
+.d-bio{font-size:13px;color:var(--ink3);line-height:1.7;}
+.games-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:80px;}
+.goc{position:relative;overflow:hidden;height:500px;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;}
+.goc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
+.goc:hover img{transform:scale(1.06);}
+.goc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.15) 60%,transparent 100%);}
+.goc-body{position:relative;z-index:2;padding:28px 24px;}
+.goc-num{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.25em;color:rgba(255,255,255,0.35);margin-bottom:8px;}
+.goc-name{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:0.06em;color:#fff;line-height:1;margin-bottom:6px;}
+.goc-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:18px;}
+.goc-cta{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold2);display:flex;align-items:center;gap:8px;transition:gap 0.2s;}
+.goc:hover .goc-cta{gap:14px;}
+.phil-section{background:var(--ink);padding:100px 0;position:relative;overflow:hidden;z-index:1;}
+.phil-section::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:48px 48px;}
+.phil-inner{max-width:1240px;margin:0 auto;padding:0 60px;position:relative;z-index:1;}
+.phil-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.3em;color:var(--gold2);text-transform:uppercase;margin-bottom:48px;}
+.phil-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;}
+.phil-quote{font-family:'DM Serif Display',serif;font-size:clamp(26px,3.5vw,44px);font-style:italic;color:#fff;line-height:1.35;margin-bottom:32px;}
+.phil-quote em{color:var(--gold2);font-style:normal;}
+.phil-body{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.8;margin-bottom:28px;}
+.pillars{display:flex;flex-direction:column;gap:2px;}
+.pillar{padding:22px 24px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);display:flex;gap:14px;transition:background 0.3s;}
+.pillar:hover{background:rgba(255,255,255,0.05);}
+.p-icon{width:32px;height:32px;border:1px solid rgba(212,160,23,0.3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:2px;}
+.p-title{font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:#fff;margin-bottom:4px;}
+.p-text{font-size:12px;color:rgba(255,255,255,0.42);line-height:1.7;}
+.contact-section{background:var(--bg3);border-top:1.5px solid var(--rule);position:relative;z-index:1;}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding-bottom:100px;}
+.cb p{font-size:15px;color:var(--ink2);line-height:1.8;margin-bottom:32px;}
+.cl{display:flex;flex-direction:column;gap:2px;}
+.cl-link{display:flex;align-items:center;gap:14px;padding:16px 20px;border:1.5px solid var(--rule);background:var(--bg);text-decoration:none;color:var(--ink);transition:all 0.25s;position:relative;}
+.cl-link::after{content:'→';position:absolute;right:20px;font-size:15px;color:var(--ink3);transition:transform 0.2s,color 0.2s;}
+.cl-link:hover{border-color:var(--ink);background:var(--ink);}
+.cl-link:hover .cl-lbl,.cl-link:hover .cl-val{color:rgba(255,255,255,0.9)!important;}
+.cl-link:hover::after{color:var(--gold2);transform:translateX(4px);}
+.cl-icon{width:36px;height:36px;border:1.5px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.cl-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:2px;}
+.cl-val{font-size:13px;font-weight:600;color:var(--ink);}
+.pub-box{background:var(--ink);padding:40px;}
+.pub-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;}
+.pub-box h3{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:0.05em;color:#fff;line-height:1;margin-bottom:16px;}
+.pub-box p{font-size:13px;line-height:1.8;color:rgba(255,255,255,0.5);margin-bottom:12px;}
+.pub-list{list-style:none;margin:14px 0 22px;}
+.pub-list li{font-size:12px;color:rgba(255,255,255,0.4);padding:6px 0 6px 16px;border-bottom:1px solid rgba(255,255,255,0.04);position:relative;}
+.pub-list li::before{content:'▸';position:absolute;left:0;color:var(--gold2);font-size:9px;top:8px;}
+@media(max-width:960px){
+  #hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:90px 20px 36px;}
+  .hero-right{min-height:55vh;}
+  .hero-stat-row{display:none;}
+  .hero-tile{padding:18px 20px;}
+  .tile-badge{display:none;}
+  .about-grid,.cg,.phil-grid{grid-template-columns:1fr;gap:36px;}
+  .games-grid{grid-template-columns:1fr;gap:2px;}
+  .goc{height:340px;}
+  .sec-header{flex-direction:column;gap:12px;padding:48px 0 32px;}
+  .about-grid,.cg{padding-bottom:40px;}
+  .phil-inner{padding:0 20px;}
+}
+</style>
+</head>
+<body>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="mT()">✕</button>
+  <a href="#about" onclick="mT()">About</a>
+  <a href="#games" onclick="mT()">Games</a>
+  <a href="#philosophy" onclick="mT()">Philosophy</a>
+  <a href="#contact" onclick="mT()">Contact</a>
+</div>
+<nav>
+  <a href="index.html" class="nav-logo"><span class="nav-dot"></span>CATALYST</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#games">Games</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:duo.boardgame.design@gmail.com" class="nav-cta">For Publishers</a>
+  <button class="nav-toggle" onclick="mT()"><span></span><span></span><span></span></button>
+</nav>
+
+<section id="hero">
+  <div class="hero-left reveal">
+    <div class="hero-eyebrow">Oxford · Science Board Game Studio</div>
+    <h1 class="hero-title">CATALYST<br><span class="ol">GAMES</span></h1>
+    <p class="hero-desc">Strategy games where chemistry is the mechanic — and every player leaves knowing something real about the world.</p>
+    <div class="hero-actions">
+      <a href="#games" class="btn-primary">Explore Games</a>
+      <a href="#contact" class="btn-outline">For Publishers</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-tiles">
+      <a href="jabir.html" class="hero-tile">
+        <span class="tile-num">01</span><div class="tile-bar bar-j"></div>
+        <div class="tile-info"><div class="tile-name">JABIR: THE PERFUMER</div><div class="tile-sub">Perfumery Chemistry · 2–6 Players · Heavy</div></div>
+        <span class="tile-badge badge-art">Final Art</span><span class="tile-arrow">→</span>
+      </a>
+      <a href="synthelyst.html" class="hero-tile">
+        <span class="tile-num">02</span><div class="tile-bar bar-s"></div>
+        <div class="tile-info"><div class="tile-name">SYNTHELYST</div><div class="tile-sub">Eco-Strategy · 2–5 Players · Mid-Heavy</div></div>
+        <span class="tile-badge badge-pub">Seeking Publisher</span><span class="tile-arrow">→</span>
+      </a>
+      <a href="latherwork.html" class="hero-tile">
+        <span class="tile-num">03</span><div class="tile-bar bar-l"></div>
+        <div class="tile-info"><div class="tile-name">LATHERWORK</div><div class="tile-sub">Fabric Science · 2–4 Players · Medium</div></div>
+        <span class="tile-badge badge-des">In Design</span><span class="tile-arrow">→</span>
+      </a>
+    </div>
+    <div class="hero-stat-row">
+      <div><div class="h-stat-num">3</div><div class="h-stat-label">Games</div></div>
+      <div><div class="h-stat-num">94+</div><div class="h-stat-label">Botanicals</div></div>
+      <div><div class="h-stat-num">Oxford</div><div class="h-stat-label">Based</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="sec-wrap" style="background:var(--bg3);border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);">
+<div class="container">
+  <div class="sec-header reveal">
+    <div><div class="sec-label">About the Studio</div><h2 class="sec-title">MEHRAD<br><span class="ol">&amp; ANITA</span></h2></div>
+    <p class="sec-desc-h">Two Oxford scientists. A shared belief that the world's most fascinating chemistry belongs on the table — not just in textbooks.</p>
+  </div>
+  <div class="about-grid">
+    <div class="reveal-left">
+      <p>We are <strong>Catalyst Board Game Design</strong>, founded in Oxford by <strong>Mehrad Niasari</strong> — chemist and researcher at Oxford University — and <strong>Anita Mansouri</strong> — statistician at AstraZeneca.</p>
+      <p>Mehrad synthesises the chemistry into mechanics. Anita optimises the systems, stress-tests every interaction, and ensures every game is as playable as it is scientifically rigorous. Together we've built three titles that sit at the intersection of science, strategy, and story.</p>
+      <p>We also believe these games belong in classrooms. Every Catalyst title is a gateway — a way to show students that chemistry is one of the most creative, dramatic, and surprising disciplines that exists.</p>
+      <img src="studio_bg.png" alt="Catalyst studio workspace" class="studio-img reveal-scale">
+      <div class="about-callout">"A great game is a working model of something true — a system that teaches by letting you fail, adapt, and discover."</div>
+    </div>
+    <div class="designers reveal-right">
+      <div class="d-card">
+        <div class="d-initials">MN</div>
+        <div class="d-name">Mehrad Niasari</div>
+        <div class="d-role">Game Designer · Chemist</div>
+        <div class="d-affil">Oxford University · Chemistry &amp; Biochemistry</div>
+        <p class="d-bio">Mehrad is the scientific engine of Catalyst. His background in organic chemistry and sustainable materials drives every mechanic — from authentic distillation in Jabir to real polymer science in Synthelyst. He has worked in bioplastics R&amp;D and understands the commercial, regulatory, and scientific landscape his games portray.</p>
+      </div>
+      <div class="d-card" style="margin-top:2px;">
+        <div class="d-initials">AM</div>
+        <div class="d-name">Anita Mansouri</div>
+        <div class="d-role">Game Designer · Statistician</div>
+        <div class="d-affil">AstraZeneca · Data Science &amp; Optimisation</div>
+        <p class="d-bio">Anita brings statistical precision to game design. She runs balance analyses, optimises player experience across all game states, and ensures every Catalyst game is deeply replayable. She is also an experienced board game player — the critical eye that ensures scientific accuracy never comes at the cost of fun.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="games" class="sec-wrap" style="background:var(--bg);">
+<div class="container">
+  <div class="sec-header reveal">
+    <div><div class="sec-label">Our Portfolio</div><h2 class="sec-title">THREE<br><span class="ol">WORLDS</span></h2></div>
+    <p class="sec-desc-h">Each game is a distinct scientific universe. Click to explore mechanics, story, cards, and the real chemistry behind every rule.</p>
+  </div>
+</div>
+<div class="games-grid reveal">
+  <a href="jabir.html" class="goc">
+    <img src="jabir_hero_bg.png" alt="Jabir the Perfumer">
+    <div class="goc-ov"></div>
+    <div class="goc-body">
+      <div class="goc-num">GAME 001 · HEAVY · 2–6 PLAYERS · 90–150 MIN</div>
+      <div class="goc-name">JABIR:<br>THE PERFUMER</div>
+      <div class="goc-sub">The Chemistry of Perfumery · Final Art Phase</div>
+      <div class="goc-cta">Explore Game →</div>
+    </div>
+  </a>
+  <a href="synthelyst.html" class="goc">
+    <img src="synthelyst_hero_bg.png" alt="Synthelyst">
+    <div class="goc-ov"></div>
+    <div class="goc-body">
+      <div class="goc-num">GAME 002 · MID-HEAVY · 2–5 PLAYERS · 60–90 MIN</div>
+      <div class="goc-name">SYNTHE-<br>LYST</div>
+      <div class="goc-sub">Competitive Eco-Strategy · Seeking Publisher</div>
+      <div class="goc-cta">Explore Game →</div>
+    </div>
+  </a>
+  <a href="latherwork.html" class="goc">
+    <img src="latherwork_hero_bg.png" alt="Latherwork">
+    <div class="goc-ov"></div>
+    <div class="goc-body">
+      <div class="goc-num">GAME 003 · MEDIUM · 2–4 PLAYERS · 90–120 MIN</div>
+      <div class="goc-name">LATHER-<br>WORK</div>
+      <div class="goc-sub">The Fabric Science Game · In Design</div>
+      <div class="goc-cta">Explore Game →</div>
+    </div>
+  </a>
+</div>
+</section>
+
+<section id="philosophy" class="phil-section">
+<div class="phil-inner">
+  <div class="phil-lbl reveal">Our Design Philosophy</div>
+  <div class="phil-grid">
+    <div class="reveal-left">
+      <p class="phil-quote">Games where you win by <em>understanding</em> — not just by optimising.</p>
+      <p class="phil-body">Every Catalyst title rests on one conviction: the deepest fun comes from the moment a system clicks in your mind. When you realise why silk must be washed cold — because protein fibres denature above 30°C — the rule stops being arbitrary. It becomes knowledge. That's the reward.</p>
+      <p class="phil-body">We also believe our games belong in schools. Science motivation disguised as an excellent evening of strategy.</p>
+      <div style="margin-top:32px;"><a href="#games" class="btn-light">Explore Our Games</a></div>
+    </div>
+    <div class="pillars reveal-right">
+      <div class="pillar"><div class="p-icon">⚗️</div><div><div class="p-title">Scientific Integrity</div><p class="p-text">Every mechanism anchored in real chemistry. We research exhaustively so gameplay reflects genuine processes.</p></div></div>
+      <div class="pillar"><div class="p-icon">🎓</div><div><div class="p-title">Education Through Play</div><p class="p-text">Our games belong in schools. Science motivation disguised as an excellent evening of strategy.</p></div></div>
+      <div class="pillar"><div class="p-icon">🌍</div><div><div class="p-title">Real-World Relevance</div><p class="p-text">From plastic pollution to sustainable fashion — each game connects the table to problems that actually matter.</p></div></div>
+      <div class="pillar"><div class="p-icon">♟️</div><div><div class="p-title">First in the Market</div><p class="p-text">No comparable science-driven eurogames exist. We occupy a genuinely novel space in the hobby.</p></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="contact" class="contact-section">
+<div class="container">
+  <div class="sec-header reveal">
+    <div><div class="sec-label">Get in Touch</div><h2 class="sec-title">LET'S<br><span class="ol">TALK</span></h2></div>
+    <p class="sec-desc-h">Publishers, schools, brands, and press welcome. Full press kits and prototype access available on request.</p>
+  </div>
+  <div class="cg">
+    <div class="reveal-left">
+      <div class="cb"><p>Mehrad and Anita are based in Oxford and available for publisher meetings, convention demos, school workshops, and brand collaborations. Our games have unique commercial potential — from perfume brand tie-ins with Jabir, to sustainability campaign partnerships with Synthelyst.</p></div>
+      <div class="cl">
+        <a href="mailto:duo.boardgame.design@gmail.com" class="cl-link"><div class="cl-icon">✉️</div><div><div class="cl-lbl">Email</div><div class="cl-val">duo.boardgame.design@gmail.com</div></div></a>
+        <a href="https://instagram.com/catalyst.boardgame" target="_blank" class="cl-link"><div class="cl-icon">📷</div><div><div class="cl-lbl">Instagram</div><div class="cl-val">@catalyst.boardgame</div></div></a>
+        <a href="tel:+447541178881" class="cl-link"><div class="cl-icon">📞</div><div><div class="cl-lbl">Phone / WhatsApp</div><div class="cl-val">+44 7541 178 881</div></div></a>
+      </div>
+    </div>
+    <div class="pub-box reveal-right">
+      <div class="pub-lbl">A Note to Publishers</div>
+      <h3>READY TO<br>COLLABORATE</h3>
+      <p>Science-driven eurogames for thoughtful adults — and for the next generation discovering that chemistry is one of the greatest games ever played.</p>
+      <ul class="pub-list">
+        <li>Jabir: Final art phase — prototype ready for play</li>
+        <li>Synthelyst: Actively seeking a publishing partner</li>
+        <li>Full rulebooks and design documents available</li>
+        <li>Brand collaboration potential (perfume, sustainability)</li>
+        <li>School and educational licensing available</li>
+        <li>Available for Spiel Essen, UK Games Expo, Cannes</li>
+      </ul>
+      <a href="mailto:duo.boardgame.design@gmail.com" class="btn-gold">Request Press Kit →</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+  <a href="index.html" class="f-logo"><span class="nav-dot"></span>CATALYST</a>
+  <ul class="f-nav">
+    <li><a href="jabir.html">Jabir</a></li>
+    <li><a href="synthelyst.html">Synthelyst</a></li>
+    <li><a href="latherwork.html">Latherwork</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="f-copy">© 2025 CATALYST · MEHRAD NIASARI &amp; ANITA MANSOURI · OXFORD</span>
+</footer>
+<script>
+function mT(){document.getElementById('mobMenu').classList.toggle('open');}
+const obs=new IntersectionObserver(e=>{e.forEach((el,i)=>{if(el.isIntersecting)setTimeout(()=>el.target.classList.add('visible'),i*60);});},{threshold:0.07});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
