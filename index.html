@@ -4,299 +4,442 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CATALYST Board Games | Science Strategy Games — Oxford</title>
-<meta name="description" content="CATALYST Board Games. Jabir, Synthelyst, Latherwork — immersive science-driven strategy games by Mehrad Niasari and Anita Mansouri. Oxford UK.">
+<meta name="description" content="CATALYST Board Games. Jabir, Synthelyst, WashWheel — science-driven strategy games by Mehrad Niasari and Anita Mansouri. Oxford UK.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* =====================================================
-   CATALYST — PREMIUM IMMERSIVE DESIGN SYSTEM
-   ===================================================== */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{font-size:16px;}
-body{
-  background:#07111f;
-  color:rgba(255,255,255,0.85);
-  font-family:'Inter',sans-serif;
-  line-height:1.65;
-  overflow-x:hidden;
+/* ============================================================
+   CATALYST — MOBILE-FIRST RESPONSIVE DESIGN
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background: #07111f;
+  color: rgba(255,255,255,0.85);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.65;
+  overflow-x: hidden;
 }
-img{display:block;max-width:100%;}
-a{color:inherit;text-decoration:none;}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
 
-/* ── ANIMATED BACKGROUND ── */
-.bg-fixed{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
+/* BACKGROUND */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
   background:
-    radial-gradient(circle at 20% 20%, rgba(0,255,255,0.07) 0%, transparent 32%),
-    radial-gradient(circle at 80% 25%, rgba(180,0,255,0.05) 0%, transparent 36%),
-    radial-gradient(circle at 50% 80%, rgba(255,200,0,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(0,200,255,.07) 0%, transparent 35%),
+    radial-gradient(circle at 80% 25%, rgba(160,0,255,.05) 0%, transparent 38%),
+    radial-gradient(circle at 50% 80%, rgba(255,190,0,.04) 0%, transparent 42%),
     linear-gradient(180deg, #07111f 0%, #0a1830 45%, #08101f 100%);
 }
-.blob{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;animation:blobDrift 10s ease-in-out infinite;}
-.blob1{width:560px;height:560px;background:rgba(0,180,255,0.055);top:-150px;left:-80px;animation-delay:0s;}
-.blob2{width:420px;height:420px;background:rgba(160,0,255,0.045);top:30%;right:-100px;animation-delay:3.5s;}
-.blob3{width:640px;height:320px;background:rgba(255,170,0,0.038);bottom:5%;left:15%;animation-delay:7s;}
-@keyframes blobDrift{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(22px,-28px) scale(1.04);}66%{transform:translate(-14px,18px) scale(0.97);}}
+.blob { position: fixed; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: -1; animation: blobDrift 10s ease-in-out infinite; }
+.blob1 { width: 400px; height: 400px; background: rgba(0,180,255,.055); top: -100px; left: -80px; animation-delay: 0s; }
+.blob2 { width: 320px; height: 320px; background: rgba(150,0,255,.045); top: 30%; right: -60px; animation-delay: 3.5s; }
+.blob3 { width: 500px; height: 240px; background: rgba(255,170,0,.038); bottom: 5%; left: 10%; animation-delay: 7s; }
+@keyframes blobDrift { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(18px,-22px) scale(1.04);} 66%{transform:translate(-12px,15px) scale(0.97);} }
 
-/* ── NAV ── */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:900;
-  height:64px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 48px;transition:background .3s,border-color .3s;
+/* NAV */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  height: 60px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+  transition: background .3s, border-color .3s;
 }
-.nav.stuck{background:rgba(7,17,31,0.93);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.07);}
-.nav-logo{font-family:'Cinzel',serif;font-size:15px;font-weight:700;letter-spacing:.2em;color:#fff;display:flex;align-items:center;gap:10px;}
-.nav-dot{width:7px;height:7px;border-radius:50%;background:#c9a84c;box-shadow:0 0 12px #c9a84c;animation:dotPulse 3s ease infinite;}
-@keyframes dotPulse{0%,100%{box-shadow:0 0 12px #c9a84c;}50%{box-shadow:0 0 22px #c9a84c,0 0 40px rgba(201,168,76,.5);}}
-.nav-links{display:flex;gap:30px;list-style:none;}
-.nav-links a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);transition:color .25s;}
-.nav-links a:hover{color:#c9a84c;}
-.nav-cta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#07111f;background:#c9a84c;padding:9px 20px;transition:all .25s;box-shadow:0 0 20px rgba(201,168,76,.3);}
-.nav-cta:hover{background:#e0bf70;box-shadow:0 0 36px rgba(201,168,76,.5);}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
-.hamburger span{display:block;width:22px;height:1.5px;background:#c9a84c;}
-
-/* ── MOBILE NAV ── */
-.mob-nav{display:none;position:fixed;inset:0;z-index:950;background:rgba(7,17,31,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:28px;}
-.mob-nav.open{display:flex;}
-.mob-nav a{font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:#fff;transition:color .2s;}
-.mob-nav a:hover{color:#c9a84c;}
-.mob-close{position:absolute;top:18px;right:22px;font-size:30px;color:#c9a84c;background:none;border:none;cursor:pointer;}
-
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:14px 32px;transition:all .3s;border:none;cursor:pointer;}
-.btn-gold{background:linear-gradient(135deg,#c9a84c,#e0bf70);color:#07111f;box-shadow:0 0 28px rgba(201,168,76,.3);}
-.btn-gold:hover{box-shadow:0 0 50px rgba(201,168,76,.55);transform:translateY(-2px);}
-.btn-glass{background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);}
-.btn-glass:hover{background:rgba(255,255,255,.13);border-color:rgba(201,168,76,.5);color:#c9a84c;transform:translateY(-2px);}
-
-/* ── GLASS CARD ── */
-.glass{
-  background:rgba(8,18,38,0.58);
-  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:16px;
-  box-shadow:0 8px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06);
-  transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s;
+.site-nav.stuck {
+  background: rgba(7,17,31,.95);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,.07);
 }
-.glass:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 60px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.1);}
+.nav-logo {
+  font-family: 'Cinzel', serif; font-size: 14px; font-weight: 700;
+  letter-spacing: .18em; color: #fff; display: flex; align-items: center; gap: 9px;
+}
+.nav-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #c9a84c;
+  box-shadow: 0 0 12px #c9a84c; animation: dotPulse 3s ease infinite;
+  flex-shrink: 0;
+}
+@keyframes dotPulse { 0%,100%{box-shadow:0 0 12px #c9a84c;} 50%{box-shadow:0 0 22px #c9a84c,0 0 40px rgba(201,168,76,.5);} }
+.nav-links { display: none; gap: 28px; list-style: none; }
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.5); transition: color .25s;
+}
+.nav-links a:hover { color: #c9a84c; }
+.nav-cta { display: none; }
+.hamburger {
+  display: flex; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 6px;
+}
+.hamburger span { display: block; width: 22px; height: 1.5px; background: #c9a84c; transition: all .3s; }
 
-/* ── REVEAL ── */
-.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
-.rv-l{opacity:0;transform:translateX(-28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
-.rv-r{opacity:0;transform:translateX(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
-.rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:none;}
+/* MOBILE MENU */
+.mob-nav {
+  display: none; position: fixed; inset: 0; z-index: 950;
+  background: rgba(7,17,31,.97); backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+}
+.mob-nav.open { display: flex; }
+.mob-nav a {
+  font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700;
+  color: #fff; transition: color .2s;
+}
+.mob-nav a:hover { color: #c9a84c; }
+.mob-close {
+  position: absolute; top: 18px; right: 22px;
+  font-size: 30px; color: #c9a84c; background: none; border: none; cursor: pointer;
+}
 
-/* ── LAYOUT ── */
-.wrap{max-width:1200px;margin:0 auto;padding:0 48px;position:relative;z-index:1;}
-.section{padding:110px 0;position:relative;z-index:1;}
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: .15em; text-transform: uppercase;
+  padding: 13px 28px; transition: all .3s; border: none; cursor: pointer;
+  white-space: nowrap;
+}
+.btn-gold { background: linear-gradient(135deg,#c9a84c,#e0bf70); color: #07111f; box-shadow: 0 0 26px rgba(201,168,76,.28); }
+.btn-gold:hover { box-shadow: 0 0 48px rgba(201,168,76,.52); transform: translateY(-2px); }
+.btn-glass { background: rgba(255,255,255,.07); color: #fff; border: 1px solid rgba(255,255,255,.18); }
+.btn-glass:hover { background: rgba(255,255,255,.12); border-color: rgba(201,168,76,.5); color: #c9a84c; transform: translateY(-2px); }
 
-/* ── HERO ── */
-#hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;z-index:1;}
-#hero-canvas{position:absolute;inset:0;z-index:0;}
-.hero-inner{position:relative;z-index:2;padding:0 24px;max-width:840px;margin:0 auto;}
-.hero-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:#c9a84c;display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:26px;opacity:0;animation:fu .8s .2s both;}
-.hero-tag::before,.hero-tag::after{content:'';width:30px;height:1px;background:#c9a84c;opacity:.5;display:inline-block;}
-.hero-h1{font-family:'Cinzel',serif;font-size:clamp(52px,12vw,140px);font-weight:900;line-height:.87;letter-spacing:.05em;color:#fff;margin-bottom:10px;opacity:0;animation:fu .9s .35s both;text-shadow:0 0 80px rgba(201,168,76,.2);}
-.hero-h1 .g{background:linear-gradient(135deg,#c9a84c,#e8d080,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{font-family:'Cinzel',serif;font-size:clamp(11px,1.8vw,15px);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:24px;opacity:0;animation:fu .9s .48s both;}
-.hero-p{font-size:17px;color:rgba(255,255,255,.7);line-height:1.82;max-width:560px;margin:0 auto 38px;opacity:0;animation:fu .9s .6s both;}
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fu .9s .72s both;}
-.hero-down{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:3;opacity:0;animation:fu 1s 1.4s ease both;}
-.hero-down span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.22);}
-.hero-down div{width:1px;height:50px;background:linear-gradient(to bottom,#c9a84c,transparent);animation:scrollLine 2s ease infinite;}
-@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* GLASS CARD */
+.glass {
+  background: rgba(8,18,38,.58);
+  backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 14px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.06);
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+}
+.glass:hover { transform: translateY(-5px); box-shadow: 0 18px 56px rgba(0,0,0,.52); }
 
-/* ── GAMES OVERVIEW ── */
-#games{position:relative;z-index:1;}
-.games-header{padding:96px 48px 56px;text-align:center;}
-.sec-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#c9a84c;display:block;margin-bottom:14px;}
-.sec-title{font-family:'Cinzel',serif;font-size:clamp(34px,5.5vw,68px);font-weight:700;letter-spacing:.03em;line-height:.92;color:#fff;}
-.sec-title .dim{-webkit-text-stroke:1px rgba(201,168,76,.4);color:transparent;}
-.games-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
-.g-tile{position:relative;height:580px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
-.g-tile-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.16,1,.3,1),filter .7s;}
-.g-tile:hover .g-tile-bg{transform:scale(1.08);filter:brightness(.55) saturate(1.3);}
-.g-tile-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,17,31,.97) 0%,rgba(7,17,31,.2) 55%,transparent 100%);}
-.g-tile-body{position:relative;z-index:3;padding:26px 26px 0;}
-.g-tile-num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.26em;color:rgba(255,255,255,.28);margin-bottom:8px;}
-.g-tile-name{font-family:'Cinzel',serif;font-size:clamp(20px,2.6vw,30px);font-weight:700;line-height:.95;letter-spacing:.04em;color:#fff;margin-bottom:6px;}
-.g-tile-sub{font-size:13px;color:rgba(255,255,255,.5);font-style:italic;margin-bottom:14px;}
-.g-tile-cta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;gap:6px;transition:gap .25s;}
-.g-tile:hover .g-tile-cta{gap:13px;}
-.tc-j{color:#d4820a;}.tc-s{color:#28d98a;}.tc-l{color:#4a8fff;}
-.g-tile-bar{position:absolute;bottom:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1);}
-.g-tile:hover .g-tile-bar{transform:scaleX(1);}
+/* REVEAL */
+.rv    { opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1); }
+.rv-l  { opacity:0; transform:translateX(-28px); transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1); }
+.rv-r  { opacity:0; transform:translateX(28px); transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1); }
+.rv.on, .rv-l.on, .rv-r.on { opacity:1; transform:none; }
+
+/* LAYOUT */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+.section { padding: 72px 0; position: relative; z-index: 1; }
+.sec-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: .28em; text-transform: uppercase; color: #c9a84c; display: block; margin-bottom: 12px;
+}
+.sec-title {
+  font-family: 'Cinzel', serif; font-size: clamp(30px,7vw,62px);
+  font-weight: 700; letter-spacing: .03em; line-height: .92; color: #fff;
+}
+.sec-title .dim { -webkit-text-stroke: 1px rgba(201,168,76,.4); color: transparent; }
+
+/* ═══ HERO ═══ */
+#hero {
+  position: relative; height: 100vh; min-height: 580px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; overflow: hidden; z-index: 1;
+}
+#hero-canvas { position: absolute; inset: 0; z-index: 0; }
+.hero-inner { position: relative; z-index: 2; padding: 0 20px; max-width: 800px; margin: 0 auto; }
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .32em;
+  text-transform: uppercase; color: #c9a84c;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  margin-bottom: 22px; opacity: 0; animation: fu .8s .2s both;
+}
+.hero-tag::before, .hero-tag::after { content: ''; width: 24px; height: 1px; background: #c9a84c; opacity: .5; display: inline-block; }
+.hero-h1 {
+  font-family: 'Cinzel', serif; font-size: clamp(48px,13vw,130px);
+  font-weight: 900; line-height: .87; letter-spacing: .05em; color: #fff;
+  margin-bottom: 10px; opacity: 0; animation: fu .9s .35s both;
+  text-shadow: 0 0 80px rgba(201,168,76,.2);
+}
+.hero-h1 .g {
+  background: linear-gradient(135deg,#c9a84c,#e8d080,#c9a84c);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  font-family: 'Cinzel', serif; font-size: clamp(10px,2.5vw,14px); letter-spacing: .28em;
+  text-transform: uppercase; color: rgba(255,255,255,.32); margin-bottom: 20px;
+  opacity: 0; animation: fu .9s .48s both;
+}
+.hero-p {
+  font-size: clamp(14px,3.5vw,17px); color: rgba(255,255,255,.68); line-height: 1.8;
+  max-width: 520px; margin: 0 auto 32px; opacity: 0; animation: fu .9s .6s both;
+}
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fu .9s .72s both; }
+.hero-down {
+  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 3;
+  opacity: 0; animation: fu 1s 1.4s ease both;
+}
+.hero-down span { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.22); }
+.hero-down div { width: 1px; height: 44px; background: linear-gradient(to bottom,#c9a84c,transparent); animation: scLine 2s ease infinite; }
+@keyframes fu { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
+@keyframes scLine { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+/* ═══ GAMES GRID ═══ */
+#games { position: relative; z-index: 1; }
+.games-header { padding: 72px 20px 44px; text-align: center; }
+.games-grid { display: grid; grid-template-columns: 1fr; gap: 3px; }
+.g-tile {
+  position: relative; height: 420px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  text-decoration: none;
+}
+.g-tile-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .7s cubic-bezier(.16,1,.3,1), filter .7s; }
+.g-tile:hover .g-tile-bg { transform: scale(1.06); filter: brightness(.55) saturate(1.2); }
+.g-tile-ov { position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,17,31,.97) 0%, rgba(7,17,31,.22) 55%, transparent 100%); }
+.g-tile-body { position: relative; z-index: 3; padding: 20px 20px 0; }
+.g-tile-num { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .24em; color: rgba(255,255,255,.28); margin-bottom: 7px; }
+.g-tile-name { font-family: 'Cinzel', serif; font-size: clamp(22px,5vw,32px); font-weight: 700; line-height: .95; letter-spacing: .04em; color: #fff; margin-bottom: 5px; }
+.g-tile-sub { font-size: 13px; color: rgba(255,255,255,.5); font-style: italic; margin-bottom: 12px; }
+
+/* Bullet summary on tile */
+.g-tile-bullets { list-style: none; margin-bottom: 12px; }
+.g-tile-bullets li {
+  font-size: 12px; color: rgba(255,255,255,.65);
+  padding: 2px 0 2px 14px; position: relative; line-height: 1.5;
+}
+.g-tile-bullets li::before { content: '·'; position: absolute; left: 0; color: #c9a84c; font-weight: 700; }
+
+.g-tile-cta { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; display: flex; align-items: center; gap: 6px; transition: gap .25s; }
+.g-tile:hover .g-tile-cta { gap: 13px; }
+.tc-j{color:#d4820a;} .tc-s{color:#28d98a;} .tc-l{color:#4a8fff;}
+.g-tile-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; transform: scaleX(0); transform-origin: left; transition: transform .5s cubic-bezier(.16,1,.3,1); }
+.g-tile:hover .g-tile-bar { transform: scaleX(1); }
 .tb-j{background:linear-gradient(to right,#d4820a,transparent);}
 .tb-s{background:linear-gradient(to right,#28d98a,transparent);}
 .tb-l{background:linear-gradient(to right,#4a8fff,transparent);}
-/* progress */
-.gprog{padding:12px 22px 14px;background:rgba(4,8,18,.92);border-top:1px solid rgba(255,255,255,.05);}
-.gprog-row{display:flex;justify-content:space-between;margin-bottom:7px;}
-.gprog-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28);}
-.gprog-stage{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;}
-.gprog-track{height:3px;background:rgba(255,255,255,.05);border-radius:2px;position:relative;margin-bottom:8px;}
-.gprog-fill{height:100%;border-radius:2px;width:0%;transition:width 1.8s cubic-bezier(.16,1,.3,1);position:relative;}
-.gprog-fill::after{content:'';position:absolute;right:-5px;top:-5px;width:13px;height:13px;border-radius:50%;border:2px solid #07111f;}
-.gf-j{background:linear-gradient(to right,#7a3800,#d4820a);}.gf-j::after{background:#d4820a;box-shadow:0 0 8px #d4820a;}
-.gf-s{background:linear-gradient(to right,#0a4a22,#28d98a);}.gf-s::after{background:#28d98a;box-shadow:0 0 8px #28d98a;}
-.gf-l{background:linear-gradient(to right,#0a1a4a,#4a8fff);}.gf-l::after{background:#4a8fff;box-shadow:0 0 8px #4a8fff;}
-.gprog-steps{display:flex;gap:3px;}
-.gprog-step{flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,.05);}
-.gsd-j{background:rgba(212,130,10,.4);}.gsc-j{background:#d4820a;box-shadow:0 0 6px #d4820a;}
-.gsd-s{background:rgba(40,217,138,.4);}.gsc-s{background:#28d98a;box-shadow:0 0 6px #28d98a;}
-.gsd-l{background:rgba(74,143,255,.4);}.gsc-l{background:#4a8fff;box-shadow:0 0 6px #4a8fff;}
 
-/* ===================================================
-   ═══ ABOUT ═══
-   =================================================== */
-.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:start;}
-.about-p{font-size:16px;color:rgba(255,255,255,.68);line-height:1.9;margin-bottom:16px;}
-.about-p strong{color:#fff;font-weight:500;}
-.about-quote{border-left:2px solid #c9a84c;padding-left:20px;margin:24px 0;font-family:'Cinzel',serif;font-style:italic;font-size:18px;color:#fff;line-height:1.5;}
-.studio-img{width:100%;height:220px;object-fit:cover;border-radius:10px;margin-top:24px;filter:brightness(.88);}
-.d-card{overflow:hidden;border-radius:12px;margin-bottom:3px;transition:transform .4s cubic-bezier(.16,1,.3,1);position:relative;}
-.d-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:#c9a84c;border-radius:1px;z-index:1;}
-.d-card:hover{transform:translateX(5px);}
-.d-card-row{display:flex;}
-.d-photo{width:108px;height:138px;object-fit:cover;object-position:center top;flex-shrink:0;filter:grayscale(15%);transition:filter .4s;border-radius:12px 0 0 12px;}
-.d-card:hover .d-photo{filter:grayscale(0%);}
-.d-info{padding:18px 20px;flex:1;}
-.d-name{font-family:'Cinzel',serif;font-size:14px;font-weight:600;color:#67e8f9;margin-bottom:3px;letter-spacing:.04em;}
-.d-role{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#c9a84c;margin-bottom:5px;}
-.d-affil{font-size:11px;color:rgba(255,255,255,.32);margin-bottom:9px;font-style:italic;}
-.d-bio{font-size:12px;color:rgba(255,255,255,.55);line-height:1.65;}
+/* Progress bar */
+.gprog { padding: 12px 20px 14px; background: rgba(4,8,18,.92); border-top: 1px solid rgba(255,255,255,.05); }
+.gprog-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.gprog-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.28); }
+.gprog-stage { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
+.gprog-track { height: 3px; background: rgba(255,255,255,.05); border-radius: 2px; margin-bottom: 8px; position: relative; }
+.gprog-fill { height: 100%; border-radius: 2px; width: 0%; transition: width 1.8s cubic-bezier(.16,1,.3,1); position: relative; }
+.gprog-fill::after { content: ''; position: absolute; right: -5px; top: -5px; width: 13px; height: 13px; border-radius: 50%; border: 2px solid #07111f; }
+.gf-j{background:linear-gradient(to right,#7a3800,#d4820a);} .gf-j::after{background:#d4820a;box-shadow:0 0 8px #d4820a;}
+.gf-s{background:linear-gradient(to right,#0a4a22,#28d98a);} .gf-s::after{background:#28d98a;box-shadow:0 0 8px #28d98a;}
+.gf-l{background:linear-gradient(to right,#0a1a4a,#4a8fff);} .gf-l::after{background:#4a8fff;box-shadow:0 0 8px #4a8fff;}
+.gprog-steps { display: flex; gap: 3px; }
+.gprog-step { flex: 1; height: 2px; border-radius: 1px; background: rgba(255,255,255,.05); }
+.gsd-j{background:rgba(212,130,10,.4);} .gsc-j{background:#d4820a;box-shadow:0 0 6px #d4820a;}
+.gsd-s{background:rgba(40,217,138,.4);} .gsc-s{background:#28d98a;box-shadow:0 0 6px #28d98a;}
+.gsd-l{background:rgba(74,143,255,.4);} .gsc-l{background:#4a8fff;box-shadow:0 0 6px #4a8fff;}
 
-/* ===================================================
-   ═══ PHILOSOPHY ═══
-   =================================================== */
-.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;}
-.phil-quote{font-family:'Cinzel',serif;font-size:clamp(17px,2.5vw,28px);font-weight:500;line-height:1.38;color:#fff;margin-bottom:22px;font-style:italic;}
-.phil-quote em{background:linear-gradient(135deg,#c9a84c,#e8d080);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
-.phil-p{font-size:15px;color:rgba(255,255,255,.62);line-height:1.85;margin-bottom:14px;}
-.pillars{display:flex;flex-direction:column;gap:3px;}
-.pillar{display:flex;gap:14px;padding:18px 20px;border-radius:10px;transition:background .3s;}
-.pillar:hover{background:rgba(255,255,255,.04);}
-.pillar-ic{width:32px;height:32px;flex-shrink:0;border:1px solid rgba(201,168,76,.22);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .3s;}
-.pillar:hover .pillar-ic{border-color:#c9a84c;box-shadow:0 0 12px rgba(201,168,76,.2);}
-.pillar-title{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.05em;color:#fff;margin-bottom:4px;}
-.pillar-body{font-size:12px;color:rgba(255,255,255,.48);line-height:1.65;}
+/* ═══ ABOUT ═══ */
+.about-cols { display: flex; flex-direction: column; gap: 40px; }
+.about-text p { font-size: 15px; color: rgba(255,255,255,.68); line-height: 1.88; margin-bottom: 14px; }
+.about-text p strong { color: #fff; font-weight: 500; }
+.about-quote { border-left: 2px solid #c9a84c; padding-left: 18px; margin: 20px 0; font-family: 'Cinzel', serif; font-style: italic; font-size: 16px; color: #fff; line-height: 1.5; }
+.studio-img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-top: 20px; filter: brightness(.88); border: 1px solid rgba(255,255,255,.06); }
+.designers { display: flex; flex-direction: column; gap: 3px; }
+.d-card { overflow: hidden; border-radius: 12px; margin-bottom: 3px; transition: transform .4s cubic-bezier(.16,1,.3,1); position: relative; }
+.d-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: #c9a84c; border-radius: 1px; z-index: 1; }
+.d-card:hover { transform: translateX(4px); }
+.d-card-row { display: flex; }
+.d-photo { width: 90px; height: 120px; object-fit: cover; object-position: center top; flex-shrink: 0; filter: grayscale(15%); transition: filter .4s; border-radius: 12px 0 0 12px; }
+.d-card:hover .d-photo { filter: grayscale(0%); }
+.d-info { padding: 14px 16px; flex: 1; }
+.d-name { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 3px; letter-spacing: .04em; }
+.d-role { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: #c9a84c; margin-bottom: 4px; }
+.d-affil { font-size: 11px; color: rgba(255,255,255,.3); margin-bottom: 8px; font-style: italic; }
+.d-bio { font-size: 12px; color: rgba(255,255,255,.52); line-height: 1.6; }
 
-/* ===================================================
-   ═══ PUBLISHERS ═══
-   =================================================== */
-.pub-header{text-align:center;margin-bottom:52px;}
-.pub-header h2{font-family:'Cinzel',serif;font-size:clamp(32px,5vw,60px);font-weight:700;line-height:.92;color:#fff;margin-bottom:14px;}
-.pub-header p{font-size:16px;color:rgba(255,255,255,.58);max-width:520px;margin:0 auto;line-height:1.8;}
-/* email btns */
-.pub-email-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:40px;}
-.peb{display:flex;flex-direction:column;align-items:center;gap:9px;padding:22px 14px;border-radius:12px;transition:all .35s cubic-bezier(.16,1,.3,1);text-align:center;position:relative;overflow:hidden;cursor:pointer;}
-.peb::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .4s;}
-.peb-j{background:rgba(212,130,10,.08);border:1px solid rgba(212,130,10,.2);}.peb-j::after{background:#d4820a;}.peb-j:hover{border-color:rgba(212,130,10,.48);box-shadow:0 8px 36px rgba(212,130,10,.14);transform:translateY(-4px);}
-.peb-s{background:rgba(40,217,138,.07);border:1px solid rgba(40,217,138,.18);}.peb-s::after{background:#28d98a;}.peb-s:hover{border-color:rgba(40,217,138,.44);box-shadow:0 8px 36px rgba(40,217,138,.1);transform:translateY(-4px);}
-.peb-l{background:rgba(74,143,255,.08);border:1px solid rgba(74,143,255,.18);}.peb-l::after{background:#4a8fff;}.peb-l:hover{border-color:rgba(74,143,255,.44);box-shadow:0 8px 36px rgba(74,143,255,.1);transform:translateY(-4px);}
-.peb:hover::after{transform:scaleX(1);}
-.peb-icon{font-size:24px;}.peb-name{font-family:'Cinzel',serif;font-size:14px;letter-spacing:.04em;color:#fff;}
-.peb-act{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;}
-.peb-act-j{color:#d4820a;}.peb-act-s{color:#28d98a;}.peb-act-l{color:#4a8fff;}
-/* game cards */
-.pub-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
-.pgc{position:relative;overflow:hidden;border-radius:12px;transition:all .4s cubic-bezier(.16,1,.3,1);}
-.pgc:hover{transform:translateY(-7px);}
-.pgc-j:hover{box-shadow:0 18px 64px rgba(212,130,10,.16);}
-.pgc-s:hover{box-shadow:0 18px 64px rgba(40,217,138,.12);}
-.pgc-l:hover{box-shadow:0 18px 64px rgba(74,143,255,.12);}
-.pgc-img{height:196px;overflow:hidden;position:relative;}
-.pgc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
-.pgc:hover .pgc-img img{transform:scale(1.08);}
-.pgc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,17,31,.9) 0%,transparent 60%);}
-.pgc-minis{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:7px;padding:0 12px;}
-.pgc-minis img{width:44px;height:60px;object-fit:cover;border-radius:3px;border:1px solid rgba(255,255,255,.16);box-shadow:0 5px 16px rgba(0,0,0,.6);opacity:0;transform:translateY(8px);transition:all .3s;}
-.pgc:hover .pgc-minis img{opacity:1;transform:translateY(0);}
-.pgc-minis img:nth-child(1){transition-delay:0s}.pgc-minis img:nth-child(2){transition-delay:.06s}.pgc-minis img:nth-child(3){transition-delay:.12s}
-.pgc-body{padding:16px 18px;background:rgba(8,18,38,.6);}
-.pgc-line1{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
-.pgc-bar{width:2px;height:26px;flex-shrink:0;border-radius:1px;}
-.pgc-name{font-family:'Cinzel',serif;font-size:15px;letter-spacing:.04em;color:#fff;}
-.pgc-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.11em;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+/* ═══ PHILOSOPHY ═══ */
+.phil-cols { display: flex; flex-direction: column; gap: 36px; }
+.phil-quote { font-family: 'Cinzel', serif; font-size: clamp(16px,4vw,26px); font-weight: 500; line-height: 1.38; color: #fff; margin-bottom: 18px; font-style: italic; }
+.phil-quote em { background: linear-gradient(135deg,#c9a84c,#e8d080); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-style: normal; }
+.phil-p { font-size: 15px; color: rgba(255,255,255,.62); line-height: 1.85; margin-bottom: 13px; }
+.pillars { display: flex; flex-direction: column; gap: 3px; }
+.pillar { display: flex; gap: 13px; padding: 16px 18px; border-radius: 10px; transition: background .3s; }
+.pillar:hover { background: rgba(255,255,255,.04); }
+.pillar-ic { width: 30px; height: 30px; flex-shrink: 0; border: 1px solid rgba(201,168,76,.22); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: all .3s; }
+.pillar:hover .pillar-ic { border-color: #c9a84c; box-shadow: 0 0 12px rgba(201,168,76,.2); }
+.pillar-title { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: .04em; color: #fff; margin-bottom: 3px; }
+.pillar-body { font-size: 12px; color: rgba(255,255,255,.48); line-height: 1.6; }
+
+/* ═══ PUBLISHERS ═══ */
+.pub-header { text-align: center; margin-bottom: 40px; }
+.pub-header h2 { font-family: 'Cinzel', serif; font-size: clamp(28px,7vw,56px); font-weight: 700; line-height: .92; color: #fff; margin-bottom: 12px; }
+.pub-header p { font-size: 15px; color: rgba(255,255,255,.58); max-width: 500px; margin: 0 auto; line-height: 1.75; }
+
+/* Email buttons */
+.pub-email-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+.peb {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px; border-radius: 12px;
+  transition: all .35s cubic-bezier(.16,1,.3,1);
+  position: relative; overflow: hidden; cursor: pointer; width: 100%;
+}
+.peb::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; transform: scaleX(0); transform-origin: left; transition: transform .4s; }
+.peb-j { background: rgba(212,130,10,.08); border: 1px solid rgba(212,130,10,.22); }
+.peb-j::after { background: #d4820a; } .peb-j:hover { border-color: rgba(212,130,10,.5); box-shadow: 0 6px 30px rgba(212,130,10,.14); transform: translateY(-2px); }
+.peb-s { background: rgba(40,217,138,.07); border: 1px solid rgba(40,217,138,.2); }
+.peb-s::after { background: #28d98a; } .peb-s:hover { border-color: rgba(40,217,138,.46); box-shadow: 0 6px 30px rgba(40,217,138,.1); transform: translateY(-2px); }
+.peb-l { background: rgba(74,143,255,.08); border: 1px solid rgba(74,143,255,.2); }
+.peb-l::after { background: #4a8fff; } .peb-l:hover { border-color: rgba(74,143,255,.46); box-shadow: 0 6px 30px rgba(74,143,255,.1); transform: translateY(-2px); }
+.peb:hover::after { transform: scaleX(1); }
+.peb-icon { font-size: 22px; flex-shrink: 0; }
+.peb-text { flex: 1; }
+.peb-name { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: .04em; color: #fff; display: block; margin-bottom: 2px; }
+.peb-act { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+.peb-act-j{color:#d4820a;} .peb-act-s{color:#28d98a;} .peb-act-l{color:#4a8fff;}
+.peb-arrow { font-size: 16px; color: rgba(255,255,255,.25); flex-shrink: 0; transition: transform .25s, color .25s; }
+.peb:hover .peb-arrow { transform: translateX(4px); color: #c9a84c; }
+
+/* Game cards in publishers */
+.pub-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.pgc { position: relative; overflow: hidden; border-radius: 12px; transition: all .4s cubic-bezier(.16,1,.3,1); }
+.pgc:hover { transform: translateY(-5px); }
+.pgc-j:hover { box-shadow: 0 16px 56px rgba(212,130,10,.16); }
+.pgc-s:hover { box-shadow: 0 16px 56px rgba(40,217,138,.12); }
+.pgc-l:hover { box-shadow: 0 16px 56px rgba(74,143,255,.12); }
+.pgc-img { height: 180px; overflow: hidden; position: relative; }
+.pgc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.pgc:hover .pgc-img img { transform: scale(1.07); }
+.pgc-ov { position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,17,31,.9) 0%, transparent 60%); }
+.pgc-minis { position: absolute; bottom: 9px; left: 0; right: 0; display: flex; justify-content: center; gap: 6px; padding: 0 12px; }
+.pgc-minis img { width: 40px; height: 54px; object-fit: cover; border-radius: 3px; border: 1px solid rgba(255,255,255,.16); box-shadow: 0 4px 14px rgba(0,0,0,.6); opacity: 0; transform: translateY(6px); transition: all .3s; }
+.pgc:hover .pgc-minis img { opacity: 1; transform: translateY(0); }
+.pgc-minis img:nth-child(1){transition-delay:0s} .pgc-minis img:nth-child(2){transition-delay:.06s} .pgc-minis img:nth-child(3){transition-delay:.12s}
+.pgc-body { padding: 14px 16px; background: rgba(8,18,38,.6); display: flex; align-items: center; gap: 10px; justify-content: space-between; flex-wrap: wrap; }
+.pgc-left { display: flex; align-items: center; gap: 8px; }
+.pgc-bar { width: 2px; height: 24px; flex-shrink: 0; border-radius: 1px; }
+.pgc-name { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: .04em; color: #fff; }
+.pgc-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; }
 .pgc-badge-j{background:rgba(212,130,10,.12);color:#d4820a;border:1px solid rgba(212,130,10,.2);}
 .pgc-badge-s{background:rgba(40,217,138,.1);color:#28d98a;border:1px solid rgba(40,217,138,.18);}
 .pgc-badge-l{background:rgba(74,143,255,.1);color:#4a8fff;border:1px solid rgba(74,143,255,.18);}
-.pgc-sub{font-size:11px;color:rgba(255,255,255,.28);font-family:'JetBrains Mono',monospace;margin-bottom:9px;}
-.pgc-arrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:gap .2s;}
-.pgc:hover .pgc-arrow{gap:10px;}
-.pgc-arrow-j{color:#d4820a;}.pgc-arrow-s{color:#28d98a;}.pgc-arrow-l{color:#4a8fff;}
-/* pub bottom */
-.pub-bottom{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.pub-info{padding:30px;}
-.pub-info p{font-size:15px;color:rgba(255,255,255,.62);line-height:1.85;margin-bottom:18px;}
-.pub-list{list-style:none;margin-bottom:26px;}
-.pub-list li{font-size:13px;color:rgba(255,255,255,.58);padding:7px 0 7px 17px;border-bottom:1px solid rgba(255,255,255,.04);position:relative;}
-.pub-list li::before{content:'▸';position:absolute;left:0;color:#c9a84c;font-size:9px;top:9px;}
-.pub-contact{padding:30px;border:1px solid rgba(201,168,76,.2);}
-.pub-contact h3{font-family:'Cinzel',serif;font-size:clamp(18px,3vw,34px);line-height:.92;color:#fff;margin-bottom:11px;}
-.pub-contact p{font-size:14px;color:rgba(255,255,255,.58);line-height:1.8;margin-bottom:16px;}
-.c-links{display:flex;flex-direction:column;gap:2px;margin-bottom:18px;}
-.c-link{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid rgba(255,255,255,.06);border-radius:7px;background:rgba(255,255,255,.02);transition:all .28s;position:relative;}
-.c-link:hover{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.05);}
-.c-link::after{content:'→';position:absolute;right:14px;color:rgba(255,255,255,.22);transition:transform .2s,color .2s;}
-.c-link:hover::after{color:#c9a84c;transform:translateX(4px);}
-.c-ico{width:28px;height:28px;border:1px solid rgba(255,255,255,.1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
-.c-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:1px;}
-.c-val{font-size:13px;font-weight:500;color:#fff;}
+.pgc-right { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; display: flex; align-items: center; gap: 4px; transition: gap .2s; }
+.pgc:hover .pgc-right { gap: 8px; }
+.pgc-arrow-j{color:#d4820a;} .pgc-arrow-s{color:#28d98a;} .pgc-arrow-l{color:#4a8fff;}
 
-/* ── FOOTER ── */
-footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;position:relative;z-index:1;}
-.f-brand{font-family:'Cinzel',serif;font-size:14px;letter-spacing:.16em;color:#fff;display:flex;align-items:center;gap:9px;}
-.f-nav{display:flex;gap:20px;list-style:none;flex-wrap:wrap;}
-.f-nav a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);transition:color .2s;}
-.f-nav a:hover{color:#c9a84c;}
-.f-copy{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.2);}
+/* Pub info + contact */
+.pub-bottom { display: flex; flex-direction: column; gap: 12px; }
+.pub-info { padding: 26px 22px; }
+.pub-info p { font-size: 14px; color: rgba(255,255,255,.62); line-height: 1.82; margin-bottom: 16px; }
+.pub-list { list-style: none; margin-bottom: 22px; }
+.pub-list li { font-size: 13px; color: rgba(255,255,255,.58); padding: 7px 0 7px 16px; border-bottom: 1px solid rgba(255,255,255,.04); position: relative; }
+.pub-list li::before { content: '▸'; position: absolute; left: 0; color: #c9a84c; font-size: 9px; top: 9px; }
+.pub-cta-stack { display: flex; flex-direction: column; gap: 8px; }
+.pub-contact { padding: 26px 22px; border: 1px solid rgba(201,168,76,.2); border-radius: 14px; }
+.pub-contact h3 { font-family: 'Cinzel', serif; font-size: clamp(18px,4vw,32px); line-height: .92; color: #fff; margin-bottom: 10px; }
+.pub-contact p { font-size: 14px; color: rgba(255,255,255,.58); line-height: 1.78; margin-bottom: 16px; }
+.c-links { display: flex; flex-direction: column; gap: 2px; margin-bottom: 16px; }
+.c-link { display: flex; align-items: center; gap: 11px; padding: 12px 14px; border: 1px solid rgba(255,255,255,.06); border-radius: 7px; background: rgba(255,255,255,.02); transition: all .28s; position: relative; }
+.c-link:hover { border-color: rgba(201,168,76,.3); background: rgba(201,168,76,.05); }
+.c-link::after { content: '→'; position: absolute; right: 14px; color: rgba(255,255,255,.22); transition: transform .2s, color .2s; }
+.c-link:hover::after { color: #c9a84c; transform: translateX(3px); }
+.c-ico { width: 28px; height: 28px; border: 1px solid rgba(255,255,255,.1); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.c-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 1px; }
+.c-val { font-size: 13px; font-weight: 500; color: #fff; }
 
-/* ── RESPONSIVE ── */
-@media(max-width:960px){
-  .nav{padding:0 20px;}.nav-links,.nav-cta{display:none;}.hamburger{display:flex;}
-  .wrap{padding:0 20px;}
-  .section{padding:72px 0;}
-  .games-grid{grid-template-columns:1fr;}.g-tile{height:400px;}
-  .scene-layout{grid-template-columns:1fr;gap:28px;padding:0 20px;}
-  .beaker-scene,.reactor-scene,.wheel-scene{height:300px;}
-  .beaker-wrap{width:190px;height:320px;}
-  .reactor-img-el{width:200px;}.wheel-wrap{width:260px;height:260px;}
-  .about-grid,.phil-grid{grid-template-columns:1fr;gap:40px;}
-  .pub-email-row,.pub-cards,.pub-bottom{grid-template-columns:1fr;gap:8px;}
-  footer{padding:28px 20px;flex-direction:column;text-align:center;}
-  .f-nav{justify-content:center;}
-  .games-header{padding:60px 20px 44px;}
+/* FOOTER */
+footer {
+  background: rgba(7,17,31,.95); border-top: 1px solid rgba(255,255,255,.06);
+  padding: 32px 20px; position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;
 }
-@media(max-width:600px){
-  .hero-btns{flex-direction:column;align-items:center;}
-  .scene-layout{flex-direction:column;}
+.f-brand { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: .16em; color: #fff; display: flex; align-items: center; gap: 8px; }
+.f-nav { display: flex; gap: 16px; list-style: none; flex-wrap: wrap; justify-content: center; }
+.f-nav a { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.26); transition: color .2s; }
+.f-nav a:hover { color: #c9a84c; }
+.f-copy { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,.18); }
+
+/* ══════════════════════════════════
+   MOBILE BASE — already mobile-first
+   ══════════════════════════════════ */
+
+/* ══════════════════════════════════
+   TABLET — 600px+
+   ══════════════════════════════════ */
+@media (min-width: 600px) {
+  .site-nav { padding: 0 28px; }
+  .wrap { padding: 0 28px; }
+  .games-grid { grid-template-columns: 1fr 1fr; gap: 3px; }
+  .g-tile { height: 440px; }
+  .pub-email-grid { flex-direction: row; gap: 8px; }
+  .peb { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+  .peb-arrow { display: none; }
+  .peb-text { text-align: center; }
+  .pub-cards { flex-direction: row; flex-wrap: wrap; gap: 10px; }
+  .pgc { flex: 1 1 calc(50% - 5px); min-width: 210px; }
+  .d-photo { width: 100px; height: 130px; }
+  .g-tile-name { font-size: clamp(22px,4vw,30px); }
 }
-/* prefers-reduced-motion */
-@media(prefers-reduced-motion:reduce){
-  *,.blob,.nav-dot,#hero-canvas{animation:none!important;transition:none!important;}
+
+/* ══════════════════════════════════
+   DESKTOP — 960px+
+   ══════════════════════════════════ */
+@media (min-width: 960px) {
+  .site-nav { padding: 0 48px; height: 64px; }
+  .nav-links { display: flex; }
+  .nav-cta {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .15em;
+    text-transform: uppercase; color: #07111f; background: #c9a84c;
+    padding: 9px 20px; transition: all .25s; box-shadow: 0 0 20px rgba(201,168,76,.28);
+  }
+  .nav-cta:hover { background: #e0bf70; box-shadow: 0 0 36px rgba(201,168,76,.5); }
+  .hamburger { display: none; }
+  .wrap { padding: 0 48px; }
+  .section { padding: 110px 0; }
+  .games-header { padding: 96px 48px 56px; }
+  .games-grid { grid-template-columns: repeat(3,1fr); gap: 3px; }
+  .g-tile { height: 580px; }
+  .g-tile-name { font-size: clamp(22px,2.8vw,30px); }
+  .about-cols { flex-direction: row; gap: 80px; align-items: start; }
+  .about-cols > div:first-child { flex: 1.1; }
+  .about-cols > div:last-child { flex: 1; min-width: 0; }
+  .phil-cols { flex-direction: row; gap: 72px; }
+  .phil-cols > div { flex: 1; }
+  .pub-email-grid { flex-direction: row; gap: 12px; }
+  .peb { flex-direction: column; align-items: center; text-align: center; gap: 9px; padding: 22px 14px; }
+  .peb-arrow { display: none; }
+  .pub-cards { flex-direction: row; gap: 12px; }
+  .pgc { flex: 1; min-width: 0; }
+  .pub-bottom { flex-direction: row; gap: 12px; }
+  .pub-info { flex: 1; }
+  .pub-contact { flex: 1; }
+  footer { flex-direction: row; justify-content: space-between; text-align: left; padding: 40px 48px; }
+  .f-nav { justify-content: flex-start; }
+  .d-photo { width: 100px; height: 132px; }
+}
+
+/* ══════════════════════════════════
+   LARGE DESKTOP — 1280px+
+   ══════════════════════════════════ */
+@media (min-width: 1280px) {
+  .wrap { padding: 0 64px; }
+  .games-header { padding: 96px 64px 56px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, .blob { animation: none !important; transition: none !important; }
 }
 </style>
 </head>
 <body>
 
-<div class="bg-fixed"></div>
 <div class="blob blob1"></div>
 <div class="blob blob2"></div>
 <div class="blob blob3"></div>
 
-<!-- MOBILE NAV -->
+<!-- MOBILE MENU -->
 <div class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="mT()">✕</button>
   <a href="#about" onclick="mT()">About</a>
   <a href="#games" onclick="mT()">Games</a>
+  <a href="#philosophy" onclick="mT()">Philosophy</a>
   <a href="#publishers" onclick="mT()">Publishers</a>
 </div>
 
 <!-- NAV -->
-<nav class="nav" id="siteNav">
+<nav class="site-nav" id="siteNav">
   <a href="index.html" class="nav-logo"><span class="nav-dot"></span>CATALYST</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -315,7 +458,7 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
     <div class="hero-tag">Oxford · Board Game Design Studio</div>
     <h1 class="hero-h1">CATALYST<br><span class="g">GAMES</span></h1>
     <p class="hero-sub">Where Chemistry Becomes Strategy</p>
-    <p class="hero-p">Immersive science-driven strategy games — where every mechanic is grounded in real chemistry, and every scroll reveals a new world.</p>
+    <p class="hero-p">Science-driven strategy games where every mechanic is grounded in real chemistry — and every player leaves knowing something true about the world.</p>
     <div class="hero-btns">
       <a href="#games" class="btn btn-gold">Explore Games</a>
       <a href="#publishers" class="btn btn-glass">For Publishers</a>
@@ -324,14 +467,16 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
   <div class="hero-down"><span>Scroll</span><div></div></div>
 </section>
 
-<!-- ═══ GAMES OVERVIEW ═══ -->
+<!-- ═══ GAMES ═══ -->
 <section id="games">
   <div class="games-header rv">
     <span class="sec-label" style="display:flex;justify-content:center;">Our Portfolio</span>
-    <h2 class="sec-title" style="text-align:center;margin-bottom:12px;">A Growing<br><span class="dim">Universe</span></h2>
-    <p style="text-align:center;font-size:16px;color:rgba(255,255,255,.58);max-width:520px;margin:0 auto;line-height:1.8;">Three scientific worlds — actively growing. Scroll into each to experience the chemistry.</p>
+    <h2 class="sec-title" style="text-align:center;margin-bottom:10px;">A Growing<br><span class="dim">Universe</span></h2>
+    <p style="text-align:center;font-size:15px;color:rgba(255,255,255,.55);max-width:480px;margin:0 auto;line-height:1.75;">Three scientific worlds — actively designing more.</p>
   </div>
   <div class="games-grid">
+
+    <!-- JABIR -->
     <a href="jabir.html" class="g-tile rv">
       <div class="g-tile-bg" style="background-image:url('jabir_hero_bg.png')"></div>
       <div class="g-tile-ov"></div>
@@ -339,7 +484,13 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
         <div class="g-tile-num">001 · Heavy · 2–6 Players · 90–150 min</div>
         <div class="g-tile-name">Jabir:<br>The Perfumer</div>
         <div class="g-tile-sub">The Chemistry of Perfumery</div>
-        <div class="g-tile-cta tc-j">Enter the Laboratory →</div>
+        <ul class="g-tile-bullets">
+          <li>41 real botanical extracts · 6 global regions</li>
+          <li>4 authentic extraction methods</li>
+          <li>Age to peak potency · compose &amp; score</li>
+          <li>Heavy eurogame · seeks publisher</li>
+        </ul>
+        <div class="g-tile-cta tc-j">Explore →</div>
       </div>
       <div class="gprog">
         <div class="gprog-row"><span class="gprog-lbl">Development</span><span class="gprog-stage" style="color:#d4820a;">Seeking Publisher</span></div>
@@ -348,6 +499,8 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
       </div>
       <div class="g-tile-bar tb-j"></div>
     </a>
+
+    <!-- SYNTHELYST -->
     <a href="synthelyst.html" class="g-tile rv">
       <div class="g-tile-bg" style="background-image:url('synthelyst_hero_bg.png')"></div>
       <div class="g-tile-ov"></div>
@@ -355,7 +508,13 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
         <div class="g-tile-num">002 · Mid-Heavy · 2–5 Players · 60–90 min</div>
         <div class="g-tile-name">Synthe-<br>lyst</div>
         <div class="g-tile-sub">Competitive Eco-Strategy</div>
-        <div class="g-tile-cta tc-s">Save the Earth →</div>
+        <ul class="g-tile-bullets">
+          <li>CEO of a bioplastics firm · year 2035</li>
+          <li>5 feedstocks · build energy networks</li>
+          <li>Resolve crises or everyone loses</li>
+          <li>Mid-heavy eurogame · seeks publisher</li>
+        </ul>
+        <div class="g-tile-cta tc-s">Explore →</div>
       </div>
       <div class="gprog">
         <div class="gprog-row"><span class="gprog-lbl">Development</span><span class="gprog-stage" style="color:#28d98a;">Seeking Publisher</span></div>
@@ -364,14 +523,22 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
       </div>
       <div class="g-tile-bar tb-s"></div>
     </a>
-    <a href="latherwork.html" class="g-tile rv">
-      <div class="g-tile-bg" style="background-image:url('latherwork_hero_bg.png')"></div>
+
+    <!-- WASHWHEEL -->
+    <a href="washwheel.html" class="g-tile rv">
+      <div class="g-tile-bg" style="background-image:url('washwheel_hero_bg.png')"></div>
       <div class="g-tile-ov"></div>
       <div class="g-tile-body">
         <div class="g-tile-num">003 · Medium · 2–4 Players · 90–120 min</div>
-        <div class="g-tile-name">Lather-<br>work</div>
+        <div class="g-tile-name">Wash-<br>Wheel</div>
         <div class="g-tile-sub">The Fabric Science Game</div>
-        <div class="g-tile-cta tc-l">Enter the Lab →</div>
+        <ul class="g-tile-bullets">
+          <li>Match detergents to real fibre profiles</li>
+          <li>Rotating Wash Wheel resource market</li>
+          <li>4 specialist lab roles · crisis events</li>
+          <li>Medium eurogame · in design</li>
+        </ul>
+        <div class="g-tile-cta tc-l">Explore →</div>
       </div>
       <div class="gprog">
         <div class="gprog-row"><span class="gprog-lbl">Development</span><span class="gprog-stage" style="color:#4a8fff;">Mechanics Design</span></div>
@@ -380,42 +547,46 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
       </div>
       <div class="g-tile-bar tb-l"></div>
     </a>
+
   </div>
 </section>
-
 
 <!-- ═══ ABOUT ═══ -->
 <section id="about" class="section" style="border-top:1px solid rgba(255,255,255,.06);">
 <div class="wrap">
-  <div class="about-grid">
+  <div class="about-cols">
     <div class="rv-l">
       <span class="sec-label">About the Studio</span>
-      <h2 class="sec-title" style="margin-bottom:24px;">Mehrad<br><span class="dim">&amp; Anita</span></h2>
-      <p class="about-p">We are <strong>Catalyst Board Game Design</strong>, founded in Oxford by a chemist and a statistician who believe the world's most fascinating science belongs on the table.</p>
-      <p class="about-p">Mehrad synthesises the chemistry into mechanics. Anita optimises the systems and ensures every game is as playable as it is scientifically rigorous.</p>
+      <h2 class="sec-title" style="margin-bottom:22px;">Mehrad<br><span class="dim">&amp; Anita</span></h2>
+      <div class="about-text">
+        <p>We are <strong>Catalyst Board Game Design</strong> — an Oxford science board game studio founded by a chemist and a statistician.</p>
+        <p>Mehrad turns real chemistry into game mechanics. Anita stress-tests and balances every system. Together we design for curious adults and students who haven't yet discovered that science can be thrilling.</p>
+      </div>
       <div class="about-quote">"A great game is a working model of something true — a system that teaches by letting you fail, adapt, and discover."</div>
       <img src="studio_bg.png" alt="Catalyst studio Oxford" class="studio-img rv" loading="lazy">
     </div>
     <div class="rv-r">
-      <div class="d-card glass">
-        <div class="d-card-row">
-          <img src="mehrad_image.jpg" alt="Mehrad Niasari" class="d-photo" loading="lazy">
-          <div class="d-info">
-            <div class="d-name">Mehrad Niasari</div>
-            <div class="d-role">Game Designer · Chemist</div>
-            <div class="d-affil">Oxford University · Chemistry &amp; Materials</div>
-            <p class="d-bio">Organic chemistry and bioplastics R&amp;D background drives every mechanic — from distillation in Jabir to polymer science in Synthelyst.</p>
+      <div class="designers">
+        <div class="d-card glass">
+          <div class="d-card-row">
+            <img src="mehrad_image.jpg" alt="Mehrad Niasari" class="d-photo" loading="lazy">
+            <div class="d-info">
+              <div class="d-name">Mehrad Niasari</div>
+              <div class="d-role">Game Designer · Chemist</div>
+              <div class="d-affil">Oxford University · Chemistry &amp; Materials</div>
+              <p class="d-bio">Organic chemistry and bioplastics R&amp;D background drives every mechanic — from distillation in Jabir to polymer science in Synthelyst.</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="d-card glass" style="margin-top:3px;">
-        <div class="d-card-row">
-          <img src="anita_image.jpg" alt="Anita Mansouri" class="d-photo" loading="lazy">
-          <div class="d-info">
-            <div class="d-name">Anita Mansouri</div>
-            <div class="d-role">Game Designer · Statistician</div>
-            <div class="d-affil">Statistician in pharmaceutical industry</div>
-            <p class="d-bio">Brings statistical precision to game design — stress-testing mechanics, optimising balance, ensuring Catalyst games are elegant and genuinely competitive.</p>
+        <div class="d-card glass" style="margin-top:3px;">
+          <div class="d-card-row">
+            <img src="anita_image.jpg" alt="Anita Mansouri" class="d-photo" loading="lazy">
+            <div class="d-info">
+              <div class="d-name">Anita Mansouri</div>
+              <div class="d-role">Game Designer · Statistician</div>
+              <div class="d-affil">Statistician in pharmaceutical industry</div>
+              <p class="d-bio">Brings statistical precision to game design — stress-testing mechanics, optimising balance, ensuring Catalyst games are elegant and genuinely competitive.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -427,19 +598,19 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
 <!-- ═══ PHILOSOPHY ═══ -->
 <section id="philosophy" class="section" style="border-top:1px solid rgba(255,255,255,.06);">
 <div class="wrap">
-  <div class="phil-grid">
+  <div class="phil-cols">
     <div class="rv-l">
       <span class="sec-label">Design Philosophy</span>
       <p class="phil-quote">Games where you win by <em>understanding</em> — not just by optimising.</p>
       <p class="phil-p">Every Catalyst title rests on one conviction: the deepest fun comes from the moment a system clicks in your mind. When you realise a rule exists because the chemistry demands it — that rule becomes knowledge.</p>
-      <p class="phil-p">We also believe our games belong in classrooms. Science motivation disguised as an excellent evening of strategy.</p>
-      <div style="margin-top:24px;"><a href="#games" class="btn btn-glass">Explore Games</a></div>
+      <p class="phil-p">We also believe our games belong in classrooms — science motivation disguised as an excellent evening of strategy.</p>
+      <div style="margin-top:22px;"><a href="#games" class="btn btn-glass">Explore Games</a></div>
     </div>
     <div class="pillars rv-r">
-      <div class="pillar"><div class="pillar-ic">⚗️</div><div><div class="pillar-title">Scientific Integrity</div><p class="pillar-body">Every mechanism anchored in real chemistry — we research exhaustively so gameplay reflects genuine processes.</p></div></div>
-      <div class="pillar"><div class="pillar-ic">🎓</div><div><div class="pillar-title">Education Through Play</div><p class="pillar-body">Our games belong in schools. Science motivation disguised as an excellent evening of strategy.</p></div></div>
-      <div class="pillar"><div class="pillar-ic">🌍</div><div><div class="pillar-title">Real-World Relevance</div><p class="pillar-body">From plastic pollution to sustainable fashion — each game connects the table to problems that actually matter.</p></div></div>
-      <div class="pillar"><div class="pillar-ic">♟️</div><div><div class="pillar-title">First in the Market</div><p class="pillar-body">No comparable science-driven eurogames exist. We occupy a genuinely novel space in the hobby.</p></div></div>
+      <div class="pillar"><div class="pillar-ic">⚗️</div><div><div class="pillar-title">Scientific Integrity</div><p class="pillar-body">Every mechanism anchored in real chemistry — researched exhaustively so gameplay reflects genuine processes.</p></div></div>
+      <div class="pillar"><div class="pillar-ic">🎓</div><div><div class="pillar-title">Education Through Play</div><p class="pillar-body">Science motivation disguised as an excellent evening of strategy — our games belong in schools.</p></div></div>
+      <div class="pillar"><div class="pillar-ic">🌍</div><div><div class="pillar-title">Real-World Relevance</div><p class="pillar-body">From plastic pollution to sustainable fashion — each game connects the table to problems that matter.</p></div></div>
+      <div class="pillar"><div class="pillar-ic">♟️</div><div><div class="pillar-title">First in the Market</div><p class="pillar-body">No comparable science-driven eurogames exist. A genuinely novel space in the hobby.</p></div></div>
     </div>
   </div>
 </div>
@@ -448,38 +619,41 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
 <!-- ═══ PUBLISHERS ═══ -->
 <section id="publishers" class="section" style="border-top:1px solid rgba(255,255,255,.06);">
 <div class="wrap">
+
   <div class="pub-header rv">
     <span class="sec-label" style="display:flex;justify-content:center;">For Publishers &amp; Partners</span>
     <h2>Catalyst<br><span class="dim">Portfolio</span></h2>
-    <p>Science-driven eurogames for thoughtful adults — and for the next generation discovering chemistry. Actively designing more titles.</p>
+    <p>Science-driven eurogames with genuine IP depth. Actively designing more titles. We are based in Oxford and available for meetings, demos, and conventions.</p>
   </div>
 
-  <!-- ONE-CLICK EMAIL BUTTONS -->
-  <div class="pub-email-row rv">
+  <!-- EMAIL BUTTONS -->
+  <div class="pub-email-grid rv">
     <a href="mailto:duo.boardgame.design@gmail.com?subject=Enquiry%3A%20Jabir%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="peb peb-j">
-      <span class="peb-icon">⚗️</span><span class="peb-name">Jabir: The Perfumer</span>
-      <span class="peb-act peb-act-j">✉ Enquire About This Game</span>
+      <span class="peb-icon">⚗️</span>
+      <div class="peb-text"><span class="peb-name">Jabir: The Perfumer</span><span class="peb-act peb-act-j">✉ Enquire About This Game</span></div>
+      <span class="peb-arrow">→</span>
     </a>
     <a href="mailto:duo.boardgame.design@gmail.com?subject=Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="peb peb-s">
-      <span class="peb-icon">🌿</span><span class="peb-name">Synthelyst</span>
-      <span class="peb-act peb-act-s">✉ Enquire About This Game</span>
+      <span class="peb-icon">🌿</span>
+      <div class="peb-text"><span class="peb-name">Synthelyst</span><span class="peb-act peb-act-s">✉ Enquire About This Game</span></div>
+      <span class="peb-arrow">→</span>
     </a>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Enquiry%3A%20Latherwork&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Latherwork.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="peb peb-l">
-      <span class="peb-icon">🫧</span><span class="peb-name">Latherwork</span>
-      <span class="peb-act peb-act-l">✉ Enquire About This Game</span>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Enquiry%3A%20WashWheel&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20WashWheel.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="peb peb-l">
+      <span class="peb-icon">🫧</span>
+      <div class="peb-text"><span class="peb-name">WashWheel</span><span class="peb-act peb-act-l">✉ Enquire About This Game</span></div>
+      <span class="peb-arrow">→</span>
     </a>
   </div>
 
+  <!-- GAME CARDS -->
   <div class="pub-cards rv">
     <a href="jabir.html" class="pgc pgc-j glass">
       <div class="pgc-img"><img src="jabir_hero_bg.png" alt="Jabir" loading="lazy"><div class="pgc-ov"></div>
         <div class="pgc-minis"><img src="jabir_box.png" alt="" loading="lazy"><img src="jabir_card.png" alt="" loading="lazy"><img src="jabir_token_1.png" alt="" loading="lazy"></div>
       </div>
       <div class="pgc-body">
-        <div class="pgc-line1"><span class="pgc-bar" style="background:#d4820a"></span><span class="pgc-name">Jabir</span></div>
-        <span class="pgc-badge pgc-badge-j">Seeking Publisher</span>
-        <div class="pgc-sub" style="margin-top:5px;">Heavy · 2–6 Players · Prototype Ready</div>
-        <div class="pgc-arrow pgc-arrow-j">Full Details →</div>
+        <div class="pgc-left"><span class="pgc-bar" style="background:#d4820a"></span><span class="pgc-name">Jabir</span><span class="pgc-badge pgc-badge-j">Seeking Publisher</span></div>
+        <div class="pgc-right pgc-arrow-j">Details →</div>
       </div>
     </a>
     <a href="synthelyst.html" class="pgc pgc-s glass">
@@ -487,46 +661,42 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
         <div class="pgc-minis"><img src="synthelyst_card1.png" alt="" loading="lazy"><img src="synthelyst_card2.png" alt="" loading="lazy"><img src="synthelyst_card3.png" alt="" loading="lazy"></div>
       </div>
       <div class="pgc-body">
-        <div class="pgc-line1"><span class="pgc-bar" style="background:#28d98a"></span><span class="pgc-name">Synthelyst</span></div>
-        <span class="pgc-badge pgc-badge-s">Seeking Publisher</span>
-        <div class="pgc-sub" style="margin-top:5px;">Mid-Heavy · 2–5 Players · Art Ready</div>
-        <div class="pgc-arrow pgc-arrow-s">Full Details →</div>
+        <div class="pgc-left"><span class="pgc-bar" style="background:#28d98a"></span><span class="pgc-name">Synthelyst</span><span class="pgc-badge pgc-badge-s">Seeking Publisher</span></div>
+        <div class="pgc-right pgc-arrow-s">Details →</div>
       </div>
     </a>
-    <a href="latherwork.html" class="pgc pgc-l glass">
-      <div class="pgc-img"><img src="latherwork_hero_bg.png" alt="Latherwork" loading="lazy"><div class="pgc-ov"></div>
-        <div class="pgc-minis"><img src="latherwork_card1.png" alt="" loading="lazy"><img src="latherwork_card2.png" alt="" loading="lazy"><img src="latherwork_board.png" alt="" loading="lazy"></div>
+    <a href="washwheel.html" class="pgc pgc-l glass">
+      <div class="pgc-img"><img src="washwheel_hero_bg.png" alt="WashWheel" loading="lazy"><div class="pgc-ov"></div>
+        <div class="pgc-minis"><img src="washwheel_card1.png" alt="" loading="lazy"><img src="washwheel_card2.png" alt="" loading="lazy"><img src="washwheel_board.png" alt="" loading="lazy"></div>
       </div>
       <div class="pgc-body">
-        <div class="pgc-line1"><span class="pgc-bar" style="background:#4a8fff"></span><span class="pgc-name">Latherwork</span></div>
-        <span class="pgc-badge pgc-badge-l">In Design</span>
-        <div class="pgc-sub" style="margin-top:5px;">Medium · 2–4 Players · Mechanics Phase</div>
-        <div class="pgc-arrow pgc-arrow-l">Full Details →</div>
+        <div class="pgc-left"><span class="pgc-bar" style="background:#4a8fff"></span><span class="pgc-name">WashWheel</span><span class="pgc-badge pgc-badge-l">In Design</span></div>
+        <div class="pgc-right pgc-arrow-l">Details →</div>
       </div>
     </a>
   </div>
 
+  <!-- CONTACT + INFO -->
   <div class="pub-bottom rv">
     <div class="pub-info glass">
       <span class="sec-label">What We Offer</span>
-      <p>Mehrad and Anita are based in Oxford and available for publisher meetings, convention demos, school workshops, and brand collaborations.</p>
+      <p>Available for publisher meetings, convention demos, school workshops, and brand collaborations.</p>
       <ul class="pub-list">
-        <li>Jabir &amp; Synthelyst: prototypes ready for play</li>
-        <li>Full rulebooks and design documents available</li>
-        <li>Brand collaboration potential (perfume, sustainability)</li>
-        <li>School and educational licensing available</li>
+        <li>Jabir &amp; Synthelyst: prototypes ready to play</li>
+        <li>Full rulebooks and design documents on request</li>
+        <li>Brand collaboration potential — perfume &amp; sustainability</li>
+        <li>Educational licensing available</li>
         <li>Available for Spiel Essen, UK Games Expo, Cannes</li>
-        <li>Actively designing additional titles</li>
       </ul>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <a href="mailto:duo.boardgame.design@gmail.com?subject=Press%20Kit%20Request&body=Hello%20Catalyst%2C%0A%0APlease%20send%20me%20your%20full%20press%20kit.%0A%0AThank%20you." class="btn btn-gold" style="justify-content:center;">✉ Request Full Press Kit</a>
-        <a href="mailto:duo.boardgame.design@gmail.com?subject=Demo%20Request&body=Hello%20Catalyst%2C%0A%0AI%20would%20like%20to%20arrange%20a%20prototype%20demo.%0A%0AThank%20you." class="btn btn-glass" style="justify-content:center;">📋 Request Prototype Demo</a>
+      <div class="pub-cta-stack">
+        <a href="mailto:duo.boardgame.design@gmail.com?subject=Press%20Kit%20Request&body=Hello%20Catalyst%2C%0A%0APlease%20send%20me%20your%20full%20press%20kit.%0A%0AThank%20you." class="btn btn-gold" style="width:100%;">✉ Request Full Press Kit</a>
+        <a href="mailto:duo.boardgame.design@gmail.com?subject=Demo%20Request&body=Hello%20Catalyst%2C%0A%0AI%20would%20like%20to%20arrange%20a%20prototype%20demo.%0A%0AThank%20you." class="btn btn-glass" style="width:100%;">📋 Request Prototype Demo</a>
       </div>
     </div>
-    <div class="pub-contact glass">
+    <div class="pub-contact">
       <span class="sec-label">Get in Touch</span>
       <h3>Ready to<br>Collaborate</h3>
-      <p>Science-driven eurogames with genuine IP depth, unusual thematic territory, and strong replayability built from real chemistry.</p>
+      <p>Science-driven eurogames with genuine IP depth and strong replayability built from real chemistry.</p>
       <div class="c-links">
         <a href="mailto:duo.boardgame.design@gmail.com" class="c-link"><div class="c-ico">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">duo.boardgame.design@gmail.com</div></div></a>
         <a href="https://instagram.com/catalyst.boardgame" target="_blank" class="c-link"><div class="c-ico">📷</div><div><div class="c-lbl">Instagram</div><div class="c-val">@catalyst.boardgame</div></div></a>
@@ -534,44 +704,67 @@ footer{background:rgba(7,17,31,.95);border-top:1px solid rgba(255,255,255,.06);p
       </div>
     </div>
   </div>
+
 </div>
 </section>
 
 <footer>
   <a href="index.html" class="f-brand"><span class="nav-dot"></span>CATALYST</a>
-  <ul class="f-nav"><li><a href="jabir.html">Jabir</a></li><li><a href="synthelyst.html">Synthelyst</a></li><li><a href="latherwork.html">Latherwork</a></li><li><a href="#publishers">Contact</a></li></ul>
+  <ul class="f-nav">
+    <li><a href="jabir.html">Jabir</a></li>
+    <li><a href="synthelyst.html">Synthelyst</a></li>
+    <li><a href="washwheel.html">WashWheel</a></li>
+    <li><a href="#publishers">Contact</a></li>
+  </ul>
   <span class="f-copy">© 2025 CATALYST · MEHRAD NIASARI &amp; ANITA MANSOURI · OXFORD</span>
 </footer>
 
-
 <script>
+// NAV
 window.addEventListener('scroll',()=>document.getElementById('siteNav').classList.toggle('stuck',scrollY>36));
 function mT(){document.getElementById('mobNav').classList.toggle('open');}
-// Progress bars
-[{id:'pgj',w:'88%'},{id:'pgs',w:'84%'},{id:'pgl',w:'26%'}].forEach(b=>{
-  const el=document.getElementById(b.id);if(!el)return;
-  const ob=new IntersectionObserver(en=>{if(en[0].isIntersecting){setTimeout(()=>{el.style.width=b.w;},350);ob.disconnect();}},{threshold:.3});
-  ob.observe(el.closest('.g-tile'));
-});
-// Hero canvas
+
+// HERO CANVAS
 (function(){
-  const c=document.getElementById('hero-canvas');if(!c)return;
+  const c=document.getElementById('hero-canvas');
+  if(!c)return;
   Object.assign(c.style,{position:'absolute',inset:0,width:'100%',height:'100%'});
-  const ctx=c.getContext('2d');let W,H,pts=[];
+  const ctx=c.getContext('2d');
+  let W,H,pts=[];
   const resize=()=>{W=c.width=innerWidth;H=c.height=innerHeight;};
   resize();window.addEventListener('resize',resize);
-  for(let i=0;i<65;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.36,vy:(Math.random()-.5)*.36,r:Math.random()*1.3+.4});
+  for(let i=0;i<60;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.3+.4});
   const draw=()=>{
     ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(201,168,76,.42)';ctx.fill();});
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(201,168,76,.42)';ctx.fill();
+    });
     for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
       const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
-      if(d<115){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(201,168,76,${.08*(1-d/115)})`;ctx.lineWidth=.5;ctx.stroke();}}
-    requestAnimationFrame(draw);};draw();
+      if(d<115){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(201,168,76,${.08*(1-d/115)})`;ctx.lineWidth=.5;ctx.stroke();}
+    }
+    requestAnimationFrame(draw);
+  };
+  draw();
 })();
-// Scroll reveal
-const rvObs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*65);});},{threshold:.06});
-document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>rvObs.observe(el));
+
+// PROGRESS BARS
+[{id:'pgj',w:'88%'},{id:'pgs',w:'84%'},{id:'pgl',w:'26%'}].forEach(b=>{
+  const el=document.getElementById(b.id);if(!el)return;
+  const ob=new IntersectionObserver(en=>{
+    if(en[0].isIntersecting){setTimeout(()=>{el.style.width=b.w;},350);ob.disconnect();}
+  },{threshold:.3});
+  ob.observe(el.closest('.g-tile'));
+});
+
+// SCROLL REVEAL
+const rv=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*65);});
+},{threshold:.06});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>rv.observe(el));
 </script>
 </body>
+</html>
