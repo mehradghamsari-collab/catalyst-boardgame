@@ -3,990 +3,789 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CATALYST Board Games | Oxford Science Game Studio</title>
-<meta name="description" content="Catalyst Board Games — four science-inspired strategy games by Mehrad Niasari & Anita Mansouri. Oxford. Seeking publishers.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Catalyst Board Games — Oxford Science Game Studio</title>
+<meta name="description" content="Four science-inspired strategy games by Mehrad Niasari & Anita Mansouri. Oxford. Seeking publishers.">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-/* ═══════════════════════════════════════════════════════════
-   CATALYST 3D — WHITE EDITION
-   White bg · Charcoal text · Teal/Gold/Copper accents
-   ═══════════════════════════════════════════════════════════ */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;font-size:16px;}
-body{background:#fff;color:#1a1a2e;font-family:'Inter',sans-serif;line-height:1.65;overflow-x:hidden;}
-img{display:block;max-width:100%;height:auto;}
-a{color:inherit;text-decoration:none;}
-:root{
-  --teal:#00c9b1;--teal2:#00a896;--aqua:#5ff3e4;
-  --gold:#f2c94c;--copper:#c77d4a;
-  --charcoal:#1a1a2e;--mid:#2d2d44;--soft:#6b7280;
-  --offwhite:#f8f9fa;--border:#e5e7eb;
-  --jabir:#e8890c;--synth:#22c55e;--wash:#3b82f6;--mise:#c9a87a;
-}
+/* ── HOME-SPECIFIC ── */
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:#f1f1f1;}
-::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
-
-/* ══════════════════════════════
-   NAV
-   ══════════════════════════════ */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:900;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 24px;height:64px;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  transition:box-shadow .3s;
-}
-.nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,.08);}
-.nav-logo{display:flex;align-items:center;gap:10px;font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:.18em;color:var(--charcoal);}
-.nav-logo img{height:38px;width:38px;object-fit:contain;border-radius:50%;transition:transform .5s cubic-bezier(.34,1.56,.64,1);}
-.nav-logo img:hover{transform:rotate(15deg) scale(1.1);}
-.nav-links{display:none;list-style:none;gap:6px;align-items:center;}
-.nav-links a{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);padding:6px 12px;border-radius:6px;transition:all .2s;}
-.nav-links a:hover{color:var(--teal);background:rgba(0,201,177,.06);}
-.nav-cta{
-  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-  background:var(--charcoal);color:#fff;padding:9px 20px;border-radius:6px;
-  transform-style:preserve-3d;transition:all .3s cubic-bezier(.34,1.56,.64,1);
-  box-shadow:0 4px 0 rgba(0,0,0,.4);display:none;
-}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 0 rgba(0,0,0,.4);}
-.nav-cta:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.4);}
-.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
-.hamburger span{display:block;width:22px;height:1.5px;background:var(--charcoal);transition:all .3s;}
-.mob-nav{display:none;position:fixed;inset:0;z-index:950;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:24px;}
-.mob-nav.open{display:flex;}
-.mob-nav a{font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--charcoal);transition:color .2s;}
-.mob-nav a:hover{color:var(--teal);}
-.mob-close{position:absolute;top:20px;right:24px;font-size:28px;background:none;border:none;cursor:pointer;color:var(--soft);}
-
-/* ══════════════════════════════
-   TOKEN BUTTON SYSTEM
-   ══════════════════════════════ */
-.tbtn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
-  padding:13px 28px;border:none;border-radius:8px;cursor:pointer;
-  transform-style:preserve-3d;transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;
-  position:relative;white-space:nowrap;
-}
-.tbtn::after{content:'';position:absolute;inset:0;border-radius:8px;background:linear-gradient(135deg,rgba(255,255,255,.25) 0%,transparent 60%);pointer-events:none;}
-.tbtn:hover{transform:perspective(400px) rotateX(-8deg) rotateY(4deg) translateY(-3px);}
-.tbtn:active{transform:perspective(400px) rotateX(4deg) translateY(2px);transition-duration:.1s;}
-.tbtn-dark{background:var(--charcoal);color:#fff;box-shadow:0 6px 0 #0a0a1a,0 8px 20px rgba(26,26,46,.25);}
-.tbtn-dark:hover{box-shadow:0 8px 0 #0a0a1a,0 12px 28px rgba(26,26,46,.3);}
-.tbtn-dark:active{box-shadow:0 2px 0 #0a0a1a;}
-.tbtn-teal{background:linear-gradient(135deg,var(--teal),#00e5cf);color:#fff;box-shadow:0 6px 0 var(--teal2),0 8px 24px rgba(0,201,177,.3);}
-.tbtn-teal:hover{box-shadow:0 8px 0 var(--teal2),0 12px 32px rgba(0,201,177,.4);}
-.tbtn-teal:active{box-shadow:0 2px 0 var(--teal2);}
-.tbtn-outline{background:transparent;color:var(--charcoal);border:2px solid var(--charcoal);box-shadow:0 6px 0 rgba(26,26,46,.2);}
-.tbtn-outline:hover{background:var(--charcoal);color:#fff;box-shadow:0 8px 0 rgba(26,26,46,.3);}
-.tbtn-outline:active{box-shadow:0 2px 0 rgba(26,26,46,.2);}
-.tbtn-copper{background:linear-gradient(135deg,var(--copper),#e09060);color:#fff;box-shadow:0 6px 0 #9a5a2a,0 8px 20px rgba(199,125,74,.3);}
-.tbtn-copper:hover{box-shadow:0 8px 0 #9a5a2a,0 12px 28px rgba(199,125,74,.4);}
-.tbtn-copper:active{box-shadow:0 2px 0 #9a5a2a;}
-
-/* ══════════════════════════════
-   REVEAL ANIMATIONS
-   ══════════════════════════════ */
-.rv{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
-.rv-l{opacity:0;transform:translateX(-32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
-.rv-r{opacity:0;transform:translateX(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
-.rv-s{opacity:0;transform:scale(.94);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
-.rv.on,.rv-l.on,.rv-r.on,.rv-s.on{opacity:1;transform:none;}
-.delay-1{transition-delay:.1s!important;}
-.delay-2{transition-delay:.2s!important;}
-.delay-3{transition-delay:.3s!important;}
-.delay-4{transition-delay:.4s!important;}
-.delay-5{transition-delay:.5s!important;}
-
-/* ══════════════════════════════
-   LAYOUT UTILS
-   ══════════════════════════════ */
-.wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
-.section{padding:96px 0;}
-.sec-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:12px;}
-.sec-h{font-family:'Cinzel',serif;font-size:clamp(32px,6vw,64px);font-weight:700;line-height:.9;letter-spacing:.02em;color:var(--charcoal);}
-.sec-h .dim{color:var(--border);-webkit-text-stroke:1px var(--border);}
-.sec-h .accent{color:var(--teal);}
-.sec-p{font-size:16px;color:var(--soft);line-height:1.85;max-width:580px;}
-.divider{width:40px;height:2px;background:var(--teal);margin:20px 0;border-radius:1px;}
-
-/* ══════════════════════════════
-   HERO
-   ══════════════════════════════ */
+/* HERO */
 #hero{
-  min-height:100vh;display:flex;align-items:center;position:relative;
-  overflow:hidden;background:#fff;padding-top:64px;
+  min-height:100svh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:120px 24px 80px;
+  background:#fff;position:relative;overflow:hidden;
 }
-#hero-canvas{position:absolute;inset:0;pointer-events:none;opacity:.5;}
-.hero-grid{
-  display:grid;grid-template-columns:1fr;gap:60px;
-  align-items:center;width:100%;padding:60px 24px 40px;
-  position:relative;z-index:2;max-width:1240px;margin:0 auto;
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--light);border-radius:980px;padding:6px 16px;
+  font-size:12px;font-weight:600;color:var(--mid);letter-spacing:.04em;text-transform:uppercase;
+  margin-bottom:28px;
 }
-.hero-label{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
-.hero-label-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 2s ease infinite;}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,201,177,.4)}70%{box-shadow:0 0 0 10px rgba(0,201,177,0)}}
-.hero-label span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--soft);}
-.hero-h{font-family:'Cinzel',serif;font-size:clamp(52px,11vw,130px);font-weight:900;line-height:.82;letter-spacing:.04em;color:var(--charcoal);margin-bottom:20px;}
-.hero-h .teal-line{display:block;background:linear-gradient(90deg,var(--teal),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{font-family:'Cinzel',serif;font-size:clamp(10px,2vw,13px);letter-spacing:.32em;text-transform:uppercase;color:var(--soft);margin-bottom:18px;}
-.hero-p{font-size:clamp(14px,2vw,17px);color:var(--soft);line-height:1.9;max-width:520px;margin-bottom:36px;}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
-.hero-stats{display:flex;gap:32px;flex-wrap:wrap;}
-.hero-stat-n{font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--charcoal);line-height:1;}
-.hero-stat-l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);margin-top:3px;}
-/* Box showcase */
-.hero-boxes{position:relative;height:520px;}
-.box-float{
+.hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);}
+.hero-h{
+  font-size:clamp(52px,9vw,96px);font-weight:700;
+  letter-spacing:-.05em;line-height:1.0;
+  color:var(--black);margin-bottom:20px;
+}
+.hero-h .line2{
+  background:linear-gradient(90deg,#00c9b1,#00e5cf,#f5a623);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:clamp(17px,2.5vw,22px);color:var(--mid);line-height:1.6;max-width:540px;margin:0 auto 36px;}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:72px;}
+
+/* FLOATING BOXES */
+.boxes-stage{
+  position:relative;width:100%;max-width:700px;margin:0 auto;
+  height:320px;
+}
+@media(min-width:640px){.boxes-stage{height:420px;}}
+.fbox{
   position:absolute;
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,.18)) drop-shadow(0 8px 20px rgba(0,0,0,.12));
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1),filter .4s;
-  transform-style:preserve-3d;cursor:pointer;
+  filter:drop-shadow(0 32px 64px rgba(0,0,0,.13)) drop-shadow(0 8px 24px rgba(0,0,0,.09));
+  transition:filter .4s,transform .4s;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;
+  cursor:pointer;
 }
-.box-float:hover{
-  filter:drop-shadow(0 40px 80px rgba(0,0,0,.28)) drop-shadow(0 10px 30px rgba(0,0,0,.18));
+.fbox img{display:block;width:100%;height:auto;object-fit:contain;}
+.fbox:hover{filter:drop-shadow(0 44px 80px rgba(0,0,0,.22)) drop-shadow(0 12px 32px rgba(0,0,0,.14));}
+.fb1{width:170px;top:0;left:5%;animation:fb1 5.2s ease-in-out infinite;}
+.fb2{width:160px;top:30px;left:calc(25% - 20px);animation:fb2 6.1s ease-in-out infinite;}
+.fb3{width:160px;top:160px;left:15%;animation:fb3 5.7s ease-in-out infinite;}
+.fb4{width:150px;top:180px;left:calc(40% - 10px);animation:fb4 4.9s ease-in-out infinite;}
+@media(min-width:640px){
+  .fb1{width:220px;top:0;left:8%;}
+  .fb2{width:205px;top:40px;left:30%;}
+  .fb3{width:205px;top:210px;left:14%;}
+  .fb4{width:190px;top:235px;left:42%;}
 }
-.box-float img{width:100%;height:100%;object-fit:contain;}
-.bf-jabir{width:195px;top:10px;left:0;animation:floatA 5s ease-in-out infinite;}
-.bf-synth{width:185px;top:55px;left:140px;animation:floatB 6s ease-in-out infinite;}
-.bf-wash{width:185px;top:200px;left:10px;animation:floatC 5.5s ease-in-out infinite;}
-.bf-mise{width:175px;top:230px;left:175px;animation:floatD 4.8s ease-in-out infinite;}
-@keyframes floatA{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-16px) rotate(0deg);}}
-@keyframes floatB{0%,100%{transform:translateY(0) rotate(2deg);}50%{transform:translateY(-12px) rotate(0deg);}}
-@keyframes floatC{0%,100%{transform:translateY(0) rotate(1deg);}50%{transform:translateY(-18px) rotate(-1deg);}}
-@keyframes floatD{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-14px) rotate(1deg);}}
-.box-float:hover{animation-play-state:paused;}
+@keyframes fb1{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-18px) rotate(-1deg);}}
+@keyframes fb2{0%,100%{transform:translateY(0) rotate(2deg);}50%{transform:translateY(-14px) rotate(0deg);}}
+@keyframes fb3{0%,100%{transform:translateY(0) rotate(1deg);}50%{transform:translateY(-20px) rotate(-1deg);}}
+@keyframes fb4{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-16px) rotate(1deg);}}
+.fbox:hover{animation-play-state:paused;}
 
-/* ══════════════════════════════
-   MARQUEE STRIP
-   ══════════════════════════════ */
-.marquee-strip{
-  background:var(--charcoal);color:#fff;
-  padding:14px 0;overflow:hidden;position:relative;z-index:1;
+/* HERO SCROLL CUE */
+.scroll-cue{
+  margin-top:60px;display:flex;flex-direction:column;align-items:center;gap:6px;
+  opacity:.4;transition:opacity .3s;
 }
-.marquee-track{display:flex;gap:48px;animation:marquee 25s linear infinite;white-space:nowrap;}
-.marquee-item{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.12em;display:flex;align-items:center;gap:16px;color:rgba(255,255,255,.7);}
-.marquee-item span{color:var(--teal);}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.scroll-cue:hover{opacity:.7;}
+.scroll-cue-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--black),transparent);animation:scline 2s ease infinite;}
+.scroll-cue-label{font-size:11px;color:var(--mid);letter-spacing:.1em;text-transform:uppercase;}
+@keyframes scline{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-/* ══════════════════════════════
-   GAMES — FULL SCREEN PANELS
-   ══════════════════════════════ */
-.game-panel{
-  min-height:100vh;display:flex;align-items:stretch;
-  position:relative;overflow:hidden;
+/* MARQUEE */
+.marquee{
+  background:var(--black);overflow:hidden;padding:14px 0;
+  border-top:1px solid rgba(255,255,255,.08);
 }
-.gp-img-side{
-  flex:1;position:relative;overflow:hidden;min-height:50vh;
+.marquee-track{display:flex;gap:0;animation:mq 30s linear infinite;white-space:nowrap;}
+.marquee-track:hover{animation-play-state:paused;}
+.mq-item{
+  display:inline-flex;align-items:center;gap:20px;padding:0 30px;
+  font-size:13px;color:rgba(255,255,255,.45);letter-spacing:.06em;
+  font-weight:500;
 }
-.gp-img-side img{
+.mq-item b{color:rgba(255,255,255,.85);font-weight:600;}
+.mq-sep{color:rgba(255,255,255,.2);}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* GAME FEATURE SECTIONS — Apple "big feature" style */
+.feature{
+  display:grid;grid-template-columns:1fr;
+  gap:0;min-height:80vh;
+  border-top:1px solid var(--border);
+}
+@media(min-width:768px){
+  .feature{grid-template-columns:1fr 1fr;min-height:600px;}
+  .feature.flip .feat-img{order:2;}
+  .feature.flip .feat-txt{order:1;}
+}
+.feat-img{
+  position:relative;overflow:hidden;background:var(--light);
+  min-height:50vw;max-height:700px;
+}
+@media(min-width:768px){.feat-img{min-height:unset;max-height:unset;}}
+.feat-img img{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center;
-  transition:transform 8s ease;
-  transform-origin:center;
+  transition:transform 6s ease;transform:scale(1.0);
 }
-.game-panel:hover .gp-img-side img{transform:scale(1.06);}
-.gp-img-overlay{position:absolute;inset:0;pointer-events:none;}
-.gp-text-side{
-  flex:1;display:flex;flex-direction:column;justify-content:center;
-  padding:60px 48px;background:#fff;position:relative;z-index:2;
+.feature:hover .feat-img img{transform:scale(1.04);}
+.feat-img-tint{position:absolute;inset:0;}
+.feat-txt{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:56px 40px;background:#fff;
 }
-.gp-num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--border);margin-bottom:10px;}
-.gp-title{font-family:'Cinzel',serif;font-size:clamp(36px,5vw,68px);font-weight:900;line-height:.86;letter-spacing:.04em;margin-bottom:14px;}
-.gp-subtitle{font-size:14px;font-style:italic;color:var(--soft);margin-bottom:22px;letter-spacing:.04em;}
-.gp-desc{font-size:15px;color:var(--soft);line-height:1.9;margin-bottom:28px;max-width:480px;}
-/* Stat pills */
-.gp-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;}
-.gp-stat{
-  padding:7px 14px;border-radius:20px;
-  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-  border:1px solid var(--border);background:var(--offwhite);color:var(--soft);
-  transition:all .3s;
+@media(min-width:768px){.feat-txt{padding:80px 60px;}}
+.feat-game-num{
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--border);margin-bottom:10px;
 }
-.gp-stat:hover{border-color:var(--teal);color:var(--teal);background:rgba(0,201,177,.06);}
-/* Bullet features */
-.gp-features{list-style:none;margin-bottom:32px;display:flex;flex-direction:column;gap:10px;}
-.gp-feature{display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--mid);}
-.gp-feature-dot{
-  width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:1px;
-  display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;
-  transform-style:preserve-3d;transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+.feat-title{
+  font-size:clamp(38px,5vw,64px);font-weight:700;
+  letter-spacing:-.04em;line-height:1.02;margin-bottom:10px;
 }
-.gp-feature:hover .gp-feature-dot{transform:perspective(200px) rotateX(-15deg) rotateY(10deg) scale(1.1);}
-/* Progress bar */
-.gp-progress{margin-bottom:28px;}
-.gp-prog-row{display:flex;justify-content:space-between;margin-bottom:6px;}
-.gp-prog-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);}
-.gp-prog-stage{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;}
-.gp-prog-track{height:4px;background:var(--border);border-radius:2px;}
-.gp-prog-fill{height:100%;border-radius:2px;width:0;transition:width 2s cubic-bezier(.16,1,.3,1);}
-/* Card flip hover detail */
-.gp-card-preview{
-  position:relative;perspective:800px;cursor:pointer;
-  width:120px;flex-shrink:0;
+.feat-subtitle{font-size:15px;color:var(--mid);font-style:italic;margin-bottom:20px;}
+.feat-desc{font-size:16px;color:var(--mid);line-height:1.75;margin-bottom:24px;max-width:460px;}
+/* Stats row */
+.feat-stats{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:24px;}
+.feat-stat{display:flex;flex-direction:column;gap:2px;}
+.fs-n{font-size:22px;font-weight:700;letter-spacing:-.03em;color:var(--black);}
+.fs-l{font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;}
+/* Bullets */
+.feat-bullets{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.feat-bullet{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14px;color:var(--mid);line-height:1.55;
 }
-.gp-card-inner{
-  width:120px;height:168px;position:relative;
-  transform-style:preserve-3d;transition:transform .7s cubic-bezier(.34,1.56,.64,1);
-}
-.gp-card-preview:hover .gp-card-inner{transform:perspective(800px) rotateY(180deg);}
-.gp-card-face,.gp-card-back{
-  position:absolute;inset:0;border-radius:10px;
-  backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.15);
-}
-.gp-card-face img,.gp-card-back img{width:100%;height:100%;object-fit:cover;}
-.gp-card-back{transform:rotateY(180deg);background:var(--charcoal);display:flex;align-items:center;justify-content:center;padding:12px;text-align:center;}
-.gp-card-back-text{font-family:'Cinzel',serif;font-size:10px;color:#fff;line-height:1.5;}
-/* Alt layout */
-.game-panel.alt .gp-text-side{order:-1;}
-
-/* ══════════════════════════════
-   DETAIL PHOTOS — between panels
-   ══════════════════════════════ */
-.detail-strip{
-  position:relative;height:500px;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-}
-.detail-strip-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;}
-.detail-strip-ov{position:absolute;inset:0;background:rgba(0,0,0,.45);}
-.detail-strip-content{position:relative;z-index:2;text-align:center;color:#fff;padding:0 24px;}
-.detail-strip-content h3{font-family:'Cinzel',serif;font-size:clamp(24px,5vw,52px);font-weight:700;margin-bottom:12px;}
-.detail-strip-content p{font-size:16px;opacity:.75;max-width:500px;margin:0 auto;}
-/* Parallax via JS class */
-.parallax-img{transform:translateY(0);transition:transform 0s linear;}
-
-/* ══════════════════════════════
-   ABOUT
-   ══════════════════════════════ */
-#about{background:var(--offwhite);}
-.about-grid{display:grid;grid-template-columns:1fr;gap:60px;align-items:center;}
-.about-lifestyle{
-  position:relative;border-radius:20px;overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,.12);
-}
-.about-lifestyle img{width:100%;height:400px;object-fit:cover;}
-.about-lifestyle-badge{
-  position:absolute;bottom:20px;left:20px;
-  background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
-  border-radius:12px;padding:14px 18px;
-  box-shadow:0 8px 30px rgba(0,0,0,.15);
-}
-.alb-num{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--charcoal);line-height:1;}
-.alb-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);}
-/* Designers */
-.designers{display:flex;flex-direction:column;gap:16px;margin-top:32px;}
-.d-card{
-  display:flex;gap:0;border-radius:14px;overflow:hidden;
-  box-shadow:0 4px 20px rgba(0,0,0,.07);border:1px solid var(--border);
-  transform-style:preserve-3d;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s;
-  position:relative;
-}
-.d-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal);}
-.d-card:hover{transform:perspective(800px) rotateX(-2deg) translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.12);}
-.d-photo{width:88px;height:110px;object-fit:cover;object-position:center top;flex-shrink:0;}
-.d-info{padding:16px 18px;flex:1;background:#fff;}
-.d-name{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--charcoal);margin-bottom:3px;}
-.d-role{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;}
-.d-affil{font-size:11px;color:var(--soft);font-style:italic;margin-bottom:7px;}
-.d-bio{font-size:12px;color:var(--soft);line-height:1.65;}
-/* Pillars */
-.pillars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px;}
-.pillar{
-  padding:18px 16px;border-radius:12px;border:1px solid var(--border);
-  text-align:center;background:#fff;
-  transform-style:preserve-3d;transition:all .4s cubic-bezier(.16,1,.3,1);
-}
-.pillar:hover{border-color:var(--teal);transform:perspective(600px) rotateX(-6deg) rotateY(3deg) translateY(-4px);box-shadow:0 16px 40px rgba(0,201,177,.1);}
-.pillar-icon{font-size:28px;display:block;margin-bottom:10px;transition:transform .4s;}
-.pillar:hover .pillar-icon{transform:scale(1.15);}
-.pillar-name{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.06em;color:var(--charcoal);margin-bottom:4px;}
-.pillar-desc{font-size:11px;color:var(--soft);line-height:1.55;}
-
-/* ══════════════════════════════
-   PUBLISHERS
-   ══════════════════════════════ */
-.pub-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:40px;}
-.pub-enq{
-  display:flex;align-items:center;gap:16px;padding:18px 22px;
-  border-radius:12px;border:1.5px solid var(--border);
-  background:#fff;transition:all .35s cubic-bezier(.16,1,.3,1);
-  cursor:pointer;position:relative;overflow:hidden;
-  transform-style:preserve-3d;
-}
-.pub-enq::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;border-radius:1.5px;}
-.pub-enq:hover{transform:perspective(600px) rotateX(-2deg) translateX(4px) translateY(-2px);box-shadow:0 12px 36px rgba(0,0,0,.1);}
-.pe-jabir::before{background:var(--jabir);}.pe-jabir:hover{border-color:rgba(232,137,12,.35);}
-.pe-synth::before{background:var(--synth);}.pe-synth:hover{border-color:rgba(34,197,94,.35);}
-.pe-wash::before{background:var(--wash);}.pe-wash:hover{border-color:rgba(59,130,246,.35);}
-.pe-mise::before{background:var(--mise);}.pe-mise:hover{border-color:rgba(201,168,122,.35);}
-.pe-icon{font-size:26px;flex-shrink:0;}
-.pe-body{flex:1;}
-.pe-name{font-family:'Cinzel',serif;font-size:15px;color:var(--charcoal);margin-bottom:2px;}
-.pe-act{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;}
-.pe-arrow{font-size:18px;color:var(--border);transition:transform .25s,color .25s;flex-shrink:0;}
-.pub-enq:hover .pe-arrow{transform:translateX(5px);color:var(--teal);}
-
-/* offer list */
-.offer-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.offer-item{
-  display:flex;align-items:center;gap:14px;padding:14px 18px;
-  border:1px solid var(--border);border-radius:10px;background:#fff;font-size:14px;color:var(--mid);
-  transform-style:preserve-3d;transition:all .35s cubic-bezier(.16,1,.3,1);
-}
-.offer-item:hover{border-color:var(--teal);transform:perspective(600px) rotateX(-3deg) translateY(-3px);box-shadow:0 10px 28px rgba(0,201,177,.08);}
-.offer-bullet{
-  width:28px;height:28px;border-radius:8px;background:var(--charcoal);
+.feat-bullet-icon{
+  width:24px;height:24px;border-radius:8px;flex-shrink:0;margin-top:0;
   display:flex;align-items:center;justify-content:center;font-size:12px;
-  flex-shrink:0;color:#fff;
-  transform-style:preserve-3d;transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
 }
-.offer-item:hover .offer-bullet{transform:perspective(200px) rotateX(-12deg) rotateY(8deg) scale(1.1);}
+.feat-bullet:hover .feat-bullet-icon{transform:scale(1.15) rotate(-5deg);}
+.feat-bullet strong{color:var(--black);}
+/* Progress */
+.feat-progress{margin-bottom:24px;}
+.fp-label{display:flex;justify-content:space-between;margin-bottom:6px;}
+.fp-key{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);}
+.fp-val{font-size:11px;font-weight:600;letter-spacing:.06em;}
+.fp-track{height:3px;background:var(--border);border-radius:2px;}
+.fp-fill{height:100%;border-radius:2px;width:0;transition:width 1.8s cubic-bezier(.25,1,.5,1);}
+/* Buttons */
+.feat-btns{display:flex;gap:10px;flex-wrap:wrap;}
 
-/* ══════════════════════════════
-   CONTACT FORM
-   ══════════════════════════════ */
-.ch-step-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);display:block;margin-bottom:14px;}
-.ch-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;}
+/* FULL-BLEED DETAIL — Apple "cinematic" strip */
+.cin-strip{
+  position:relative;height:480px;overflow:hidden;
+  border-top:1px solid var(--border);
+}
+.cin-bg{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  transition:transform 0s linear;
+}
+.cin-tint{position:absolute;inset:0;background:rgba(0,0,0,.42);}
+.cin-body{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  color:#fff;padding:0 24px;z-index:2;
+}
+.cin-title{font-size:clamp(28px,5vw,52px);font-weight:700;letter-spacing:-.04em;line-height:1.1;margin-bottom:10px;}
+.cin-sub{font-size:17px;opacity:.7;max-width:520px;margin:0 auto;}
+
+/* ABOUT */
+#about{background:var(--light);}
+.about-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;}
+@media(min-width:768px){.about-grid{grid-template-columns:1fr 1fr;gap:80px;}}
+.about-photo-wrap{border-radius:24px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.1);}
+.about-photo-wrap img{width:100%;height:420px;object-fit:cover;object-position:center top;}
+.about-quote{
+  font-size:clamp(20px,3vw,28px);font-weight:600;letter-spacing:-.03em;
+  line-height:1.35;color:var(--black);margin-bottom:24px;
+}
+.about-quote em{color:var(--teal);font-style:normal;}
+.about-body{font-size:16px;color:var(--mid);line-height:1.8;margin-bottom:24px;}
+/* Designer pills */
+.designers{display:flex;flex-direction:column;gap:12px;margin-top:32px;}
+.d-pill{
+  display:flex;align-items:center;gap:16px;
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  padding:14px 18px;
+  transition:box-shadow .3s,transform .3s;
+}
+.d-pill:hover{box-shadow:0 12px 40px rgba(0,0,0,.08);transform:translateY(-2px);}
+.d-photo{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;}
+.d-name{font-size:15px;font-weight:600;color:var(--black);letter-spacing:-.02em;}
+.d-role{font-size:12px;color:var(--teal);font-weight:500;margin:2px 0;}
+.d-affil{font-size:12px;color:var(--mid);}
+/* Pillars grid */
+.pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:32px;}
+@media(max-width:480px){.pillars{grid-template-columns:1fr 1fr;}}
+.pillar{
+  background:#fff;border:1px solid var(--border);border-radius:14px;
+  padding:18px 14px;text-align:center;
+  transition:box-shadow .3s,transform .3s;
+}
+.pillar:hover{box-shadow:0 10px 32px rgba(0,0,0,.07);transform:translateY(-3px);}
+.pi-icon{font-size:24px;margin-bottom:8px;}
+.pi-name{font-size:13px;font-weight:600;color:var(--black);margin-bottom:3px;}
+.pi-desc{font-size:11px;color:var(--mid);line-height:1.5;}
+
+/* PUBLISHERS */
+.pub-enq-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:32px;}
+@media(min-width:640px){.pub-enq-grid{grid-template-columns:1fr 1fr;}}
+.pub-enq{
+  display:flex;align-items:center;gap:14px;
+  background:#fff;border:1px solid var(--border);border-radius:14px;
+  padding:16px 20px;cursor:pointer;
+  transition:box-shadow .25s,transform .25s,border-color .25s;
+  position:relative;overflow:hidden;
+}
+.pub-enq::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:0 2px 2px 0;
+}
+.pub-enq:hover{box-shadow:0 10px 36px rgba(0,0,0,.09);transform:translateY(-2px);}
+.pe-j::before{background:var(--jabir);}.pe-j:hover{border-color:rgba(232,137,12,.3);}
+.pe-s::before{background:var(--synth);}.pe-s:hover{border-color:rgba(34,197,94,.3);}
+.pe-w::before{background:var(--wash);}.pe-w:hover{border-color:rgba(59,130,246,.3);}
+.pe-m::before{background:var(--mise);}.pe-m:hover{border-color:rgba(201,168,122,.3);}
+.pe-icon{font-size:24px;}
+.pe-name{font-size:15px;font-weight:600;color:var(--black);margin-bottom:1px;}
+.pe-act{font-size:11px;color:var(--mid);}
+.pe-arr{margin-left:auto;font-size:18px;color:var(--border);transition:transform .2s,color .2s;}
+.pub-enq:hover .pe-arr{transform:translateX(4px);color:var(--teal);}
+/* Offer items */
+.offer-grid{display:grid;grid-template-columns:1fr;gap:8px;}
+@media(min-width:640px){.offer-grid{grid-template-columns:1fr 1fr;}}
+.offer-item{
+  display:flex;align-items:center;gap:12px;font-size:14px;color:var(--mid);
+  background:var(--light);border-radius:12px;padding:14px 16px;
+  transition:background .2s;
+}
+.offer-item:hover{background:#eaeaec;}
+.oi-icon{font-size:18px;flex-shrink:0;}
+
+/* CONTACT */
+.ch-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+@media(max-width:480px){
+  .ch-cards{grid-template-columns:1fr;}
+  .ch-card{flex-direction:row;text-align:left;padding:14px 16px;gap:14px;}
+}
 .ch-card{
-  display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 12px 20px;
-  border-radius:14px;background:var(--offwhite);border:1.5px solid var(--border);
-  cursor:pointer;transform-style:preserve-3d;transition:all .4s cubic-bezier(.34,1.56,.64,1);text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  background:var(--light);border:1.5px solid var(--border);border-radius:14px;
+  padding:22px 12px;cursor:pointer;
+  transition:all .3s cubic-bezier(.25,1,.5,1);text-align:center;
 }
-.ch-card:hover{transform:perspective(400px) rotateX(-10deg) rotateY(5deg) translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.1);}
-#card-email:hover{border-color:var(--teal);box-shadow:0 16px 40px rgba(0,201,177,.15);}
-#card-whatsapp:hover{border-color:#25D366;box-shadow:0 16px 40px rgba(37,211,102,.15);}
-#card-telegram:hover{border-color:#2AABEE;box-shadow:0 16px 40px rgba(42,171,238,.15);}
-.ch-card-icon{width:52px;height:52px;border-radius:14px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:transform .3s;}
-.ch-card:hover .ch-card-icon{transform:scale(1.1);}
-.ch-card-name{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--charcoal);}
-.ch-card-desc{font-size:11px;color:var(--soft);line-height:1.5;}
-.ch-card-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;}
-.ch-panel{animation:fadeUp .35s ease both;}
-.ch-back-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:8px;}
-.ch-back{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);background:none;border:none;cursor:pointer;padding:0;transition:color .2s;}
-.ch-back:hover{color:var(--teal);}
-.ch-active-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;border:1px solid;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;}
-.ch-send-btn{
-  width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
-  padding:14px 20px;border-radius:8px;border:none;cursor:pointer;
-  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
-  font-weight:600;transform-style:preserve-3d;transition:all .4s cubic-bezier(.34,1.56,.64,1);margin-top:4px;
+.ch-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.1);}
+#cc-email:hover{border-color:var(--teal);}
+#cc-wa:hover{border-color:#25D366;}
+#cc-tg:hover{border-color:#2AABEE;}
+.ch-card-ico{
+  width:48px;height:48px;border-radius:12px;border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  background:#fff;transition:transform .3s;
 }
-.ch-send-btn:hover{transform:perspective(400px) rotateX(-8deg) translateY(-2px);}
-.ch-send-btn:active{transform:perspective(400px) rotateX(4deg);transition-duration:.1s;}
+.ch-card:hover .ch-card-ico{transform:scale(1.1);}
+.ch-card-name{font-size:14px;font-weight:600;color:var(--black);}
+.ch-card-desc{font-size:11px;color:var(--mid);}
+.ch-card-tag{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+.ch-panel{animation:fadeUp .3s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ch-back{
+  background:none;border:none;cursor:pointer;font-size:13px;color:var(--mid);
+  display:flex;align-items:center;gap:5px;padding:0;margin-bottom:16px;
+  transition:color .15s;
+}
+.ch-back:hover{color:var(--black);}
+.ch-badge{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 12px;
+  border-radius:20px;border:1px solid;font-size:11px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;float:right;
+}
+.form-label{display:block;font-size:12px;font-weight:500;color:var(--mid);margin-bottom:6px;letter-spacing:.04em;}
 .form-input,.form-textarea,.form-select{
-  width:100%;background:#fff;border:1.5px solid var(--border);border-radius:8px;
-  color:var(--charcoal);font-family:'Inter',sans-serif;font-size:14px;
-  padding:12px 16px;outline:none;transition:border-color .25s,box-shadow .25s;
+  width:100%;background:#fff;border:1.5px solid var(--border);border-radius:10px;
+  color:var(--black);font-size:15px;padding:11px 14px;outline:none;
+  transition:border-color .2s,box-shadow .2s;font-family:inherit;
 }
-.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,201,177,.1);}
+.form-input:focus,.form-textarea:focus,.form-select:focus{
+  border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,201,177,.12);
+}
 .form-input::placeholder,.form-textarea::placeholder{color:var(--border);}
 .form-textarea{resize:vertical;min-height:100px;}
-.form-label{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);margin-bottom:6px;}
-.form-group{margin-bottom:14px;}
+.form-select option{background:#fff;}
+.form-row{margin-bottom:14px;}
 .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
-.form-status{display:none;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:10px 14px;border-radius:8px;margin-top:10px;}
+@media(max-width:480px){.form-row-2{grid-template-columns:1fr;}}
+.form-status{display:none;font-size:13px;padding:10px 14px;border-radius:10px;margin-top:10px;}
 .form-status.ok{display:block;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);color:#16a34a;}
 .form-status.er{display:block;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);color:#dc2626;}
-/* Contact quick links */
-.c-links{display:flex;flex-direction:column;gap:4px;margin-top:20px;}
+.ch-send{
+  width:100%;padding:13px;border:none;border-radius:10px;cursor:pointer;
+  font-size:15px;font-weight:600;font-family:inherit;
+  transition:all .2s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.ch-send:hover{transform:scale(1.01);filter:brightness(1.05);}
+.ch-send:active{transform:scale(.99);}
+.c-links{display:flex;flex-direction:column;gap:8px;margin-top:24px;}
 .c-link{
   display:flex;align-items:center;gap:12px;padding:12px 16px;
-  border:1px solid var(--border);border-radius:10px;background:#fff;
-  transform-style:preserve-3d;transition:all .35s cubic-bezier(.16,1,.3,1);
+  background:var(--light);border-radius:12px;font-size:14px;
+  transition:background .2s;
 }
-.c-link:hover{border-color:var(--teal);transform:perspective(400px) rotateX(-3deg) translateY(-2px);box-shadow:0 8px 24px rgba(0,201,177,.1);}
-.c-ico{width:32px;height:32px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
-.c-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--soft);margin-bottom:1px;}
-.c-val{font-size:13px;font-weight:500;color:var(--charcoal);}
+.c-link:hover{background:#eaeaec;}
+.cl-ico{font-size:18px;flex-shrink:0;}
+.cl-lbl{font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:1px;}
+.cl-val{font-size:13px;font-weight:500;color:var(--black);}
 
-/* ══════════════════════════════
-   NEWSLETTER
-   ══════════════════════════════ */
-#newsletter{background:var(--charcoal);color:#fff;}
-.nl-wrap{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;}
-.nl-title{font-family:'Cinzel',serif;font-size:clamp(28px,5vw,52px);font-weight:700;line-height:.92;margin-bottom:14px;}
-.nl-desc{font-size:15px;color:rgba(255,255,255,.55);line-height:1.85;max-width:480px;}
-.nl-perks{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:10px;}
-.nl-perk{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.6);}
-.nl-perk-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;}
-.nl-form-box{
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-  border-radius:20px;padding:36px 32px;
-}
-.nl-form-title{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;}
-.nl-form-sub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:22px;}
+/* NEWSLETTER */
+#newsletter{background:var(--black);}
+.nl-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;}
+@media(min-width:768px){.nl-grid{grid-template-columns:1fr 1fr;gap:80px;}}
+.nl-title{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1.05;color:#fff;margin-bottom:16px;}
+.nl-sub{font-size:16px;color:rgba(255,255,255,.5);line-height:1.75;max-width:440px;}
+.nl-perks{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:10px;}
+.nl-perk{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.55);}
+.nl-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0;}
+.nl-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;}
+.nl-box-title{font-size:20px;font-weight:700;color:#fff;letter-spacing:-.03em;margin-bottom:4px;}
+.nl-box-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;}
 .nl-inp{
-  width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
-  border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:14px;
-  padding:12px 16px;outline:none;transition:border-color .25s,box-shadow .25s;margin-bottom:10px;
+  width:100%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);
+  border-radius:10px;color:#fff;font-size:15px;padding:11px 14px;outline:none;
+  margin-bottom:10px;transition:border-color .2s,box-shadow .2s;font-family:inherit;
 }
-.nl-inp:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,201,177,.15);}
+.nl-inp:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,201,177,.18);}
 .nl-inp::placeholder{color:rgba(255,255,255,.25);}
-.nl-note{font-size:11px;color:rgba(255,255,255,.25);margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;line-height:1.6;}
-.nl-status{display:none;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:10px 14px;border-radius:8px;margin-top:10px;}
-.nl-status.ok{display:block;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#4ade80;}
-.nl-status.er{display:block;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;}
+.nl-note{font-size:11px;color:rgba(255,255,255,.2);margin-top:12px;line-height:1.6;}
+.nl-stat{display:none;font-size:13px;padding:10px 14px;border-radius:10px;margin-top:10px;}
+.nl-stat.ok{display:block;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#4ade80;}
+.nl-stat.er{display:block;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#f87171;}
 
-/* ══════════════════════════════
-   FAQ
-   ══════════════════════════════ */
-#faq{background:var(--offwhite);}
-.faq-game-block{margin-bottom:52px;}
-.faq-game-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-.faq-game-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;animation:pulse 2.5s ease infinite;}
-.faq-game-name{font-family:'Cinzel',serif;font-size:clamp(18px,3vw,26px);font-weight:700;color:var(--charcoal);}
-.faq-list{display:flex;flex-direction:column;gap:4px;}
-.faq-item{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;transition:border-color .3s,box-shadow .3s;}
-.faq-item:hover{border-color:rgba(0,201,177,.3);box-shadow:0 4px 20px rgba(0,201,177,.06);}
+/* FAQ */
+.faq-block{margin-bottom:48px;}
+.faq-game-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.fq-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.fq-name{font-size:clamp(18px,3vw,22px);font-weight:700;letter-spacing:-.03em;}
+.faq-list{display:flex;flex-direction:column;gap:2px;}
+.faq-item{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#fff;transition:border-color .2s;}
+.faq-item:hover{border-color:rgba(0,201,177,.3);}
 .faq-q{
-  width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;
-  padding:18px 22px;background:transparent;border:none;cursor:pointer;
-  font-family:'Inter',sans-serif;font-size:14px;font-weight:500;color:var(--charcoal);
-  text-align:left;transform-style:preserve-3d;transition:all .3s;
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 20px;background:transparent;border:none;cursor:pointer;
+  font-size:14px;font-weight:500;color:var(--black);text-align:left;font-family:inherit;
+  transition:background .15s;
 }
-.faq-q:hover{background:rgba(0,201,177,.03);}
-.faq-chevron{
-  width:24px;height:24px;border:1.5px solid var(--border);border-radius:50%;
-  flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  font-size:12px;color:var(--teal);transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .25s,border-color .25s;
+.faq-q:hover{background:rgba(0,0,0,.02);}
+.faq-icon{
+  width:22px;height:22px;border:1.5px solid var(--border);border-radius:50%;
+  flex-shrink:0;font-size:13px;display:flex;align-items:center;justify-content:center;
+  color:var(--mid);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s;
 }
-.faq-item.open .faq-chevron{transform:rotate(180deg);background:var(--teal);border-color:var(--teal);color:#fff;}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1);}
-.faq-item.open .faq-a{max-height:300px;}
-.faq-a-inner{padding:0 22px 18px;font-size:13px;color:var(--soft);line-height:1.8;}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--teal);border-color:var(--teal);color:#fff;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.25,1,.5,1);}
+.faq-item.open .faq-a{max-height:280px;}
+.faq-a-inner{padding:0 20px 16px;font-size:14px;color:var(--mid);line-height:1.75;}
 
-/* ══════════════════════════════
-   FOOTER
-   ══════════════════════════════ */
-footer{
-  background:#fff;border-top:1px solid var(--border);
-  padding:40px 24px;
-}
-.footer-inner{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;}
-.f-brand{display:flex;align-items:center;gap:10px;font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:.18em;color:var(--charcoal);}
-.f-brand img{height:44px;width:44px;object-fit:contain;border-radius:50%;}
-.f-tag{font-family:'Cinzel',serif;font-style:italic;font-size:12px;color:var(--soft);}
-.f-nav{display:flex;gap:20px;list-style:none;flex-wrap:wrap;justify-content:center;}
-.f-nav a{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);transition:color .2s;}
-.f-nav a:hover{color:var(--teal);}
-.f-social{display:flex;gap:10px;}
-.f-social a{
-  width:36px;height:36px;border:1px solid var(--border);border-radius:10px;
+/* FOOTER */
+footer{background:#fff;border-top:1px solid var(--border);padding:40px 0;}
+.foot-inner{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;}
+@media(min-width:768px){.foot-inner{flex-direction:row;justify-content:space-between;text-align:left;}}
+.foot-brand{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--black);}
+.foot-brand img{height:28px;width:28px;border-radius:50%;object-fit:contain;}
+.foot-nav{display:flex;gap:20px;list-style:none;flex-wrap:wrap;justify-content:center;}
+.foot-nav a{font-size:12px;color:var(--mid);transition:color .15s;}
+.foot-nav a:hover{color:var(--black);}
+.foot-social{display:flex;gap:10px;}
+.foot-social a{
+  width:34px;height:34px;border:1px solid var(--border);border-radius:10px;
   display:flex;align-items:center;justify-content:center;font-size:16px;
-  transform-style:preserve-3d;transition:all .4s cubic-bezier(.34,1.56,.64,1);
+  transition:border-color .2s,background .2s;
 }
-.f-social a:hover{border-color:var(--teal);background:rgba(0,201,177,.06);transform:perspective(300px) rotateX(-10deg) rotateY(8deg) translateY(-3px);}
-.f-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--border);}
+.foot-social a:hover{border-color:var(--teal);background:rgba(0,201,177,.06);}
+.foot-copy{font-size:12px;color:var(--border);}
 
-/* ══════════════════════════════
-   GLASS CARD PANEL
-   ══════════════════════════════ */
-.glass-panel{
-  background:#fff;border:1px solid var(--border);border-radius:20px;
-  box-shadow:0 4px 30px rgba(0,0,0,.06);padding:36px;
-  transition:box-shadow .4s;
-}
-.glass-panel:hover{box-shadow:0 16px 60px rgba(0,0,0,.1);}
-
-/* ══════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════ */
-@media(min-width:640px){
-  .hero-grid{grid-template-columns:1fr 1fr;padding:80px 24px 60px;}
-  .about-grid{grid-template-columns:1fr 1fr;}
-  .nl-wrap{grid-template-columns:1fr 1fr;gap:60px;}
-  .pub-grid{grid-template-columns:1fr 1fr;}
-  .ch-cards{grid-template-columns:repeat(3,1fr);}
-}
-@media(min-width:960px){
-  .nav-links{display:flex;}
-  .nav-cta{display:inline-block;}
-  .hamburger{display:none;}
-  .wrap{padding:0 48px;}
-  .section{padding:120px 0;}
-  .game-panel{flex-direction:row;}
-  .game-panel.alt{flex-direction:row;}
-  .gp-img-side,.gp-text-side{flex:1;}
-  .gp-text-side{padding:80px 60px;}
-  .about-grid{gap:80px;}
-  .pillars{grid-template-columns:repeat(3,1fr);}
-  .footer-inner{flex-direction:row;justify-content:space-between;text-align:left;}
-  .f-nav{justify-content:flex-start;}
-}
-@media(min-width:1280px){
-  .wrap{padding:0 64px;}
-  .hero-grid{max-width:1240px;padding:80px 64px 60px;}
-}
-@media(max-width:640px){
-  .hero-boxes{height:380px;}
-  .bf-jabir{width:140px;}
-  .bf-synth{width:130px;left:110px;}
-  .bf-wash{width:130px;}
-  .bf-mise{width:125px;left:130px;}
-  .gp-text-side{padding:40px 24px;}
-  .game-panel{flex-direction:column;}
-  .gp-img-side{min-height:55vw;max-height:340px;}
-  .form-row-2{grid-template-columns:1fr;}
-  .ch-cards{grid-template-columns:1fr;}
-  .ch-card{flex-direction:row;text-align:left;gap:14px;padding:14px 16px;}
-  .ch-card-tag{margin-left:auto;}
-}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+/* CUSTOM CURSOR */
+*{cursor:none!important;}
+#cur{position:fixed;width:10px;height:10px;background:var(--teal);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s;mix-blend-mode:multiply;}
+#cur2{position:fixed;width:36px;height:36px;border:1.5px solid var(--teal);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:width .3s,height .3s,opacity .3s;}
+body.hovering #cur{width:16px;height:16px;}
+body.hovering #cur2{width:52px;height:52px;opacity:.2;}
 </style>
 </head>
 <body>
+<div id="cur"></div><div id="cur2"></div>
 
-<!-- MOBILE NAV -->
+<!-- MOBILE MENU -->
 <div class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="mT()">✕</button>
   <a href="#games" onclick="mT()">Games</a>
-  <a href="#about" onclick="mT()">About</a>
+  <a href="#about" onclick="mT()">Studio</a>
   <a href="#publishers" onclick="mT()">Publishers</a>
   <a href="#faq" onclick="mT()">FAQ</a>
   <a href="#newsletter" onclick="mT()">Newsletter</a>
   <a href="#contact" onclick="mT()">Contact</a>
-  <a href="https://instagram.com/catalyst.boardgames" target="_blank" onclick="mT()">Instagram</a>
 </div>
 
 <!-- NAV -->
 <nav class="nav" id="siteNav">
   <a href="index.html" class="nav-logo">
-    <img src="catalyst_logo.png" alt="Catalyst Board Games">
-    CATALYST
+    <img src="catalyst_logo.png" alt="Catalyst">
+    <span class="nav-logo-text">Catalyst</span>
   </a>
   <ul class="nav-links">
     <li><a href="#games">Games</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="#about">Studio</a></li>
     <li><a href="#publishers">Publishers</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#newsletter">Newsletter</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="https://instagram.com/catalyst.boardgames" target="_blank">Instagram</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Get in Touch</a>
+  <a href="#contact" class="nav-cta-btn">Get in Touch</a>
   <button class="hamburger" onclick="mT()"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
-  <canvas id="hero-canvas"></canvas>
-  <div class="hero-grid">
-    <div>
-      <div class="hero-label rv"><span class="hero-label-dot"></span><span>Oxford Science Game Studio</span></div>
-      <h1 class="hero-h rv delay-1">
-        CATALYST<br>
-        <span class="teal-line">BOARD GAMES</span>
-      </h1>
-      <p class="hero-sub rv delay-2">Strategy · Science · Sustainability</p>
-      <p class="hero-p rv delay-3">Four science-inspired strategy games grounded in real chemistry, ecology, fashion, and materials science. Designed in Oxford. Seeking publishers worldwide.</p>
-      <div class="hero-btns rv delay-4">
-        <a href="#games" class="tbtn tbtn-dark">Explore Games</a>
-        <a href="#contact" class="tbtn tbtn-outline">Contact Us</a>
-        <a href="https://instagram.com/catalyst.boardgames" target="_blank" class="tbtn tbtn-copper">Instagram</a>
-      </div>
-      <div class="hero-stats rv delay-5">
-        <div><div class="hero-stat-n">4</div><div class="hero-stat-l">Games</div></div>
-        <div><div class="hero-stat-n">2</div><div class="hero-stat-l">Publisher Ready</div></div>
-        <div><div class="hero-stat-n">Oxford</div><div class="hero-stat-l">UK Studio</div></div>
-      </div>
-    </div>
-    <div class="hero-boxes rv-r delay-2">
-      <div class="box-float bf-jabir" id="bfJ"><img src="jabir_box.png" alt="Jabir: The Perfumer"></div>
-      <div class="box-float bf-synth" id="bfS"><img src="synthelyst_box.png" alt="Synthelyst"></div>
-      <div class="box-float bf-wash" id="bfW"><img src="washwheel_box.png" alt="WashWheel"></div>
-      <div class="box-float bf-mise" id="bfM"><img src="mise_box.png" alt="Mise en Scène"></div>
-    </div>
+  <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Oxford Science Game Studio</div>
+  <h1 class="hero-h rv">
+    Science meets<br>
+    <span class="line2">board gaming.</span>
+  </h1>
+  <p class="hero-sub rv d1">Four strategy games grounded in real chemistry, ecology, fashion, and materials science. Designed in Oxford. Seeking publishers.</p>
+  <div class="hero-btns rv d2">
+    <a href="#games" class="apple-btn ab-dark">Explore the games</a>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Catalyst%20Board%20Games" class="apple-btn ab-outline">Publisher enquiry</a>
   </div>
-  <a href="#games" style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:6px;animation:bounceDown 2s ease infinite;">
-    <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--soft);">Scroll</span>
-    <span style="font-size:18px;color:var(--teal);">↓</span>
-  </a>
+  <div class="boxes-stage rv d3">
+    <div class="fbox fb1" id="bJ"><img src="jabir_box.png" alt="Jabir: The Perfumer"></div>
+    <div class="fbox fb2" id="bS"><img src="synthelyst_box.png" alt="Synthelyst"></div>
+    <div class="fbox fb3" id="bW"><img src="washwheel_box.png" alt="WashWheel"></div>
+    <div class="fbox fb4" id="bM"><img src="mise_box.png" alt="Mise en Scène"></div>
+  </div>
+  <div class="scroll-cue"><span class="scroll-cue-label">Scroll</span><div class="scroll-cue-line"></div></div>
 </section>
-<style>@keyframes bounceDown{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}</style>
 
 <!-- MARQUEE -->
-<div class="marquee-strip">
+<div class="marquee">
   <div class="marquee-track">
-    <div class="marquee-item">Jabir: The Perfumer <span>·</span></div>
-    <div class="marquee-item">Synthelyst <span>·</span></div>
-    <div class="marquee-item">WashWheel <span>·</span></div>
-    <div class="marquee-item">Mise en Scène <span>·</span></div>
-    <div class="marquee-item">Oxford Science Studio <span>·</span></div>
-    <div class="marquee-item">Seeking Publisher <span>·</span></div>
-    <div class="marquee-item">Jabir: The Perfumer <span>·</span></div>
-    <div class="marquee-item">Synthelyst <span>·</span></div>
-    <div class="marquee-item">WashWheel <span>·</span></div>
-    <div class="marquee-item">Mise en Scène <span>·</span></div>
-    <div class="marquee-item">Oxford Science Studio <span>·</span></div>
-    <div class="marquee-item">Seeking Publisher <span>·</span></div>
+    <span class="mq-item"><b>Jabir: The Perfumer</b><span class="mq-sep">·</span></span>
+    <span class="mq-item"><b>Synthelyst</b><span class="mq-sep">·</span></span>
+    <span class="mq-item"><b>WashWheel</b><span class="mq-sep">·</span></span>
+    <span class="mq-item"><b>Mise en Scène</b><span class="mq-sep">·</span></span>
+    <span class="mq-item">Oxford Studio<span class="mq-sep">·</span></span>
+    <span class="mq-item">Seeking Publisher<span class="mq-sep">·</span></span>
+    <span class="mq-item">Science-Inspired<span class="mq-sep">·</span></span>
+    <span class="mq-item"><b>Jabir: The Perfumer</b><span class="mq-sep">·</span></span>
+    <span class="mq-item"><b>Synthelyst</b><span class="mq-sep">·</span></span>
+    <span class="mq-item"><b>WashWheel</b><span class="mq-sep">·</span></span>
+    <span class="mq-item"><b>Mise en Scène</b><span class="mq-sep">·</span></span>
+    <span class="mq-item">Oxford Studio<span class="mq-sep">·</span></span>
+    <span class="mq-item">Seeking Publisher<span class="mq-sep">·</span></span>
+    <span class="mq-item">Science-Inspired<span class="mq-sep">·</span></span>
   </div>
 </div>
 
 <!-- ═══ GAMES ═══ -->
 <div id="games">
 
-  <!-- JABIR -->
-  <div class="game-panel">
-    <div class="gp-img-side">
-      <img src="jabir_spread.png" alt="Jabir: The Perfumer components" loading="lazy">
-      <div class="gp-img-overlay" style="background:linear-gradient(to right,transparent 70%,#fff 100%)"></div>
+<!-- JABIR -->
+<div class="feature">
+  <div class="feat-img">
+    <img src="jabir_spread.png" alt="Jabir components" loading="lazy">
+    <div class="feat-img-tint" style="background:linear-gradient(to right,transparent 60%,#fff)"></div>
+  </div>
+  <div class="feat-txt">
+    <div class="feat-game-num rv">001 of 004</div>
+    <h2 class="feat-title rv d1" style="color:var(--jabir);">Jabir:<br>The Perfumer</h2>
+    <p class="feat-subtitle rv d1">A Game of Perfumery Chemistry</p>
+    <div class="feat-stats rv d2">
+      <div class="feat-stat"><div class="fs-n">2–6</div><div class="fs-l">Players</div></div>
+      <div class="feat-stat"><div class="fs-n">90–150</div><div class="fs-l">Minutes</div></div>
+      <div class="feat-stat"><div class="fs-n">Heavy</div><div class="fs-l">Weight</div></div>
     </div>
-    <div class="gp-text-side">
-      <div class="gp-num rv">001 / 004</div>
-      <h2 class="gp-title rv delay-1" style="color:var(--jabir);">Jabir:<br>The Perfumer</h2>
-      <p class="gp-subtitle rv delay-1">A Game of Perfumery Chemistry</p>
-      <div class="gp-stats rv delay-2">
-        <span class="gp-stat">2–6 Players</span>
-        <span class="gp-stat">90–150 min</span>
-        <span class="gp-stat">Heavy</span>
-        <span class="gp-stat">Age 14+</span>
-      </div>
-      <p class="gp-desc rv delay-2">Step into the world of a master perfumer. Harvest aromatic botanicals across 6 global regions, extract essences using 4 real chemical methods, and compose fragrances that score across the fragrance pyramid. The first eurogame built on authentic perfumery chemistry.</p>
-      <ul class="gp-features rv delay-3">
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--jabir);">⚗</div><div><strong>41 real botanical extracts</strong> from 6 global harvesting regions</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--jabir);">🔬</div><div><strong>4 extraction methods</strong> — steam, solvent, cold press, enfleurage</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--jabir);">🏆</div><div><strong>Fragrance pyramid scoring</strong> — top, heart, base notes</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--jabir);">📚</div><div><strong>Educational IP</strong> — real science embedded in every mechanic</div></li>
-      </ul>
-      <div class="gp-progress rv delay-3">
-        <div class="gp-prog-row"><span class="gp-prog-lbl">Development</span><span class="gp-prog-stage" style="color:var(--jabir);">Seeking Publisher</span></div>
-        <div class="gp-prog-track"><div class="gp-prog-fill" id="pgJ" style="background:linear-gradient(to right,#7a3800,var(--jabir));"></div></div>
-      </div>
-      <div class="rv delay-4" style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="jabir.html" class="tbtn tbtn-dark" style="background:var(--jabir);box-shadow:0 6px 0 #8a4800;">Explore Jabir →</a>
-        <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer." class="tbtn tbtn-outline">✉ Enquire</a>
-      </div>
+    <p class="feat-desc rv d2">Harvest real botanicals, extract essences using authentic chemistry, and compose masterpiece fragrances. The only eurogame built on perfumery science.</p>
+    <ul class="feat-bullets rv d3">
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(232,137,12,.1);">⚗️</div><div><strong>41 real botanical extracts</strong> from 6 global regions</div></li>
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(232,137,12,.1);">🔬</div><div><strong>4 extraction methods</strong> — steam, solvent, cold press, enfleurage</div></li>
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(232,137,12,.1);">📚</div><div><strong>Full educational IP</strong> — real science in every mechanic</div></li>
+    </ul>
+    <div class="feat-progress rv d3">
+      <div class="fp-label"><span class="fp-key">Development</span><span class="fp-val" style="color:var(--jabir);">Seeking Publisher</span></div>
+      <div class="fp-track"><div class="fp-fill" id="pJ" style="background:var(--jabir);"></div></div>
+    </div>
+    <div class="feat-btns rv d4">
+      <a href="jabir.html" class="apple-btn ab-dark">Learn more</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir" class="apple-btn ab-outline">Enquire</a>
     </div>
   </div>
-
-  <!-- JABIR DETAIL STRIP -->
-  <div class="detail-strip rv-s">
-    <img src="jabir_flask_detail.png" alt="Jabir distillation tokens" class="detail-strip-bg parallax-img" data-speed="0.3" loading="lazy">
-    <div class="detail-strip-ov"></div>
-    <div class="detail-strip-content">
-      <h3>41 Real Botanicals</h3>
-      <p>Every token is a real aromatic species — rose, oud, jasmine, bergamot, vetiver. The science is in the game.</p>
-    </div>
-  </div>
-
-  <!-- SYNTHELYST -->
-  <div class="game-panel alt">
-    <div class="gp-text-side" style="background:var(--offwhite);">
-      <div class="gp-num rv">002 / 004</div>
-      <h2 class="gp-title rv delay-1" style="color:var(--synth);">Synthe-<br>lyst</h2>
-      <p class="gp-subtitle rv delay-1">A Game of Biomaterial Innovation</p>
-      <div class="gp-stats rv delay-2">
-        <span class="gp-stat">2–5 Players</span>
-        <span class="gp-stat">60–90 min</span>
-        <span class="gp-stat">Mid-Heavy</span>
-        <span class="gp-stat">Age 14+</span>
-      </div>
-      <p class="gp-desc rv delay-2">You are CEO of a bioplastics firm in 2035. Build sustainable supply chains, manage energy networks, and resolve environmental crises — before Earth Health hits zero. The only game where everyone can lose together.</p>
-      <ul class="gp-features rv delay-3">
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--synth);">🌿</div><div><strong>5 real bioplastic feedstocks</strong> — corn, sugarcane, potato, milk, algae</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--synth);">⚡</div><div><strong>Energy network building</strong> — solar, wind, hydro, geothermal</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--synth);">🌍</div><div><strong>Earth Health tracker</strong> — shared loss condition for all players</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--synth);">🏭</div><div><strong>5 unique company boards</strong> with asymmetric abilities</div></li>
-      </ul>
-      <div class="gp-progress rv delay-3">
-        <div class="gp-prog-row"><span class="gp-prog-lbl">Development</span><span class="gp-prog-stage" style="color:var(--synth);">Seeking Publisher</span></div>
-        <div class="gp-prog-track"><div class="gp-prog-fill" id="pgS" style="background:linear-gradient(to right,#0a4a22,var(--synth));"></div></div>
-      </div>
-      <div class="rv delay-4" style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="synthelyst.html" class="tbtn tbtn-dark" style="background:var(--synth);box-shadow:0 6px 0 #15803d;">Explore Synthelyst →</a>
-        <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst." class="tbtn tbtn-outline">✉ Enquire</a>
-      </div>
-    </div>
-    <div class="gp-img-side">
-      <img src="synthelyst_spread.png" alt="Synthelyst components" loading="lazy">
-      <div class="gp-img-overlay" style="background:linear-gradient(to left,transparent 70%,var(--offwhite) 100%)"></div>
-    </div>
-  </div>
-
-  <!-- SYNTHELYST DETAIL STRIP -->
-  <div class="detail-strip rv-s">
-    <img src="synthelyst_pellets.png" alt="Bioplastic pellets" class="detail-strip-bg parallax-img" data-speed="0.25" loading="lazy">
-    <div class="detail-strip-ov" style="background:rgba(0,30,0,.5);"></div>
-    <div class="detail-strip-content">
-      <h3>Real Bioplastics Science</h3>
-      <p>Built by a bioplastics R&D researcher — every feedstock, polymer chain, and energy trade-off is scientifically accurate.</p>
-    </div>
-  </div>
-
-  <!-- WASHWHEEL -->
-  <div class="game-panel">
-    <div class="gp-img-side">
-      <img src="washwheel_spread.png" alt="WashWheel components" loading="lazy">
-      <div class="gp-img-overlay" style="background:linear-gradient(to right,transparent 70%,#fff 100%)"></div>
-    </div>
-    <div class="gp-text-side">
-      <div class="gp-num rv">003 / 004</div>
-      <h2 class="gp-title rv delay-1" style="color:var(--wash);">Wash-<br>Wheel</h2>
-      <p class="gp-subtitle rv delay-1">The Fabric Science Game</p>
-      <div class="gp-stats rv delay-2">
-        <span class="gp-stat">2–4 Players</span>
-        <span class="gp-stat">90–120 min</span>
-        <span class="gp-stat">Medium</span>
-        <span class="gp-stat">Age 14+</span>
-      </div>
-      <p class="gp-desc rv delay-2">Run a professional textile laboratory. The rotating Wash Wheel drives a real-time resource market. Match the right detergent chemistry to each garment's fibre profile — or risk damaging valuable pieces and losing points.</p>
-      <ul class="gp-features rv delay-3">
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--wash);">🫧</div><div><strong>Rotating Wash Wheel</strong> — a physical circular card market with 12 slots</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--wash);">🧫</div><div><strong>Real fibre chemistry</strong> — pH, temperature, enzyme compatibility</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--wash);">🔬</div><div><strong>4 specialist roles</strong> — Chemist, Ecologist, Specialist, Innovator</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--wash);">♻️</div><div><strong>Sustainability scoring</strong> — eco choices earn bonus points</div></li>
-      </ul>
-      <div class="gp-progress rv delay-3">
-        <div class="gp-prog-row"><span class="gp-prog-lbl">Development</span><span class="gp-prog-stage" style="color:var(--wash);">In Design</span></div>
-        <div class="gp-prog-track"><div class="gp-prog-fill" id="pgW" style="background:linear-gradient(to right,#1e3a8a,var(--wash));"></div></div>
-      </div>
-      <div class="rv delay-4" style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="washwheel.html" class="tbtn tbtn-dark" style="background:var(--wash);box-shadow:0 6px 0 #1d4ed8;">Explore WashWheel →</a>
-        <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20WashWheel." class="tbtn tbtn-outline">✉ Enquire</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- WASHWHEEL DETAIL STRIP -->
-  <div class="detail-strip rv-s">
-    <img src="washwheel_wheel_detail.png" alt="WashWheel mechanism close-up" class="detail-strip-bg parallax-img" data-speed="0.2" loading="lazy">
-    <div class="detail-strip-ov" style="background:rgba(0,10,40,.55);"></div>
-    <div class="detail-strip-content">
-      <h3>The Wash Wheel</h3>
-      <p>A rotating circular card market — resources move clockwise each round. Timing your acquisition is as critical as your chemistry knowledge.</p>
-    </div>
-  </div>
-
-  <!-- MISE EN SCÈNE -->
-  <div class="game-panel alt">
-    <div class="gp-text-side" style="background:var(--offwhite);">
-      <div class="gp-num rv">004 / 004</div>
-      <h2 class="gp-title rv delay-1" style="color:var(--mise);">Mise en<br>Scène</h2>
-      <p class="gp-subtitle rv delay-1">A Parisian Fashion Card Game</p>
-      <div class="gp-stats rv delay-2">
-        <span class="gp-stat">2–5 Players</span>
-        <span class="gp-stat">45–75 min</span>
-        <span class="gp-stat">Medium</span>
-        <span class="gp-stat">Age 14+</span>
-      </div>
-      <p class="gp-desc rv delay-2">Step into Paris Fashion Week. Draft iconic fashion pieces, build your outfit tableau, and outshine rivals through harmony, audacity, and trend awareness. One bold Statement piece anchors your look — everything else must serve it.</p>
-      <ul class="gp-features rv delay-3">
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--mise);">👗</div><div><strong>80 fashion cards</strong> — tableau building across 6 outfit slots</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--mise);">🎨</div><div><strong>Harmony scoring</strong> — palette, style tag, and season matching</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--mise);">🎭</div><div><strong>Secret Client Cards</strong> — hidden objectives revealed at end game</div></li>
-        <li class="gp-feature"><div class="gp-feature-dot" style="background:var(--mise);">💼</div><div><strong>Brand partnership potential</strong> — luxury fashion house IP</div></li>
-      </ul>
-      <div class="gp-progress rv delay-3">
-        <div class="gp-prog-row"><span class="gp-prog-lbl">Development</span><span class="gp-prog-stage" style="color:var(--mise);">Concepting Phase</span></div>
-        <div class="gp-prog-track"><div class="gp-prog-fill" id="pgM" style="background:linear-gradient(to right,#7c4a1a,var(--mise));"></div></div>
-      </div>
-      <div class="rv delay-4" style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="mise-en-scene.html" class="tbtn tbtn-dark" style="background:var(--mise);box-shadow:0 6px 0 #9a6a3a;">Explore Mise en Scène →</a>
-        <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene." class="tbtn tbtn-outline">✉ Enquire</a>
-      </div>
-    </div>
-    <div class="gp-img-side">
-      <img src="mise_spread.png" alt="Mise en Scène components" loading="lazy" style="object-position:center top;">
-      <div class="gp-img-overlay" style="background:linear-gradient(to left,transparent 70%,var(--offwhite) 100%)"></div>
-    </div>
-  </div>
-
-  <!-- MISE DETAIL STRIP -->
-  <div class="detail-strip rv-s">
-    <img src="mise_cards_detail.png" alt="Mise en Scène fashion cards" class="detail-strip-bg parallax-img" data-speed="0.25" loading="lazy">
-    <div class="detail-strip-ov" style="background:rgba(40,15,0,.45);"></div>
-    <div class="detail-strip-content">
-      <h3>Curate the Season's Most Iconic Look</h3>
-      <p>80 fashion cards. Hidden objectives. One statement piece that changes everything.</p>
-    </div>
-  </div>
-
 </div>
 
+<!-- JABIR CINEMATIC -->
+<div class="cin-strip rv">
+  <img src="jabir_flask_detail.png" class="cin-bg" alt="" loading="lazy" id="cJ">
+  <div class="cin-tint"></div>
+  <div class="cin-body">
+    <h3 class="cin-title">41 Real Botanicals</h3>
+    <p class="cin-sub">Rose, oud, jasmine, bergamot, vetiver — every token is a real aromatic species.</p>
+  </div>
+</div>
+
+<!-- SYNTHELYST -->
+<div class="feature flip">
+  <div class="feat-img">
+    <img src="synthelyst_spread.png" alt="Synthelyst components" loading="lazy">
+    <div class="feat-img-tint" style="background:linear-gradient(to left,transparent 60%,var(--light))"></div>
+  </div>
+  <div class="feat-txt" style="background:var(--light);">
+    <div class="feat-game-num rv">002 of 004</div>
+    <h2 class="feat-title rv d1" style="color:var(--synth);">Synthelyst</h2>
+    <p class="feat-subtitle rv d1">A Game of Biomaterial Innovation</p>
+    <div class="feat-stats rv d2">
+      <div class="feat-stat"><div class="fs-n">2–5</div><div class="fs-l">Players</div></div>
+      <div class="feat-stat"><div class="fs-n">60–90</div><div class="fs-l">Minutes</div></div>
+      <div class="feat-stat"><div class="fs-n">Mid-Heavy</div><div class="fs-l">Weight</div></div>
+    </div>
+    <p class="feat-desc rv d2">You are CEO of a bioplastics firm in 2035. Build sustainable supply chains, manage energy networks, and resolve crises — before Earth Health hits zero.</p>
+    <ul class="feat-bullets rv d3">
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(34,197,94,.1);">🌿</div><div><strong>5 real bioplastic feedstocks</strong> — corn, sugarcane, potato, milk, algae</div></li>
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(34,197,94,.1);">🌍</div><div><strong>Earth Health tracker</strong> — shared loss condition for all players</div></li>
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(34,197,94,.1);">🏭</div><div><strong>5 asymmetric companies</strong> with unique abilities</div></li>
+    </ul>
+    <div class="feat-progress rv d3">
+      <div class="fp-label"><span class="fp-key">Development</span><span class="fp-val" style="color:var(--synth);">Seeking Publisher</span></div>
+      <div class="fp-track"><div class="fp-fill" id="pS" style="background:var(--synth);"></div></div>
+    </div>
+    <div class="feat-btns rv d4">
+      <a href="synthelyst.html" class="apple-btn ab-dark">Learn more</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst" class="apple-btn ab-outline">Enquire</a>
+    </div>
+  </div>
+</div>
+
+<!-- SYNTHELYST CINEMATIC -->
+<div class="cin-strip rv">
+  <img src="synthelyst_pellets.png" class="cin-bg" alt="" loading="lazy" id="cS">
+  <div class="cin-tint" style="background:rgba(0,30,0,.5);"></div>
+  <div class="cin-body">
+    <h3 class="cin-title">Real Bioplastics Science</h3>
+    <p class="cin-sub">Built by a bioplastics R&D researcher — every feedstock and energy trade-off is scientifically accurate.</p>
+  </div>
+</div>
+
+<!-- WASHWHEEL -->
+<div class="feature">
+  <div class="feat-img">
+    <img src="washwheel_spread.png" alt="WashWheel components" loading="lazy">
+    <div class="feat-img-tint" style="background:linear-gradient(to right,transparent 60%,#fff)"></div>
+  </div>
+  <div class="feat-txt">
+    <div class="feat-game-num rv">003 of 004</div>
+    <h2 class="feat-title rv d1" style="color:var(--wash);">WashWheel</h2>
+    <p class="feat-subtitle rv d1">The Fabric Science Game</p>
+    <div class="feat-stats rv d2">
+      <div class="feat-stat"><div class="fs-n">2–4</div><div class="fs-l">Players</div></div>
+      <div class="feat-stat"><div class="fs-n">90–120</div><div class="fs-l">Minutes</div></div>
+      <div class="feat-stat"><div class="fs-n">Medium</div><div class="fs-l">Weight</div></div>
+    </div>
+    <p class="feat-desc rv d2">Run a professional textile lab. The rotating Wash Wheel drives a real-time resource market. Match detergent chemistry to each garment's fibre profile — or risk damaging valuable pieces.</p>
+    <ul class="feat-bullets rv d3">
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(59,130,246,.1);">🫧</div><div><strong>Rotating Wash Wheel</strong> — circular card market, 12 slots</div></li>
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(59,130,246,.1);">🧫</div><div><strong>Real fibre chemistry</strong> — pH, temperature, enzyme compatibility</div></li>
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(59,130,246,.1);">🔬</div><div><strong>4 specialist lab roles</strong> — Chemist, Ecologist, Specialist, Innovator</div></li>
+    </ul>
+    <div class="feat-progress rv d3">
+      <div class="fp-label"><span class="fp-key">Development</span><span class="fp-val" style="color:var(--wash);">In Design</span></div>
+      <div class="fp-track"><div class="fp-fill" id="pW" style="background:var(--wash);"></div></div>
+    </div>
+    <div class="feat-btns rv d4">
+      <a href="washwheel.html" class="apple-btn ab-dark">Learn more</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel" class="apple-btn ab-outline">Enquire</a>
+    </div>
+  </div>
+</div>
+
+<!-- WASHWHEEL CINEMATIC -->
+<div class="cin-strip rv">
+  <img src="washwheel_wheel_detail.png" class="cin-bg" alt="" loading="lazy" id="cW">
+  <div class="cin-tint" style="background:rgba(0,10,40,.5);"></div>
+  <div class="cin-body">
+    <h3 class="cin-title">The Wash Wheel</h3>
+    <p class="cin-sub">A rotating circular card market — timing your acquisition is as critical as your chemistry knowledge.</p>
+  </div>
+</div>
+
+<!-- MISE EN SCÈNE -->
+<div class="feature flip">
+  <div class="feat-img">
+    <img src="mise_spread.png" alt="Mise en Scène" loading="lazy" style="object-position:center top;">
+    <div class="feat-img-tint" style="background:linear-gradient(to left,transparent 60%,var(--light))"></div>
+  </div>
+  <div class="feat-txt" style="background:var(--light);">
+    <div class="feat-game-num rv">004 of 004</div>
+    <h2 class="feat-title rv d1" style="color:var(--mise);">Mise en Scène</h2>
+    <p class="feat-subtitle rv d1">A Parisian Fashion Card Game</p>
+    <div class="feat-stats rv d2">
+      <div class="feat-stat"><div class="fs-n">2–5</div><div class="fs-l">Players</div></div>
+      <div class="feat-stat"><div class="fs-n">45–75</div><div class="fs-l">Minutes</div></div>
+      <div class="feat-stat"><div class="fs-n">Medium</div><div class="fs-l">Weight</div></div>
+    </div>
+    <p class="feat-desc rv d2">Step into Paris Fashion Week. Draft iconic pieces, build your outfit tableau, and outscore rivals through harmony, audacity, and trend awareness.</p>
+    <ul class="feat-bullets rv d3">
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(201,168,122,.15);">👗</div><div><strong>80 fashion cards</strong> — tableau building, 6 outfit slots</div></li>
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(201,168,122,.15);">🎭</div><div><strong>Secret Client Cards</strong> — hidden objectives revealed at end game</div></li>
+      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(201,168,122,.15);">💼</div><div><strong>Luxury brand IP potential</strong> — fashion house co-branding</div></li>
+    </ul>
+    <div class="feat-progress rv d3">
+      <div class="fp-label"><span class="fp-key">Development</span><span class="fp-val" style="color:var(--mise);">Concepting Phase</span></div>
+      <div class="fp-track"><div class="fp-fill" id="pM" style="background:var(--mise);"></div></div>
+    </div>
+    <div class="feat-btns rv d4">
+      <a href="mise-en-scene.html" class="apple-btn ab-dark">Learn more</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene" class="apple-btn ab-outline">Enquire</a>
+    </div>
+  </div>
+</div>
+
+<!-- MISE CINEMATIC -->
+<div class="cin-strip rv">
+  <img src="mise_cards_detail.png" class="cin-bg" alt="" loading="lazy" id="cM">
+  <div class="cin-tint" style="background:rgba(30,10,0,.45);"></div>
+  <div class="cin-body">
+    <h3 class="cin-title">Curate the Season's Most Iconic Look</h3>
+    <p class="cin-sub">One bold Statement piece anchors your look — everything else must serve it.</p>
+  </div>
+</div>
+
+</div><!-- /games -->
+
 <!-- ═══ ABOUT ═══ -->
-<section id="about" class="section" style="border-top:3px solid var(--border);">
+<section id="about" class="section">
 <div class="wrap">
   <div class="about-grid">
     <div class="rv-l">
-      <div class="about-lifestyle">
+      <div class="about-photo-wrap">
         <img src="lifestyle_play.png" alt="Catalyst games in play" loading="lazy">
-        <div class="about-lifestyle-badge">
-          <div class="alb-num">4</div>
-          <div class="alb-lbl">Games Designed</div>
-        </div>
       </div>
       <div class="pillars">
-        <div class="pillar rv"><span class="pillar-icon">⚗️</span><div class="pillar-name">Science</div><p class="pillar-desc">Every mechanic grounded in real chemistry</p></div>
-        <div class="pillar rv delay-1"><span class="pillar-icon">♟️</span><div class="pillar-name">Strategy</div><p class="pillar-desc">Deep decisions, meaningful trade-offs</p></div>
-        <div class="pillar rv delay-2"><span class="pillar-icon">🌿</span><div class="pillar-name">Sustainability</div><p class="pillar-desc">Real ecological themes</p></div>
-        <div class="pillar rv delay-3"><span class="pillar-icon">💡</span><div class="pillar-name">Innovation</div><p class="pillar-desc">Novel mechanics, no genre precedent</p></div>
-        <div class="pillar rv delay-4"><span class="pillar-icon">🔭</span><div class="pillar-name">Discovery</div><p class="pillar-desc">Players leave knowing something true</p></div>
-        <div class="pillar rv delay-5"><span class="pillar-icon">🎓</span><div class="pillar-name">Education</div><p class="pillar-desc">School-ready science in premium form</p></div>
+        <div class="pillar rv"><div class="pi-icon">⚗️</div><div class="pi-name">Science</div><p class="pi-desc">Real chemistry in every mechanic</p></div>
+        <div class="pillar rv d1"><div class="pi-icon">♟️</div><div class="pi-name">Strategy</div><p class="pi-desc">Deep, meaningful decisions</p></div>
+        <div class="pillar rv d2"><div class="pi-icon">🌿</div><div class="pi-name">Ecology</div><p class="pi-desc">Real-world sustainability themes</p></div>
+        <div class="pillar rv d3"><div class="pi-icon">💡</div><div class="pi-name">Innovation</div><p class="pi-desc">Novel mechanics, no precedent</p></div>
+        <div class="pillar rv d4"><div class="pi-icon">🎓</div><div class="pi-name">Education</div><p class="pi-desc">School-ready science IP</p></div>
+        <div class="pillar rv d5"><div class="pi-icon">🔭</div><div class="pi-name">Discovery</div><p class="pi-desc">Players leave knowing something true</p></div>
       </div>
     </div>
     <div class="rv-r">
-      <span class="sec-tag">About the Studio</span>
-      <h2 class="sec-h" style="margin-bottom:16px;">Mehrad<br>&amp; <span class="accent">Anita</span></h2>
-      <div class="divider"></div>
-      <p style="font-size:15px;color:var(--soft);line-height:1.9;margin-bottom:16px;">We are <strong style="color:var(--charcoal);">Catalyst Board Game Design</strong> — an Oxford science board game studio founded by a chemist and a statistician. We design for curious adults, board game publishers, and students who haven't yet discovered that science can be thrilling.</p>
-      <p style="font-size:15px;color:var(--soft);line-height:1.9;margin-bottom:24px;">Mehrad turns real chemistry into elegant game mechanics. Anita stress-tests and balances every system with statistical precision. Every game we release must be both scientifically accurate and genuinely fun to play.</p>
-      <blockquote style="border-left:3px solid var(--teal);padding-left:18px;font-family:'Cinzel',serif;font-style:italic;font-size:16px;color:var(--charcoal);line-height:1.55;margin-bottom:28px;">"A great game is a working model of something true."</blockquote>
+      <span class="eyebrow">The Studio</span>
+      <p class="about-quote">Games that transform <em>curiosity</em> into strategy.</p>
+      <p class="about-body">Catalyst Board Games is an Oxford science game studio founded by a chemist and a statistician. We design for curious adults, board game publishers, and students who haven't yet discovered that science can be thrilling.</p>
+      <p class="about-body">Mehrad turns real chemistry into elegant game mechanics. Anita stress-tests every system with statistical precision. Every game must be both scientifically accurate and genuinely fun.</p>
       <div class="designers">
-        <div class="d-card rv">
-          <img src="mehrad_image.jpg" alt="Mehrad Niasari" class="d-photo" loading="lazy">
-          <div class="d-info">
+        <div class="d-pill rv">
+          <img src="mehrad_image.jpg" alt="Mehrad" class="d-photo">
+          <div>
             <div class="d-name">Mehrad Niasari</div>
             <div class="d-role">Game Designer · Chemist</div>
             <div class="d-affil">Oxford University · Bioplastics R&D</div>
-            <p class="d-bio">Chemistry and bioplastics research background — every game mechanic is grounded in his actual scientific work.</p>
           </div>
         </div>
-        <div class="d-card rv delay-2">
-          <img src="anita_image.jpg" alt="Anita Mansouri" class="d-photo" loading="lazy">
-          <div class="d-info">
-            <div class="d-name" style="color:var(--charcoal);font-weight:700;">Anita Mansouri</div>
+        <div class="d-pill rv d2">
+          <img src="anita_image.jpg" alt="Anita" class="d-photo">
+          <div>
+            <div class="d-name">Anita Mansouri</div>
             <div class="d-role">Game Designer · Statistician</div>
-            <div class="d-affil">Statistician · Pharmaceutical Industry</div>
-            <p class="d-bio">Brings statistical rigour to playtesting and game balance — ensuring every Catalyst game is elegantly competitive.</p>
+            <div class="d-affil">Pharmaceutical Industry · Oxford</div>
           </div>
         </div>
+      </div>
+      <div style="margin-top:24px;" class="rv d3">
+        <a href="#contact" class="apple-btn ab-dark">Work with us</a>
       </div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- CARD HANDS LIFESTYLE STRIP -->
-<div class="detail-strip rv-s" style="height:380px;">
-  <img src="jabir_cards_hand.png" alt="Jabir cards in hand" class="detail-strip-bg parallax-img" data-speed="0.2" loading="lazy">
-  <div class="detail-strip-ov" style="background:rgba(30,15,0,.5);"></div>
-  <div class="detail-strip-content">
-    <h3 style="font-size:clamp(20px,4vw,42px);">Science in Your Hands</h3>
-    <p>Every card is a real scientific element — aromatic plants, bioplastic feedstocks, fabric fibre profiles, and fashion archetypes.</p>
-  </div>
-</div>
-
 <!-- ═══ PUBLISHERS ═══ -->
-<section id="publishers" class="section" style="border-top:3px solid var(--border);">
+<section id="publishers" class="section" style="background:var(--light);border-top:1px solid var(--border);">
 <div class="wrap">
-  <div style="text-align:center;margin-bottom:52px;" class="rv">
-    <span class="sec-tag" style="display:flex;justify-content:center;">For Publishers &amp; Partners</span>
-    <h2 class="sec-h" style="margin-bottom:12px;">The Catalyst<br><span class="dim">Portfolio</span></h2>
-    <p class="sec-p" style="margin:0 auto;">Science-driven eurogames with genuine IP depth. Prototypes ready. Based in Oxford — available for meetings, demos, and conventions worldwide.</p>
+  <div style="text-align:center;max-width:580px;margin:0 auto 52px;" class="rv">
+    <span class="eyebrow">For Publishers</span>
+    <h2 class="headline" style="margin-bottom:12px;">The Catalyst Portfolio</h2>
+    <p style="font-size:17px;color:var(--mid);line-height:1.7;">Science-driven eurogames with genuine IP depth. Prototypes ready. Based in Oxford — available for meetings, demos, and conventions worldwide.</p>
   </div>
-  <div class="pub-grid rv">
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer." class="pub-enq pe-jabir">
-      <span class="pe-icon">⚗️</span>
-      <div class="pe-body"><div class="pe-name">Jabir: The Perfumer</div><div class="pe-act" style="color:var(--jabir);">Enquire about this game →</div></div>
-      <span class="pe-arrow">›</span>
+  <div class="pub-enq-grid rv">
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir" class="pub-enq pe-j">
+      <span class="pe-icon">⚗️</span><div><div class="pe-name">Jabir: The Perfumer</div><div class="pe-act">Enquire about this game</div></div><span class="pe-arr">›</span>
     </a>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst." class="pub-enq pe-synth">
-      <span class="pe-icon">🌿</span>
-      <div class="pe-body"><div class="pe-name">Synthelyst</div><div class="pe-act" style="color:var(--synth);">Enquire about this game →</div></div>
-      <span class="pe-arrow">›</span>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst" class="pub-enq pe-s">
+      <span class="pe-icon">🌿</span><div><div class="pe-name">Synthelyst</div><div class="pe-act">Enquire about this game</div></div><span class="pe-arr">›</span>
     </a>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20WashWheel." class="pub-enq pe-wash">
-      <span class="pe-icon">🫧</span>
-      <div class="pe-body"><div class="pe-name">WashWheel</div><div class="pe-act" style="color:var(--wash);">Enquire about this game →</div></div>
-      <span class="pe-arrow">›</span>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel" class="pub-enq pe-w">
+      <span class="pe-icon">🫧</span><div><div class="pe-name">WashWheel</div><div class="pe-act">Enquire about this game</div></div><span class="pe-arr">›</span>
     </a>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene." class="pub-enq pe-mise">
-      <span class="pe-icon">👗</span>
-      <div class="pe-body"><div class="pe-name">Mise en Scène</div><div class="pe-act" style="color:var(--mise);">Enquire about this game →</div></div>
-      <span class="pe-arrow">›</span>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene" class="pub-enq pe-m">
+      <span class="pe-icon">👗</span><div><div class="pe-name">Mise en Scène</div><div class="pe-act">Enquire about this game</div></div><span class="pe-arr">›</span>
     </a>
   </div>
-  <div style="display:grid;grid-template-columns:1fr;gap:20px;" class="rv delay-2">
-    <div class="glass-panel">
-      <span class="sec-tag">What We Offer</span>
-      <ul class="offer-list" style="margin-top:16px;">
-        <li class="offer-item"><div class="offer-bullet">📦</div>Jabir &amp; Synthelyst: full prototypes ready to play</li>
-        <li class="offer-item"><div class="offer-bullet">📄</div>Rulebooks and design documents available on request</li>
-        <li class="offer-item"><div class="offer-bullet">🤝</div>Brand collaboration — luxury perfume &amp; sustainability IP</li>
-        <li class="offer-item"><div class="offer-bullet">🎓</div>Educational licensing available for schools &amp; universities</li>
-        <li class="offer-item"><div class="offer-bullet">✈️</div>Available for Spiel Essen, UK Games Expo, Cannes</li>
-        <li class="offer-item"><div class="offer-bullet">🔬</div>Science accuracy documentation for every mechanic</li>
-      </ul>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;">
-        <a href="mailto:duo.boardgame.design@gmail.com?subject=Press%20Kit%20Request&body=Hello%20Catalyst%2C%0A%0APlease%20send%20me%20your%20full%20press%20kit." class="tbtn tbtn-dark" style="flex:1;justify-content:center;">✉ Request Press Kit</a>
-        <a href="https://instagram.com/catalyst.boardgames" target="_blank" class="tbtn tbtn-outline" style="flex:1;justify-content:center;">📷 Instagram</a>
-      </div>
-    </div>
+  <div class="offer-grid rv d2">
+    <div class="offer-item"><span class="oi-icon">📦</span>Jabir &amp; Synthelyst prototypes ready to play</div>
+    <div class="offer-item"><span class="oi-icon">📄</span>Rulebooks &amp; design documents on request</div>
+    <div class="offer-item"><span class="oi-icon">🤝</span>Brand collaboration — perfume &amp; sustainability IP</div>
+    <div class="offer-item"><span class="oi-icon">🎓</span>Educational licensing available</div>
+    <div class="offer-item"><span class="oi-icon">✈️</span>Spiel Essen, UK Games Expo, Cannes — available</div>
+    <div class="offer-item"><span class="oi-icon">🔬</span>Science accuracy documentation included</div>
+  </div>
+  <div style="text-align:center;margin-top:36px;" class="rv d3">
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Press%20Kit%20Request%20%E2%80%94%20Catalyst" class="apple-btn ab-dark">Request press kit</a>
   </div>
 </div>
 </section>
 
 <!-- ═══ CONTACT ═══ -->
-<section id="contact" class="section" style="background:var(--offwhite);border-top:3px solid var(--border);">
+<section id="contact" class="section" style="border-top:1px solid var(--border);">
 <div class="wrap">
-  <div style="display:grid;grid-template-columns:1fr;gap:40px;align-items:start;">
-    <div class="rv-l">
-      <span class="sec-tag">Get in Touch</span>
-      <h2 class="sec-h" style="margin-bottom:16px;">Send an<br><span class="accent">Enquiry</span></h2>
-      <div class="divider"></div>
-      <p class="sec-p" style="margin-bottom:28px;">Publishers, educators, brands, media — choose how you'd like to reach us and we'll respond within 48 hours.</p>
+  <div style="display:grid;grid-template-columns:1fr;gap:56px;align-items:start;">
+    <div class="rv-l" style="max-width:480px;">
+      <span class="eyebrow">Contact</span>
+      <h2 class="headline" style="margin-bottom:16px;">Get in touch.</h2>
+      <p style="font-size:17px;color:var(--mid);line-height:1.7;margin-bottom:28px;">Publishers, educators, brands, media — choose how you'd like to reach us. We respond within 48 hours.</p>
       <div class="c-links">
-        <a href="mailto:duo.boardgame.design@gmail.com" class="c-link"><div class="c-ico">✉️</div><div><div class="c-lbl">Email</div><div class="c-val">duo.boardgame.design@gmail.com</div></div></a>
-        <a href="https://wa.me/447541178881" target="_blank" class="c-link"><div class="c-ico">💬</div><div><div class="c-lbl">WhatsApp</div><div class="c-val">+44 7541 178 881</div></div></a>
-        <a href="https://t.me/mehrad_nia" target="_blank" class="c-link"><div class="c-ico">✈️</div><div><div class="c-lbl">Telegram</div><div class="c-val">@mehrad_nia</div></div></a>
-        <a href="https://instagram.com/catalyst.boardgames" target="_blank" class="c-link"><div class="c-ico">📷</div><div><div class="c-lbl">Instagram</div><div class="c-val">@catalyst.boardgames</div></div></a>
+        <a href="mailto:duo.boardgame.design@gmail.com" class="c-link"><span class="cl-ico">✉️</span><div><div class="cl-lbl">Email</div><div class="cl-val">duo.boardgame.design@gmail.com</div></div></a>
+        <a href="https://wa.me/447541178881" target="_blank" class="c-link"><span class="cl-ico">💬</span><div><div class="cl-lbl">WhatsApp</div><div class="cl-val">+44 7541 178 881</div></div></a>
+        <a href="https://t.me/mehrad_nia" target="_blank" class="c-link"><span class="cl-ico">✈️</span><div><div class="cl-lbl">Telegram</div><div class="cl-val">@mehrad_nia</div></div></a>
+        <a href="https://instagram.com/catalyst.boardgames" target="_blank" class="c-link"><span class="cl-ico">📷</span><div><div class="cl-lbl">Instagram</div><div class="cl-val">@catalyst.boardgames</div></div></a>
       </div>
     </div>
     <div class="rv-r">
-      <div class="glass-panel">
-        <span class="ch-step-label" id="step-lbl">Step 1 — How would you like to contact us?</span>
+      <div class="card" style="padding:28px;">
+        <p style="font-size:12px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;" id="step-lbl">How would you like to contact us?</p>
         <div id="ch-picker">
           <div class="ch-cards">
-            <button class="ch-card" id="card-email" onclick="pickChannel('email')">
-              <div class="ch-card-icon" style="background:rgba(0,201,177,.08);border-color:rgba(0,201,177,.25);">
-                <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><rect x="3" y="7" width="22" height="14" rx="2" stroke="#00c9b1" stroke-width="1.6"/><path d="M3 9l11 7 11-7" stroke="#00c9b1" stroke-width="1.6"/></svg>
-              </div>
+            <button class="ch-card" id="cc-email" onclick="pick('email')">
+              <div class="ch-card-ico">✉️</div>
               <div class="ch-card-name">Email</div>
-              <div class="ch-card-desc">Form sent to our inbox</div>
-              <div class="ch-card-tag" style="color:#00c9b1;">Recommended</div>
+              <div class="ch-card-desc">Sent to our inbox</div>
+              <span class="ch-card-tag" style="color:var(--teal);">Recommended</span>
             </button>
-            <button class="ch-card" id="card-whatsapp" onclick="pickChannel('whatsapp')">
-              <div class="ch-card-icon" style="background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.25);">
-                <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="#25D366" stroke-width="1.6"/><path d="M9 14c0-2.76 2.24-5 5-5s5 2.24 5 5-2.24 5-5 5c-.9 0-1.74-.24-2.46-.66L9 19l.66-2.54A4.97 4.97 0 019 14z" stroke="#25D366" stroke-width="1.4"/></svg>
-              </div>
+            <button class="ch-card" id="cc-wa" onclick="pick('wa')">
+              <div class="ch-card-ico">💬</div>
               <div class="ch-card-name">WhatsApp</div>
-              <div class="ch-card-desc">Opens with message ready</div>
-              <div class="ch-card-tag" style="color:#25D366;">Instant</div>
+              <div class="ch-card-desc">Opens ready to send</div>
+              <span class="ch-card-tag" style="color:#25D366;">Instant</span>
             </button>
-            <button class="ch-card" id="card-telegram" onclick="pickChannel('telegram')">
-              <div class="ch-card-icon" style="background:rgba(42,171,238,.08);border-color:rgba(42,171,238,.25);">
-                <svg width="26" height="26" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="#2AABEE" stroke-width="1.6"/><path d="M7 11l10-4-2 10-4-3" stroke="#2AABEE" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
+            <button class="ch-card" id="cc-tg" onclick="pick('tg')">
+              <div class="ch-card-ico">✈️</div>
               <div class="ch-card-name">Telegram</div>
-              <div class="ch-card-desc">Opens with message ready</div>
-              <div class="ch-card-tag" style="color:#2AABEE;">Fast</div>
+              <div class="ch-card-desc">Opens ready to send</div>
+              <span class="ch-card-tag" style="color:#2AABEE;">Fast</span>
             </button>
           </div>
         </div>
-        <!-- EMAIL -->
-        <div id="tab-email" class="ch-panel" style="display:none;">
-          <div class="ch-back-row">
-            <button class="ch-back" onclick="resetChannel()">← Choose differently</button>
-            <div class="ch-active-badge" style="background:rgba(0,201,177,.08);border-color:rgba(0,201,177,.25);color:#00c9b1;">✉ Email</div>
+        <!-- EMAIL PANEL -->
+        <div id="panel-email" class="ch-panel" style="display:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+            <button class="ch-back" onclick="reset()">← Back</button>
+            <span class="ch-badge" style="background:rgba(0,201,177,.08);border-color:rgba(0,201,177,.3);color:var(--teal);">✉ Email</span>
           </div>
           <form id="cForm" action="https://formspree.io/f/xeedpvqp" method="POST">
-            <input type="hidden" name="_subject" value="Catalyst Board Games Website Enquiry">
+            <input type="hidden" name="_subject" value="Catalyst Website Enquiry">
             <div class="form-row-2">
-              <div class="form-group" style="margin-bottom:0;"><label class="form-label" for="fn">Name</label><input class="form-input" type="text" id="fn" name="name" placeholder="Jane Smith" required></div>
-              <div class="form-group" style="margin-bottom:0;"><label class="form-label" for="fe">Email</label><input class="form-input" type="email" id="fe" name="email" placeholder="jane@publisher.com" required></div>
+              <div><label class="form-label">Name</label><input class="form-input" type="text" name="name" placeholder="Jane Smith" required></div>
+              <div><label class="form-label">Email</label><input class="form-input" type="email" name="email" placeholder="jane@publisher.com" required></div>
             </div>
-            <div class="form-group"><label class="form-label" for="ft">Enquiry Type</label>
-              <select class="form-select" id="ft" name="enquiry_type" required>
+            <div class="form-row"><label class="form-label">Enquiry Type</label>
+              <select class="form-select" name="enquiry_type" required>
                 <option value="" disabled selected>Select…</option>
                 <option>Publisher Interest — Jabir: The Perfumer</option>
                 <option>Publisher Interest — Synthelyst</option>
@@ -999,37 +798,35 @@ footer{
                 <option>General Enquiry</option>
               </select>
             </div>
-            <div class="form-group"><label class="form-label" for="fm">Message</label><textarea class="form-textarea" id="fm" name="message" placeholder="Tell us about your interest…" required></textarea></div>
-            <button type="submit" class="ch-send-btn" id="sbtn" style="background:var(--charcoal);color:#fff;box-shadow:0 6px 0 #0a0a1a;">
-              <svg width="16" height="16" viewBox="0 0 28 28" fill="none"><rect x="3" y="7" width="22" height="14" rx="2" stroke="#fff" stroke-width="2"/><path d="M3 9l11 7 11-7" stroke="#fff" stroke-width="2"/></svg>
-              Send Email
-            </button>
+            <div class="form-row"><label class="form-label">Message</label><textarea class="form-textarea" name="message" placeholder="Tell us about your interest in Catalyst games…" required></textarea></div>
+            <button type="submit" class="ch-send" id="sbtn" style="background:var(--black);color:#fff;">Send message</button>
             <div class="form-status" id="fstat"></div>
           </form>
+          <button class="ch-back" onclick="reset()" style="margin-top:14px;display:block;width:100%;text-align:center;padding:8px;">← Choose a different channel</button>
         </div>
-        <!-- WHATSAPP -->
-        <div id="tab-whatsapp" class="ch-panel" style="display:none;">
-          <div class="ch-back-row">
-            <button class="ch-back" onclick="resetChannel()">← Choose differently</button>
-            <div class="ch-active-badge" style="background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.25);color:#25D366;">💬 WhatsApp</div>
+        <!-- WHATSAPP PANEL -->
+        <div id="panel-wa" class="ch-panel" style="display:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+            <button class="ch-back" onclick="reset()">← Back</button>
+            <span class="ch-badge" style="background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.3);color:#25D366;">💬 WhatsApp</span>
           </div>
-          <div class="form-group"><label class="form-label" for="wa-name">Your Name</label><input class="form-input" type="text" id="wa-name" placeholder="Jane Smith"></div>
-          <div class="form-group"><label class="form-label" for="wa-msg">Message</label><textarea class="form-textarea" id="wa-msg" placeholder="Hello Catalyst, I am interested in…" style="min-height:120px;"></textarea></div>
-          <button class="ch-send-btn" onclick="sendWhatsApp()" style="background:linear-gradient(135deg,#25D366,#128c7e);color:#fff;box-shadow:0 6px 0 #0a6148;">💬 Open in WhatsApp</button>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-top:10px;text-align:center;">+44 7541 178 881</p>
-          <div style="margin-top:14px;"><button class="ch-back" onclick="resetChannel()" style="width:100%;text-align:center;padding:8px;">← Send via a different channel</button></div>
+          <div class="form-row"><label class="form-label">Your Name</label><input class="form-input" type="text" id="wa-n" placeholder="Jane Smith"></div>
+          <div class="form-row"><label class="form-label">Message</label><textarea class="form-textarea" id="wa-m" placeholder="Hello Catalyst, I'm interested in…" style="min-height:110px;"></textarea></div>
+          <button class="ch-send" onclick="sendWA()" style="background:#25D366;color:#fff;">💬 Open in WhatsApp</button>
+          <p style="font-size:12px;color:var(--mid);text-align:center;margin-top:8px;">+44 7541 178 881</p>
+          <button class="ch-back" onclick="reset()" style="margin-top:12px;display:block;width:100%;text-align:center;padding:8px;">← Choose a different channel</button>
         </div>
-        <!-- TELEGRAM -->
-        <div id="tab-telegram" class="ch-panel" style="display:none;">
-          <div class="ch-back-row">
-            <button class="ch-back" onclick="resetChannel()">← Choose differently</button>
-            <div class="ch-active-badge" style="background:rgba(42,171,238,.08);border-color:rgba(42,171,238,.25);color:#2AABEE;">✈ Telegram</div>
+        <!-- TELEGRAM PANEL -->
+        <div id="panel-tg" class="ch-panel" style="display:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+            <button class="ch-back" onclick="reset()">← Back</button>
+            <span class="ch-badge" style="background:rgba(42,171,238,.08);border-color:rgba(42,171,238,.3);color:#2AABEE;">✈ Telegram</span>
           </div>
-          <div class="form-group"><label class="form-label" for="tg-name">Your Name</label><input class="form-input" type="text" id="tg-name" placeholder="Jane Smith"></div>
-          <div class="form-group"><label class="form-label" for="tg-msg">Message</label><textarea class="form-textarea" id="tg-msg" placeholder="Hello Catalyst, I am interested in…" style="min-height:120px;"></textarea></div>
-          <button class="ch-send-btn" onclick="sendTelegram()" style="background:linear-gradient(135deg,#2AABEE,#1a8cc4);color:#fff;box-shadow:0 6px 0 #1265a0;">✈ Open in Telegram</button>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-top:10px;text-align:center;">@mehrad_nia</p>
-          <div style="margin-top:14px;"><button class="ch-back" onclick="resetChannel()" style="width:100%;text-align:center;padding:8px;">← Send via a different channel</button></div>
+          <div class="form-row"><label class="form-label">Your Name</label><input class="form-input" type="text" id="tg-n" placeholder="Jane Smith"></div>
+          <div class="form-row"><label class="form-label">Message</label><textarea class="form-textarea" id="tg-m" placeholder="Hello Catalyst, I'm interested in…" style="min-height:110px;"></textarea></div>
+          <button class="ch-send" onclick="sendTG()" style="background:#2AABEE;color:#fff;">✈ Open in Telegram</button>
+          <p style="font-size:12px;color:var(--mid);text-align:center;margin-top:8px;">@mehrad_nia</p>
+          <button class="ch-back" onclick="reset()" style="margin-top:12px;display:block;width:100%;text-align:center;padding:8px;">← Choose a different channel</button>
         </div>
       </div>
     </div>
@@ -1040,31 +837,29 @@ footer{
 <!-- ═══ NEWSLETTER ═══ -->
 <section id="newsletter" class="section">
 <div class="wrap">
-  <div class="nl-wrap">
+  <div class="nl-grid">
     <div class="rv-l">
-      <span class="sec-tag">Stay in the Loop</span>
-      <div class="nl-title">Monthly<br>Catalyst<br>Update</div>
-      <p class="nl-desc">Follow the journey from idea to tabletop. Free monthly newsletter — development news, playtest results, and early access to new game announcements.</p>
+      <span class="eyebrow" style="color:rgba(255,255,255,.4);">Newsletter</span>
+      <div class="nl-title">Monthly<br>Catalyst Update.</div>
+      <p class="nl-sub">Follow the journey from idea to tabletop. Free monthly newsletter.</p>
       <ul class="nl-perks">
-        <li class="nl-perk"><span class="nl-perk-dot"></span>Game development updates &amp; playtest results</li>
-        <li class="nl-perk"><span class="nl-perk-dot"></span>Behind-the-scenes design stories</li>
-        <li class="nl-perk"><span class="nl-perk-dot"></span>Convention appearances &amp; demo dates</li>
-        <li class="nl-perk"><span class="nl-perk-dot"></span>Early access to new game announcements</li>
-        <li class="nl-perk"><span class="nl-perk-dot"></span>One email per month. No spam. Unsubscribe anytime.</li>
+        <li class="nl-perk"><span class="nl-dot"></span>Development updates &amp; playtest results</li>
+        <li class="nl-perk"><span class="nl-dot"></span>Behind-the-scenes design stories</li>
+        <li class="nl-perk"><span class="nl-dot"></span>Convention appearances &amp; demo dates</li>
+        <li class="nl-perk"><span class="nl-dot"></span>Early access to new game announcements</li>
       </ul>
     </div>
     <div class="rv-r">
-      <div class="nl-form-box">
-        <div class="nl-form-title">Subscribe Free</div>
-        <p class="nl-form-sub">Join the Catalyst community. One email a month.</p>
+      <div class="nl-box">
+        <div class="nl-box-title">Subscribe free</div>
+        <p class="nl-box-sub">One email a month. No spam. Unsubscribe anytime.</p>
         <form id="nlForm" action="https://formspree.io/f/xeedpvqp" method="POST">
-          <input type="hidden" name="_subject" value="Catalyst Newsletter Subscription">
-          <input type="hidden" name="type" value="Newsletter Subscription">
+          <input type="hidden" name="type" value="Newsletter">
           <input class="nl-inp" type="text" name="name" placeholder="Your name" required>
           <input class="nl-inp" type="email" name="email" placeholder="your@email.com" required>
-          <button type="submit" class="tbtn tbtn-teal" style="width:100%;justify-content:center;margin-top:4px;" id="nlBtn">Subscribe to Newsletter</button>
-          <div class="nl-status" id="nlStatus"></div>
-          <p class="nl-note">By subscribing you agree to receive monthly emails from Catalyst Board Games. We never share your data.</p>
+          <button type="submit" class="ch-send" id="nlBtn" style="background:var(--teal);color:#fff;">Subscribe to newsletter</button>
+          <div class="nl-stat" id="nlStat"></div>
+          <p class="nl-note">We never share your data.</p>
         </form>
       </div>
     </div>
@@ -1073,67 +868,61 @@ footer{
 </section>
 
 <!-- ═══ FAQ ═══ -->
-<section id="faq" class="section">
+<section id="faq" class="section" style="border-top:1px solid var(--border);">
 <div class="wrap">
-  <div style="text-align:center;margin-bottom:60px;" class="rv">
-    <span class="sec-tag" style="display:flex;justify-content:center;">Frequently Asked Questions</span>
-    <h2 class="sec-h" style="margin-bottom:10px;">Questions &amp;<br><span class="dim">Answers</span></h2>
-    <p class="sec-p" style="margin:10px auto 0;">Everything publishers, educators, and players want to know about Catalyst games.</p>
+  <div style="text-align:center;margin-bottom:56px;" class="rv">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="headline">Questions &amp; answers.</h2>
   </div>
-
-  <div class="faq-game-block rv">
-    <div class="faq-game-header"><span class="faq-game-dot" style="background:var(--jabir);box-shadow:0 0 8px var(--jabir);"></span><span class="faq-game-name" style="color:var(--jabir);">Jabir: The Perfumer</span></div>
+  <div class="faq-block rv">
+    <div class="faq-game-head"><span class="fq-dot" style="background:var(--jabir);"></span><span class="fq-name" style="color:var(--jabir);">Jabir: The Perfumer</span></div>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Do I need chemistry knowledge to enjoy Jabir?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Not at all. Jabir teaches everything through play. The chemistry is embedded in the mechanics so naturally that players absorb it without realising. By your second game you'll be thinking like a real perfumer.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How long does a typical game take?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">90–150 minutes across 5 rounds. Experienced players finish closer to 90 minutes. First-time players should allow 150 minutes. A simplified first-play variant reduces this to around 75 minutes.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What makes Jabir unique compared to other eurogames?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Jabir is the only eurogame built on authentic perfumery chemistry. Every extraction method and fragrance pyramid layer is scientifically accurate. It also has strong co-branding potential with luxury fragrance houses — a commercial opportunity no other strategy game offers.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Is Jabir suitable as an educational tool?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Yes — this is a deliberate design goal. Jabir covers organic chemistry, biochemistry, and natural extraction processes. It is suitable for secondary school chemistry, university outreach programmes, and museum science experiences.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What is the current development status?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Jabir is fully designed with the prototype complete, rulebook finalised, and final art done. We are actively seeking a publishing partner. Press kits, prototype access, and design documentation are available immediately upon request.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Do I need chemistry knowledge to play?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Not at all. Jabir teaches everything through play. The chemistry is embedded in the mechanics so naturally that players absorb it without realising. By your second game you'll think like a perfumer.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How long does a game take?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">90–150 minutes across 5 rounds. Experienced players finish closer to 90 minutes. A simplified first-play variant reduces this to around 75 minutes.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What makes Jabir unique as a eurogame?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">It is the only eurogame built on authentic perfumery chemistry. Every extraction method and fragrance pyramid layer is scientifically accurate. It also has strong co-branding potential with luxury fragrance houses — a commercial opportunity no other strategy game offers.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Is Jabir suitable for education?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — this is a deliberate design goal. Jabir covers organic chemistry, biochemistry, and natural extraction processes. Suitable for secondary school chemistry, university outreach, and museum science experiences.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What is the current development status?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Fully designed — prototype complete, rulebook finalised, final art done. Actively seeking a publishing partner. Press kits and prototype access available immediately.</div></div></div>
     </div>
   </div>
-
-  <div class="faq-game-block rv">
-    <div class="faq-game-header"><span class="faq-game-dot" style="background:var(--synth);box-shadow:0 0 8px var(--synth);"></span><span class="faq-game-name" style="color:var(--synth);">Synthelyst</span></div>
+  <div class="faq-block rv">
+    <div class="faq-game-head"><span class="fq-dot" style="background:var(--synth);"></span><span class="fq-name" style="color:var(--synth);">Synthelyst</span></div>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What does "cooperative-competitive" mean in Synthelyst?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">All players must work together to keep Earth Health above zero — if it hits zero, everyone loses immediately. But within that shared survival condition, players compete individually for Victory Points. This tension is the heart of the game.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Is Synthelyst based on real bioplastics science?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Yes. Mehrad works professionally in bioplastics R&D. Every feedstock, energy system, and polymerisation mechanic reflects real industrial processes — trade-offs that players in the industry will immediately recognise.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How does the Earth Health mechanic work?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Earth Health starts at 25 and decreases with every unresolved Crisis and unsustainable energy choice. If it reaches zero, all players lose regardless of VP scores — creating genuine moral and strategic tension throughout.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Can Synthelyst be used in sustainability education?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Absolutely. Synthelyst teaches why plastic pollution is hard to solve, how collective action problems work, and what bioplastics actually are. It is being considered for use in university sustainability modules and corporate ESG training.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What is the difference between the five company boards?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Each company has a unique Core ability (usable once per round) and a Big Bet ability (usable once per game). These create distinct playstyles — Brazil's TerraCycle benefits from sugarcane speed, while Germany's Origin Polymer excels at energy efficiency.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What does "cooperative-competitive" mean?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">All players must keep Earth Health above zero — if it hits zero, everyone loses immediately. But within that shared survival condition, players compete individually for Victory Points. This tension is the heart of the game.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Is it based on real bioplastics science?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes. Mehrad works professionally in bioplastics R&D. Every feedstock, energy system, and polymerisation mechanic reflects real industrial processes — trade-offs players in the industry will immediately recognise.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How does the Earth Health mechanic work?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Earth Health starts at 25 and decreases with every unresolved Crisis and unsustainable energy choice. If it reaches zero, all players lose regardless of VP scores — creating genuine moral and strategic tension.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Can it be used in sustainability education?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Absolutely. It teaches why plastic pollution is hard to solve, how collective action problems work, and what bioplastics actually are. Being considered for university sustainability modules and corporate ESG training.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How do the five company boards differ?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Each company has a unique Core ability (once per round) and a Big Bet ability (once per game). These create distinct playstyles — Brazil's TerraCycle benefits from sugarcane speed, while Germany's Origin Polymer excels at energy efficiency.</div></div></div>
     </div>
   </div>
-
-  <div class="faq-game-block rv">
-    <div class="faq-game-header"><span class="faq-game-dot" style="background:var(--wash);box-shadow:0 0 8px var(--wash);"></span><span class="faq-game-name" style="color:var(--wash);">WashWheel</span></div>
+  <div class="faq-block rv">
+    <div class="faq-game-head"><span class="fq-dot" style="background:var(--wash);"></span><span class="fq-name" style="color:var(--wash);">WashWheel</span></div>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What is the Wash Wheel and why is it central to the game?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">The Wash Wheel is the central rotating market — a circular board with 12 slots across 4 zones. Resources move around the wheel each round. Timing your acquisitions to the wheel's rotation is as important as understanding the textile chemistry.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Do I need fabric knowledge to play?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">No prior knowledge required. WashWheel teaches real textile chemistry through play — you'll learn why wool needs acidic detergent, why silk can't go above 30°C, and why enzyme-based detergents are dangerous to delicate fibres. Each player has a science reference card at all times.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How do the four lab board roles differ?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">The Chemist gains formula flexibility; the Ecologist earns bonuses for sustainable choices; the Specialist masters specific fibre types; and the Innovator can acquire one card from the Wheel for free each round. Each role rewards a different strategic approach.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What brand partnership opportunities exist?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">WashWheel has natural co-branding potential with laundry brands (Persil, Ariel, Ecover), luxury fashion houses concerned with garment longevity, and sustainable textile organisations. The sustainability message aligns with current industry communication priorities.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What development stage is WashWheel at?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">WashWheel is in active mechanics design. The core concept and key systems are locked. The prototype is being built and playtesting will begin soon. Publishers interested in early involvement are welcome to reach out now.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What is the Wash Wheel?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">The central rotating resource market — a circular board with 12 slots across 4 zones. Resources move around the wheel each round. Timing your acquisitions to the rotation is as important as your chemistry knowledge.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Do I need fabric knowledge to play?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">No prior knowledge required. WashWheel teaches real textile chemistry through play — you'll learn why wool needs acidic detergent, why silk can't go above 30°C, and why enzyme-based detergents are dangerous to delicate fibres.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How do the four lab roles differ?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Chemist gains formula flexibility; Ecologist earns bonuses for sustainable choices; Specialist masters specific fibre types; Innovator acquires one card from the Wheel for free each round. Each rewards a different strategic approach.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What brand partnerships are possible?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Natural co-branding with laundry brands (Persil, Ariel, Ecover), luxury fashion houses concerned with garment longevity, and sustainable textile organisations.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What development stage is it at?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Active mechanics design. Core concept and key systems are locked. Prototype being built. Publishers interested in early involvement are welcome to reach out now.</div></div></div>
     </div>
   </div>
-
-  <div class="faq-game-block rv">
-    <div class="faq-game-header"><span class="faq-game-dot" style="background:var(--mise);box-shadow:0 0 8px var(--mise);"></span><span class="faq-game-name" style="color:var(--mise);">Mise en Scène</span></div>
+  <div class="faq-block rv">
+    <div class="faq-game-head"><span class="fq-dot" style="background:var(--mise);"></span><span class="fq-name" style="color:var(--mise);">Mise en Scène</span></div>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Is Mise en Scène only for fashion fans?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Not at all. While the Parisian fashion theme gives immediate appeal beyond traditional hobbyists, Mise en Scène is a genuine strategy game with multi-layered scoring, hidden objectives, and shared-information tension. Set collection and tableau-building fans will find deep strategic satisfaction.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>How does the Secret Client Card work?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Each player receives a Secret Client Card at game start — a hidden personal scoring objective (e.g. "score bonus if your outfit uses only two colour palettes"). It is kept face-down throughout play and revealed only at final scoring, adding a dramatic wildcard layer.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What audiences is Mise en Scène designed for?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Adults 14+ with a focus on audiences new to strategy gaming through the fashion entry point. Ideal for publishers seeking to expand beyond traditional board game demographics, particularly among women and creative communities.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>What luxury brand partnership potential does it have?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Significant. Mise en Scène could feature real fashion house cards (Chanel, Dior, Saint Laurent), creating co-branding opportunities similar to licensed sports card games. The premium Parisian aesthetic makes it a natural fit for retail in luxury boutiques and fashion week activations.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>Can I see the full rulebook or card designs?</span><span class="faq-chevron">▾</span></button><div class="faq-a"><div class="faq-a-inner">Yes — the full rulebook and sample card designs are available to publishers and interested partners on request. Email us at duo.boardgame.design@gmail.com or use the contact form above. We can also arrange a video walkthrough of the game concept.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Is it only for fashion fans?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Not at all. While the Parisian fashion theme gives immediate appeal beyond traditional hobbyists, Mise en Scène is a genuine strategy game with multi-layered scoring, hidden objectives, and shared-information tension.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How does the Secret Client Card work?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Each player receives a Secret Client Card at game start — a hidden personal scoring objective. It is kept face-down throughout play and revealed only at final scoring, adding a dramatic wildcard layer.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Who is the target audience?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Adults 14+ with a focus on audiences new to strategy gaming through the fashion entry point. Ideal for publishers seeking to expand beyond traditional board game demographics, particularly among women and creative communities.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What luxury brand potential does it have?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Significant. Could feature real fashion house cards (Chanel, Dior, Saint Laurent), creating co-branding similar to licensed sports card games. The premium Parisian aesthetic suits luxury boutique retail and fashion week activations.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Can I see the rulebook or card designs?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — full rulebook and sample card designs available to publishers on request. Email duo.boardgame.design@gmail.com or use the contact form. We can also arrange a video walkthrough.</div></div></div>
     </div>
   </div>
-
 </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-inner wrap">
-    <a href="index.html" class="f-brand"><img src="catalyst_logo.png" alt="Catalyst">CATALYST</a>
-    <p class="f-tag">Games that transform curiosity into strategy.</p>
-    <ul class="f-nav">
+<div class="wrap">
+  <div class="foot-inner">
+    <a href="index.html" class="foot-brand"><img src="catalyst_logo.png" alt="Catalyst">Catalyst Board Games</a>
+    <ul class="foot-nav">
       <li><a href="jabir.html">Jabir</a></li>
       <li><a href="synthelyst.html">Synthelyst</a></li>
       <li><a href="washwheel.html">WashWheel</a></li>
@@ -1142,150 +931,147 @@ footer{
       <li><a href="#newsletter">Newsletter</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="f-social">
-      <a href="https://instagram.com/catalyst.boardgames" target="_blank" title="Instagram">📷</a>
-      <a href="mailto:duo.boardgame.design@gmail.com" title="Email">✉️</a>
-      <a href="https://wa.me/447541178881" target="_blank" title="WhatsApp">💬</a>
-      <a href="https://t.me/mehrad_nia" target="_blank" title="Telegram">✈️</a>
+    <div class="foot-social">
+      <a href="https://instagram.com/catalyst.boardgames" target="_blank">📷</a>
+      <a href="mailto:duo.boardgame.design@gmail.com">✉️</a>
+      <a href="https://wa.me/447541178881" target="_blank">💬</a>
+      <a href="https://t.me/mehrad_nia" target="_blank">✈️</a>
     </div>
-    <span class="f-copy">© 2025 CATALYST · MEHRAD NIASARI &amp; ANITA MANSOURI · OXFORD</span>
+    <span class="foot-copy">© 2025 Catalyst · Mehrad Niasari &amp; Anita Mansouri · Oxford</span>
   </div>
+</div>
 </footer>
 
 <script>
-// ── NAV ──
-window.addEventListener('scroll',()=>{
-  document.getElementById('siteNav').classList.toggle('scrolled',scrollY>36);
-});
+// NAV
+window.addEventListener('scroll',()=>{},{ passive:true });
 function mT(){document.getElementById('mobNav').classList.toggle('open');}
 
-// ── HERO CANVAS — subtle float particles ──
-(function(){
-  const c=document.getElementById('hero-canvas');
-  const ctx=c.getContext('2d');
-  let W,H,pts=[];
-  const rsz=()=>{W=c.width=innerWidth;H=c.height=c.parentElement.offsetHeight;};
-  rsz();window.addEventListener('resize',rsz);
-  const cols=['rgba(0,201,177,','rgba(242,201,76,','rgba(199,125,74,'];
-  for(let i=0;i<60;i++){
-    const col=cols[Math.floor(Math.random()*cols.length)];
-    pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.8+.5,col});
-  }
-  const draw=()=>{
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=p.col+'.4)';ctx.fill();
-    });
-    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
-      const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
-      if(d<100){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(0,201,177,${.06*(1-d/100)})`;ctx.lineWidth=.5;ctx.stroke();}
-    }
-    requestAnimationFrame(draw);
-  };draw();
-})();
-
-// ── BOX 3D MOUSE TILT ──
-document.querySelectorAll('.box-float').forEach(box=>{
-  box.addEventListener('mousemove',e=>{
-    const r=box.getBoundingClientRect();
+// BOX MOUSE TILT
+document.querySelectorAll('.fbox').forEach(b=>{
+  b.addEventListener('mousemove',e=>{
+    const r=b.getBoundingClientRect();
     const x=(e.clientX-r.left)/r.width-.5;
     const y=(e.clientY-r.top)/r.height-.5;
-    box.style.transform=`perspective(600px) rotateX(${-y*18}deg) rotateY(${x*18}deg) scale(1.06)`;
-    box.style.filter=`drop-shadow(0 40px 80px rgba(0,0,0,.3))`;
+    b.style.transform=`perspective(500px) rotateX(${-y*16}deg) rotateY(${x*16}deg) scale(1.05)`;
   });
-  box.addEventListener('mouseleave',()=>{box.style.transform='';box.style.filter='';});
+  b.addEventListener('mouseleave',()=>{b.style.transform='';});
 });
 
-// ── PROGRESS BARS ──
-[{id:'pgJ',w:'88%'},{id:'pgS',w:'84%'},{id:'pgW',w:'26%'},{id:'pgM',w:'12%'}].forEach(b=>{
-  const el=document.getElementById(b.id);if(!el)return;
-  const ob=new IntersectionObserver(en=>{
-    if(en[0].isIntersecting){setTimeout(()=>{el.style.width=b.w;},300);ob.disconnect();}
-  },{threshold:.3});
+// PROGRESS BARS
+[{id:'pJ',w:'88%'},{id:'pS',w:'84%'},{id:'pW',w:'26%'},{id:'pM',w:'12%'}].forEach(p=>{
+  const el=document.getElementById(p.id);if(!el)return;
+  const ob=new IntersectionObserver(e=>{if(e[0].isIntersecting){el.style.width=p.w;ob.disconnect();}},{threshold:.5});
   ob.observe(el);
 });
 
-// ── SCROLL REVEAL ──
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*55);});
-},{threshold:.07});
-document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el=>observer.observe(el));
-
-// ── PARALLAX STRIPS ──
-window.addEventListener('scroll',()=>{
-  document.querySelectorAll('.parallax-img').forEach(img=>{
-    const rect=img.closest('.detail-strip').getBoundingClientRect();
-    const speed=parseFloat(img.dataset.speed||'.2');
-    const offset=(rect.top+rect.height/2-innerHeight/2)*speed;
-    img.style.transform=`translateY(${offset}px)`;
+// PARALLAX CINEMATIC STRIPS
+const cins=document.querySelectorAll('.cin-bg');
+const onScroll=()=>{
+  cins.forEach(img=>{
+    const strip=img.parentElement;
+    const rect=strip.getBoundingClientRect();
+    if(rect.bottom<0||rect.top>innerHeight)return;
+    const pct=(rect.top+rect.height/2-innerHeight/2)/(innerHeight);
+    img.style.transform=`translateY(${pct*40}px) scale(1.08)`;
   });
-},{passive:true});
+};
+window.addEventListener('scroll',onScroll,{passive:true});
 
-// ── CONTACT FORM ──
-function pickChannel(ch){
+// REVEAL
+const rv=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*50);});
+},{threshold:.08});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>rv.observe(el));
+
+// CONTACT CHANNEL
+function pick(ch){
   document.getElementById('ch-picker').style.display='none';
-  document.getElementById('step-lbl').textContent='Step 2 — Send your message';
-  ['email','whatsapp','telegram'].forEach(id=>{
-    const panel=document.getElementById('tab-'+id);
-    panel.style.display=id===ch?'':'none';
-    if(id===ch){panel.style.opacity='0';panel.style.transform='translateY(10px)';requestAnimationFrame(()=>{panel.style.transition='opacity .3s ease,transform .3s ease';panel.style.opacity='1';panel.style.transform='none';});}
+  document.getElementById('step-lbl').textContent='Your message';
+  ['email','wa','tg'].forEach(id=>{
+    document.getElementById('panel-'+id).style.display=id===ch?'':'none';
   });
 }
-function resetChannel(){
-  ['email','whatsapp','telegram'].forEach(id=>document.getElementById('tab-'+id).style.display='none');
-  const picker=document.getElementById('ch-picker');
-  picker.style.display='';picker.style.opacity='0';requestAnimationFrame(()=>{picker.style.transition='opacity .3s ease';picker.style.opacity='1';});
-  document.getElementById('step-lbl').textContent='Step 1 — How would you like to contact us?';
+function reset(){
+  ['email','wa','tg'].forEach(id=>document.getElementById('panel-'+id).style.display='none');
+  document.getElementById('ch-picker').style.display='';
+  document.getElementById('step-lbl').textContent='How would you like to contact us?';
 }
-const cForm=document.getElementById('cForm');
-if(cForm){cForm.addEventListener('submit',async function(e){
+const cf=document.getElementById('cForm');
+if(cf){cf.addEventListener('submit',async e=>{
   e.preventDefault();
   const btn=document.getElementById('sbtn'),stat=document.getElementById('fstat');
   btn.textContent='Sending…';btn.disabled=true;
   try{
-    const resp=await fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
-    if(resp.ok){stat.className='form-status ok';stat.textContent='✓ Message sent! We\'ll reply within 48 hours.';}
-    else throw new Error();
+    const r=await fetch(cf.action,{method:'POST',body:new FormData(cf),headers:{Accept:'application/json'}});
+    if(r.ok){stat.className='form-status ok';stat.textContent='✓ Sent! We\'ll reply within 48 hours.';cf.reset();}
+    else throw 0;
   }catch{stat.className='form-status er';stat.textContent='Something went wrong. Email us directly.';}
-  btn.innerHTML='<svg width="16" height="16" viewBox="0 0 28 28" fill="none"><rect x="3" y="7" width="22" height="14" rx="2" stroke="#fff" stroke-width="2"/><path d="M3 9l11 7 11-7" stroke="#fff" stroke-width="2"/></svg> Send Email';btn.disabled=false;
+  btn.textContent='Send message';btn.disabled=false;
 });}
-function sendWhatsApp(){
-  const name=document.getElementById('wa-name').value.trim();
-  const msg=document.getElementById('wa-msg').value.trim();
-  if(!msg){document.getElementById('wa-msg').focus();return;}
-  window.open('https://wa.me/447541178881?text='+encodeURIComponent('Hello Catalyst,'+(name?'\nFrom: '+name:'')+'\n\n'+msg+'\n\n— catalystboardgames.xyz'),'_blank');
+function sendWA(){
+  const msg=document.getElementById('wa-m').value.trim();if(!msg)return;
+  const n=document.getElementById('wa-n').value.trim();
+  window.open('https://wa.me/447541178881?text='+encodeURIComponent('Hello Catalyst,'+(n?'\nFrom: '+n:'')+'\n\n'+msg),'_blank');
 }
-function sendTelegram(){
-  const name=document.getElementById('tg-name').value.trim();
-  const msg=document.getElementById('tg-msg').value.trim();
-  if(!msg){document.getElementById('tg-msg').focus();return;}
-  window.open('https://t.me/mehrad_nia?text='+encodeURIComponent('Hello Catalyst,'+(name?'\nFrom: '+name:'')+'\n\n'+msg+'\n\n— catalystboardgames.xyz'),'_blank');
+function sendTG(){
+  const msg=document.getElementById('tg-m').value.trim();if(!msg)return;
+  const n=document.getElementById('tg-n').value.trim();
+  window.open('https://t.me/mehrad_nia?text='+encodeURIComponent('Hello Catalyst,'+(n?'\nFrom: '+n:'')+'\n\n'+msg),'_blank');
 }
 
-// ── NEWSLETTER ──
-const nlForm=document.getElementById('nlForm');
-if(nlForm){nlForm.addEventListener('submit',async function(e){
+// NEWSLETTER
+const nl=document.getElementById('nlForm');
+if(nl){nl.addEventListener('submit',async e=>{
   e.preventDefault();
-  const btn=document.getElementById('nlBtn'),stat=document.getElementById('nlStatus');
+  const btn=document.getElementById('nlBtn'),stat=document.getElementById('nlStat');
   btn.textContent='Subscribing…';btn.disabled=true;
   try{
-    const resp=await fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
-    if(resp.ok){stat.className='nl-status ok';stat.textContent='✓ Subscribed! Watch for your first update.';this.reset();}
-    else throw new Error();
-  }catch{stat.className='nl-status er';stat.textContent='Something went wrong. Please try again.';}
-  btn.textContent='Subscribe to Newsletter';btn.disabled=false;
+    const r=await fetch(nl.action,{method:'POST',body:new FormData(nl),headers:{Accept:'application/json'}});
+    if(r.ok){stat.className='nl-stat ok';stat.textContent='✓ Subscribed!';nl.reset();}
+    else throw 0;
+  }catch{stat.className='nl-stat er';stat.textContent='Something went wrong. Try again.';}
+  btn.textContent='Subscribe to newsletter';btn.disabled=false;
 });}
 
-// ── FAQ ──
-function toggleFaq(btn){
+// FAQ
+function faq(btn){
   const item=btn.closest('.faq-item');
-  const isOpen=item.classList.contains('open');
-  btn.closest('.faq-list').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!isOpen)item.classList.add('open');
+  const open=item.classList.contains('open');
+  item.closest('.faq-list').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!open)item.classList.add('open');
 }
+// GSAP + CURSOR
+gsap.registerPlugin(ScrollTrigger);
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function tick(){cx+=(mx-cx)*.1;cy+=(my-cy)*.1;cur2.style.left=cx+'px';cur2.style.top=cy+'px';requestAnimationFrame(tick);})();
+document.querySelectorAll('a,button,.feat-card,.card,.fbox,.pub-enq,.feat-card,.hscroll-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+});
+// HERO text stagger
+gsap.from('.hero-eyebrow',{opacity:0,y:20,duration:1,ease:'power3.out',delay:.2});
+gsap.from('.hero-h',{opacity:0,y:36,duration:1.1,ease:'power3.out',delay:.38});
+gsap.from('.hero-sub',{opacity:0,y:24,duration:1,ease:'power3.out',delay:.56});
+gsap.from('.hero-btns',{opacity:0,y:20,duration:.9,ease:'power3.out',delay:.74});
+// BOXES stagger float in
+gsap.from('.fbox',{opacity:0,y:40,duration:1.2,ease:'power3.out',delay:.9,stagger:.12});
+// FULL BLEED parallax
+document.querySelectorAll('.cin-bg').forEach(img=>{
+  gsap.to(img,{
+    y:80,ease:'none',
+    scrollTrigger:{trigger:img.parentElement,start:'top bottom',end:'bottom top',scrub:1.5}
+  });
+});
+// SECTION headings fade up via GSAP (complementing existing rv)
+document.querySelectorAll('.headline').forEach(el=>{
+  gsap.from(el,{opacity:0,y:40,duration:1,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}
+  });
+});
+
 </script>
 </body>
 </html>
