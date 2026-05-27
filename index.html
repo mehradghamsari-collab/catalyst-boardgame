@@ -343,6 +343,12 @@ footer{background:rgba(4,12,22,.98);border-top:1px solid rgba(25,198,180,.1);pad
 }
 @media(min-width:1280px){.wrap{padding:0 64px;}.games-header{padding:100px 64px 60px;}}
 @media(prefers-reduced-motion:reduce){*,.blob{animation:none!important;transition:none!important;}}
+
+/* CHANNEL TABS */
+.ch-tabs{display:flex;gap:3px;margin-bottom:18px;border-radius:8px;overflow:hidden;border:1px solid rgba(25,198,180,.15);}
+.ch-tab{flex:1;padding:10px 6px;background:rgba(8,24,38,.6);border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,242,234,.4);transition:all .25s;}
+.ch-tab:hover{color:var(--teal);background:rgba(25,198,180,.06);}
+.ch-tab.active{background:rgba(25,198,180,.12);color:var(--teal);border-bottom:2px solid var(--teal);}
 </style>
 </head>
 <body>
@@ -760,29 +766,55 @@ document.querySelectorAll('.g-tile').forEach(t=>{
   t.addEventListener('mouseleave',()=>{t.style.transform='';});
 });
 
-// CONTACT FORM — opens pre-filled mailto
-function sendForm(e){
+// CONTACT FORM — Formspree (email to Gmail) + WhatsApp + Telegram
+function switchTab(tab, btn){
+  document.querySelectorAll('.ch-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  ['tab-email','tab-whatsapp','tab-telegram'].forEach(id=>{
+    document.getElementById(id).style.display = id==='tab-'+tab ? '' : 'none';
+  });
+}
+
+// Formspree submission — message lands in Gmail inbox
+document.getElementById('cForm').addEventListener('submit', async function(e){
   e.preventDefault();
-  const name=document.getElementById('fn').value.trim();
-  const email=document.getElementById('fe').value.trim();
-  const type=document.getElementById('ft').value;
-  const msg=document.getElementById('fm').value.trim();
   const btn=document.getElementById('sbtn');
   const stat=document.getElementById('fstat');
-  if(!name||!email||!type||!msg){
+  btn.textContent='Sending…';btn.disabled=true;
+  try{
+    const resp = await fetch(this.action, {
+      method:'POST',
+      body: new FormData(this),
+      headers:{'Accept':'application/json'}
+    });
+    if(resp.ok){
+      stat.style.display='block';
+      stat.className='form-status ok';
+      stat.textContent='✓ Message sent! We\'ll reply to your email within 48 hours.';
+      this.reset();
+    } else {
+      throw new Error('Server error');
+    }
+  } catch(err){
+    stat.style.display='block';
     stat.className='form-status er';
-    stat.textContent='Please fill in all fields before sending.';
-    return;
+    stat.textContent='Something went wrong. Please email us directly at duo.boardgame.design@gmail.com';
   }
-  btn.textContent='Opening your email…';btn.disabled=true;
-  const subject=encodeURIComponent('Catalyst Enquiry: '+type);
-  const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nEnquiry: '+type+'\n\nMessage:\n'+msg+'\n\n— Sent via catalystboardgames.xyz');
-  window.location.href='mailto:duo.boardgame.design@gmail.com?subject='+subject+'&body='+body;
-  setTimeout(()=>{
-    stat.className='form-status ok';
-    stat.textContent='✓ Your email client has opened with your message ready. Please click Send to complete your enquiry.';
-    btn.textContent='Send Message →';btn.disabled=false;
-  },900);
+  btn.textContent='Send via Email →';btn.disabled=false;
+});
+
+function sendWhatsApp(){
+  const msg = document.getElementById('wa-msg').value.trim();
+  if(!msg){alert('Please type a message first.');return;}
+  const text = encodeURIComponent('Hello Catalyst Board Games,\n\n'+msg+'\n\n— Sent from catalystboardgames.xyz');
+  window.open('https://wa.me/447541178881?text='+text,'_blank');
+}
+
+function sendTelegram(){
+  const msg = document.getElementById('tg-msg').value.trim();
+  if(!msg){alert('Please type a message first.');return;}
+  const text = encodeURIComponent(msg);
+  window.open('https://t.me/catalystboardgames?text='+text,'_blank');
 }
 </script>
 </body>
