@@ -4,398 +4,236 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Catalyst Board Games — Oxford Science Game Studio</title>
-<meta name="description" content="Four science-inspired strategy games by Mehrad Niasari & Anita Mansouri. Oxford. Seeking publishers.">
+<meta name="description" content="Four science-inspired strategy games by Mehrad Niasari & Anita Mansouri. Oxford. Seeking publishers worldwide.">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-/* ── HOME-SPECIFIC ── */
-
-/* HERO */
-#hero{
-  min-height:100svh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  text-align:center;padding:80px 24px 40px;
-  background:#fff;position:relative;overflow:hidden;
+/* HOME PAGE STYLES */
+#hero {
+  min-height: 100svh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 80px 20px 48px; background: #fff; position: relative; overflow: hidden;
 }
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--light);border-radius:980px;padding:6px 16px;
-  font-size:12px;font-weight:600;color:var(--mid);letter-spacing:.04em;text-transform:uppercase;
-  margin-bottom:28px;
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--light); border-radius: 980px; padding: 6px 16px;
+  font-size: 11px; font-weight: 600; color: var(--mid); letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: 20px;
 }
-.hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);}
-.hero-h{
-  font-size:clamp(52px,9vw,96px);font-weight:700;
-  letter-spacing:-.05em;line-height:1.0;
-  color:var(--black);margin-bottom:20px;
+.hero-kicker-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; animation: pulse 2.5s ease infinite; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,201,177,.4); } 60% { box-shadow: 0 0 0 8px rgba(0,201,177,0); } }
+.hero-studio { font-size: clamp(11px, 1.8vw, 13px); font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--mid); margin-bottom: 10px; }
+.hero-name {
+  font-size: clamp(48px, 10vw, 110px); font-weight: 700;
+  letter-spacing: -.05em; line-height: .92; color: var(--black);
+  margin-bottom: 18px;
 }
-.hero-h .line2{
-  background:linear-gradient(90deg,#00c9b1,#00e5cf,#f5a623);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+.hero-name .grad {
+  background: linear-gradient(90deg, #00c9b1, #00e5cf 40%, #f5a623);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.hero-sub{font-size:clamp(17px,2.5vw,22px);color:var(--mid);line-height:1.6;max-width:540px;margin:0 auto 36px;}
-.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;}
-
-/* FLOATING BOXES */
-.boxes-stage{
-  position:relative;width:100%;max-width:700px;margin:0 auto;
-  height:280px;
+.hero-tagline { font-size: clamp(15px, 2.5vw, 20px); color: var(--mid); line-height: 1.65; max-width: 520px; margin: 0 auto 28px; }
+.hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+/* Floating boxes */
+.boxes-stage { position: relative; width: 100%; max-width: 680px; margin: 0 auto; height: 280px; }
+@media (min-width: 640px) { .boxes-stage { height: 360px; } }
+.fbox {
+  position: absolute;
+  filter: drop-shadow(0 28px 56px rgba(0,0,0,.12)) drop-shadow(0 8px 20px rgba(0,0,0,.08));
+  transition: filter .4s;
+  animation-timing-function: ease-in-out; animation-iteration-count: infinite;
 }
-@media(min-width:640px){.boxes-stage{height:360px;}}
-.fbox{
-  position:absolute;
-  filter:drop-shadow(0 32px 64px rgba(0,0,0,.13)) drop-shadow(0 8px 24px rgba(0,0,0,.09));
-  transition:filter .4s,transform .4s;
-  animation-timing-function:ease-in-out;
-  animation-iteration-count:infinite;
-  cursor:pointer;
+.fbox img { display: block; width: 100%; height: auto; object-fit: contain; }
+.fbox:hover { filter: drop-shadow(0 40px 72px rgba(0,0,0,.2)) drop-shadow(0 10px 28px rgba(0,0,0,.12)); animation-play-state: paused; }
+.fb1 { width: 150px; top: 0; left: 2%; animation: fb1 5.2s ease-in-out infinite; }
+.fb2 { width: 140px; top: 28px; left: 28%; animation: fb2 6s ease-in-out infinite; }
+.fb3 { width: 140px; top: 148px; left: 10%; animation: fb3 5.6s ease-in-out infinite; }
+.fb4 { width: 132px; top: 168px; left: 36%; animation: fb4 4.8s ease-in-out infinite; }
+@media (min-width: 640px) {
+  .fb1 { width: 200px; top: 0; left: 5%; }
+  .fb2 { width: 188px; top: 38px; left: 30%; }
+  .fb3 { width: 188px; top: 196px; left: 12%; }
+  .fb4 { width: 176px; top: 218px; left: 40%; }
 }
-.fbox img{display:block;width:100%;height:auto;object-fit:contain;}
-.fbox:hover{filter:drop-shadow(0 44px 80px rgba(0,0,0,.22)) drop-shadow(0 12px 32px rgba(0,0,0,.14));}
-.fb1{width:170px;top:0;left:5%;animation:fb1 5.2s ease-in-out infinite;}
-.fb2{width:160px;top:30px;left:calc(25% - 20px);animation:fb2 6.1s ease-in-out infinite;}
-.fb3{width:160px;top:160px;left:15%;animation:fb3 5.7s ease-in-out infinite;}
-.fb4{width:150px;top:180px;left:calc(40% - 10px);animation:fb4 4.9s ease-in-out infinite;}
-@media(min-width:640px){
-  .fb1{width:220px;top:0;left:8%;}
-  .fb2{width:205px;top:40px;left:30%;}
-  .fb3{width:205px;top:210px;left:14%;}
-  .fb4{width:190px;top:235px;left:42%;}
-}
-@keyframes fb1{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-18px) rotate(-1deg);}}
-@keyframes fb2{0%,100%{transform:translateY(0) rotate(2deg);}50%{transform:translateY(-14px) rotate(0deg);}}
-@keyframes fb3{0%,100%{transform:translateY(0) rotate(1deg);}50%{transform:translateY(-20px) rotate(-1deg);}}
-@keyframes fb4{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-16px) rotate(1deg);}}
-.fbox:hover{animation-play-state:paused;}
-
-/* HERO SCROLL CUE */
-.scroll-cue{
-  margin-top:24px;display:flex;flex-direction:column;align-items:center;gap:6px;
-  opacity:.4;transition:opacity .3s;
-}
-.scroll-cue:hover{opacity:.7;}
-.scroll-cue-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--black),transparent);animation:scline 2s ease infinite;}
-.scroll-cue-label{font-size:11px;color:var(--mid);letter-spacing:.1em;text-transform:uppercase;}
-@keyframes scline{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fb1 { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-16px) rotate(-1deg); } }
+@keyframes fb2 { 0%,100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(-13px) rotate(0); } }
+@keyframes fb3 { 0%,100% { transform: translateY(0) rotate(1deg); } 50% { transform: translateY(-18px) rotate(-1deg); } }
+@keyframes fb4 { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-15px) rotate(1deg); } }
 
 /* MARQUEE */
-.marquee{
-  background:var(--black);overflow:hidden;padding:14px 0;
-  border-top:1px solid rgba(255,255,255,.08);
-}
-.marquee-track{display:flex;gap:0;animation:mq 30s linear infinite;white-space:nowrap;}
-.marquee-track:hover{animation-play-state:paused;}
-.mq-item{
-  display:inline-flex;align-items:center;gap:20px;padding:0 30px;
-  font-size:13px;color:rgba(255,255,255,.45);letter-spacing:.06em;
-  font-weight:500;
-}
-.mq-item b{color:rgba(255,255,255,.85);font-weight:600;}
-.mq-sep{color:rgba(255,255,255,.2);}
-@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee { background: var(--black); overflow: hidden; padding: 13px 0; border-top: 1px solid #111; }
+.mq-track { display: flex; animation: mq 32s linear infinite; white-space: nowrap; }
+.mq-track:hover { animation-play-state: paused; }
+.mq-item { display: inline-flex; align-items: center; gap: 18px; padding: 0 28px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,.45); }
+.mq-item b { color: rgba(255,255,255,.82); font-weight: 600; }
+.mq-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.2); flex-shrink: 0; }
+@keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* GAME FEATURE SECTIONS — Apple "big feature" style */
-.feature{
-  display:grid;grid-template-columns:1fr;
-  gap:0;min-height:80vh;
-  border-top:1px solid var(--border);
-}
-@media(min-width:768px){
-  .feature{grid-template-columns:1fr 1fr;min-height:600px;}
-  .feature.flip .feat-img{order:2;}
-  .feature.flip .feat-txt{order:1;}
-}
-.feat-img{
-  position:relative;overflow:hidden;background:var(--light);
-  min-height:50vw;max-height:700px;
-}
-@media(min-width:768px){.feat-img{min-height:unset;max-height:unset;}}
-.feat-img img{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:center;
-  transition:transform 6s ease;transform:scale(1.0);
-}
-.feature:hover .feat-img img{transform:scale(1.04);}
-.feat-img-tint{position:absolute;inset:0;}
-.feat-txt{
-  display:flex;flex-direction:column;justify-content:center;
-  padding:56px 40px;background:#fff;
-}
-@media(min-width:768px){.feat-txt{padding:80px 60px;}}
-.feat-game-num{
-  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--border);margin-bottom:10px;
-}
-.feat-title{
-  font-size:clamp(38px,5vw,64px);font-weight:700;
-  letter-spacing:-.04em;line-height:1.02;margin-bottom:10px;
-}
-.feat-subtitle{font-size:15px;color:var(--mid);font-style:italic;margin-bottom:20px;}
-.feat-desc{font-size:16px;color:var(--mid);line-height:1.75;margin-bottom:24px;max-width:460px;}
-/* Stats row */
-.feat-stats{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:24px;}
-.feat-stat{display:flex;flex-direction:column;gap:2px;}
-.fs-n{font-size:22px;font-weight:700;letter-spacing:-.03em;color:var(--black);}
-.fs-l{font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;}
-/* Bullets */
-.feat-bullets{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
-.feat-bullet{
-  display:flex;align-items:flex-start;gap:12px;
-  font-size:14px;color:var(--mid);line-height:1.55;
-}
-.feat-bullet-icon{
-  width:24px;height:24px;border-radius:8px;flex-shrink:0;margin-top:0;
-  display:flex;align-items:center;justify-content:center;font-size:12px;
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
-}
-.feat-bullet:hover .feat-bullet-icon{transform:scale(1.15) rotate(-5deg);}
-.feat-bullet strong{color:var(--black);}
+/* GAME FEATURE PANELS */
+.gf { display: grid; grid-template-columns: 1fr; min-height: 520px; border-top: 1px solid var(--border); }
+@media (min-width: 768px) { .gf { grid-template-columns: 1fr 1fr; min-height: 580px; } .gf.flip .gf-img { order: 2; } .gf.flip .gf-txt { order: 1; } }
+.gf-img { position: relative; overflow: hidden; background: var(--light); min-height: 280px; }
+@media (min-width: 768px) { .gf-img { min-height: auto; } }
+.gf-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 7s ease; }
+.gf:hover .gf-img img { transform: scale(1.04); }
+.gf-txt { padding: 48px 24px; display: flex; flex-direction: column; justify-content: center; background: #fff; }
+@media (min-width: 768px) { .gf-txt { padding: 70px 56px; } }
+.gf.flip .gf-txt { background: var(--light); }
+.gf-num { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--border); margin-bottom: 8px; }
+.gf-title { font-size: clamp(34px, 5vw, 60px); font-weight: 700; letter-spacing: -.04em; line-height: .96; margin-bottom: 8px; }
+.gf-sub { font-size: 14px; color: var(--mid); font-style: italic; margin-bottom: 18px; }
+.gf-desc { font-size: clamp(14px, 1.8vw, 16px); color: var(--mid); line-height: 1.8; margin-bottom: 20px; max-width: 440px; }
+.gf-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.gf-tag { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 5px 12px; border-radius: 980px; border: 1px solid var(--border); color: var(--mid); background: #fff; }
+.gf-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.gf-bullet { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--mid); line-height: 1.5; }
+.gf-bullet::before { content: '—'; color: var(--border); flex-shrink: 0; font-weight: 300; }
+.gf-bullet strong { color: var(--black); font-weight: 500; }
+.gf-btns { display: flex; gap: 10px; flex-wrap: wrap; }
 /* Progress */
-.feat-progress{margin-bottom:24px;}
-.fp-label{display:flex;justify-content:space-between;margin-bottom:6px;}
-.fp-key{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);}
-.fp-val{font-size:11px;font-weight:600;letter-spacing:.06em;}
-.fp-track{height:3px;background:var(--border);border-radius:2px;}
-.fp-fill{height:100%;border-radius:2px;width:0;transition:width 1.8s cubic-bezier(.25,1,.5,1);}
-/* Buttons */
-.feat-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.gf-progress { margin-bottom: 20px; }
+.gfp-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+.gfp-key { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--mid); }
+.gfp-val { font-size: 10px; font-weight: 600; letter-spacing: .06em; }
+.gfp-track { height: 2px; background: var(--border); border-radius: 1px; }
+.gfp-fill { height: 100%; border-radius: 1px; width: 0; transition: width 1.8s cubic-bezier(.25,1,.5,1); }
 
-/* FULL-BLEED DETAIL — Apple "cinematic" strip */
-.cin-strip{
-  position:relative;height:480px;overflow:hidden;
-  border-top:1px solid var(--border);
-}
-.cin-bg{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:center;
-  transition:transform 0s linear;
-}
-.cin-tint{position:absolute;inset:0;background:rgba(0,0,0,.42);}
-.cin-body{
-  position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;
-  color:#fff;padding:0 24px;z-index:2;
-}
-.cin-title{font-size:clamp(28px,5vw,52px);font-weight:700;letter-spacing:-.04em;line-height:1.1;margin-bottom:10px;}
-.cin-sub{font-size:17px;opacity:.7;max-width:520px;margin:0 auto;}
+/* CINEMATIC */
+.cin-home { position: relative; height: 340px; overflow: hidden; border-top: 1px solid var(--border); }
+@media (min-width: 768px) { .cin-home { height: 460px; } }
+.cin-home img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.cin-home-tint { position: absolute; inset: 0; }
+.cin-home-body { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; padding: 0 20px; }
+.cin-home-body h3 { font-size: clamp(22px, 4vw, 44px); font-weight: 700; letter-spacing: -.04em; line-height: 1.08; margin-bottom: 8px; }
+.cin-home-body p { font-size: clamp(13px, 2vw, 16px); opacity: .7; max-width: 480px; margin: 0 auto; line-height: 1.65; }
 
 /* ABOUT */
-#about{background:var(--light);}
-.about-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;}
-@media(min-width:768px){.about-grid{grid-template-columns:1fr 1fr;gap:80px;}}
-.about-photo-wrap{border-radius:24px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.1);}
-.about-photo-wrap img{width:100%;height:420px;object-fit:cover;object-position:center top;}
-.about-quote{
-  font-size:clamp(20px,3vw,28px);font-weight:600;letter-spacing:-.03em;
-  line-height:1.35;color:var(--black);margin-bottom:24px;
-}
-.about-quote em{color:var(--teal);font-style:normal;}
-.about-body{font-size:16px;color:var(--mid);line-height:1.8;margin-bottom:24px;}
-/* Designer pills */
-.designers{display:flex;flex-direction:column;gap:12px;margin-top:32px;}
-.d-pill{
-  display:flex;align-items:center;gap:16px;
-  background:#fff;border:1px solid var(--border);border-radius:16px;
-  padding:14px 18px;
-  transition:box-shadow .3s,transform .3s;
-}
-.d-pill:hover{box-shadow:0 12px 40px rgba(0,0,0,.08);transform:translateY(-2px);}
-.d-photo{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;}
-.d-name{font-size:15px;font-weight:600;color:var(--black);letter-spacing:-.02em;}
-.d-role{font-size:12px;color:var(--teal);font-weight:500;margin:2px 0;}
-.d-affil{font-size:12px;color:var(--mid);}
-/* Pillars grid */
-.pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:32px;}
-@media(max-width:480px){.pillars{grid-template-columns:1fr 1fr;}}
-.pillar{
-  background:#fff;border:1px solid var(--border);border-radius:14px;
-  padding:18px 14px;text-align:center;
-  transition:box-shadow .3s,transform .3s;
-}
-.pillar:hover{box-shadow:0 10px 32px rgba(0,0,0,.07);transform:translateY(-3px);}
-.pi-icon{font-size:24px;margin-bottom:8px;}
-.pi-name{font-size:13px;font-weight:600;color:var(--black);margin-bottom:3px;}
-.pi-desc{font-size:11px;color:var(--mid);line-height:1.5;}
+#about { background: var(--light); padding: 80px 0; border-top: 1px solid var(--border); }
+@media (min-width: 768px) { #about { padding: 110px 0; } }
+.about-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
+@media (min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; gap: 72px; } }
+.about-img { border-radius: 18px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.1); }
+.about-img img { width: 100%; height: 360px; object-fit: cover; object-position: center top; display: block; }
+@media (min-width: 768px) { .about-img img { height: 460px; } }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); display: block; margin-bottom: 12px; }
+.section-h { font-size: clamp(28px, 5vw, 52px); font-weight: 700; letter-spacing: -.04em; line-height: 1.0; color: var(--black); margin-bottom: 16px; }
+.about-quote { font-size: clamp(18px, 2.5vw, 24px); font-weight: 600; letter-spacing: -.03em; line-height: 1.35; color: var(--black); margin-bottom: 20px; }
+.about-quote em { color: var(--teal); font-style: normal; }
+.about-body { font-size: 15px; color: var(--mid); line-height: 1.85; margin-bottom: 14px; }
+.designers { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+.d-pill { display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; transition: box-shadow .25s, transform .25s; }
+.d-pill:hover { box-shadow: 0 8px 30px rgba(0,0,0,.07); transform: translateY(-2px); }
+.d-photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center top; flex-shrink: 0; }
+.d-name { font-size: 15px; font-weight: 600; color: var(--black); letter-spacing: -.02em; }
+.d-role { font-size: 11px; color: var(--teal); font-weight: 600; margin: 2px 0; letter-spacing: .04em; }
+.d-affil { font-size: 12px; color: var(--mid); }
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 28px; }
+@media (min-width: 480px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
+.pillar { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 12px; text-align: center; transition: box-shadow .25s, transform .25s; }
+.pillar:hover { box-shadow: 0 8px 28px rgba(0,0,0,.07); transform: translateY(-2px); }
+.pi-icon { font-size: 22px; margin-bottom: 7px; display: block; }
+.pi-name { font-size: 12px; font-weight: 600; color: var(--black); margin-bottom: 3px; }
+.pi-desc { font-size: 11px; color: var(--mid); line-height: 1.45; }
 
 /* PUBLISHERS */
-.pub-enq-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:32px;}
-@media(min-width:640px){.pub-enq-grid{grid-template-columns:1fr 1fr;}}
-.pub-enq{
-  display:flex;align-items:center;gap:14px;
-  background:#fff;border:1px solid var(--border);border-radius:14px;
-  padding:16px 20px;cursor:pointer;
-  transition:box-shadow .25s,transform .25s,border-color .25s;
-  position:relative;overflow:hidden;
-}
-.pub-enq::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:0 2px 2px 0;
-}
-.pub-enq:hover{box-shadow:0 10px 36px rgba(0,0,0,.09);transform:translateY(-2px);}
-.pe-j::before{background:var(--jabir);}.pe-j:hover{border-color:rgba(232,137,12,.3);}
-.pe-s::before{background:var(--synth);}.pe-s:hover{border-color:rgba(34,197,94,.3);}
-.pe-w::before{background:var(--wash);}.pe-w:hover{border-color:rgba(59,130,246,.3);}
-.pe-m::before{background:var(--mise);}.pe-m:hover{border-color:rgba(201,168,122,.3);}
-.pe-icon{font-size:24px;}
-.pe-name{font-size:15px;font-weight:600;color:var(--black);margin-bottom:1px;}
-.pe-act{font-size:11px;color:var(--mid);}
-.pe-arr{margin-left:auto;font-size:18px;color:var(--border);transition:transform .2s,color .2s;}
-.pub-enq:hover .pe-arr{transform:translateX(4px);color:var(--teal);}
-/* Offer items */
-.offer-grid{display:grid;grid-template-columns:1fr;gap:8px;}
-@media(min-width:640px){.offer-grid{grid-template-columns:1fr 1fr;}}
-.offer-item{
-  display:flex;align-items:center;gap:12px;font-size:14px;color:var(--mid);
-  background:var(--light);border-radius:12px;padding:14px 16px;
-  transition:background .2s;
-}
-.offer-item:hover{background:#eaeaec;}
-.oi-icon{font-size:18px;flex-shrink:0;}
+#publishers { padding: 80px 0; border-top: 1px solid var(--border); }
+@media (min-width: 768px) { #publishers { padding: 110px 0; } }
+.pub-enq-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 28px; }
+@media (min-width: 640px) { .pub-enq-grid { grid-template-columns: 1fr 1fr; } }
+.pub-enq { display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; transition: box-shadow .25s, transform .25s, border-color .25s; position: relative; overflow: hidden; }
+.pub-enq::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 0 2px 2px 0; }
+.pub-enq:hover { box-shadow: 0 8px 28px rgba(0,0,0,.08); transform: translateY(-2px); }
+.pe-j::before { background: #e8890c; } .pe-j:hover { border-color: rgba(232,137,12,.3); }
+.pe-s::before { background: #22c55e; } .pe-s:hover { border-color: rgba(34,197,94,.3); }
+.pe-w::before { background: #3b82f6; } .pe-w:hover { border-color: rgba(59,130,246,.3); }
+.pe-m::before { background: #c9a87a; } .pe-m:hover { border-color: rgba(201,168,122,.3); }
+.pe-icon { font-size: 22px; flex-shrink: 0; }
+.pe-name { font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 1px; }
+.pe-act { font-size: 11px; color: var(--mid); }
+.pe-arr { margin-left: auto; font-size: 16px; color: var(--border); transition: transform .2s, color .2s; flex-shrink: 0; }
+.pub-enq:hover .pe-arr { transform: translateX(4px); color: var(--teal); }
+.offer-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 640px) { .offer-grid { grid-template-columns: 1fr 1fr; } }
+.offer-item { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--mid); background: var(--light); border-radius: 10px; padding: 12px 16px; }
+.offer-item:hover { background: #eaeaec; }
+.oi-icon { font-size: 16px; flex-shrink: 0; }
 
 /* CONTACT */
-.ch-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
-@media(max-width:480px){
-  .ch-cards{grid-template-columns:1fr;}
-  .ch-card{flex-direction:row;text-align:left;padding:14px 16px;gap:14px;}
+#contact { background: var(--light); padding: 80px 0; border-top: 1px solid var(--border); }
+@media (min-width: 768px) { #contact { padding: 110px 0; } }
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
+@media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
+.c-links { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+.c-link { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #fff; border-radius: 12px; border: 1px solid var(--border); transition: box-shadow .2s, transform .2s; }
+.c-link:hover { box-shadow: 0 6px 22px rgba(0,0,0,.07); transform: translateY(-2px); }
+.cl-ico { font-size: 18px; flex-shrink: 0; }
+.cl-lbl { font-size: 10px; color: var(--mid); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1px; }
+.cl-val { font-size: 13px; font-weight: 500; color: var(--black); }
+/* Channel picker */
+.ch-card-box { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
+.ch-step-lbl { font-size: 11px; font-weight: 600; color: var(--mid); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 16px; display: block; }
+.ch-cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+@media (max-width: 400px) { .ch-cards-row { grid-template-columns: 1fr; } }
+.ch-card { display: flex; flex-direction: column; align-items: center; gap: 8px; background: var(--light); border: 1.5px solid var(--border); border-radius: 12px; padding: 18px 10px; cursor: pointer; transition: all .25s; text-align: center; }
+.ch-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.1); }
+#cc-email:hover { border-color: var(--teal); }
+#cc-wa:hover { border-color: #25D366; }
+#cc-tg:hover { border-color: #2AABEE; }
+.ch-ico { font-size: 22px; }
+.ch-name { font-size: 13px; font-weight: 600; color: var(--black); }
+.ch-desc { font-size: 11px; color: var(--mid); }
+.ch-tag { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.ch-panel { animation: fadeUp .3s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.ch-back { background: none; border: none; cursor: pointer; font-size: 13px; color: var(--mid); display: flex; align-items: center; gap: 5px; margin-bottom: 16px; transition: color .15s; }
+.ch-back:hover { color: var(--black); }
+.ch-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 20px; border: 1px solid; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; float: right; }
+.form-lbl { display: block; font-size: 11px; font-weight: 500; color: var(--mid); margin-bottom: 5px; letter-spacing: .04em; }
+.form-inp, .form-sel, .form-ta {
+  width: 100%; background: #fff; border: 1.5px solid var(--border); border-radius: 9px;
+  color: var(--black); font-size: 14px; padding: 10px 13px; outline: none;
+  transition: border-color .2s, box-shadow .2s; font-family: inherit; display: block;
 }
-.ch-card{
-  display:flex;flex-direction:column;align-items:center;gap:9px;
-  background:var(--light);border:1.5px solid var(--border);border-radius:14px;
-  padding:22px 12px;cursor:pointer;
-  transition:all .3s cubic-bezier(.25,1,.5,1);text-align:center;
-}
-.ch-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.1);}
-#cc-email:hover{border-color:var(--teal);}
-#cc-wa:hover{border-color:#25D366;}
-#cc-tg:hover{border-color:#2AABEE;}
-.ch-card-ico{
-  width:48px;height:48px;border-radius:12px;border:1.5px solid var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:22px;
-  background:#fff;transition:transform .3s;
-}
-.ch-card:hover .ch-card-ico{transform:scale(1.1);}
-.ch-card-name{font-size:14px;font-weight:600;color:var(--black);}
-.ch-card-desc{font-size:11px;color:var(--mid);}
-.ch-card-tag{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
-.ch-panel{animation:fadeUp .3s ease both;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.ch-back{
-  background:none;border:none;cursor:pointer;font-size:13px;color:var(--mid);
-  display:flex;align-items:center;gap:5px;padding:0;margin-bottom:16px;
-  transition:color .15s;
-}
-.ch-back:hover{color:var(--black);}
-.ch-badge{
-  display:inline-flex;align-items:center;gap:6px;padding:4px 12px;
-  border-radius:20px;border:1px solid;font-size:11px;font-weight:600;
-  letter-spacing:.06em;text-transform:uppercase;float:right;
-}
-.form-label{display:block;font-size:12px;font-weight:500;color:var(--mid);margin-bottom:6px;letter-spacing:.04em;}
-.form-input,.form-textarea,.form-select{
-  width:100%;background:#fff;border:1.5px solid var(--border);border-radius:10px;
-  color:var(--black);font-size:15px;padding:11px 14px;outline:none;
-  transition:border-color .2s,box-shadow .2s;font-family:inherit;
-}
-.form-input:focus,.form-textarea:focus,.form-select:focus{
-  border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,201,177,.12);
-}
-.form-input::placeholder,.form-textarea::placeholder{color:var(--border);}
-.form-textarea{resize:vertical;min-height:100px;}
-.form-select option{background:#fff;}
-.form-row{margin-bottom:14px;}
-.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
-@media(max-width:480px){.form-row-2{grid-template-columns:1fr;}}
-.form-status{display:none;font-size:13px;padding:10px 14px;border-radius:10px;margin-top:10px;}
-.form-status.ok{display:block;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);color:#16a34a;}
-.form-status.er{display:block;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);color:#dc2626;}
-.ch-send{
-  width:100%;padding:13px;border:none;border-radius:10px;cursor:pointer;
-  font-size:15px;font-weight:600;font-family:inherit;
-  transition:all .2s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.ch-send:hover{transform:scale(1.01);filter:brightness(1.05);}
-.ch-send:active{transform:scale(.99);}
-.c-links{display:flex;flex-direction:column;gap:8px;margin-top:24px;}
-.c-link{
-  display:flex;align-items:center;gap:12px;padding:12px 16px;
-  background:var(--light);border-radius:12px;font-size:14px;
-  transition:background .2s;
-}
-.c-link:hover{background:#eaeaec;}
-.cl-ico{font-size:18px;flex-shrink:0;}
-.cl-lbl{font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:1px;}
-.cl-val{font-size:13px;font-weight:500;color:var(--black);}
+.form-inp:focus, .form-sel:focus, .form-ta:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,201,177,.1); }
+.form-inp::placeholder, .form-ta::placeholder { color: #c7c7cc; }
+.form-ta { resize: vertical; min-height: 96px; }
+.form-row { margin-bottom: 12px; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+@media (max-width: 400px) { .form-row-2 { grid-template-columns: 1fr; } }
+.form-st { display: none; font-size: 13px; padding: 10px 14px; border-radius: 9px; margin-top: 8px; }
+.form-st.ok { display: block; background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.3); color: #16a34a; }
+.form-st.er { display: block; background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.3); color: #dc2626; }
+.ch-send-btn { width: 100%; padding: 12px; border: none; border-radius: 9px; cursor: pointer; font-size: 14px; font-weight: 600; font-family: inherit; transition: all .2s; margin-top: 4px; }
+.ch-send-btn:hover { filter: brightness(1.06); transform: scale(1.01); }
+.ch-wa-hint { font-size: 11px; color: var(--mid); text-align: center; margin-top: 7px; }
+.ch-alt-back { width: 100%; text-align: center; background: none; border: none; cursor: pointer; font-size: 12px; color: var(--mid); padding: 10px; margin-top: 8px; transition: color .15s; }
+.ch-alt-back:hover { color: var(--black); }
 
 /* NEWSLETTER */
-#newsletter{background:var(--black);}
-.nl-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center;}
-@media(min-width:768px){.nl-grid{grid-template-columns:1fr 1fr;gap:80px;}}
-.nl-title{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1.05;color:#fff;margin-bottom:16px;}
-.nl-sub{font-size:16px;color:rgba(255,255,255,.5);line-height:1.75;max-width:440px;}
-.nl-perks{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:10px;}
-.nl-perk{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.55);}
-.nl-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0;}
-.nl-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:32px;}
-.nl-box-title{font-size:20px;font-weight:700;color:#fff;letter-spacing:-.03em;margin-bottom:4px;}
-.nl-box-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;}
-.nl-inp{
-  width:100%;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);
-  border-radius:10px;color:#fff;font-size:15px;padding:11px 14px;outline:none;
-  margin-bottom:10px;transition:border-color .2s,box-shadow .2s;font-family:inherit;
-}
-.nl-inp:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,201,177,.18);}
-.nl-inp::placeholder{color:rgba(255,255,255,.25);}
-.nl-note{font-size:11px;color:rgba(255,255,255,.2);margin-top:12px;line-height:1.6;}
-.nl-stat{display:none;font-size:13px;padding:10px 14px;border-radius:10px;margin-top:10px;}
-.nl-stat.ok{display:block;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#4ade80;}
-.nl-stat.er{display:block;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#f87171;}
-
-/* FAQ */
-.faq-block{margin-bottom:48px;}
-.faq-game-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
-.fq-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.fq-name{font-size:clamp(18px,3vw,22px);font-weight:700;letter-spacing:-.03em;}
-.faq-list{display:flex;flex-direction:column;gap:2px;}
-.faq-item{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#fff;transition:border-color .2s;}
-.faq-item:hover{border-color:rgba(0,201,177,.3);}
-.faq-q{
-  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:16px 20px;background:transparent;border:none;cursor:pointer;
-  font-size:14px;font-weight:500;color:var(--black);text-align:left;font-family:inherit;
-  transition:background .15s;
-}
-.faq-q:hover{background:rgba(0,0,0,.02);}
-.faq-icon{
-  width:22px;height:22px;border:1.5px solid var(--border);border-radius:50%;
-  flex-shrink:0;font-size:13px;display:flex;align-items:center;justify-content:center;
-  color:var(--mid);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s;
-}
-.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--teal);border-color:var(--teal);color:#fff;}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.25,1,.5,1);}
-.faq-item.open .faq-a{max-height:280px;}
-.faq-a-inner{padding:0 20px 16px;font-size:14px;color:var(--mid);line-height:1.75;}
-
-/* FOOTER */
-footer{background:#fff;border-top:1px solid var(--border);padding:40px 0;}
-.foot-inner{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;}
-@media(min-width:768px){.foot-inner{flex-direction:row;justify-content:space-between;text-align:left;}}
-.foot-brand{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--black);}
-.foot-brand img{height:28px;width:28px;border-radius:50%;object-fit:contain;}
-.foot-nav{display:flex;gap:20px;list-style:none;flex-wrap:wrap;justify-content:center;}
-.foot-nav a{font-size:12px;color:var(--mid);transition:color .15s;}
-.foot-nav a:hover{color:var(--black);}
-.foot-social{display:flex;gap:10px;}
-.foot-social a{
-  width:34px;height:34px;border:1px solid var(--border);border-radius:10px;
-  display:flex;align-items:center;justify-content:center;font-size:16px;
-  transition:border-color .2s,background .2s;
-}
-.foot-social a:hover{border-color:var(--teal);background:rgba(0,201,177,.06);}
-.foot-copy{font-size:12px;color:var(--border);}
-
+#newsletter { background: var(--black); padding: 80px 0; }
+@media (min-width: 768px) { #newsletter { padding: 100px 0; } }
+.nl-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+@media (min-width: 768px) { .nl-grid { grid-template-columns: 1fr 1fr; gap: 72px; } }
+.nl-title { font-size: clamp(28px, 5vw, 52px); font-weight: 700; letter-spacing: -.04em; line-height: 1.0; color: #fff; margin-bottom: 14px; }
+.nl-sub { font-size: 15px; color: rgba(255,255,255,.48); line-height: 1.8; max-width: 420px; }
+.nl-perks { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 9px; }
+.nl-perk { display: flex; align-items: center; gap: 9px; font-size: 14px; color: rgba(255,255,255,.52); }
+.nl-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+.nl-box { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 28px; }
+.nl-box-title { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: -.03em; margin-bottom: 3px; }
+.nl-box-sub { font-size: 12px; color: rgba(255,255,255,.38); margin-bottom: 18px; }
+.nl-inp { width: 100%; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.14); border-radius: 9px; color: #fff; font-size: 14px; padding: 11px 14px; outline: none; margin-bottom: 10px; transition: border-color .2s; font-family: inherit; }
+.nl-inp:focus { border-color: var(--teal); }
+.nl-inp::placeholder { color: rgba(255,255,255,.24); }
+.nl-note { font-size: 11px; color: rgba(255,255,255,.2); margin-top: 10px; line-height: 1.6; }
+.nl-st { display: none; font-size: 13px; padding: 9px 14px; border-radius: 9px; margin-top: 8px; }
+.nl-st.ok { display: block; background: rgba(34,197,94,.15); border: 1px solid rgba(34,197,94,.3); color: #4ade80; }
+.nl-st.er { display: block; background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.3); color: #f87171; }
 </style>
 </head>
 <body>
+
 <!-- MOBILE MENU -->
 <div class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="mT()">✕</button>
@@ -404,379 +242,338 @@ footer{background:#fff;border-top:1px solid var(--border);padding:40px 0;}
   <a href="#publishers" onclick="mT()">Publishers</a>
   <a href="#newsletter" onclick="mT()">Newsletter</a>
   <a href="#contact" onclick="mT()">Contact</a>
+  <a href="https://instagram.com/catalyst.boardgames" target="_blank" onclick="mT()">Instagram</a>
 </div>
 
 <!-- NAV -->
 <nav class="nav" id="siteNav">
   <a href="index.html" class="nav-logo">
     <img src="catalyst_logo.png" alt="Catalyst">
-    <span class="nav-logo-text">Catalyst</span>
+    <span class="nav-logo-text">Catalyst Board Games</span>
   </a>
   <ul class="nav-links">
     <li><a href="#games">Games</a></li>
     <li><a href="#about">Studio</a></li>
     <li><a href="#publishers">Publishers</a></li>
-      <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="https://instagram.com/catalyst.boardgames" target="_blank">Instagram</a></li>
   </ul>
-  <a href="#contact" class="nav-cta-btn">Get in Touch</a>
+  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Catalyst%20Board%20Games&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20your%20games.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="nav-cta-btn">Publisher enquiry</a>
   <button class="hamburger" onclick="mT()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- ═══ HERO ═══ -->
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Real-Life Inspired Board Games</div>
-  <div class="hero-studio rv" style="font-size:clamp(11px,1.8vw,13px);font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Catalyst Board Games · Oxford</div>
-  <h1 class="hero-h rv">
-    Science meets<br>
-    <span class="line2">board gaming.</span>
-  </h1>
-  <p class="hero-sub rv d1">Four strategy games grounded in real chemistry, ecology, fashion, and materials science. Designed in Oxford. Seeking publishers.</p>
-  <div class="hero-btns rv d2">
+  <div class="hero-kicker"><span class="hero-kicker-dot"></span>Real-Life Inspired Board Games</div>
+  <div class="hero-studio rv">Oxford Science Game Studio · Est. 2023</div>
+  <h1 class="hero-name rv d1">Catalyst<br><span class="grad">Board Games</span></h1>
+  <p class="hero-tagline rv d2">Four strategy games grounded in real chemistry, ecology, fashion, and materials science. Designed for publishers who value genuine IP.</p>
+  <div class="hero-btns rv d3">
     <a href="#games" class="apple-btn ab-dark">Explore the games</a>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Catalyst%20Board%20Games&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20your%20board%20games.%20Please%20send%20me%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Publisher enquiry</a>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Catalyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20your%20portfolio.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Publisher enquiry</a>
   </div>
-  <div class="boxes-stage rv d3">
-    <div class="fbox fb1" id="bJ"><img src="jabir_box.png" alt="Jabir: The Perfumer"></div>
-    <div class="fbox fb2" id="bS"><img src="synthelyst_box.png" alt="Synthelyst"></div>
-    <div class="fbox fb3" id="bW"><img src="washwheel_box.png" alt="WashWheel"></div>
-    <div class="fbox fb4" id="bM"><img src="mise_box.png" alt="Mise en Scène"></div>
+  <div class="boxes-stage rv d4">
+    <div class="fbox fb1"><img src="jabir_box.png" alt="Jabir: The Perfumer"></div>
+    <div class="fbox fb2"><img src="synthelyst_box.png" alt="Synthelyst"></div>
+    <div class="fbox fb3"><img src="washwheel_box.png" alt="WashWheel"></div>
+    <div class="fbox fb4"><img src="mise_box.png" alt="Mise en Scène"></div>
   </div>
-
 </section>
 
 <!-- MARQUEE -->
 <div class="marquee">
-  <div class="marquee-track">
-    <span class="mq-item"><b>Jabir: The Perfumer</b><span class="mq-sep">·</span></span>
-    <span class="mq-item"><b>Synthelyst</b><span class="mq-sep">·</span></span>
-    <span class="mq-item"><b>WashWheel</b><span class="mq-sep">·</span></span>
-    <span class="mq-item"><b>Mise en Scène</b><span class="mq-sep">·</span></span>
-    <span class="mq-item">Oxford Studio<span class="mq-sep">·</span></span>
-    <span class="mq-item">Seeking Publisher<span class="mq-sep">·</span></span>
-    <span class="mq-item">Science-Inspired<span class="mq-sep">·</span></span>
-    <span class="mq-item"><b>Jabir: The Perfumer</b><span class="mq-sep">·</span></span>
-    <span class="mq-item"><b>Synthelyst</b><span class="mq-sep">·</span></span>
-    <span class="mq-item"><b>WashWheel</b><span class="mq-sep">·</span></span>
-    <span class="mq-item"><b>Mise en Scène</b><span class="mq-sep">·</span></span>
-    <span class="mq-item">Oxford Studio<span class="mq-sep">·</span></span>
-    <span class="mq-item">Seeking Publisher<span class="mq-sep">·</span></span>
-    <span class="mq-item">Science-Inspired<span class="mq-sep">·</span></span>
+  <div class="mq-track">
+    <span class="mq-item"><b>Jabir: The Perfumer</b><span class="mq-dot"></span></span>
+    <span class="mq-item"><b>Synthelyst</b><span class="mq-dot"></span></span>
+    <span class="mq-item"><b>WashWheel</b><span class="mq-dot"></span></span>
+    <span class="mq-item"><b>Mise en Scène</b><span class="mq-dot"></span></span>
+    <span class="mq-item">Oxford Studio<span class="mq-dot"></span></span>
+    <span class="mq-item">Seeking Publisher<span class="mq-dot"></span></span>
+    <span class="mq-item">Real-Life Science<span class="mq-dot"></span></span>
+    <span class="mq-item"><b>Jabir: The Perfumer</b><span class="mq-dot"></span></span>
+    <span class="mq-item"><b>Synthelyst</b><span class="mq-dot"></span></span>
+    <span class="mq-item"><b>WashWheel</b><span class="mq-dot"></span></span>
+    <span class="mq-item"><b>Mise en Scène</b><span class="mq-dot"></span></span>
+    <span class="mq-item">Oxford Studio<span class="mq-dot"></span></span>
+    <span class="mq-item">Seeking Publisher<span class="mq-dot"></span></span>
+    <span class="mq-item">Real-Life Science<span class="mq-dot"></span></span>
   </div>
 </div>
 
-<!-- ═══ GAMES ═══ -->
+<!-- GAMES -->
 <div id="games">
 
 <!-- JABIR -->
-<div class="feature">
-  <div class="feat-img">
-    <img src="jabir_spread.png" alt="Jabir components" loading="lazy">
-    <div class="feat-img-tint" style="background:linear-gradient(to right,transparent 60%,#fff)"></div>
-  </div>
-  <div class="feat-txt">
-    <div class="feat-game-num rv">001 of 004</div>
-    <h2 class="feat-title rv d1" style="color:var(--jabir);">Jabir:<br>The Perfumer</h2>
-    <p class="feat-subtitle rv d1">A Game of Perfumery Chemistry</p>
-    <div class="feat-stats rv d2">
-      <div class="feat-stat"><div class="fs-n">2–6</div><div class="fs-l">Players</div></div>
-      <div class="feat-stat"><div class="fs-n">90–150</div><div class="fs-l">Minutes</div></div>
-      <div class="feat-stat"><div class="fs-n">Heavy</div><div class="fs-l">Weight</div></div>
+<div class="gf">
+  <div class="gf-img"><img src="jabir_spread.png" alt="Jabir: The Perfumer" loading="lazy" id="imgJ"></div>
+  <div class="gf-txt">
+    <div class="gf-num rv">001 / 004</div>
+    <h2 class="gf-title rv d1" style="color:#e8890c;">Jabir:<br>The Perfumer</h2>
+    <p class="gf-sub rv d1">A Game of Perfumery Chemistry · Heavy Eurogame</p>
+    <div class="gf-tags rv d2">
+      <span class="gf-tag">2–6 Players</span><span class="gf-tag">90–150 min</span><span class="gf-tag">Age 14+</span><span class="gf-tag">Heavy</span>
     </div>
-    <p class="feat-desc rv d2">Harvest real botanicals, extract essences using authentic chemistry, and compose masterpiece fragrances. The only eurogame built on perfumery science.</p>
-    <ul class="feat-bullets rv d3">
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(232,137,12,.1);">⚗️</div><div><strong>41 real botanical extracts</strong> from 6 global regions</div></li>
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(232,137,12,.1);">🔬</div><div><strong>4 extraction methods</strong> — steam, solvent, cold press, enfleurage</div></li>
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(232,137,12,.1);">📚</div><div><strong>Full educational IP</strong> — real science in every mechanic</div></li>
+    <p class="gf-desc rv d2">Step into the workshop of a master perfumer. Harvest real aromatic botanicals, extract essences through authentic chemistry, and compose fragrances that outshine every rival. The only eurogame built on genuine perfumery science.</p>
+    <ul class="gf-bullets rv d3">
+      <li class="gf-bullet"><strong>41 real botanical extracts</strong> from six global growing regions</li>
+      <li class="gf-bullet"><strong>Authentic extraction chemistry</strong> — four distinct scientific methods</li>
+      <li class="gf-bullet"><strong>Fragrance pyramid scoring</strong> — top, heart and base notes</li>
+      <li class="gf-bullet"><strong>Luxury brand partnership potential</strong> with fragrance houses</li>
+      <li class="gf-bullet"><strong>Education licensing ready</strong> — secondary school to university</li>
     </ul>
-    <div class="feat-progress rv d3">
-      <div class="fp-label"><span class="fp-key">Development</span><span class="fp-val" style="color:var(--jabir);">Seeking Publisher</span></div>
-      <div class="fp-track"><div class="fp-fill" id="pJ" style="background:var(--jabir);"></div></div>
+    <div class="gf-progress rv d3">
+      <div class="gfp-row"><span class="gfp-key">Development</span><span class="gfp-val" style="color:#e8890c;">Seeking Publisher · Prototype Ready</span></div>
+      <div class="gfp-track"><div class="gfp-fill" id="pJ" style="background:#e8890c;"></div></div>
     </div>
-    <div class="feat-btns rv d4">
-      <a href="jabir.html" class="apple-btn ab-dark">Learn more</a>
-      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir" class="apple-btn ab-outline">Enquire</a>
+    <div class="gf-btns rv d4">
+      <a href="jabir.html" class="apple-btn ab-dark">View full details</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit%20and%20prototype%20access%20details.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
     </div>
   </div>
 </div>
 
 <!-- JABIR CINEMATIC -->
-<div class="cin-strip rv">
-  <img src="jabir_flask_detail.png" class="cin-bg" alt="" loading="lazy" id="cJ">
-  <div class="cin-tint"></div>
-  <div class="cin-body">
-    <h3 class="cin-title">41 Real Botanicals</h3>
-    <p class="cin-sub">Rose, oud, jasmine, bergamot, vetiver — every token is a real aromatic species.</p>
-  </div>
+<div class="cin-home rv" id="cJ">
+  <img src="jabir_flask_detail.png" alt="" loading="lazy" id="cJimg">
+  <div class="cin-home-tint" style="background:rgba(30,10,0,.45);"></div>
+  <div class="cin-home-body"><h3>41 Real Botanicals</h3><p>Rose, oud, jasmine, bergamot, vetiver — every extract token is a real aromatic species, named and illustrated with scientific precision.</p></div>
 </div>
 
 <!-- SYNTHELYST -->
-<div class="feature flip">
-  <div class="feat-img">
-    <img src="synthelyst_spread.png" alt="Synthelyst components" loading="lazy">
-    <div class="feat-img-tint" style="background:linear-gradient(to left,transparent 60%,var(--light))"></div>
-  </div>
-  <div class="feat-txt" style="background:var(--light);">
-    <div class="feat-game-num rv">002 of 004</div>
-    <h2 class="feat-title rv d1" style="color:var(--synth);">Synthelyst</h2>
-    <p class="feat-subtitle rv d1">A Game of Biomaterial Innovation</p>
-    <div class="feat-stats rv d2">
-      <div class="feat-stat"><div class="fs-n">2–5</div><div class="fs-l">Players</div></div>
-      <div class="feat-stat"><div class="fs-n">60–90</div><div class="fs-l">Minutes</div></div>
-      <div class="feat-stat"><div class="fs-n">Mid-Heavy</div><div class="fs-l">Weight</div></div>
+<div class="gf flip">
+  <div class="gf-img"><img src="synthelyst_spread.png" alt="Synthelyst" loading="lazy" id="imgS"></div>
+  <div class="gf-txt">
+    <div class="gf-num rv">002 / 004</div>
+    <h2 class="gf-title rv d1" style="color:#22c55e;">Synthelyst</h2>
+    <p class="gf-sub rv d1">A Game of Biomaterial Innovation · Mid-Heavy Eurogame</p>
+    <div class="gf-tags rv d2">
+      <span class="gf-tag">2–5 Players</span><span class="gf-tag">60–90 min</span><span class="gf-tag">Age 14+</span><span class="gf-tag">Mid-Heavy</span>
     </div>
-    <p class="feat-desc rv d2">You are CEO of a bioplastics firm in 2035. Build sustainable supply chains, manage energy networks, and resolve crises — before Earth Health hits zero.</p>
-    <ul class="feat-bullets rv d3">
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(34,197,94,.1);">🌿</div><div><strong>5 real bioplastic feedstocks</strong> — corn, sugarcane, potato, milk, algae</div></li>
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(34,197,94,.1);">🌍</div><div><strong>Earth Health tracker</strong> — shared loss condition for all players</div></li>
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(34,197,94,.1);">🏭</div><div><strong>5 asymmetric companies</strong> with unique abilities</div></li>
+    <p class="gf-desc rv d2">You are CEO of a bioplastics firm in 2035. Build sustainable supply chains, manage clean energy networks, and prevent ecological collapse — while outmanoeuvring rivals for market dominance. Every mechanic is grounded in real bioplastics science.</p>
+    <ul class="gf-bullets rv d3">
+      <li class="gf-bullet"><strong>5 real bioplastic feedstocks</strong> — corn, sugarcane, potato, milk, algae</li>
+      <li class="gf-bullet"><strong>Cooperative-competitive tension</strong> — shared Earth Health loss condition</li>
+      <li class="gf-bullet"><strong>Asymmetric company boards</strong> — five distinct strategic identities</li>
+      <li class="gf-bullet"><strong>ESG &amp; sustainability education</strong> licensing potential</li>
+      <li class="gf-bullet"><strong>Prototype complete</strong> — ready to play today</li>
     </ul>
-    <div class="feat-progress rv d3">
-      <div class="fp-label"><span class="fp-key">Development</span><span class="fp-val" style="color:var(--synth);">Seeking Publisher</span></div>
-      <div class="fp-track"><div class="fp-fill" id="pS" style="background:var(--synth);"></div></div>
+    <div class="gf-progress rv d3">
+      <div class="gfp-row"><span class="gfp-key">Development</span><span class="gfp-val" style="color:#22c55e;">Seeking Publisher · Prototype Ready</span></div>
+      <div class="gfp-track"><div class="gfp-fill" id="pS" style="background:#22c55e;"></div></div>
     </div>
-    <div class="feat-btns rv d4">
-      <a href="synthelyst.html" class="apple-btn ab-dark">Learn more</a>
-      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst" class="apple-btn ab-outline">Enquire</a>
+    <div class="gf-btns rv d4">
+      <a href="synthelyst.html" class="apple-btn ab-dark">View full details</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit%20and%20prototype%20access%20details.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
     </div>
   </div>
 </div>
 
 <!-- SYNTHELYST CINEMATIC -->
-<div class="cin-strip rv">
-  <img src="synthelyst_pellets.png" class="cin-bg" alt="" loading="lazy" id="cS">
-  <div class="cin-tint" style="background:rgba(0,30,0,.5);"></div>
-  <div class="cin-body">
-    <h3 class="cin-title">Real Bioplastics Science</h3>
-    <p class="cin-sub">Built by a bioplastics R&D researcher — every feedstock and energy trade-off is scientifically accurate.</p>
-  </div>
+<div class="cin-home rv" id="cS">
+  <img src="synthelyst_pellets.png" alt="" loading="lazy" id="cSimg">
+  <div class="cin-home-tint" style="background:rgba(0,20,0,.5);"></div>
+  <div class="cin-home-body"><h3>Real Bioplastics Science</h3><p>Designed by a bioplastics R&D researcher — every feedstock, energy trade-off, and polymer chain is scientifically grounded.</p></div>
 </div>
 
 <!-- WASHWHEEL -->
-<div class="feature">
-  <div class="feat-img">
-    <img src="washwheel_spread.png" alt="WashWheel components" loading="lazy">
-    <div class="feat-img-tint" style="background:linear-gradient(to right,transparent 60%,#fff)"></div>
-  </div>
-  <div class="feat-txt">
-    <div class="feat-game-num rv">003 of 004</div>
-    <h2 class="feat-title rv d1" style="color:var(--wash);">WashWheel</h2>
-    <p class="feat-subtitle rv d1">The Fabric Science Game</p>
-    <div class="feat-stats rv d2">
-      <div class="feat-stat"><div class="fs-n">2–4</div><div class="fs-l">Players</div></div>
-      <div class="feat-stat"><div class="fs-n">90–120</div><div class="fs-l">Minutes</div></div>
-      <div class="feat-stat"><div class="fs-n">Medium</div><div class="fs-l">Weight</div></div>
+<div class="gf">
+  <div class="gf-img"><img src="washwheel_spread.png" alt="WashWheel" loading="lazy" id="imgW"></div>
+  <div class="gf-txt">
+    <div class="gf-num rv">003 / 004</div>
+    <h2 class="gf-title rv d1" style="color:#3b82f6;">WashWheel</h2>
+    <p class="gf-sub rv d1">The Fabric Science Game · Medium Weight</p>
+    <div class="gf-tags rv d2">
+      <span class="gf-tag">2–4 Players</span><span class="gf-tag">90–120 min</span><span class="gf-tag">Age 14+</span><span class="gf-tag">Medium</span>
     </div>
-    <p class="feat-desc rv d2">Run a professional textile lab. The rotating Wash Wheel drives a real-time resource market. Match detergent chemistry to each garment's fibre profile — or risk damaging valuable pieces.</p>
-    <ul class="feat-bullets rv d3">
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(59,130,246,.1);">🫧</div><div><strong>Rotating Wash Wheel</strong> — circular card market, 12 slots</div></li>
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(59,130,246,.1);">🧫</div><div><strong>Real fibre chemistry</strong> — pH, temperature, enzyme compatibility</div></li>
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(59,130,246,.1);">🔬</div><div><strong>4 specialist lab roles</strong> — Chemist, Ecologist, Specialist, Innovator</div></li>
+    <p class="gf-desc rv d2">Run a professional textile laboratory. The rotating Wash Wheel drives a live resource market. Match detergent chemistry to each garment's real fibre profile — or risk damaging valuable pieces and losing critical points.</p>
+    <ul class="gf-bullets rv d3">
+      <li class="gf-bullet"><strong>Rotating Wash Wheel board</strong> — a circular card market with 12 slots</li>
+      <li class="gf-bullet"><strong>Real textile chemistry</strong> — pH, temperature, enzyme science</li>
+      <li class="gf-bullet"><strong>4 specialist lab roles</strong> with unique strategic approaches</li>
+      <li class="gf-bullet"><strong>Brand partnership potential</strong> — laundry, fashion, sustainability sectors</li>
+      <li class="gf-bullet"><strong>Sustainability scoring</strong> rewards eco-friendly decisions</li>
     </ul>
-    <div class="feat-progress rv d3">
-      <div class="fp-label"><span class="fp-key">Development</span><span class="fp-val" style="color:var(--wash);">In Design</span></div>
-      <div class="fp-track"><div class="fp-fill" id="pW" style="background:var(--wash);"></div></div>
+    <div class="gf-progress rv d3">
+      <div class="gfp-row"><span class="gfp-key">Development</span><span class="gfp-val" style="color:#3b82f6;">In Design · Early Publisher Interest Welcome</span></div>
+      <div class="gfp-track"><div class="gfp-fill" id="pW" style="background:#3b82f6;"></div></div>
     </div>
-    <div class="feat-btns rv d4">
-      <a href="washwheel.html" class="apple-btn ab-dark">Learn more</a>
-      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel" class="apple-btn ab-outline">Enquire</a>
+    <div class="gf-btns rv d4">
+      <a href="washwheel.html" class="apple-btn ab-dark">View full details</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20WashWheel.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
     </div>
   </div>
 </div>
 
 <!-- WASHWHEEL CINEMATIC -->
-<div class="cin-strip rv">
-  <img src="washwheel_wheel_detail.png" class="cin-bg" alt="" loading="lazy" id="cW">
-  <div class="cin-tint" style="background:rgba(0,10,40,.5);"></div>
-  <div class="cin-body">
-    <h3 class="cin-title">The Wash Wheel</h3>
-    <p class="cin-sub">A rotating circular card market — timing your acquisition is as critical as your chemistry knowledge.</p>
-  </div>
+<div class="cin-home rv" id="cW">
+  <img src="washwheel_wheel_detail.png" alt="" loading="lazy" id="cWimg">
+  <div class="cin-home-tint" style="background:rgba(0,8,32,.52);"></div>
+  <div class="cin-home-body"><h3>The Wash Wheel</h3><p>A rotating circular card market — resources move clockwise each round, making timing your acquisition as critical as your chemistry knowledge.</p></div>
 </div>
 
 <!-- MISE EN SCÈNE -->
-<div class="feature flip">
-  <div class="feat-img">
-    <img src="mise_spread.png" alt="Mise en Scène" loading="lazy" style="object-position:center top;">
-    <div class="feat-img-tint" style="background:linear-gradient(to left,transparent 60%,var(--light))"></div>
-  </div>
-  <div class="feat-txt" style="background:var(--light);">
-    <div class="feat-game-num rv">004 of 004</div>
-    <h2 class="feat-title rv d1" style="color:var(--mise);">Mise en Scène</h2>
-    <p class="feat-subtitle rv d1">A Parisian Fashion Card Game</p>
-    <div class="feat-stats rv d2">
-      <div class="feat-stat"><div class="fs-n">2–5</div><div class="fs-l">Players</div></div>
-      <div class="feat-stat"><div class="fs-n">45–75</div><div class="fs-l">Minutes</div></div>
-      <div class="feat-stat"><div class="fs-n">Medium</div><div class="fs-l">Weight</div></div>
+<div class="gf flip">
+  <div class="gf-img"><img src="mise_spread.png" alt="Mise en Scène" loading="lazy" id="imgM" style="object-position:center top;"></div>
+  <div class="gf-txt">
+    <div class="gf-num rv">004 / 004</div>
+    <h2 class="gf-title rv d1" style="color:#c9a87a;">Mise en Scène</h2>
+    <p class="gf-sub rv d1">A Parisian Fashion Card Game · Medium Weight</p>
+    <div class="gf-tags rv d2">
+      <span class="gf-tag">2–5 Players</span><span class="gf-tag">45–75 min</span><span class="gf-tag">Age 14+</span><span class="gf-tag">Medium</span>
     </div>
-    <p class="feat-desc rv d2">Step into Paris Fashion Week. Draft iconic pieces, build your outfit tableau, and outscore rivals through harmony, audacity, and trend awareness.</p>
-    <ul class="feat-bullets rv d3">
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(201,168,122,.15);">👗</div><div><strong>80 fashion cards</strong> — tableau building, 6 outfit slots</div></li>
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(201,168,122,.15);">🎭</div><div><strong>Secret Client Cards</strong> — hidden objectives revealed at end game</div></li>
-      <li class="feat-bullet"><div class="feat-bullet-icon" style="background:rgba(201,168,122,.15);">💼</div><div><strong>Luxury brand IP potential</strong> — fashion house co-branding</div></li>
+    <p class="gf-desc rv d2">Step into Paris Fashion Week. Draft iconic fashion pieces, build your outfit tableau, and outscore rivals through harmony, audacity, and trend awareness. One bold Statement piece anchors your look — everything else must serve it.</p>
+    <ul class="gf-bullets rv d3">
+      <li class="gf-bullet"><strong>80 exquisitely illustrated fashion cards</strong> — 6 outfit slot types</li>
+      <li class="gf-bullet"><strong>Multi-layered harmony scoring</strong> — palette, style tag, season</li>
+      <li class="gf-bullet"><strong>Secret Client objectives</strong> — hidden wildcards revealed at game end</li>
+      <li class="gf-bullet"><strong>Luxury brand co-branding potential</strong> — Chanel, Dior, Saint Laurent</li>
+      <li class="gf-bullet"><strong>Expands board game audience</strong> to fashion and lifestyle demographics</li>
     </ul>
-    <div class="feat-progress rv d3">
-      <div class="fp-label"><span class="fp-key">Development</span><span class="fp-val" style="color:var(--mise);">Concepting Phase</span></div>
-      <div class="fp-track"><div class="fp-fill" id="pM" style="background:var(--mise);"></div></div>
+    <div class="gf-progress rv d3">
+      <div class="gfp-row"><span class="gfp-key">Development</span><span class="gfp-val" style="color:#c9a87a;">Concepting · Early Publisher Interest Welcome</span></div>
+      <div class="gfp-track"><div class="gfp-fill" id="pM" style="background:#c9a87a;"></div></div>
     </div>
-    <div class="feat-btns rv d4">
-      <a href="mise-en-scene.html" class="apple-btn ab-dark">Learn more</a>
-      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene" class="apple-btn ab-outline">Enquire</a>
+    <div class="gf-btns rv d4">
+      <a href="mise-en-scene.html" class="apple-btn ab-dark">View full details</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
     </div>
   </div>
 </div>
 
 <!-- MISE CINEMATIC -->
-<div class="cin-strip rv">
-  <img src="mise_cards_detail.png" class="cin-bg" alt="" loading="lazy" id="cM">
-  <div class="cin-tint" style="background:rgba(30,10,0,.45);"></div>
-  <div class="cin-body">
-    <h3 class="cin-title">Curate the Season's Most Iconic Look</h3>
-    <p class="cin-sub">One bold Statement piece anchors your look — everything else must serve it.</p>
-  </div>
+<div class="cin-home rv" id="cM">
+  <img src="mise_cards_detail.png" alt="" loading="lazy" id="cMimg">
+  <div class="cin-home-tint" style="background:rgba(24,8,0,.44);"></div>
+  <div class="cin-home-body"><h3>Curate the Season's Most Iconic Look</h3><p>One bold Statement piece anchors your look. Everything else must serve it — or lose points.</p></div>
 </div>
 
 </div><!-- /games -->
 
-<!-- ═══ ABOUT ═══ -->
-<section id="about" class="section">
+<!-- ABOUT -->
+<section id="about">
 <div class="wrap">
   <div class="about-grid">
     <div class="rv-l">
-      <div class="about-photo-wrap">
+      <div class="about-img">
         <img src="lifestyle_play.png" alt="Catalyst games in play" loading="lazy">
       </div>
       <div class="pillars">
         <div class="pillar rv"><div class="pi-icon">⚗️</div><div class="pi-name">Science</div><p class="pi-desc">Real chemistry in every mechanic</p></div>
         <div class="pillar rv d1"><div class="pi-icon">♟️</div><div class="pi-name">Strategy</div><p class="pi-desc">Deep, meaningful decisions</p></div>
-        <div class="pillar rv d2"><div class="pi-icon">🌿</div><div class="pi-name">Ecology</div><p class="pi-desc">Real-world sustainability themes</p></div>
+        <div class="pillar rv d2"><div class="pi-icon">🌿</div><div class="pi-name">Ecology</div><p class="pi-desc">Real sustainability themes</p></div>
         <div class="pillar rv d3"><div class="pi-icon">💡</div><div class="pi-name">Innovation</div><p class="pi-desc">Novel mechanics, no precedent</p></div>
         <div class="pillar rv d4"><div class="pi-icon">🎓</div><div class="pi-name">Education</div><p class="pi-desc">School-ready science IP</p></div>
-        <div class="pillar rv d5"><div class="pi-icon">🔭</div><div class="pi-name">Discovery</div><p class="pi-desc">Players leave knowing something true</p></div>
+        <div class="pillar rv d5" style="transition-delay:.42s!important;"><div class="pi-icon">🔭</div><div class="pi-name">Discovery</div><p class="pi-desc">Players learn something true</p></div>
       </div>
     </div>
-    <div class="rv-r">
+    <div class="rv-r" style="opacity:0;transform:translateX(24px);transition:opacity .75s cubic-bezier(.25,1,.5,1),transform .75s cubic-bezier(.25,1,.5,1);">
       <span class="eyebrow">The Studio</span>
+      <h2 class="section-h">Mehrad &amp; Anita.</h2>
       <p class="about-quote">Games that transform <em>curiosity</em> into strategy.</p>
       <p class="about-body">Catalyst Board Games is an Oxford science game studio founded by a chemist and a statistician. We design for curious adults, board game publishers, and students who haven't yet discovered that science can be thrilling.</p>
-      <p class="about-body">Mehrad turns real chemistry into elegant game mechanics. Anita stress-tests every system with statistical precision. Every game must be both scientifically accurate and genuinely fun.</p>
+      <p class="about-body">Mehrad turns real chemistry and scientific research into elegant mechanics. Anita stress-tests every system with statistical rigour. Every game must be both scientifically accurate and genuinely compelling to play.</p>
       <div class="designers">
         <div class="d-pill rv">
-          <img src="mehrad_image.jpg" alt="Mehrad" class="d-photo">
-          <div>
-            <div class="d-name">Mehrad Niasari</div>
-            <div class="d-role">Game Designer · Chemist</div>
-            <div class="d-affil">Oxford University · Bioplastics R&D</div>
-          </div>
+          <img src="mehrad_image.jpg" alt="Mehrad Niasari" class="d-photo">
+          <div><div class="d-name">Mehrad Niasari</div><div class="d-role">Game Designer · Chemist</div><div class="d-affil">Oxford University · Bioplastics R&amp;D</div></div>
         </div>
         <div class="d-pill rv d2">
-          <img src="anita_image.jpg" alt="Anita" class="d-photo">
-          <div>
-            <div class="d-name">Anita Mansouri</div>
-            <div class="d-role">Game Designer · Statistician</div>
-            <div class="d-affil">Pharmaceutical Industry · Oxford</div>
-          </div>
+          <img src="anita_image.jpg" alt="Anita Mansouri" class="d-photo">
+          <div><div class="d-name">Anita Mansouri</div><div class="d-role">Game Designer · Statistician</div><div class="d-affil">Pharmaceutical Industry · Oxford</div></div>
         </div>
       </div>
-      <div style="margin-top:24px;" class="rv d3">
-        <a href="#contact" class="apple-btn ab-dark">Work with us</a>
-      </div>
+      <div style="margin-top:22px;" class="rv d3"><a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Catalyst&body=Hello%20Catalyst%2C%0A%0AI%20would%20like%20to%20discuss%20publishing%20opportunities.%0A%0AThank%20you." class="apple-btn ab-dark">Get in touch</a></div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- ═══ PUBLISHERS ═══ -->
-<section id="publishers" class="section" style="background:var(--light);border-top:1px solid var(--border);">
+<!-- PUBLISHERS -->
+<section id="publishers">
 <div class="wrap">
-  <div style="text-align:center;max-width:580px;margin:0 auto 52px;" class="rv">
-    <span class="eyebrow">For Publishers</span>
-    <h2 class="headline" style="margin-bottom:12px;">The Catalyst Portfolio</h2>
-    <p style="font-size:17px;color:var(--mid);line-height:1.7;">Science-driven eurogames with genuine IP depth. Prototypes ready. Based in Oxford — available for meetings, demos, and conventions worldwide.</p>
+  <div style="text-align:center;max-width:560px;margin:0 auto 44px;" class="rv">
+    <span class="eyebrow" style="display:flex;justify-content:center;margin-bottom:10px;">For Publishers</span>
+    <h2 class="section-h">The Catalyst Portfolio.</h2>
+    <p style="font-size:16px;color:var(--mid);line-height:1.75;">Science-driven eurogames with genuine IP depth. Based in Oxford — available for demos, meetings, and conventions worldwide.</p>
   </div>
   <div class="pub-enq-grid rv">
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir" class="pub-enq pe-j">
-      <span class="pe-icon">⚗️</span><div><div class="pe-name">Jabir: The Perfumer</div><div class="pe-act">Enquire about this game</div></div><span class="pe-arr">›</span>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-j">
+      <span class="pe-icon">⚗️</span><div><div class="pe-name">Jabir: The Perfumer</div><div class="pe-act">Prototype ready · Enquire now</div></div><span class="pe-arr">›</span>
     </a>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst" class="pub-enq pe-s">
-      <span class="pe-icon">🌿</span><div><div class="pe-name">Synthelyst</div><div class="pe-act">Enquire about this game</div></div><span class="pe-arr">›</span>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-s">
+      <span class="pe-icon">🌿</span><div><div class="pe-name">Synthelyst</div><div class="pe-act">Prototype ready · Enquire now</div></div><span class="pe-arr">›</span>
     </a>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel" class="pub-enq pe-w">
-      <span class="pe-icon">🫧</span><div><div class="pe-name">WashWheel</div><div class="pe-act">Enquire about this game</div></div><span class="pe-arr">›</span>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20WashWheel.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-w">
+      <span class="pe-icon">🫧</span><div><div class="pe-name">WashWheel</div><div class="pe-act">In design · Early interest welcome</div></div><span class="pe-arr">›</span>
     </a>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene" class="pub-enq pe-m">
-      <span class="pe-icon">👗</span><div><div class="pe-name">Mise en Scène</div><div class="pe-act">Enquire about this game</div></div><span class="pe-arr">›</span>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-m">
+      <span class="pe-icon">👗</span><div><div class="pe-name">Mise en Scène</div><div class="pe-act">Concepting · Early interest welcome</div></div><span class="pe-arr">›</span>
     </a>
   </div>
   <div class="offer-grid rv d2">
-    <div class="offer-item"><span class="oi-icon">📦</span>Jabir &amp; Synthelyst prototypes ready to play</div>
-    <div class="offer-item"><span class="oi-icon">📄</span>Rulebooks &amp; design documents on request</div>
+    <div class="offer-item"><span class="oi-icon">📦</span>Jabir &amp; Synthelyst: prototypes ready to play</div>
+    <div class="offer-item"><span class="oi-icon">📄</span>Full rulebooks &amp; design documents on request</div>
     <div class="offer-item"><span class="oi-icon">🤝</span>Brand collaboration — perfume &amp; sustainability IP</div>
-    <div class="offer-item"><span class="oi-icon">🎓</span>Educational licensing available</div>
+    <div class="offer-item"><span class="oi-icon">🎓</span>Educational licensing — schools &amp; universities</div>
     <div class="offer-item"><span class="oi-icon">✈️</span>Spiel Essen, UK Games Expo, Cannes — available</div>
-    <div class="offer-item"><span class="oi-icon">🔬</span>Science accuracy documentation included</div>
+    <div class="offer-item"><span class="oi-icon">🔬</span>Science accuracy documentation for every mechanic</div>
   </div>
   <div style="text-align:center;margin-top:36px;" class="rv d3">
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Press%20Kit%20Request%20%E2%80%94%20Catalyst" class="apple-btn ab-dark">Request press kit</a>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Press%20Kit%20Request%20%E2%80%94%20Catalyst%20Board%20Games&body=Hello%20Catalyst%2C%0A%0APlease%20send%20me%20your%20full%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Request full press kit</a>
   </div>
 </div>
 </section>
 
-<!-- ═══ CONTACT ═══ -->
-<section id="contact" class="section" style="border-top:1px solid var(--border);">
+<!-- CONTACT -->
+<section id="contact">
 <div class="wrap">
-  <div style="display:grid;grid-template-columns:1fr;gap:56px;align-items:start;">
-    <div class="rv-l" style="max-width:480px;">
-      <span class="eyebrow">Contact</span>
-      <h2 class="headline" style="margin-bottom:16px;">Get in touch.</h2>
-      <p style="font-size:17px;color:var(--mid);line-height:1.7;margin-bottom:28px;">Publishers, educators, brands, media — choose how you'd like to reach us. We respond within 48 hours.</p>
+  <div class="contact-grid">
+    <div class="rv-l" style="opacity:0;transform:translateX(-24px);transition:opacity .75s cubic-bezier(.25,1,.5,1),transform .75s cubic-bezier(.25,1,.5,1);">
+      <span class="eyebrow">Contact Us</span>
+      <h2 class="section-h">Get in touch.</h2>
+      <p style="font-size:16px;color:var(--mid);line-height:1.75;margin-bottom:24px;">Publishers, educators, brands, and media — we respond within 48 hours. Choose your preferred channel below or use the form.</p>
       <div class="c-links">
         <a href="mailto:duo.boardgame.design@gmail.com" class="c-link"><span class="cl-ico">✉️</span><div><div class="cl-lbl">Email</div><div class="cl-val">duo.boardgame.design@gmail.com</div></div></a>
-        <a href="https://wa.me/447541178881" target="_blank" class="c-link"><span class="cl-ico">💬</span><div><div class="cl-lbl">WhatsApp</div><div class="cl-val">WhatsApp</div></div></a>
-        <a href="https://t.me/mehrad_nia" target="_blank" class="c-link"><span class="cl-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="#fff"/></svg></span><div><div class="cl-lbl">Telegram</div><div class="cl-val">@mehrad_nia</div></div></a>
+        <a href="https://wa.me/447541178881" target="_blank" class="c-link"><span class="cl-ico">💬</span><div><div class="cl-lbl">WhatsApp</div><div class="cl-val">Open WhatsApp chat</div></div></a>
+        <a href="https://t.me/mehrad_nia" target="_blank" class="c-link">
+          <span class="cl-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8L17 7l-3.8 12.2-2.9-4.7-4.8-2.7z" fill="#fff"/></svg></span>
+          <div><div class="cl-lbl">Telegram</div><div class="cl-val">@mehrad_nia</div></div>
+        </a>
         <a href="https://instagram.com/catalyst.boardgames" target="_blank" class="c-link"><span class="cl-ico">📷</span><div><div class="cl-lbl">Instagram</div><div class="cl-val">@catalyst.boardgames</div></div></a>
       </div>
     </div>
-    <div class="rv-r">
-      <div class="card" style="padding:28px;">
-        <p style="font-size:12px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;" id="step-lbl">How would you like to contact us?</p>
+    <div class="rv-r" style="opacity:0;transform:translateX(24px);transition:opacity .75s cubic-bezier(.25,1,.5,1),transform .75s cubic-bezier(.25,1,.5,1);">
+      <div class="ch-card-box">
+        <span class="ch-step-lbl" id="step-lbl">How would you like to reach us?</span>
         <div id="ch-picker">
-          <div class="ch-cards">
+          <div class="ch-cards-row">
             <button class="ch-card" id="cc-email" onclick="pick('email')">
-              <div class="ch-card-ico">✉️</div>
-              <div class="ch-card-name">Email</div>
-              <div class="ch-card-desc">Sent to our inbox</div>
-              <span class="ch-card-tag" style="color:var(--teal);">Recommended</span>
+              <span class="ch-ico">✉️</span><div class="ch-name">Email</div><div class="ch-desc">To our inbox</div><span class="ch-tag" style="color:var(--teal);">Recommended</span>
             </button>
             <button class="ch-card" id="cc-wa" onclick="pick('wa')">
-              <div class="ch-card-ico">💬</div>
-              <div class="ch-card-name">WhatsApp</div>
-              <div class="ch-card-desc">Opens ready to send</div>
-              <span class="ch-card-tag" style="color:#25D366;">Instant</span>
+              <span class="ch-ico">💬</span><div class="ch-name">WhatsApp</div><div class="ch-desc">Opens ready</div><span class="ch-tag" style="color:#25D366;">Instant</span>
             </button>
             <button class="ch-card" id="cc-tg" onclick="pick('tg')">
-              <div class="ch-card-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="#fff"/><path d="M10.5 14.5l-.5-3.5 7-4.5" stroke="#fff" stroke-width=".6" fill="none"/></svg></div>
-              <div class="ch-card-name">Telegram</div>
-              <div class="ch-card-desc">Opens ready to send</div>
-              <span class="ch-card-tag" style="color:#2AABEE;">Fast</span>
+              <span class="ch-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8L17 7l-3.8 12.2-2.9-4.7-4.8-2.7z" fill="#fff"/></svg></span>
+              <div class="ch-name">Telegram</div><div class="ch-desc">Opens ready</div><span class="ch-tag" style="color:#2AABEE;">Fast</span>
             </button>
           </div>
         </div>
-        <!-- EMAIL PANEL -->
+        <!-- EMAIL -->
         <div id="panel-email" class="ch-panel" style="display:none;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
             <button class="ch-back" onclick="reset()">← Back</button>
             <span class="ch-badge" style="background:rgba(0,201,177,.08);border-color:rgba(0,201,177,.3);color:var(--teal);">✉ Email</span>
           </div>
           <form id="cForm" action="https://formspree.io/f/xeedpvqp" method="POST">
-            <input type="hidden" name="_subject" value="Catalyst Website Enquiry">
+            <input type="hidden" name="_subject" value="Catalyst Board Games — Website Enquiry">
             <div class="form-row-2">
-              <div><label class="form-label">Name</label><input class="form-input" type="text" name="name" placeholder="Jane Smith" required></div>
-              <div><label class="form-label">Email</label><input class="form-input" type="email" name="email" placeholder="jane@publisher.com" required></div>
+              <div><label class="form-lbl">Name</label><input class="form-inp" type="text" name="name" placeholder="Jane Smith" required></div>
+              <div><label class="form-lbl">Email</label><input class="form-inp" type="email" name="email" placeholder="jane@publisher.com" required></div>
             </div>
-            <div class="form-row"><label class="form-label">Enquiry Type</label>
-              <select class="form-select" name="enquiry_type" required>
+            <div class="form-row"><label class="form-lbl">Enquiry Type</label>
+              <select class="form-sel" name="enquiry_type" required>
                 <option value="" disabled selected>Select…</option>
                 <option>Publisher Interest — Jabir: The Perfumer</option>
                 <option>Publisher Interest — Synthelyst</option>
@@ -789,35 +586,37 @@ footer{background:#fff;border-top:1px solid var(--border);padding:40px 0;}
                 <option>General Enquiry</option>
               </select>
             </div>
-            <div class="form-row"><label class="form-label">Message</label><textarea class="form-textarea" name="message" placeholder="Tell us about your interest in Catalyst games…" required></textarea></div>
-            <button type="submit" class="ch-send" id="sbtn" style="background:var(--black);color:#fff;">Send message</button>
-            <div class="form-status" id="fstat"></div>
+            <div class="form-row"><label class="form-lbl">Message</label><textarea class="form-ta" name="message" placeholder="Tell us about your interest in Catalyst games…" required></textarea></div>
+            <button type="submit" class="ch-send-btn" id="sbtn" style="background:var(--black);color:#fff;">Send message</button>
+            <div class="form-st" id="fstat"></div>
           </form>
-          <button class="ch-back" onclick="reset()" style="margin-top:14px;display:block;width:100%;text-align:center;padding:8px;">← Choose a different channel</button>
+          <button class="ch-alt-back" onclick="reset()">← Choose a different channel</button>
         </div>
-        <!-- WHATSAPP PANEL -->
+        <!-- WHATSAPP -->
         <div id="panel-wa" class="ch-panel" style="display:none;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
             <button class="ch-back" onclick="reset()">← Back</button>
             <span class="ch-badge" style="background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.3);color:#25D366;">💬 WhatsApp</span>
           </div>
-          <div class="form-row"><label class="form-label">Your Name</label><input class="form-input" type="text" id="wa-n" placeholder="Jane Smith"></div>
-          <div class="form-row"><label class="form-label">Message</label><textarea class="form-textarea" id="wa-m" placeholder="Hello Catalyst, I'm interested in…" style="min-height:110px;"></textarea></div>
-          <button class="ch-send" onclick="sendWA()" style="background:#25D366;color:#fff;">💬 Open in WhatsApp</button>
-          <p style="font-size:12px;color:var(--mid);text-align:center;margin-top:8px;">Opens WhatsApp</p>
-          <button class="ch-back" onclick="reset()" style="margin-top:12px;display:block;width:100%;text-align:center;padding:8px;">← Choose a different channel</button>
+          <div class="form-row"><label class="form-lbl">Name</label><input class="form-inp" type="text" id="wa-n" placeholder="Jane Smith"></div>
+          <div class="form-row"><label class="form-lbl">Message</label><textarea class="form-ta" id="wa-m" placeholder="Hello Catalyst, I'm interested in…"></textarea></div>
+          <button class="ch-send-btn" onclick="sendWA()" style="background:#25D366;color:#fff;">Open in WhatsApp</button>
+          <p class="ch-wa-hint">Opens the WhatsApp app on your device</p>
+          <button class="ch-alt-back" onclick="reset()">← Choose a different channel</button>
         </div>
-        <!-- TELEGRAM PANEL -->
+        <!-- TELEGRAM -->
         <div id="panel-tg" class="ch-panel" style="display:none;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
             <button class="ch-back" onclick="reset()">← Back</button>
-            <span class="ch-badge" style="background:rgba(42,171,238,.08);border-color:rgba(42,171,238,.3);color:#2AABEE;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="#fff"/></svg> Telegram</span>
+            <span class="ch-badge" style="background:rgba(42,171,238,.08);border-color:rgba(42,171,238,.3);color:#2AABEE;">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8L17 7l-3.8 12.2-2.9-4.7-4.8-2.7z" fill="#fff"/></svg> Telegram
+            </span>
           </div>
-          <div class="form-row"><label class="form-label">Your Name</label><input class="form-input" type="text" id="tg-n" placeholder="Jane Smith"></div>
-          <div class="form-row"><label class="form-label">Message</label><textarea class="form-textarea" id="tg-m" placeholder="Hello Catalyst, I'm interested in…" style="min-height:110px;"></textarea></div>
-          <button class="ch-send" onclick="sendTG()" style="background:#2AABEE;color:#fff;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="white" fill-opacity=".3"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="white"/></svg> Send via Telegram</button>
-          <p style="font-size:12px;color:var(--mid);text-align:center;margin-top:8px;">@mehrad_nia</p>
-          <button class="ch-back" onclick="reset()" style="margin-top:12px;display:block;width:100%;text-align:center;padding:8px;">← Choose a different channel</button>
+          <div class="form-row"><label class="form-lbl">Name</label><input class="form-inp" type="text" id="tg-n" placeholder="Jane Smith"></div>
+          <div class="form-row"><label class="form-lbl">Message</label><textarea class="form-ta" id="tg-m" placeholder="Hello Catalyst, I'm interested in…"></textarea></div>
+          <button class="ch-send-btn" onclick="sendTG()" style="background:#2AABEE;color:#fff;">Open in Telegram</button>
+          <p class="ch-wa-hint">Opens Telegram · @mehrad_nia</p>
+          <button class="ch-alt-back" onclick="reset()">← Choose a different channel</button>
         </div>
       </div>
     </div>
@@ -825,39 +624,38 @@ footer{background:#fff;border-top:1px solid var(--border);padding:40px 0;}
 </div>
 </section>
 
-<!-- ═══ NEWSLETTER ═══ -->
-<section id="newsletter" class="section">
+<!-- NEWSLETTER -->
+<section id="newsletter">
 <div class="wrap">
   <div class="nl-grid">
-    <div class="rv-l">
+    <div class="rv-l" style="opacity:0;transform:translateX(-24px);transition:opacity .75s cubic-bezier(.25,1,.5,1),transform .75s cubic-bezier(.25,1,.5,1);">
       <span class="eyebrow" style="color:rgba(255,255,255,.4);">Newsletter</span>
-      <div class="nl-title">Monthly<br>Catalyst Update.</div>
-      <p class="nl-sub">Follow the journey from idea to tabletop. Free monthly newsletter.</p>
+      <div class="nl-title">Monthly updates<br>from the studio.</div>
+      <p class="nl-sub">Development news, playtest results, convention dates, and early access to new announcements. One email per month.</p>
       <ul class="nl-perks">
-        <li class="nl-perk"><span class="nl-dot"></span>Development updates &amp; playtest results</li>
+        <li class="nl-perk"><span class="nl-dot"></span>Game development updates &amp; playtest results</li>
         <li class="nl-perk"><span class="nl-dot"></span>Behind-the-scenes design stories</li>
         <li class="nl-perk"><span class="nl-dot"></span>Convention appearances &amp; demo dates</li>
         <li class="nl-perk"><span class="nl-dot"></span>Early access to new game announcements</li>
       </ul>
     </div>
-    <div class="rv-r">
+    <div class="rv-r" style="opacity:0;transform:translateX(24px);transition:opacity .75s cubic-bezier(.25,1,.5,1),transform .75s cubic-bezier(.25,1,.5,1);">
       <div class="nl-box">
         <div class="nl-box-title">Subscribe free</div>
         <p class="nl-box-sub">One email a month. No spam. Unsubscribe anytime.</p>
         <form id="nlForm" action="https://formspree.io/f/xeedpvqp" method="POST">
-          <input type="hidden" name="type" value="Newsletter">
+          <input type="hidden" name="type" value="Newsletter Subscription">
           <input class="nl-inp" type="text" name="name" placeholder="Your name" required>
           <input class="nl-inp" type="email" name="email" placeholder="your@email.com" required>
-          <button type="submit" class="ch-send" id="nlBtn" style="background:var(--teal);color:#fff;">Subscribe to newsletter</button>
-          <div class="nl-stat" id="nlStat"></div>
-          <p class="nl-note">We never share your data.</p>
+          <button type="submit" class="apple-btn ab-teal" style="width:100%;justify-content:center;margin-top:2px;" id="nlBtn">Subscribe</button>
+          <div class="nl-st" id="nlStat"></div>
+          <p class="nl-note">We never share your data with third parties.</p>
         </form>
       </div>
     </div>
   </div>
 </div>
 </section>
-
 
 <!-- FOOTER -->
 <footer>
@@ -869,85 +667,91 @@ footer{background:#fff;border-top:1px solid var(--border);padding:40px 0;}
       <li><a href="synthelyst.html">Synthelyst</a></li>
       <li><a href="washwheel.html">WashWheel</a></li>
       <li><a href="mise-en-scene.html">Mise en Scène</a></li>
-      <li><a href="#newsletter">Newsletter</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
     </ul>
     <div class="foot-social">
-      <a href="https://instagram.com/catalyst.boardgames" target="_blank">📷</a>
-      <a href="mailto:duo.boardgame.design@gmail.com">✉️</a>
-      <a href="https://wa.me/447541178881" target="_blank">💬</a>
-      <a href="https://t.me/mehrad_nia" target="_blank" title="Telegram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="#fff"/></svg></a>
+      <a href="https://instagram.com/catalyst.boardgames" target="_blank" title="Instagram">📷</a>
+      <a href="mailto:duo.boardgame.design@gmail.com" title="Email">✉️</a>
+      <a href="https://wa.me/447541178881" target="_blank" title="WhatsApp">💬</a>
+      <a href="https://t.me/mehrad_nia" target="_blank" title="Telegram">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8L17 7l-3.8 12.2-2.9-4.7-4.8-2.7z" fill="#fff"/></svg>
+      </a>
     </div>
-    <span class="foot-copy">© 2025 Catalyst · Mehrad Niasari &amp; Anita Mansouri · Oxford</span>
+    <span class="foot-copy">© 2025 Catalyst Board Games · Mehrad Niasari &amp; Anita Mansouri · Oxford</span>
   </div>
 </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
-// NAV
-window.addEventListener('scroll',()=>{},{ passive:true });
+gsap.registerPlugin(ScrollTrigger);
 function mT(){document.getElementById('mobNav').classList.toggle('open');}
 
-// BOX MOUSE TILT
+// NAV
+window.addEventListener('scroll',()=>{
+  document.getElementById('siteNav').style.boxShadow = scrollY > 20 ? '0 1px 0 #d2d2d7' : 'none';
+},{passive:true});
+
+// HERO animations
+gsap.from('.hero-kicker',{opacity:0,y:16,duration:.9,ease:'power3.out',delay:.15});
+gsap.from('.hero-studio',{opacity:0,y:16,duration:.9,ease:'power3.out',delay:.28});
+gsap.from('.hero-name',{opacity:0,y:28,duration:1,ease:'power3.out',delay:.42});
+gsap.from('.hero-tagline',{opacity:0,y:20,duration:.9,ease:'power3.out',delay:.58});
+gsap.from('.hero-btns',{opacity:0,y:18,duration:.8,ease:'power3.out',delay:.72});
+gsap.from('.fbox',{opacity:0,y:32,duration:1.1,ease:'power3.out',delay:.88,stagger:.1});
+
+// BOX 3D tilt
 document.querySelectorAll('.fbox').forEach(b=>{
   b.addEventListener('mousemove',e=>{
     const r=b.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    b.style.transform=`perspective(500px) rotateX(${-y*16}deg) rotateY(${x*16}deg) scale(1.05)`;
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    b.style.transform=`perspective(500px) rotateX(${-y*14}deg) rotateY(${x*14}deg) scale(1.04)`;
   });
-  b.addEventListener('mouseleave',()=>{b.style.transform='';});
+  b.addEventListener('mouseleave',()=>b.style.transform='');
+});
+
+// CINEMATIC parallax
+['cJ','cS','cW','cM'].forEach(id=>{
+  const img=document.getElementById(id+'img');
+  if(!img)return;
+  gsap.to(img,{y:70,ease:'none',scrollTrigger:{trigger:'#'+id,start:'top bottom',end:'bottom top',scrub:1.5}});
 });
 
 // PROGRESS BARS
-[{id:'pJ',w:'88%'},{id:'pS',w:'84%'},{id:'pW',w:'26%'},{id:'pM',w:'12%'}].forEach(p=>{
+[{id:'pJ',w:'88%'},{id:'pS',w:'84%'},{id:'pW',w:'28%'},{id:'pM',w:'12%'}].forEach(p=>{
   const el=document.getElementById(p.id);if(!el)return;
   const ob=new IntersectionObserver(e=>{if(e[0].isIntersecting){el.style.width=p.w;ob.disconnect();}},{threshold:.5});
   ob.observe(el);
 });
 
-// PARALLAX CINEMATIC STRIPS
-const cins=document.querySelectorAll('.cin-bg');
-const onScroll=()=>{
-  cins.forEach(img=>{
-    const strip=img.parentElement;
-    const rect=strip.getBoundingClientRect();
-    if(rect.bottom<0||rect.top>innerHeight)return;
-    const pct=(rect.top+rect.height/2-innerHeight/2)/(innerHeight);
-    img.style.transform=`translateY(${pct*40}px) scale(1.08)`;
-  });
-};
-window.addEventListener('scroll',onScroll,{passive:true});
-
-// REVEAL
-const rv=new IntersectionObserver(entries=>{
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*50);});
-},{threshold:.08});
-document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>rv.observe(el));
+},{threshold:.07});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>obs.observe(el));
 
 // CONTACT CHANNEL
 function pick(ch){
   document.getElementById('ch-picker').style.display='none';
-  document.getElementById('step-lbl').textContent='Your message';
-  ['email','wa','tg'].forEach(id=>{
-    document.getElementById('panel-'+id).style.display=id===ch?'':'none';
-  });
+  document.getElementById('step-lbl').textContent='Send your message';
+  ['email','wa','tg'].forEach(id=>document.getElementById('panel-'+id).style.display=id===ch?'':'none');
 }
 function reset(){
   ['email','wa','tg'].forEach(id=>document.getElementById('panel-'+id).style.display='none');
   document.getElementById('ch-picker').style.display='';
-  document.getElementById('step-lbl').textContent='How would you like to contact us?';
+  document.getElementById('step-lbl').textContent='How would you like to reach us?';
 }
 const cf=document.getElementById('cForm');
 if(cf){cf.addEventListener('submit',async e=>{
   e.preventDefault();
-  const btn=document.getElementById('sbtn'),stat=document.getElementById('fstat');
+  const btn=document.getElementById('sbtn'),st=document.getElementById('fstat');
   btn.textContent='Sending…';btn.disabled=true;
-  try{
-    const r=await fetch(cf.action,{method:'POST',body:new FormData(cf),headers:{Accept:'application/json'}});
-    if(r.ok){stat.className='form-status ok';stat.textContent='✓ Sent! We\'ll reply within 48 hours.';cf.reset();}
+  try{const r=await fetch(cf.action,{method:'POST',body:new FormData(cf),headers:{Accept:'application/json'}});
+    if(r.ok){st.className='form-st ok';st.textContent='✓ Sent! We\'ll reply within 48 hours.';cf.reset();}
     else throw 0;
-  }catch{stat.className='form-status er';stat.textContent='Something went wrong. Email us directly.';}
+  }catch{st.className='form-st er';st.textContent='Something went wrong. Email us directly.';}
   btn.textContent='Send message';btn.disabled=false;
 });}
 function sendWA(){
@@ -960,59 +764,17 @@ function sendTG(){
   const n=document.getElementById('tg-n').value.trim();
   window.open('https://t.me/mehrad_nia?text='+encodeURIComponent('Hello Catalyst,'+(n?'\nFrom: '+n:'')+'\n\n'+msg),'_blank');
 }
-
-// NEWSLETTER
 const nl=document.getElementById('nlForm');
 if(nl){nl.addEventListener('submit',async e=>{
   e.preventDefault();
-  const btn=document.getElementById('nlBtn'),stat=document.getElementById('nlStat');
+  const btn=document.getElementById('nlBtn'),st=document.getElementById('nlStat');
   btn.textContent='Subscribing…';btn.disabled=true;
-  try{
-    const r=await fetch(nl.action,{method:'POST',body:new FormData(nl),headers:{Accept:'application/json'}});
-    if(r.ok){stat.className='nl-stat ok';stat.textContent='✓ Subscribed!';nl.reset();}
+  try{const r=await fetch(nl.action,{method:'POST',body:new FormData(nl),headers:{Accept:'application/json'}});
+    if(r.ok){st.className='nl-st ok';st.textContent='✓ Subscribed! Watch for your first update.';nl.reset();}
     else throw 0;
-  }catch{stat.className='nl-stat er';stat.textContent='Something went wrong. Try again.';}
-  btn.textContent='Subscribe to newsletter';btn.disabled=false;
+  }catch{st.className='nl-st er';st.textContent='Something went wrong. Please try again.';}
+  btn.textContent='Subscribe';btn.disabled=false;
 });}
-
-// FAQ
-function faq(btn){
-  const item=btn.closest('.faq-item');
-  const open=item.classList.contains('open');
-  item.closest('.faq-list').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!open)item.classList.add('open');
-}
-// GSAP + CURSOR
-gsap.registerPlugin(ScrollTrigger);
-const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
-let mx=0,my=0,cx=0,cy=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function tick(){cx+=(mx-cx)*.1;cy+=(my-cy)*.1;cur2.style.left=cx+'px';cur2.style.top=cy+'px';requestAnimationFrame(tick);})();
-document.querySelectorAll('a,button,.feat-card,.card,.fbox,.pub-enq,.feat-card,.hscroll-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
-});
-// HERO text stagger
-gsap.from('.hero-eyebrow',{opacity:0,y:20,duration:1,ease:'power3.out',delay:.2});
-gsap.from('.hero-h',{opacity:0,y:36,duration:1.1,ease:'power3.out',delay:.38});
-gsap.from('.hero-sub',{opacity:0,y:24,duration:1,ease:'power3.out',delay:.56});
-gsap.from('.hero-btns',{opacity:0,y:20,duration:.9,ease:'power3.out',delay:.74});
-// BOXES stagger float in
-gsap.from('.fbox',{opacity:0,y:40,duration:1.2,ease:'power3.out',delay:.9,stagger:.12});
-// FULL BLEED parallax
-document.querySelectorAll('.cin-bg').forEach(img=>{
-  gsap.to(img,{
-    y:80,ease:'none',
-    scrollTrigger:{trigger:img.parentElement,start:'top bottom',end:'bottom top',scrub:1.5}
-  });
-});
-// SECTION headings fade up via GSAP (complementing existing rv)
-document.querySelectorAll('.headline').forEach(el=>{
-  gsap.from(el,{opacity:0,y:40,duration:1,ease:'power3.out',
-    scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}
-  });
-});
-
 </script>
 </body>
 </html>

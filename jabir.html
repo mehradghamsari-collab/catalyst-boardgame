@@ -4,304 +4,165 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jabir: The Perfumer — Catalyst Board Games</title>
-<meta name="description" content="The only eurogame built on authentic perfumery chemistry. 2–6 players, 90–150 min. Seeking publisher.">
+<meta name="description" content="Jabir: The Perfumer: A Game of Perfumery Chemistry. Seeking Publisher. Catalyst Board Games, Oxford.">
 <link rel="stylesheet" href="style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-:root{--ac:#e8890c;--ac2:#c96800;--acl:rgba(232,137,12,.08);}
-/* CUSTOM CURSOR */
-body.hovering body.hovering /* HERO */
-.g-hero{
-  height:100svh;min-height:640px;position:relative;overflow:hidden;
-  display:flex;align-items:flex-end;
-  background:#fff;
-}
-.g-hero-bg{
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse at 70% 40%,rgba(232,137,12,.06) 0%,transparent 65%),
-             radial-gradient(ellipse at 30% 80%,rgba(232,137,12,.04) 0%,transparent 60%),#fff;
-}
-.g-hero-box{
-  position:absolute;right:6%;top:50%;transform:translateY(-50%);
-  width:min(38vw,420px);z-index:2;
-  filter:drop-shadow(0 40px 80px rgba(232,137,12,.15)) drop-shadow(0 16px 40px rgba(0,0,0,.1));
-}
-.g-hero-box img{width:100%;height:auto;object-fit:contain;display:block;}
-.g-hero-body{position:relative;z-index:3;padding:0 6vw 8vh;max-width:640px;}
-.g-back{
-  display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--mid);
-  margin-bottom:32px;transition:color .2s;position:absolute;top:72px;left:6vw;
-}
-.g-back:hover{color:var(--black);}
-.g-eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);margin-bottom:16px;display:block;}
-.g-title{
-  font-size:clamp(56px,9vw,108px);font-weight:700;
-  letter-spacing:-.05em;line-height:.9;color:var(--black);
-  margin-bottom:18px;
-}
-.g-title em{color:var(--ac);font-style:normal;}
-.g-sub{font-size:clamp(16px,2vw,20px);color:var(--mid);margin-bottom:28px;line-height:1.5;font-style:italic;}
-.g-meta{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:36px;}
-.gm-item{display:flex;flex-direction:column;gap:3px;}
-.gm-n{font-size:22px;font-weight:700;letter-spacing:-.03em;color:var(--black);}
-.gm-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);}
-.g-btns{display:flex;gap:10px;flex-wrap:wrap;}
-.scroll-hint{position:absolute;bottom:32px;right:6vw;display:flex;align-items:center;gap:8px;color:var(--mid);font-size:12px;letter-spacing:.06em;text-transform:uppercase;}
-.sh-line{width:40px;height:1px;background:var(--mid);transform-origin:left;}
-/* SECTIONS */
-.gs{padding:120px 0;border-top:1px solid var(--border);}
-.gc{max-width:1200px;margin:0 auto;padding:0 6vw;}
-.gs-ey{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);display:block;margin-bottom:14px;}
-.gs-h{font-size:clamp(34px,5vw,60px);font-weight:700;letter-spacing:-.04em;line-height:1.0;color:var(--black);margin-bottom:20px;}
-.gs-p{font-size:17px;color:var(--mid);line-height:1.8;max-width:600px;}
-/* SPLIT */
-.split{display:grid;grid-template-columns:1fr;gap:0;}
-@media(min-width:768px){.split{grid-template-columns:1fr 1fr;}}
-.split-img{overflow:hidden;background:var(--light);min-height:400px;position:relative;}
-.split-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;will-change:transform;}
-.split-txt{padding:72px 48px;display:flex;flex-direction:column;justify-content:center;background:#fff;}
-@media(max-width:767px){.split-txt{padding:48px 24px;}}
-/* FULL BLEED */
-.full-bleed{height:520px;position:relative;overflow:hidden;}
-.fb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform;}
-.fb-tint{position:absolute;inset:0;background:rgba(0,0,0,.44);}
-.fb-body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:0 24px;}
-.fb-title{font-size:clamp(28px,5vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin-bottom:10px;}
-.fb-sub{font-size:17px;opacity:.68;max-width:500px;margin:0 auto;}
-/* FEATURE CARDS */
-.feat-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:40px;}
-.feat-card{
-  background:#fff;border:1px solid var(--border);border-radius:16px;
-  padding:24px;transition:box-shadow .3s,transform .3s,border-color .3s;
-}
-.feat-card:hover{box-shadow:0 16px 48px rgba(0,0,0,.08);transform:translateY(-4px);border-color:var(--ac);}
-.fc-icon{font-size:28px;margin-bottom:12px;display:block;}
-.fc-title{font-size:15px;font-weight:600;color:var(--black);margin-bottom:6px;letter-spacing:-.02em;}
-.fc-body{font-size:13px;color:var(--mid);line-height:1.65;}
-/* STATS ROW */
-.stats-row{display:flex;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:40px;}
-.stat-cell{flex:1;padding:24px 20px;text-align:center;border-right:1px solid var(--border);transition:background .2s;}
-.stat-cell:last-child{border-right:none;}
-.stat-cell:hover{background:var(--light);}
-.sc-n{font-size:28px;font-weight:700;letter-spacing:-.04em;color:var(--ac);line-height:1;}
-.sc-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);margin-top:5px;}
-/* PROGRESS */
-.prog-bar{height:3px;background:var(--border);border-radius:2px;margin:8px 0 0;overflow:hidden;}
-.prog-fill{height:100%;background:var(--ac);border-radius:2px;width:0;transition:width 1.8s cubic-bezier(.25,1,.5,1);}
-/* BULLETS */
-.bullet-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:20px;}
-.bl-item{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--mid);line-height:1.55;}
-.bl-dot{
-  width:26px;height:26px;border-radius:8px;background:var(--acl);
-  display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:0;
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
-}
-.bl-item:hover .bl-dot{transform:scale(1.15) rotate(-8deg);}
-.bl-item strong{color:var(--black);}
-/* HORIZONTAL SCROLL CARDS */
-.hscroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:16px;margin-top:24px;
-  scrollbar-width:thin;scrollbar-color:var(--ac) var(--border);}
-.hscroll::-webkit-scrollbar{height:3px;}
-.hscroll::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px;}
-.hscroll-card{flex:0 0 200px;border-radius:14px;overflow:hidden;border:1px solid var(--border);transition:border-color .2s,transform .2s;}
-.hscroll-card:hover{border-color:var(--ac);transform:translateY(-4px);}
-.hscroll-card img{width:100%;height:270px;object-fit:cover;}
-.hscroll-lbl{padding:10px 12px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);}
-/* PUBLISHER CTA */
-.pub-cta{background:var(--black);border-radius:24px;padding:64px 48px;text-align:center;margin-top:60px;}
-.pub-cta h3{font-size:clamp(28px,4vw,48px);font-weight:700;color:#fff;letter-spacing:-.04em;margin-bottom:12px;}
-.pub-cta p{font-size:17px;color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 28px;}
-@media(max-width:640px){.pub-cta{padding:40px 24px;}.split-txt{padding:40px 20px;}}
-/* REVEAL */
-.rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.25,1,.5,1),transform .8s cubic-bezier(.25,1,.5,1);}
-.rv.on{opacity:1;transform:none;}
-.d1{transition-delay:.1s!important;}.d2{transition-delay:.2s!important;}.d3{transition-delay:.3s!important;}
-
-/* FAQ */
-.faq-item{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#fff;transition:border-color .2s;margin-bottom:2px;}
-.faq-item:hover{border-color:rgba(0,0,0,.15);}
-.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;background:transparent;border:none;cursor:pointer;font-size:14px;font-weight:500;color:var(--black);text-align:left;font-family:inherit;transition:background .15s;}
-.faq-q:hover{background:rgba(0,0,0,.02);}
-.faq-icon{width:22px;height:22px;border:1.5px solid var(--border);border-radius:50%;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--mid);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s;}
-.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--ac);border-color:var(--ac);color:#fff;}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.25,1,.5,1);}
-.faq-item.open .faq-a{max-height:280px;}
-.faq-a-inner{padding:0 20px 16px;font-size:14px;color:var(--mid);line-height:1.75;}
+:root{--ac:#e8890c;--acl:rgba(232,137,12,.07);}
+.g-hero{ background: radial-gradient(ellipse at 70% 50%, rgba(232,137,12,.06) 0%, transparent 65%), #fff; }
+.faq-item.open .faq-icon{background:#e8890c;border-color:#e8890c;}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav class="nav" id="siteNav">
-  <a href="index.html" class="nav-logo">
-    <img src="catalyst_logo.png" alt="Catalyst">
-    <span class="nav-logo-text">Catalyst</span>
-  </a>
+  <a href="index.html" class="nav-logo"><img src="catalyst_logo.png" alt="Catalyst"><span class="nav-logo-text">Catalyst Board Games</span></a>
   <ul class="nav-links">
     <li><a href="index.html#games">All Games</a></li>
+    <li><a href="jabir.html">Jabir</a></li>
     <li><a href="synthelyst.html">Synthelyst</a></li>
     <li><a href="washwheel.html">WashWheel</a></li>
     <li><a href="mise-en-scene.html">Mise en Scène</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="nav-cta-btn">Enquire →</a>
+  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit%20and%20prototype%20details.%0A%0AThank%20you." class="nav-cta-btn">Enquire →</a>
   <button class="hamburger" onclick="document.getElementById('mobNav').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 <div class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="document.getElementById('mobNav').classList.remove('open')">✕</button>
   <a href="index.html" onclick="document.getElementById('mobNav').classList.remove('open')">Home</a>
+  <a href="index.html#games" onclick="document.getElementById('mobNav').classList.remove('open')">All Games</a>
   <a href="index.html#contact" onclick="document.getElementById('mobNav').classList.remove('open')">Contact</a>
 </div>
 
 <!-- HERO -->
 <section class="g-hero">
-  <div class="g-hero-bg"></div>
-  <a href="index.html" class="g-back">← All games</a>
-  <div class="g-hero-box" id="heroBox">
-    <img src="jabir_box.png" alt="Jabir: The Perfumer">
-  </div>
-  <div class="g-hero-body">
-    <span class="g-eyebrow">Game 001 · Heavy Eurogame</span>
-    <h1 class="g-title">Jabir:<br><em>The Perfumer</em></h1>
+  <div class="g-hero-left">
+    <a href="index.html" class="g-back">← All games</a>
+    <span class="g-eyebrow" style="color:#e8890c;">Game 001 of 004 · Heavy Eurogame</span>
+    <h1 class="g-title">Jabir:<br><em style="color:#e8890c;font-style:normal;">The Perfumer</em></h1>
     <p class="g-sub">A Game of Perfumery Chemistry</p>
     <div class="g-meta">
       <div class="gm-item"><div class="gm-n">2–6</div><div class="gm-l">Players</div></div>
       <div class="gm-item"><div class="gm-n">90–150</div><div class="gm-l">Minutes</div></div>
       <div class="gm-item"><div class="gm-n">Heavy</div><div class="gm-l">Weight</div></div>
       <div class="gm-item"><div class="gm-n">14+</div><div class="gm-l">Age</div></div>
+      <div class="gm-item"><div class="gm-n" style="color:#e8890c;">Seeking Publisher</div><div class="gm-l">Prototype complete and ready to play</div></div>
     </div>
     <div class="g-btns">
-      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Publisher enquiry</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit%20and%20prototype%20details.%0A%0AThank%20you." class="apple-btn ab-dark">Send publisher enquiry</a>
       <a href="index.html#contact" class="apple-btn ab-outline">Get in touch</a>
     </div>
   </div>
-  <div class="scroll-hint"><div class="sh-line" id="shLine"></div><span>Scroll to explore</span></div>
+  <div class="g-hero-right">
+    <div class="g-hero-right-bg" style="background: radial-gradient(ellipse at 70% 50%, rgba(232,137,12,.06) 0%, transparent 65%), #fff;"></div>
+    <div class="g-hero-box" id="heroBox"><img src="jabir_box.png" alt="Jabir: The Perfumer"></div>
+  </div>
 </section>
 
-<!-- HERO IMAGE STRIP — fills space below hero -->
-<div style="background:#fff;display:flex;gap:0;overflow:hidden;height:260px;border-top:1px solid var(--border);">
-  <div style="flex:1;overflow:hidden;"><img src="jabir_cards_hand.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s;display:block;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''"></div>
-  <div style="flex:1;overflow:hidden;"><img src="jabir_botanicals_hand.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s;display:block;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''"></div>
-  <div style="flex:1;overflow:hidden;"><img src="jabir_flask_detail.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .6s;display:block;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''"></div>
-</div>
+<!-- IMAGE STRIP -->
+<div class="img-strip"><div class="img-strip-cell"><img src="jabir_cards_hand.png" alt="" loading="lazy"></div><div class="img-strip-cell"><img src="jabir_botanicals_hand.png" alt="" loading="lazy"></div><div class="img-strip-cell"><img src="jabir_flask_detail.png" alt="" loading="lazy"></div></div>
 
-<!-- WHAT IS IT -->
+<!-- INTRODUCTION -->
 <section class="gs">
 <div class="gc">
-  <div class="split">
-    <div class="split-img" id="imgSpread">
-      <img src="jabir_spread.png" alt="Jabir components" loading="lazy" id="imgSpreadImg">
-    </div>
-    <div class="split-txt">
-      <span class="gs-ey rv">The Game</span>
-      <h2 class="gs-h rv d1">The world's first<br>perfumery eurogame.</h2>
-      <p class="gs-p rv d2">Step into the workshop of a master perfumer. Harvest aromatic botanicals across six global regions, extract essences using four authentic chemical methods, and compose fragrances that score across the fragrance pyramid. The science is real. The competition is fierce.</p>
-      <div class="stats-row rv d3">
-        <div class="stat-cell"><div class="sc-n">41</div><div class="sc-l">Botanicals</div></div>
-        <div class="stat-cell"><div class="sc-n">6</div><div class="sc-l">Regions</div></div>
-        <div class="stat-cell"><div class="sc-n">4</div><div class="sc-l">Methods</div></div>
-        <div class="stat-cell"><div class="sc-n">5</div><div class="sc-l">Rounds</div></div>
-      </div>
-    </div>
+  <div class="intro-block">
+    <span class="gs-ey rv" style="color:#e8890c;">About the Game</span>
+    <p class="big-p rv d1">The world's first eurogame built on authentic perfumery chemistry.</p>
+    <p class="body-p rv">Jabir places players in the role of master perfumers competing across five seasons of harvest, extraction, and composition. Every mechanic is grounded in the real science of fragrance creation — from regional botany to molecular extraction chemistry.</p><p class="body-p rv">Named after Jabir ibn Hayyan, the 8th-century Arab chemist who invented distillation, the game brings one of history's most sophisticated crafts to the modern strategy gaming table.</p><p class="body-p rv">Jabir is not merely a game about perfume. It is a game about mastery, patience, and the chemistry of beauty — presented in a format that publishers can position for luxury retail, science education, and brand partnerships with fragrance houses worldwide.</p>
   </div>
 </div>
 </section>
 
-<!-- CINEMATIC STRIP — FLASKS -->
-<div class="full-bleed rv" id="fb1">
-  <img src="jabir_flask_detail.png" class="fb-img" alt="" loading="lazy" id="fb1img">
-  <div class="fb-tint"></div>
-  <div class="fb-body">
-    <h3 class="fb-title">41 Real Botanicals</h3>
-    <p class="fb-sub">Rose, oud, jasmine, bergamot, vetiver — every token is a real aromatic species from the world's great growing regions.</p>
-  </div>
-</div>
+<div class="cin rv">
+  <img src="jabir_flask_detail.png" class="cin-img" alt="" loading="lazy">
+  
 
-<!-- MECHANICS -->
+<!-- WHAT MAKES IT UNIQUE -->
 <section class="gs" style="background:var(--light);">
 <div class="gc">
-  <span class="gs-ey rv">How It Plays</span>
-  <h2 class="gs-h rv d1">Deep strategy.<br>Real science.</h2>
-  <p class="gs-p rv d2">Every turn, every action is grounded in authentic perfumery chemistry. No other eurogame asks you to think like a real scientist.</p>
-  <div class="feat-cards">
-    <div class="feat-card rv"><span class="fc-icon">🌍</span><div class="fc-title">Harvesting</div><div class="fc-body">Collect 41 real botanical extracts from 6 global regions — each with unique availability windows and extraction compatibility.</div></div>
-    <div class="feat-card rv d1"><span class="fc-icon">⚗️</span><div class="fc-title">Extraction</div><div class="fc-body">Choose from steam distillation, solvent extraction, cold pressing, or enfleurage — each yielding different aromatic profiles and VP.</div></div>
-    <div class="feat-card rv d2"><span class="fc-icon">🧪</span><div class="fc-title">Composition</div><div class="fc-body">Layer top, heart, and base notes into a fragrance pyramid. Score for harmony, boldness, and rarity across 5 rounds.</div></div>
-    <div class="feat-card rv d3"><span class="fc-icon">🏆</span><div class="fc-title">Grand Alchemist</div><div class="fc-body">The player whose fragrance portfolio earns the most prestige becomes Grand Alchemist of the season. One winner. No ties.</div></div>
-    <div class="feat-card rv"><span class="fc-icon">🔬</span><div class="fc-title">Maturation Tracks</div><div class="fc-body">Age your essences for greater potency — but time your harvest windows or lose the opportunity entirely.</div></div>
-    <div class="feat-card rv d1"><span class="fc-icon">⚡</span><div class="fc-title">Crisis Events</div><div class="fc-body">Seasonal market disruptions, crop failures, and competitor interference keep every game unpredictable and tense.</div></div>
+  <span class="gs-ey rv" style="color:#e8890c;">Key Strengths</span>
+  <h2 class="gs-h rv d1">What makes<br>Jabir: The Perfumer exceptional.</h2>
+  <div class="feat-grid">
+<div class="feat-card rv"><span class="fc-icon">⚗️</span><div class="fc-title">Real Chemistry</div><div class="fc-body">Every extraction method — steam distillation, solvent extraction, cold pressing, enfleurage — reflects actual industrial perfumery science. Players engage with genuine material science.</div></div>
+<div class="feat-card rv"><span class="fc-icon">🌍</span><div class="fc-title">Global Botany</div><div class="fc-body">41 aromatic botanical species across six real growing regions — from the rose fields of Bulgaria to the oud forests of Southeast Asia. Every extract token is scientifically named.</div></div>
+<div class="feat-card rv"><span class="fc-icon">🏆</span><div class="fc-title">Fragrance Pyramid</div><div class="fc-body">The scoring system mirrors the real fragrance pyramid: top, heart, and base notes score differently, rewarding deep knowledge and thoughtful composition strategy.</div></div>
+<div class="feat-card rv"><span class="fc-icon">💎</span><div class="fc-title">Luxury IP Potential</div><div class="fc-body">Natural co-branding opportunity with premium fragrance houses such as Creed, Maison Margiela, or Chanel. The aesthetic and subject matter open retail markets far beyond traditional board game channels.</div></div>
+<div class="feat-card rv"><span class="fc-icon">🎓</span><div class="fc-title">Education Ready</div><div class="fc-body">Designed for the classroom as much as the gaming table. Currently being considered for secondary school chemistry, university chemistry outreach, and museum science programming.</div></div>
+<div class="feat-card rv"><span class="fc-icon">📦</span><div class="fc-title">Prototype Complete</div><div class="fc-body">The full prototype is ready to play today. Rulebook finalised. Final art complete. Press kit, science documentation, and design files available immediately on request.</div></div>
   </div>
 </div>
 </section>
 
-<!-- CINEMATIC STRIP — CARDS HAND -->
-<div class="full-bleed rv" id="fb2">
-  <img src="jabir_cards_hand.png" class="fb-img" alt="" loading="lazy" id="fb2img">
-  <div class="fb-tint" style="background:rgba(60,20,0,.5);"></div>
-  <div class="fb-body">
-    <h3 class="fb-title">Botanical Cards</h3>
-    <p class="fb-sub">Each card is a real species — scientifically named, illustrated with botanical precision, and mechanically true to its chemistry.</p>
-  </div>
+<div class="cin-body"><h3 class="cin-h">Botanical Cards</h3><p class="cin-p">Each card carries a real species name, extraction method, and fragrance notes — beautiful, precise, and mechanically true to its chemistry.</p></div>
 </div>
 
-<!-- COMPONENTS -->
+<!-- FOR PUBLISHERS -->
 <section class="gs">
 <div class="gc">
-  <span class="gs-ey rv">Components</span>
-  <h2 class="gs-h rv d1">Everything in the box.</h2>
-  <div class="hscroll rv d2">
-    <div class="hscroll-card"><img src="jabir_spread.png" alt="Full spread" loading="lazy"><div class="hscroll-lbl">Full Spread</div></div>
-    <div class="hscroll-card"><img src="jabir_cards_hand.png" alt="Cards" loading="lazy"><div class="hscroll-lbl">Botanical Cards</div></div>
-    <div class="hscroll-card"><img src="jabir_botanicals_hand.png" alt="Botanicals" loading="lazy"><div class="hscroll-lbl">Extract Tokens</div></div>
-    <div class="hscroll-card"><img src="jabir_flask_detail.png" alt="Flasks" loading="lazy"><div class="hscroll-lbl">Flask Tokens</div></div>
-  </div>
-  <div class="split" style="margin-top:60px;">
-    <div class="split-txt" style="background:var(--light);border-radius:20px 0 0 20px;">
-      <span class="gs-ey rv">Why Jabir?</span>
-      <h3 class="gs-h rv d1" style="font-size:clamp(26px,4vw,42px);">For publishers<br>seeking real IP.</h3>
-      <ul class="bullet-list rv d2">
-        <li class="bl-item"><div class="bl-dot">📦</div><div><strong>Prototype complete</strong> — ready to play today</div></li>
-        <li class="bl-item"><div class="bl-dot">📚</div><div><strong>Science documentation</strong> — accuracy verified by researchers</div></li>
-        <li class="bl-item"><div class="bl-dot">🤝</div><div><strong>Brand partnerships</strong> — natural co-branding with luxury fragrance houses</div></li>
-        <li class="bl-item"><div class="bl-dot">🎓</div><div><strong>Education licensing</strong> — secondary school &amp; university ready</div></li>
-        <li class="bl-item"><div class="bl-dot">✈️</div><div><strong>Convention ready</strong> — Spiel Essen, UK Games Expo, Cannes</div></li>
+  <div class="pub-cols">
+    <div>
+      <span class="gs-ey rv" style="color:#e8890c;">For Publishers</span>
+      <h2 class="gs-h rv d1" style="font-size:clamp(26px,4vw,44px);">Built for publishers with vision.</h2>
+      <p class="gs-p rv d2">Jabir occupies a completely unique category: a premium eurogame with authentic scientific foundations and genuine luxury brand partnership potential. No comparable game exists in the market.</p>
+      <ul class="blist rv d3">
+<li class="blist-item"><div class="blist-dot" style="background:rgba(232,137,12,.07);">📦</div><div><strong>Prototype ready to play — schedule a session today</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(232,137,12,.07);">📄</div><div><strong>Full rulebook, science documentation, and design files available</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(232,137,12,.07);">🤝</div><div><strong>Natural fragrance house co-branding — Creed, Chanel, Maison Margiela</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(232,137,12,.07);">🎓</div><div><strong>Education licensing — secondary school to university</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(232,137,12,.07);">🌍</div><div><strong>Suitable for Spiel Essen, UK Games Expo, Cannes</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(232,137,12,.07);">💼</div><div><strong>Retail potential in luxury department stores and boutiques</strong></div></li>
       </ul>
     </div>
-    <div class="split-img" style="min-height:360px;">
-      <img src="jabir_botanicals_hand.png" alt="Jabir botanicals" loading="lazy">
+    <div class="split-img rv" style="min-height:360px;border-radius:var(--radius);overflow:hidden;">
+      <img src="jabir_spread.png" alt="Jabir: The Perfumer" loading="lazy" style="border-radius:var(--radius);">
     </div>
   </div>
-  <div class="pub-cta rv">
-    <h3>Interested in publishing Jabir?</h3>
-    <p>We have prototypes ready, full design documentation, and science accuracy reports. Let's talk.</p>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer." class="apple-btn ab-teal">Send publisher enquiry</a>
-  </div>
 </div>
 </section>
 
-<!-- ═══ FAQ — JABIR ═══ -->
+<!-- GALLERY -->
 <section class="gs" style="background:var(--light);">
 <div class="gc">
-  <span class="gs-ey rv">Frequently Asked Questions</span>
-  <h2 class="gs-h rv d1">Everything you need<br>to know about Jabir.</h2>
-  <div style="display:flex;flex-direction:column;gap:4px;margin-top:36px;">
-    <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>Do I need chemistry knowledge to play?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Not at all. Jabir teaches everything through play. The chemistry is embedded in the mechanics so naturally that players absorb it without realising. By your second game you'll think like a real perfumer.</div></div></div>
-    <div class="faq-item rv d1"><button class="faq-q" onclick="faq(this)"><span>How long does a game take?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">90–150 minutes across 5 rounds. Experienced players finish closer to 90 minutes. A simplified first-play variant reduces this to around 75 minutes.</div></div></div>
-    <div class="faq-item rv d2"><button class="faq-q" onclick="faq(this)"><span>What makes Jabir unique as a eurogame?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">It is the only eurogame built on authentic perfumery chemistry. Every extraction method and fragrance pyramid layer is scientifically accurate. It also has strong co-branding potential with luxury fragrance houses — a commercial opportunity no other strategy game offers.</div></div></div>
-    <div class="faq-item rv d3"><button class="faq-q" onclick="faq(this)"><span>Is Jabir suitable for education?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — this is a deliberate design goal. Jabir covers organic chemistry, biochemistry, and natural extraction processes. Suitable for secondary school chemistry, university outreach, and museum science experiences.</div></div></div>
-    <div class="faq-item rv d4"><button class="faq-q" onclick="faq(this)"><span>What is the current development status?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Fully designed — prototype complete, rulebook finalised, final art done. Actively seeking a publishing partner. Press kits and prototype access available immediately on request.</div></div></div>
+  <span class="gs-ey rv" style="color:#e8890c;">Game Components</span>
+  <h2 class="gs-h rv d1">See it in detail.</h2>
+  <div class="hgallery rv d2">
+    <div class="hgallery-card"><img src="jabir_cards_hand.png" alt="" loading="lazy"><div class="hgallery-lbl">Game Spread</div></div><div class="hgallery-card"><img src="jabir_botanicals_hand.png" alt="" loading="lazy"><div class="hgallery-lbl">Component Detail</div></div><div class="hgallery-card"><img src="jabir_flask_detail.png" alt="" loading="lazy"><div class="hgallery-lbl">Cards Detail</div></div>
   </div>
 </div>
 </section>
 
-<!-- FOOTER -->
+<!-- FAQ -->
+<section class="gs">
+<div class="gc">
+  <span class="gs-ey rv" style="color:#e8890c;">Publisher Questions</span>
+  <h2 class="gs-h rv d1">Frequently asked<br>by publishers.</h2>
+  <div class="faq-block">
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>Do publishers need to know about perfumery?</span><span class="faq-icon" style="border-color:#e8890c;color:#e8890c;">+</span></button><div class="faq-a"><div class="faq-a-inner">Not at all. The science is embedded naturally in the mechanics — publishers engage with it as a rich theme and IP asset rather than a subject that needs expertise. The game teaches through play.</div></div></div>
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>What brand partnership opportunities exist?</span><span class="faq-icon" style="border-color:#e8890c;color:#e8890c;">+</span></button><div class="faq-a"><div class="faq-a-inner">Jabir has natural co-branding potential with luxury fragrance houses, perfumery ingredient suppliers, and heritage brands. The aesthetic and subject matter open retail markets far beyond traditional board game channels.</div></div></div>
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>Is the prototype available to review?</span><span class="faq-icon" style="border-color:#e8890c;color:#e8890c;">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — the prototype is complete and ready to play. We can arrange a demonstration at your offices or at a convention. Contact us to schedule a session.</div></div></div>
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>What is the educational licensing opportunity?</span><span class="faq-icon" style="border-color:#e8890c;color:#e8890c;">+</span></button><div class="faq-a"><div class="faq-a-inner">Jabir covers organic chemistry, biochemistry, and natural extraction processes in an engaging format. Licensing is available for secondary school programmes, university outreach, and museum experiences.</div></div></div>
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>What design documentation is available?</span><span class="faq-icon" style="border-color:#e8890c;color:#e8890c;">+</span></button><div class="faq-a"><div class="faq-a-inner">Full rulebook, science accuracy documentation, component specifications, and design files are available to interested publishers immediately upon request.</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="gs" style="background:var(--light);">
+<div class="gc">
+  <div class="pub-cta rv">
+    <h3>Interested in publishing Jabir?</h3>
+    <p>We have a complete prototype ready to play, full design documentation, and science accuracy reports verified by researchers. Let's talk.</p>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit%20and%20prototype%20details.%0A%0AThank%20you." class="apple-btn ab-teal">Send publisher enquiry</a>
+  </div>
+</div>
+</section>
+
 <footer>
 <div class="wrap">
   <div class="foot-inner">
     <a href="index.html" class="foot-brand"><img src="catalyst_logo.png" alt="Catalyst">Catalyst Board Games</a>
     <ul class="foot-nav">
       <li><a href="index.html">Home</a></li>
+      <li><a href="jabir.html">Jabir</a></li>
       <li><a href="synthelyst.html">Synthelyst</a></li>
       <li><a href="washwheel.html">WashWheel</a></li>
       <li><a href="mise-en-scene.html">Mise en Scène</a></li>
@@ -310,105 +171,41 @@ body.hovering body.hovering /* HERO */
     <div class="foot-social">
       <a href="https://instagram.com/catalyst.boardgames" target="_blank">📷</a>
       <a href="mailto:duo.boardgame.design@gmail.com">✉️</a>
+      <a href="https://wa.me/447541178881" target="_blank">💬</a>
+      <a href="https://t.me/mehrad_nia" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8L17 7l-3.8 12.2-2.9-4.7-4.8-2.7z" fill="#fff"/></svg></a>
     </div>
-    <span class="foot-copy">© 2025 Catalyst · Oxford</span>
+    <span class="foot-copy">© 2025 Catalyst Board Games · Oxford</span>
   </div>
 </div>
 </footer>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
-
-// CURSOR
-const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
-let mx=0,my=0,cx=0,cy=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function tick(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cur2.style.left=cx+'px';cur2.style.top=cy+'px';requestAnimationFrame(tick);})();
-document.querySelectorAll('a,button,.feat-card,.hscroll-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+window.addEventListener('scroll',()=>{document.getElementById('siteNav').style.boxShadow=scrollY>20?'0 1px 0 #d2d2d7':'none';},{passive:true});
+gsap.from('.g-eyebrow',{opacity:0,y:16,duration:.9,ease:'power3.out',delay:.2});
+gsap.from('.g-title',{opacity:0,y:28,duration:1,ease:'power3.out',delay:.35});
+gsap.from('.g-sub',{opacity:0,y:18,duration:.9,ease:'power3.out',delay:.5});
+gsap.from('.g-meta',{opacity:0,y:16,duration:.8,ease:'power3.out',delay:.65});
+gsap.from('.g-btns',{opacity:0,y:14,duration:.8,ease:'power3.out',delay:.78});
+gsap.to('#heroBox',{y:-16,duration:3,ease:'sine.inOut',yoyo:true,repeat:-1});
+gsap.to('#heroBox',{y:60,ease:'none',scrollTrigger:{trigger:'.g-hero',start:'top top',end:'bottom top',scrub:1}});
+document.querySelectorAll('.cin .cin-img').forEach(img=>{
+  gsap.to(img,{y:70,ease:'none',scrollTrigger:{trigger:img.closest('.cin'),start:'top bottom',end:'bottom top',scrub:1.5}});
 });
-
-// NAV scroll
-window.addEventListener('scroll',()=>{
-  document.getElementById('siteNav').style.boxShadow=scrollY>40?'0 1px 0 var(--border)':'none';
-},{passive:true});
-
-// HERO BOX float + parallax
-gsap.to('#heroBox',{y:-18,duration:3,ease:'sine.inOut',yoyo:true,repeat:-1});
-gsap.to('#heroBox',{
-  y:80,ease:'none',
-  scrollTrigger:{trigger:'.g-hero',start:'top top',end:'bottom top',scrub:1}
+document.querySelectorAll('.split-img img').forEach(img=>{
+  gsap.to(img,{y:50,ease:'none',scrollTrigger:{trigger:img.closest('.split-img'),start:'top bottom',end:'bottom top',scrub:1.5}});
 });
-
-// SCROLL HINT line animate
-gsap.from('#shLine',{scaleX:0,duration:1.2,ease:'power2.out',delay:.8});
-
-// HERO body text reveal
-gsap.from('.g-eyebrow',{opacity:0,y:20,duration:1,ease:'power3.out',delay:.3});
-gsap.from('.g-title',{opacity:0,y:30,duration:1.1,ease:'power3.out',delay:.45,stagger:.05});
-gsap.from('.g-sub',{opacity:0,y:20,duration:1,ease:'power3.out',delay:.7});
-gsap.from('.g-meta .gm-item',{opacity:0,y:16,duration:.8,ease:'power3.out',delay:.85,stagger:.1});
-gsap.from('.g-btns .apple-btn',{opacity:0,y:14,duration:.8,ease:'power3.out',delay:1.1,stagger:.12});
-
-// SPLIT IMAGE parallax
-gsap.to('#imgSpreadImg',{
-  y:60,ease:'none',
-  scrollTrigger:{trigger:'#imgSpread',start:'top bottom',end:'bottom top',scrub:1.5}
-});
-
-// FULL BLEED parallax + reveal
-['#fb1img','#fb2img'].forEach((sel,i)=>{
-  gsap.to(sel,{
-    y:80,ease:'none',
-    scrollTrigger:{trigger:sel.replace('img',''),start:'top bottom',end:'bottom top',scrub:1.5}
+document.querySelectorAll('.feat-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`perspective(500px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-3px)`;
   });
-  gsap.from(sel.replace('img',''),{
-    opacity:0,
-    scrollTrigger:{trigger:sel.replace('img',''),start:'top 85%',end:'top 50%',scrub:false,toggleActions:'play none none none'}
-  });
+  c.addEventListener('mouseleave',()=>c.style.transform='');
 });
-
-// SCROLL REVEAL
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*55);});
-},{threshold:.08});
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*55);});},{threshold:.07});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-
-// STAT COUNTER animate
-function countUp(el,target,suffix=''){
-  let start=0;const dur=1800;const step=timestamp=>{
-    if(!step.start)step.start=timestamp;
-    const p=Math.min((timestamp-step.start)/dur,1);
-    el.textContent=Math.floor(p*target)+(p===1?suffix:'');
-    if(p<1)requestAnimationFrame(step);
-  };requestAnimationFrame(step);
-}
-const statObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.querySelectorAll('.sc-n').forEach(el=>{
-        const v=el.textContent.replace(/[^0-9]/g,'');
-        if(v)countUp(el,parseInt(v));
-      });
-      statObs.unobserve(e.target);
-    }
-  });
-},{threshold:.5});
-document.querySelectorAll('.stats-row').forEach(el=>statObs.observe(el));
-
-// FEAT CARDS subtle 3D hover
-document.querySelectorAll('.feat-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const r=card.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    card.style.transform=`perspective(600px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-4px)`;
-  });
-  card.addEventListener('mouseleave',()=>{card.style.transform='';});
-});
-function faq(btn){const item=btn.closest('.faq-item');const open=item.classList.contains('open');item.closest('div').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');}
-
+function faq(btn){const item=btn.closest('.faq-item'),open=item.classList.contains('open');item.closest('.faq-block').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');}
 </script>
 </body>
 </html>

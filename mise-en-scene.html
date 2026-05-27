@@ -4,92 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mise en Scène — Catalyst Board Games</title>
+<meta name="description" content="Mise en Scène: A Parisian Fashion Card Game. Concepting Phase. Catalyst Board Games, Oxford.">
 <link rel="stylesheet" href="style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-:root{--ac:#c9a87a;--ac2:#9a6a3a;--acl:rgba(201,168,122,.1);}
-body.hovering body.hovering .g-hero{height:100svh;position:relative;overflow:hidden;display:flex;align-items:flex-end;background:#fff;}
-.g-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(201,168,122,.1) 0%,transparent 65%),#fff;}
-.g-hero-box{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:min(38vw,420px);z-index:2;filter:drop-shadow(0 40px 80px rgba(201,168,122,.1)) drop-shadow(0 16px 40px rgba(0,0,0,.1));}
-.g-hero-box img{width:100%;height:auto;object-fit:contain;display:block;}
-.g-hero-body{position:relative;z-index:3;padding:0 6vw 8vh;max-width:640px;}
-.g-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--mid);margin-bottom:32px;transition:color .2s;position:absolute;top:72px;left:6vw;}
-.g-back:hover{color:var(--black);}
-.g-eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);margin-bottom:16px;display:block;}
-.g-title{font-size:clamp(52px,9vw,108px);font-weight:700;letter-spacing:-.05em;line-height:.9;color:var(--black);margin-bottom:18px;}
-.g-title em{color:var(--ac);font-style:normal;}
-.g-sub{font-size:clamp(16px,2vw,20px);color:var(--mid);margin-bottom:28px;line-height:1.5;font-style:italic;}
-.g-meta{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:36px;}
-.gm-item{display:flex;flex-direction:column;gap:3px;}
-.gm-n{font-size:22px;font-weight:700;letter-spacing:-.03em;color:var(--black);}
-.gm-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);}
-.g-btns{display:flex;gap:10px;flex-wrap:wrap;}
-.scroll-hint{position:absolute;bottom:32px;right:6vw;display:flex;align-items:center;gap:8px;color:var(--mid);font-size:12px;letter-spacing:.06em;text-transform:uppercase;}
-.sh-line{width:40px;height:1px;background:var(--mid);transform-origin:left;}
-.gs{padding:120px 0;border-top:1px solid var(--border);}
-.gc{max-width:1200px;margin:0 auto;padding:0 6vw;}
-.gs-ey{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);display:block;margin-bottom:14px;}
-.gs-h{font-size:clamp(32px,5vw,60px);font-weight:700;letter-spacing:-.04em;line-height:1.0;color:var(--black);margin-bottom:20px;}
-.gs-p{font-size:17px;color:var(--mid);line-height:1.8;max-width:600px;}
-.split{display:grid;grid-template-columns:1fr;gap:0;}
-@media(min-width:768px){.split{grid-template-columns:1fr 1fr;}}
-.split-img{overflow:hidden;background:var(--light);min-height:380px;position:relative;}
-.split-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;will-change:transform;}
-.split-txt{padding:72px 48px;display:flex;flex-direction:column;justify-content:center;background:#fff;}
-@media(max-width:767px){.split-txt{padding:40px 20px;}}
-.full-bleed{height:520px;position:relative;overflow:hidden;}
-.fb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform;}
-.fb-tint{position:absolute;inset:0;background:rgba(30,10,0,.46);}
-.fb-body{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:0 24px;}
-.fb-title{font-size:clamp(26px,5vw,54px);font-weight:700;letter-spacing:-.04em;line-height:1.05;margin-bottom:10px;}
-.fb-sub{font-size:17px;opacity:.68;max-width:500px;margin:0 auto;}
-.feat-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:40px;}
-.feat-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;transition:box-shadow .3s,transform .3s,border-color .3s;}
-.feat-card:hover{box-shadow:0 16px 48px rgba(0,0,0,.08);transform:translateY(-4px);border-color:var(--ac);}
-.fc-icon{font-size:28px;margin-bottom:12px;display:block;}
-.fc-title{font-size:15px;font-weight:600;color:var(--black);margin-bottom:6px;letter-spacing:-.02em;}
-.fc-body{font-size:13px;color:var(--mid);line-height:1.65;}
-.stats-row{display:flex;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:40px;}
-.stat-cell{flex:1;padding:24px 20px;text-align:center;border-right:1px solid var(--border);transition:background .2s;}
-.stat-cell:last-child{border-right:none;}
-.stat-cell:hover{background:var(--light);}
-.sc-n{font-size:28px;font-weight:700;letter-spacing:-.04em;color:var(--ac);line-height:1;}
-.sc-l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);margin-top:5px;}
-.bullet-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:20px;}
-.bl-item{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--mid);line-height:1.55;}
-.bl-dot{width:26px;height:26px;border-radius:8px;background:var(--acl);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:transform .4s cubic-bezier(.34,1.56,.64,1);}
-.bl-item:hover .bl-dot{transform:scale(1.15) rotate(-8deg);}
-.bl-item strong{color:var(--black);}
-.hscroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:16px;margin-top:24px;scrollbar-width:thin;scrollbar-color:var(--ac) var(--border);}
-.hscroll::-webkit-scrollbar{height:3px;}.hscroll::-webkit-scrollbar-thumb{background:var(--ac);border-radius:2px;}
-.hscroll-card{flex:0 0 200px;border-radius:14px;overflow:hidden;border:1px solid var(--border);transition:border-color .2s,transform .2s;}
-.hscroll-card:hover{border-color:var(--ac);transform:translateY(-4px);}
-.hscroll-card img{width:100%;height:270px;object-fit:cover;}
-.hscroll-lbl{padding:10px 12px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);}
-.pub-cta{background:var(--black);border-radius:24px;padding:64px 48px;text-align:center;margin-top:60px;}
-.pub-cta h3{font-size:clamp(26px,4vw,48px);font-weight:700;color:#fff;letter-spacing:-.04em;margin-bottom:12px;}
-.pub-cta p{font-size:17px;color:rgba(255,255,255,.5);max-width:480px;margin:0 auto 28px;}
-@media(max-width:640px){.pub-cta{padding:40px 24px;}}
-.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.25,1,.5,1),transform .8s cubic-bezier(.25,1,.5,1);}
-.rv.on{opacity:1;transform:none;}
-.d1{transition-delay:.1s!important;}.d2{transition-delay:.2s!important;}.d3{transition-delay:.3s!important;}
-
-/* FAQ */
-.faq-item{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#fff;transition:border-color .2s;margin-bottom:2px;}
-.faq-item:hover{border-color:rgba(0,0,0,.15);}
-.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;background:transparent;border:none;cursor:pointer;font-size:14px;font-weight:500;color:var(--black);text-align:left;font-family:inherit;transition:background .15s;}
-.faq-q:hover{background:rgba(0,0,0,.02);}
-.faq-icon{width:22px;height:22px;border:1.5px solid var(--border);border-radius:50%;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--mid);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s;}
-.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--ac);border-color:var(--ac);color:#fff;}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.25,1,.5,1);}
-.faq-item.open .faq-a{max-height:280px;}
-.faq-a-inner{padding:0 20px 16px;font-size:14px;color:var(--mid);line-height:1.75;}
+:root{--ac:#c9a87a;--acl:rgba(201,168,122,.08);}
+.g-hero{ background: radial-gradient(ellipse at 70% 50%, rgba(201,168,122,.07) 0%, transparent 65%), #fff; }
+.faq-item.open .faq-icon{background:#c9a87a;border-color:#c9a87a;}
 </style>
 </head>
 <body>
 <nav class="nav" id="siteNav">
-  <a href="index.html" class="nav-logo"><img src="catalyst_logo.png" alt="Catalyst"><span class="nav-logo-text">Catalyst</span></a>
+  <a href="index.html" class="nav-logo"><img src="catalyst_logo.png" alt="Catalyst"><span class="nav-logo-text">Catalyst Board Games</span></a>
   <ul class="nav-links">
     <li><a href="index.html#games">All Games</a></li>
     <li><a href="jabir.html">Jabir</a></li>
@@ -98,132 +23,189 @@ body.hovering body.hovering .g-hero{height:100svh;position:relative;overflow:hid
     <li><a href="mise-en-scene.html">Mise en Scène</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Sc%C3%A8ne&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Sc%C3%A8ne.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="nav-cta-btn">Enquire →</a>
+  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="nav-cta-btn">Enquire →</a>
   <button class="hamburger" onclick="document.getElementById('mobNav').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 <div class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="document.getElementById('mobNav').classList.remove('open')">✕</button>
   <a href="index.html" onclick="document.getElementById('mobNav').classList.remove('open')">Home</a>
+  <a href="index.html#games" onclick="document.getElementById('mobNav').classList.remove('open')">All Games</a>
   <a href="index.html#contact" onclick="document.getElementById('mobNav').classList.remove('open')">Contact</a>
 </div>
+
+<!-- HERO -->
 <section class="g-hero">
-  <div class="g-hero-bg"></div>
-  <a href="index.html" class="g-back">← All games</a>
-  <div class="g-hero-box" id="heroBox"><img src="mise_box.png" alt="Mise en Scène"></div>
-  <div class="g-hero-body">
-    <span class="g-eyebrow">Game 004 · Medium Weight</span>
-    <h1 class="g-title">Mise en Scène</h1>
+  <div class="g-hero-left">
+    <a href="index.html" class="g-back">← All games</a>
+    <span class="g-eyebrow" style="color:#c9a87a;">Game 004 of 004 · Medium Weight</span>
+    <h1 class="g-title">Mise en<br><em style="color:#c9a87a;font-style:normal;">Scène</em></h1>
     <p class="g-sub">A Parisian Fashion Card Game</p>
     <div class="g-meta">
       <div class="gm-item"><div class="gm-n">2–5</div><div class="gm-l">Players</div></div>
       <div class="gm-item"><div class="gm-n">45–75</div><div class="gm-l">Minutes</div></div>
       <div class="gm-item"><div class="gm-n">Medium</div><div class="gm-l">Weight</div></div>
       <div class="gm-item"><div class="gm-n">14+</div><div class="gm-l">Age</div></div>
+      <div class="gm-item"><div class="gm-n" style="color:#c9a87a;">Concepting Phase</div><div class="gm-l">Early publisher interest welcome</div></div>
     </div>
     <div class="g-btns">
-      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Sc%C3%A8ne&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Sc%C3%A8ne.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Publisher enquiry</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Send publisher enquiry</a>
       <a href="index.html#contact" class="apple-btn ab-outline">Get in touch</a>
     </div>
   </div>
-  <div class="scroll-hint"><div class="sh-line" id="shLine"></div><span>Scroll to explore</span></div>
+  <div class="g-hero-right">
+    <div class="g-hero-right-bg" style="background: radial-gradient(ellipse at 70% 50%, rgba(201,168,122,.07) 0%, transparent 65%), #fff;"></div>
+    <div class="g-hero-box" id="heroBox"><img src="mise_box.png" alt="Mise en Scène"></div>
+  </div>
 </section>
+
+<!-- IMAGE STRIP -->
+<div class="img-strip"><div class="img-strip-cell"><img src="mise_spread.png" alt="" loading="lazy"></div><div class="img-strip-cell"><img src="mise_cards_detail.png" alt="" loading="lazy"></div><div class="img-strip-cell"><img src="mise_cards_hand.png" alt="" loading="lazy"></div></div>
+
+<!-- INTRODUCTION -->
 <section class="gs">
 <div class="gc">
-  <div class="split">
-    <div class="split-img" id="imgSpread"><img src="mise_spread.png" alt="Mise en Scène components" loading="lazy" id="imgSpreadImg"></div>
-    <div class="split-txt">
-      <span class="gs-ey rv">The Game</span>
-      <h2 class="gs-h rv d1">Step into Paris Fashion Week. Draft iconic fashion.</h2>
-      <p class="gs-p rv d2">Step into Paris Fashion Week. Draft iconic fashion pieces, build your outfit tableau, and outscore rivals through harmony, audacity, and trend awareness. One bold Statement piece anchors your look — everything else must serve it.</p>
-      <div class="stats-row rv d3"><div class="stat-cell"><div class="sc-n">80</div><div class="sc-l">Fashion Cards</div></div><div class="stat-cell"><div class="sc-n">6</div><div class="sc-l">Outfit Slots</div></div><div class="stat-cell"><div class="sc-n">5</div><div class="sc-l">Players Max</div></div><div class="stat-cell"><div class="sc-n">10</div><div class="sc-l">Secret Clients</div></div></div>
-    </div>
+  <div class="intro-block">
+    <span class="gs-ey rv" style="color:#c9a87a;">About the Game</span>
+    <p class="big-p rv d1">A premium card game that brings Paris Fashion Week to the table — and opens board gaming to an entirely new audience.</p>
+    <p class="body-p rv">Mise en Scène places players as Parisian stylists competing to curate the season's most iconic looks. Draft exquisite fashion pieces, build your outfit tableau, and outscore rivals through harmony, audacity, and trend awareness. One bold Statement piece anchors your look — everything else must serve it.</p><p class="body-p rv">The game is designed with a dual audience in mind: strategy gamers who love set collection and tableau building will find real mechanical depth, while fashion and lifestyle audiences will be drawn in by the premium Parisian aesthetic and immediately accessible theme.</p><p class="body-p rv">Mise en Scène represents a significant commercial opportunity for publishers seeking to expand beyond traditional board game demographics. No comparable fashion eurogame exists in the current market.</p>
   </div>
 </div>
 </section>
-<div class="full-bleed rv" id="fb1">
-  <img src="mise_cards_detail.png" class="fb-img" alt="" loading="lazy" id="fb1img">
-  <div class="fb-tint"></div>
-  <div class="fb-body"><h3 class="fb-title">Curate the Season's Most Iconic Look</h3><p class="fb-sub">One bold Statement piece anchors your look — everything else must serve it.</p></div>
-</div>
+
+<div class="cin rv">
+  <img src="mise_cards_detail.png" class="cin-img" alt="" loading="lazy">
+  
+
+<!-- WHAT MAKES IT UNIQUE -->
 <section class="gs" style="background:var(--light);">
 <div class="gc">
-  <span class="gs-ey rv">How It Plays</span>
-  <h2 class="gs-h rv d1">Deep strategy. Real science.</h2>
-  <p class="gs-p rv d2">Every mechanic is grounded in authentic science. Every decision is meaningful.</p>
-  <div class="feat-cards"><div class="feat-card rv"><span class="fc-icon">👗</span><div class="fc-title">80 Fashion Cards</div><div class="fc-body">Outerwear, tops, bottoms, shoes, hats, bags, dresses — each with Style Tag, Colour Palette, Fashion Number, Season, and Card Effect.</div></div><div class="feat-card rv"><span class="fc-icon">🏗️</span><div class="fc-title">Tableau Building</div><div class="fc-body">Build your Mise en Scène across 6 outfit slots. One Statement piece only — everything else must complement it or scores are lost.</div></div><div class="feat-card rv"><span class="fc-icon">🎨</span><div class="fc-title">Harmony Scoring</div><div class="fc-body">Monochrome Moment, Trend Combo, Effortless Chic, Season Story, Controlled Chaos — five harmony bonuses reward specific card combinations.</div></div><div class="feat-card rv"><span class="fc-icon">📋</span><div class="fc-title">Secret Client Cards</div><div class="fc-body">Each player holds a hidden personal scoring objective. Revealed only at end game — creating a dramatic wildcard in the final score.</div></div><div class="feat-card rv"><span class="fc-icon">💅</span><div class="fc-title">Special Actions</div><div class="fc-body">Muse Card: swap a card ignoring slot rules. Démodé Card: cancel a rival's top harmony bonus. Each used only once per game.</div></div><div class="feat-card rv"><span class="fc-icon">🌟</span><div class="fc-title">Fashion Brief Cards</div><div class="fc-body">Three public scoring modifiers visible to all — shaping the entire game's strategy before a single card is played.</div></div></div>
+  <span class="gs-ey rv" style="color:#c9a87a;">Key Strengths</span>
+  <h2 class="gs-h rv d1">What makes<br>Mise en Scène exceptional.</h2>
+  <div class="feat-grid">
+<div class="feat-card rv"><span class="fc-icon">👗</span><div class="fc-title">80 Fashion Cards</div><div class="fc-body">Outerwear, tops, bottoms, shoes, accessories, and bags — each card beautifully illustrated with Parisian editorial art and carrying meaningful strategic attributes.</div></div>
+<div class="feat-card rv"><span class="fc-icon">🎨</span><div class="fc-title">Multi-Layer Harmony Scoring</div><div class="fc-body">Players score through five distinct harmony systems — Monochrome Moment, Trend Combo, Effortless Chic, Season Story, Controlled Chaos — rewarding different strategic approaches.</div></div>
+<div class="feat-card rv"><span class="fc-icon">🎭</span><div class="fc-title">Secret Client Objectives</div><div class="fc-body">Each player holds a hidden personal scoring objective, revealed only at final scoring. This creates a dramatic wildcard layer that keeps every game unpredictable until the final reveal.</div></div>
+<div class="feat-card rv"><span class="fc-icon">💎</span><div class="fc-title">Luxury Brand IP Potential</div><div class="fc-body">Mise en Scène could feature real fashion house cards — Chanel, Dior, Saint Laurent — creating co-branding opportunities comparable to licensed sports card games, with retail potential in luxury boutiques worldwide.</div></div>
+<div class="feat-card rv"><span class="fc-icon">👩‍🎤</span><div class="fc-title">Audience Expansion</div><div class="fc-body">The fashion theme is a direct gateway to demographics traditionally underrepresented in strategy gaming — particularly women and creative communities. This is a significant commercial differentiator.</div></div>
+<div class="feat-card rv"><span class="fc-icon">🌟</span><div class="fc-title">Parisian Premium Aesthetic</div><div class="fc-body">The art direction is editorial, luxurious, and aspirational. It is designed to sit comfortably in high-end retail environments alongside fashion and lifestyle products, not only in board game specialist stores.</div></div>
+  </div>
 </div>
 </section>
-<div class="full-bleed rv" id="fb2">
-  <img src="mise_cards_hand.png" class="fb-img" alt="" loading="lazy" id="fb2img">
-  <div class="fb-tint"></div>
-  <div class="fb-body"><h3 class="fb-title">Fashion Cards</h3><p class="fb-sub">Every card is a real garment archetype — with Style Tag, Colour Palette, Fashion Number, Season, and a unique Card Effect.</p></div>
+
+<div class="cin-body"><h3 class="cin-h">Fashion Cards</h3><p class="cin-p">Each card is a real garment archetype — illustrated with editorial precision and carrying Style Tag, Palette, Fashion Number, and Season attributes.</p></div>
 </div>
+
+<!-- FOR PUBLISHERS -->
 <section class="gs">
 <div class="gc">
-  <span class="gs-ey rv">Components</span>
-  <h2 class="gs-h rv d1">Everything in the box.</h2>
-  <div class="hscroll rv d2"><div class="hscroll-card"><img src="mise_spread.png" alt="Full Spread" loading="lazy"><div class="hscroll-lbl">Full Spread</div></div><div class="hscroll-card"><img src="mise_cards_detail.png" alt="Card Detail" loading="lazy"><div class="hscroll-lbl">Card Detail</div></div><div class="hscroll-card"><img src="mise_cards_hand.png" alt="Cards in Hand" loading="lazy"><div class="hscroll-lbl">Cards in Hand</div></div><div class="hscroll-card"><img src="mise_hero_bg.png" alt="Game in Play" loading="lazy"><div class="hscroll-lbl">Game in Play</div></div><div class="hscroll-card"><img src="mise_card.png" alt="Card Front" loading="lazy"><div class="hscroll-lbl">Card Front</div></div></div>
-  <div class="split" style="margin-top:60px;">
-    <div class="split-txt" style="background:var(--light);border-radius:20px 0 0 20px;">
-      <span class="gs-ey rv">Why Mise en Scène?</span>
-      <h3 class="gs-h rv d1" style="font-size:clamp(24px,4vw,40px);">For publishers<br>seeking real IP.</h3>
-      <ul class="bullet-list rv d2"><li class="bl-item"><div class="bl-dot">📦</div><div><strong>Concept locked — rulebook and card art direction complete</strong></div></li><li class="bl-item"><div class="bl-dot">💎</div><div><strong>Natural luxury brand co-branding — Chanel, Dior, Saint Laurent</strong></div></li><li class="bl-item"><div class="bl-dot">👗</div><div><strong>Expands board game audience to fashion and lifestyle demographics</strong></div></li><li class="bl-item"><div class="bl-dot">🎓</div><div><strong>No comparable fashion eurogame exists — unique market position</strong></div></li><li class="bl-item"><div class="bl-dot">✈️</div><div><strong>Available for early publishing discussions now</strong></div></li></ul>
+  <div class="pub-cols">
+    <div>
+      <span class="gs-ey rv" style="color:#c9a87a;">For Publishers</span>
+      <h2 class="gs-h rv d1" style="font-size:clamp(26px,4vw,44px);">No comparable game exists.</h2>
+      <p class="gs-p rv d2">The combination of premium Parisian art direction, genuine strategic depth, secret objectives, and luxury brand co-branding potential gives Mise en Scène a market position that no other current game occupies.</p>
+      <ul class="blist rv d3">
+<li class="blist-item"><div class="blist-dot" style="background:rgba(201,168,122,.08);">🎨</div><div><strong>Concept locked — card art direction and rulebook complete</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(201,168,122,.08);">💎</div><div><strong>Luxury co-branding — Chanel, Dior, Saint Laurent potential</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(201,168,122,.08);">👗</div><div><strong>Expands board game audience to fashion and lifestyle demographics</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(201,168,122,.08);">🏪</div><div><strong>Retail potential beyond specialist board game channels</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(201,168,122,.08);">🎭</div><div><strong>Genuinely unique market position — no comparable game exists</strong></div></li>
+<li class="blist-item"><div class="blist-dot" style="background:rgba(201,168,122,.08);">✈️</div><div><strong>Early publishing discussions welcome now</strong></div></li>
+      </ul>
     </div>
-    <div class="split-img" style="min-height:360px;"><img src="mise_spread.png" alt="Mise en Scène" loading="lazy"></div>
-  </div>
-  <div class="pub-cta rv">
-    <h3>Interested in publishing Mise en Scène?</h3>
-    <p>Mise en Scène is in concepting phase — publishers interested in shaping the development direction are welcome to reach out now.</p>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Sc%C3%A8ne&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Sc%C3%A8ne.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-teal">Send publisher enquiry</a>
+    <div class="split-img rv" style="min-height:360px;border-radius:var(--radius);overflow:hidden;">
+      <img src="mise_cards_detail.png" alt="Mise en Scène" loading="lazy" style="border-radius:var(--radius);">
+    </div>
   </div>
 </div>
 </section>
-<footer><div class="wrap"><div class="foot-inner">
-  <a href="index.html" class="foot-brand"><img src="catalyst_logo.png" alt="Catalyst">Catalyst Board Games</a>
-  <ul class="foot-nav">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="jabir.html">Jabir</a></li>
-    <li><a href="synthelyst.html">Synthelyst</a></li>
-    <li><a href="washwheel.html">WashWheel</a></li>
-    <li><a href="mise-en-scene.html">Mise en Scène</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-  </ul>
-  <div class="foot-social">
-    <a href="https://instagram.com/catalyst.boardgames" target="_blank">📷</a>
-    <a href="mailto:duo.boardgame.design@gmail.com">✉️</a>
+
+<!-- GALLERY -->
+<section class="gs" style="background:var(--light);">
+<div class="gc">
+  <span class="gs-ey rv" style="color:#c9a87a;">Game Components</span>
+  <h2 class="gs-h rv d1">See it in detail.</h2>
+  <div class="hgallery rv d2">
+    <div class="hgallery-card"><img src="mise_spread.png" alt="" loading="lazy"><div class="hgallery-lbl">Game Spread</div></div><div class="hgallery-card"><img src="mise_cards_detail.png" alt="" loading="lazy"><div class="hgallery-lbl">Component Detail</div></div><div class="hgallery-card"><img src="mise_cards_hand.png" alt="" loading="lazy"><div class="hgallery-lbl">Cards Detail</div></div>
   </div>
-  <span class="foot-copy">© 2025 Catalyst · Oxford</span>
-</div></div></footer>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="gs">
+<div class="gc">
+  <span class="gs-ey rv" style="color:#c9a87a;">Publisher Questions</span>
+  <h2 class="gs-h rv d1">Frequently asked<br>by publishers.</h2>
+  <div class="faq-block">
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>What makes Mise en Scène commercially distinctive?</span><span class="faq-icon" style="border-color:#c9a87a;color:#c9a87a;">+</span></button><div class="faq-a"><div class="faq-a-inner">It is the only fashion eurogame with genuine strategic depth and luxury brand co-branding potential. The combination of premium art direction, real mechanics, and audience expansion opportunity is unique in the current market.</div></div></div>
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>What luxury brand partnership potential does it have?</span><span class="faq-icon" style="border-color:#c9a87a;color:#c9a87a;">+</span></button><div class="faq-a"><div class="faq-a-inner">Significant. Mise en Scène could feature real fashion house cards (Chanel, Dior, Saint Laurent), creating co-branding similar to licensed sports card games. Retail potential extends to luxury department stores, boutiques, and fashion week activations.</div></div></div>
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>Who is the target audience?</span><span class="faq-icon" style="border-color:#c9a87a;color:#c9a87a;">+</span></button><div class="faq-a"><div class="faq-a-inner">Primary: strategy gamers who enjoy set collection and tableau building. Secondary: fashion and lifestyle audiences new to strategy gaming — particularly women, creative professionals, and luxury consumers. This dual audience is the game's key commercial advantage.</div></div></div>
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>What stage of development is it at?</span><span class="faq-icon" style="border-color:#c9a87a;color:#c9a87a;">+</span></button><div class="faq-a"><div class="faq-a-inner">Concepting phase — the core concept, rulebook, and art direction are complete. Publishers who engage now have the opportunity to co-shape component and art direction decisions. We welcome early conversations.</div></div></div>
+<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>Is the rulebook available to review?</span><span class="faq-icon" style="border-color:#c9a87a;color:#c9a87a;">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — the full rulebook and sample card designs are available to publishers and interested partners on request. We can also arrange a video walkthrough of the concept and mechanics.</div></div></div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="gs" style="background:var(--light);">
+<div class="gc">
+  <div class="pub-cta rv">
+    <h3>Interested in Mise en Scène?</h3>
+    <p>The rulebook and card art direction are complete. We welcome early publisher conversations — this is your opportunity to shape a game with a genuinely unique market position.</p>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-teal">Send publisher enquiry</a>
+  </div>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+  <div class="foot-inner">
+    <a href="index.html" class="foot-brand"><img src="catalyst_logo.png" alt="Catalyst">Catalyst Board Games</a>
+    <ul class="foot-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="jabir.html">Jabir</a></li>
+      <li><a href="synthelyst.html">Synthelyst</a></li>
+      <li><a href="washwheel.html">WashWheel</a></li>
+      <li><a href="mise-en-scene.html">Mise en Scène</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="foot-social">
+      <a href="https://instagram.com/catalyst.boardgames" target="_blank">📷</a>
+      <a href="mailto:duo.boardgame.design@gmail.com">✉️</a>
+      <a href="https://wa.me/447541178881" target="_blank">💬</a>
+      <a href="https://t.me/mehrad_nia" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8L17 7l-3.8 12.2-2.9-4.7-4.8-2.7z" fill="#fff"/></svg></a>
+    </div>
+    <span class="foot-copy">© 2025 Catalyst Board Games · Oxford</span>
+  </div>
+</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
-const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
-let mx=0,my=0,cx=0,cy=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function tick(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cur2.style.left=cx+'px';cur2.style.top=cy+'px';requestAnimationFrame(tick);})();
-document.querySelectorAll('a,button,.feat-card,.hscroll-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+window.addEventListener('scroll',()=>{document.getElementById('siteNav').style.boxShadow=scrollY>20?'0 1px 0 #d2d2d7':'none';},{passive:true});
+gsap.from('.g-eyebrow',{opacity:0,y:16,duration:.9,ease:'power3.out',delay:.2});
+gsap.from('.g-title',{opacity:0,y:28,duration:1,ease:'power3.out',delay:.35});
+gsap.from('.g-sub',{opacity:0,y:18,duration:.9,ease:'power3.out',delay:.5});
+gsap.from('.g-meta',{opacity:0,y:16,duration:.8,ease:'power3.out',delay:.65});
+gsap.from('.g-btns',{opacity:0,y:14,duration:.8,ease:'power3.out',delay:.78});
+gsap.to('#heroBox',{y:-16,duration:3,ease:'sine.inOut',yoyo:true,repeat:-1});
+gsap.to('#heroBox',{y:60,ease:'none',scrollTrigger:{trigger:'.g-hero',start:'top top',end:'bottom top',scrub:1}});
+document.querySelectorAll('.cin .cin-img').forEach(img=>{
+  gsap.to(img,{y:70,ease:'none',scrollTrigger:{trigger:img.closest('.cin'),start:'top bottom',end:'bottom top',scrub:1.5}});
 });
-window.addEventListener('scroll',()=>{document.getElementById('siteNav').style.boxShadow=scrollY>40?'0 1px 0 var(--border)':'none';},{passive:true});
-gsap.to('#heroBox',{y:-18,duration:3,ease:'sine.inOut',yoyo:true,repeat:-1});
-gsap.to('#heroBox',{y:80,ease:'none',scrollTrigger:{trigger:'.g-hero',start:'top top',end:'bottom top',scrub:1}});
-gsap.from('#shLine',{scaleX:0,duration:1.2,ease:'power2.out',delay:.8});
-gsap.from('.g-eyebrow',{opacity:0,y:20,duration:1,ease:'power3.out',delay:.3});
-gsap.from('.g-title',{opacity:0,y:30,duration:1.1,ease:'power3.out',delay:.45});
-gsap.from('.g-sub',{opacity:0,y:20,duration:1,ease:'power3.out',delay:.7});
-gsap.from('.g-meta .gm-item',{opacity:0,y:16,duration:.8,ease:'power3.out',delay:.85,stagger:.1});
-gsap.from('.g-btns .apple-btn',{opacity:0,y:14,duration:.8,ease:'power3.out',delay:1.1,stagger:.12});
-gsap.to('#imgSpreadImg',{y:60,ease:'none',scrollTrigger:{trigger:'#imgSpread',start:'top bottom',end:'bottom top',scrub:1.5}});
-['#fb1img','#fb2img'].forEach(sel=>{
-  gsap.to(sel,{y:80,ease:'none',scrollTrigger:{trigger:sel.replace('img',''),start:'top bottom',end:'bottom top',scrub:1.5}});
+document.querySelectorAll('.split-img img').forEach(img=>{
+  gsap.to(img,{y:50,ease:'none',scrollTrigger:{trigger:img.closest('.split-img'),start:'top bottom',end:'bottom top',scrub:1.5}});
 });
-const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*55);});},{threshold:.08});
+document.querySelectorAll('.feat-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`perspective(500px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-3px)`;
+  });
+  c.addEventListener('mouseleave',()=>c.style.transform='');
+});
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*55);});},{threshold:.07});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-document.querySelectorAll('.feat-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(600px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-4px)`;});
-  card.addEventListener('mouseleave',()=>{card.style.transform='';});
-});
-function faq(btn){const item=btn.closest('.faq-item');const open=item.classList.contains('open');item.closest('div').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');}
-
+function faq(btn){const item=btn.closest('.faq-item'),open=item.classList.contains('open');item.closest('.faq-block').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');}
 </script>
-</body></html>
+</body>
+</html>
