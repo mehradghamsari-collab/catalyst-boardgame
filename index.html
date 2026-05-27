@@ -15,7 +15,7 @@
 #hero{
   min-height:100svh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  text-align:center;padding:120px 24px 80px;
+  text-align:center;padding:80px 24px 40px;
   background:#fff;position:relative;overflow:hidden;
 }
 .hero-eyebrow{
@@ -35,14 +35,14 @@
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .hero-sub{font-size:clamp(17px,2.5vw,22px);color:var(--mid);line-height:1.6;max-width:540px;margin:0 auto 36px;}
-.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:72px;}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;}
 
 /* FLOATING BOXES */
 .boxes-stage{
   position:relative;width:100%;max-width:700px;margin:0 auto;
-  height:320px;
+  height:280px;
 }
-@media(min-width:640px){.boxes-stage{height:420px;}}
+@media(min-width:640px){.boxes-stage{height:360px;}}
 .fbox{
   position:absolute;
   filter:drop-shadow(0 32px 64px rgba(0,0,0,.13)) drop-shadow(0 8px 24px rgba(0,0,0,.09));
@@ -71,7 +71,7 @@
 
 /* HERO SCROLL CUE */
 .scroll-cue{
-  margin-top:60px;display:flex;flex-direction:column;align-items:center;gap:6px;
+  margin-top:24px;display:flex;flex-direction:column;align-items:center;gap:6px;
   opacity:.4;transition:opacity .3s;
 }
 .scroll-cue:hover{opacity:.7;}
@@ -393,24 +393,15 @@ footer{background:#fff;border-top:1px solid var(--border);padding:40px 0;}
 .foot-social a:hover{border-color:var(--teal);background:rgba(0,201,177,.06);}
 .foot-copy{font-size:12px;color:var(--border);}
 
-/* CUSTOM CURSOR */
-*{cursor:none!important;}
-#cur{position:fixed;width:10px;height:10px;background:var(--teal);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s;mix-blend-mode:multiply;}
-#cur2{position:fixed;width:36px;height:36px;border:1.5px solid var(--teal);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:width .3s,height .3s,opacity .3s;}
-body.hovering #cur{width:16px;height:16px;}
-body.hovering #cur2{width:52px;height:52px;opacity:.2;}
 </style>
 </head>
 <body>
-<div id="cur"></div><div id="cur2"></div>
-
 <!-- MOBILE MENU -->
 <div class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="mT()">✕</button>
   <a href="#games" onclick="mT()">Games</a>
   <a href="#about" onclick="mT()">Studio</a>
   <a href="#publishers" onclick="mT()">Publishers</a>
-  <a href="#faq" onclick="mT()">FAQ</a>
   <a href="#newsletter" onclick="mT()">Newsletter</a>
   <a href="#contact" onclick="mT()">Contact</a>
 </div>
@@ -425,8 +416,7 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
     <li><a href="#games">Games</a></li>
     <li><a href="#about">Studio</a></li>
     <li><a href="#publishers">Publishers</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#newsletter">Newsletter</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="https://instagram.com/catalyst.boardgames" target="_blank">Instagram</a></li>
   </ul>
@@ -436,7 +426,8 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
-  <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Oxford Science Game Studio</div>
+  <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Real-Life Inspired Board Games</div>
+  <div class="hero-studio rv" style="font-size:clamp(11px,1.8vw,13px);font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Catalyst Board Games · Oxford</div>
   <h1 class="hero-h rv">
     Science meets<br>
     <span class="line2">board gaming.</span>
@@ -444,7 +435,7 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
   <p class="hero-sub rv d1">Four strategy games grounded in real chemistry, ecology, fashion, and materials science. Designed in Oxford. Seeking publishers.</p>
   <div class="hero-btns rv d2">
     <a href="#games" class="apple-btn ab-dark">Explore the games</a>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Catalyst%20Board%20Games" class="apple-btn ab-outline">Publisher enquiry</a>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Catalyst%20Board%20Games&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20your%20board%20games.%20Please%20send%20me%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Publisher enquiry</a>
   </div>
   <div class="boxes-stage rv d3">
     <div class="fbox fb1" id="bJ"><img src="jabir_box.png" alt="Jabir: The Perfumer"></div>
@@ -452,7 +443,7 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
     <div class="fbox fb3" id="bW"><img src="washwheel_box.png" alt="WashWheel"></div>
     <div class="fbox fb4" id="bM"><img src="mise_box.png" alt="Mise en Scène"></div>
   </div>
-  <div class="scroll-cue"><span class="scroll-cue-label">Scroll</span><div class="scroll-cue-line"></div></div>
+
 </section>
 
 <!-- MARQUEE -->
@@ -742,8 +733,8 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
       <p style="font-size:17px;color:var(--mid);line-height:1.7;margin-bottom:28px;">Publishers, educators, brands, media — choose how you'd like to reach us. We respond within 48 hours.</p>
       <div class="c-links">
         <a href="mailto:duo.boardgame.design@gmail.com" class="c-link"><span class="cl-ico">✉️</span><div><div class="cl-lbl">Email</div><div class="cl-val">duo.boardgame.design@gmail.com</div></div></a>
-        <a href="https://wa.me/447541178881" target="_blank" class="c-link"><span class="cl-ico">💬</span><div><div class="cl-lbl">WhatsApp</div><div class="cl-val">+44 7541 178 881</div></div></a>
-        <a href="https://t.me/mehrad_nia" target="_blank" class="c-link"><span class="cl-ico">✈️</span><div><div class="cl-lbl">Telegram</div><div class="cl-val">@mehrad_nia</div></div></a>
+        <a href="https://wa.me/447541178881" target="_blank" class="c-link"><span class="cl-ico">💬</span><div><div class="cl-lbl">WhatsApp</div><div class="cl-val">WhatsApp</div></div></a>
+        <a href="https://t.me/mehrad_nia" target="_blank" class="c-link"><span class="cl-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="#fff"/></svg></span><div><div class="cl-lbl">Telegram</div><div class="cl-val">@mehrad_nia</div></div></a>
         <a href="https://instagram.com/catalyst.boardgames" target="_blank" class="c-link"><span class="cl-ico">📷</span><div><div class="cl-lbl">Instagram</div><div class="cl-val">@catalyst.boardgames</div></div></a>
       </div>
     </div>
@@ -765,7 +756,7 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
               <span class="ch-card-tag" style="color:#25D366;">Instant</span>
             </button>
             <button class="ch-card" id="cc-tg" onclick="pick('tg')">
-              <div class="ch-card-ico">✈️</div>
+              <div class="ch-card-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="#fff"/><path d="M10.5 14.5l-.5-3.5 7-4.5" stroke="#fff" stroke-width=".6" fill="none"/></svg></div>
               <div class="ch-card-name">Telegram</div>
               <div class="ch-card-desc">Opens ready to send</div>
               <span class="ch-card-tag" style="color:#2AABEE;">Fast</span>
@@ -813,18 +804,18 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
           <div class="form-row"><label class="form-label">Your Name</label><input class="form-input" type="text" id="wa-n" placeholder="Jane Smith"></div>
           <div class="form-row"><label class="form-label">Message</label><textarea class="form-textarea" id="wa-m" placeholder="Hello Catalyst, I'm interested in…" style="min-height:110px;"></textarea></div>
           <button class="ch-send" onclick="sendWA()" style="background:#25D366;color:#fff;">💬 Open in WhatsApp</button>
-          <p style="font-size:12px;color:var(--mid);text-align:center;margin-top:8px;">+44 7541 178 881</p>
+          <p style="font-size:12px;color:var(--mid);text-align:center;margin-top:8px;">Opens WhatsApp</p>
           <button class="ch-back" onclick="reset()" style="margin-top:12px;display:block;width:100%;text-align:center;padding:8px;">← Choose a different channel</button>
         </div>
         <!-- TELEGRAM PANEL -->
         <div id="panel-tg" class="ch-panel" style="display:none;">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
             <button class="ch-back" onclick="reset()">← Back</button>
-            <span class="ch-badge" style="background:rgba(42,171,238,.08);border-color:rgba(42,171,238,.3);color:#2AABEE;">✈ Telegram</span>
+            <span class="ch-badge" style="background:rgba(42,171,238,.08);border-color:rgba(42,171,238,.3);color:#2AABEE;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="#fff"/></svg> Telegram</span>
           </div>
           <div class="form-row"><label class="form-label">Your Name</label><input class="form-input" type="text" id="tg-n" placeholder="Jane Smith"></div>
           <div class="form-row"><label class="form-label">Message</label><textarea class="form-textarea" id="tg-m" placeholder="Hello Catalyst, I'm interested in…" style="min-height:110px;"></textarea></div>
-          <button class="ch-send" onclick="sendTG()" style="background:#2AABEE;color:#fff;">✈ Open in Telegram</button>
+          <button class="ch-send" onclick="sendTG()" style="background:#2AABEE;color:#fff;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="white" fill-opacity=".3"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="white"/></svg> Send via Telegram</button>
           <p style="font-size:12px;color:var(--mid);text-align:center;margin-top:8px;">@mehrad_nia</p>
           <button class="ch-back" onclick="reset()" style="margin-top:12px;display:block;width:100%;text-align:center;padding:8px;">← Choose a different channel</button>
         </div>
@@ -867,55 +858,6 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
 </div>
 </section>
 
-<!-- ═══ FAQ ═══ -->
-<section id="faq" class="section" style="border-top:1px solid var(--border);">
-<div class="wrap">
-  <div style="text-align:center;margin-bottom:56px;" class="rv">
-    <span class="eyebrow">FAQ</span>
-    <h2 class="headline">Questions &amp; answers.</h2>
-  </div>
-  <div class="faq-block rv">
-    <div class="faq-game-head"><span class="fq-dot" style="background:var(--jabir);"></span><span class="fq-name" style="color:var(--jabir);">Jabir: The Perfumer</span></div>
-    <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Do I need chemistry knowledge to play?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Not at all. Jabir teaches everything through play. The chemistry is embedded in the mechanics so naturally that players absorb it without realising. By your second game you'll think like a perfumer.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How long does a game take?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">90–150 minutes across 5 rounds. Experienced players finish closer to 90 minutes. A simplified first-play variant reduces this to around 75 minutes.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What makes Jabir unique as a eurogame?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">It is the only eurogame built on authentic perfumery chemistry. Every extraction method and fragrance pyramid layer is scientifically accurate. It also has strong co-branding potential with luxury fragrance houses — a commercial opportunity no other strategy game offers.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Is Jabir suitable for education?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — this is a deliberate design goal. Jabir covers organic chemistry, biochemistry, and natural extraction processes. Suitable for secondary school chemistry, university outreach, and museum science experiences.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What is the current development status?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Fully designed — prototype complete, rulebook finalised, final art done. Actively seeking a publishing partner. Press kits and prototype access available immediately.</div></div></div>
-    </div>
-  </div>
-  <div class="faq-block rv">
-    <div class="faq-game-head"><span class="fq-dot" style="background:var(--synth);"></span><span class="fq-name" style="color:var(--synth);">Synthelyst</span></div>
-    <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What does "cooperative-competitive" mean?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">All players must keep Earth Health above zero — if it hits zero, everyone loses immediately. But within that shared survival condition, players compete individually for Victory Points. This tension is the heart of the game.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Is it based on real bioplastics science?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes. Mehrad works professionally in bioplastics R&D. Every feedstock, energy system, and polymerisation mechanic reflects real industrial processes — trade-offs players in the industry will immediately recognise.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How does the Earth Health mechanic work?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Earth Health starts at 25 and decreases with every unresolved Crisis and unsustainable energy choice. If it reaches zero, all players lose regardless of VP scores — creating genuine moral and strategic tension.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Can it be used in sustainability education?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Absolutely. It teaches why plastic pollution is hard to solve, how collective action problems work, and what bioplastics actually are. Being considered for university sustainability modules and corporate ESG training.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How do the five company boards differ?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Each company has a unique Core ability (once per round) and a Big Bet ability (once per game). These create distinct playstyles — Brazil's TerraCycle benefits from sugarcane speed, while Germany's Origin Polymer excels at energy efficiency.</div></div></div>
-    </div>
-  </div>
-  <div class="faq-block rv">
-    <div class="faq-game-head"><span class="fq-dot" style="background:var(--wash);"></span><span class="fq-name" style="color:var(--wash);">WashWheel</span></div>
-    <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What is the Wash Wheel?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">The central rotating resource market — a circular board with 12 slots across 4 zones. Resources move around the wheel each round. Timing your acquisitions to the rotation is as important as your chemistry knowledge.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Do I need fabric knowledge to play?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">No prior knowledge required. WashWheel teaches real textile chemistry through play — you'll learn why wool needs acidic detergent, why silk can't go above 30°C, and why enzyme-based detergents are dangerous to delicate fibres.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How do the four lab roles differ?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Chemist gains formula flexibility; Ecologist earns bonuses for sustainable choices; Specialist masters specific fibre types; Innovator acquires one card from the Wheel for free each round. Each rewards a different strategic approach.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What brand partnerships are possible?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Natural co-branding with laundry brands (Persil, Ariel, Ecover), luxury fashion houses concerned with garment longevity, and sustainable textile organisations.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What development stage is it at?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Active mechanics design. Core concept and key systems are locked. Prototype being built. Publishers interested in early involvement are welcome to reach out now.</div></div></div>
-    </div>
-  </div>
-  <div class="faq-block rv">
-    <div class="faq-game-head"><span class="fq-dot" style="background:var(--mise);"></span><span class="fq-name" style="color:var(--mise);">Mise en Scène</span></div>
-    <div class="faq-list">
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Is it only for fashion fans?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Not at all. While the Parisian fashion theme gives immediate appeal beyond traditional hobbyists, Mise en Scène is a genuine strategy game with multi-layered scoring, hidden objectives, and shared-information tension.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>How does the Secret Client Card work?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Each player receives a Secret Client Card at game start — a hidden personal scoring objective. It is kept face-down throughout play and revealed only at final scoring, adding a dramatic wildcard layer.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Who is the target audience?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Adults 14+ with a focus on audiences new to strategy gaming through the fashion entry point. Ideal for publishers seeking to expand beyond traditional board game demographics, particularly among women and creative communities.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>What luxury brand potential does it have?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Significant. Could feature real fashion house cards (Chanel, Dior, Saint Laurent), creating co-branding similar to licensed sports card games. The premium Parisian aesthetic suits luxury boutique retail and fashion week activations.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="faq(this)"><span>Can I see the rulebook or card designs?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — full rulebook and sample card designs available to publishers on request. Email duo.boardgame.design@gmail.com or use the contact form. We can also arrange a video walkthrough.</div></div></div>
-    </div>
-  </div>
-</div>
-</section>
 
 <!-- FOOTER -->
 <footer>
@@ -927,7 +869,6 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
       <li><a href="synthelyst.html">Synthelyst</a></li>
       <li><a href="washwheel.html">WashWheel</a></li>
       <li><a href="mise-en-scene.html">Mise en Scène</a></li>
-      <li><a href="#faq">FAQ</a></li>
       <li><a href="#newsletter">Newsletter</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -935,7 +876,7 @@ body.hovering #cur2{width:52px;height:52px;opacity:.2;}
       <a href="https://instagram.com/catalyst.boardgames" target="_blank">📷</a>
       <a href="mailto:duo.boardgame.design@gmail.com">✉️</a>
       <a href="https://wa.me/447541178881" target="_blank">💬</a>
-      <a href="https://t.me/mehrad_nia" target="_blank">✈️</a>
+      <a href="https://t.me/mehrad_nia" target="_blank" title="Telegram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.5l12-5-4 13-3-5-5-3z" fill="#fff"/></svg></a>
     </div>
     <span class="foot-copy">© 2025 Catalyst · Mehrad Niasari &amp; Anita Mansouri · Oxford</span>
   </div>
