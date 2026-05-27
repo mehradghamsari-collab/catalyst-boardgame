@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalyst Boardgames | Boardgames Inspired by Real Life</title>
+<meta name="description" content="Catalyst Boardgames creates premium science-inspired tabletop games about real-world systems, strategy, sustainability, innovation, and discovery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="home-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<canvas id="particleCanvas" class="particle-canvas" aria-hidden="true"></canvas>
+
+<div class="mob-nav mobile-panel" id="mobNav" aria-hidden="true">
+  <button class="mob-close" id="mobileClose" type="button" aria-label="Close menu">x</button>
+  <a href="#home">Home</a>
+  <a href="#games">Games</a>
+  <a href="#about">About</a>
+  <a href="#community">Community</a>
+  <a href="#shop">Shop</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<nav class="site-nav home-nav" id="siteNav" aria-label="Primary navigation">
+  <a href="#home" class="nav-logo catalyst-logo" aria-label="Catalyst Boardgames home">
+    <span class="nav-symbol" aria-hidden="true">
+      <svg viewBox="0 0 40 40" focusable="false">
+        <path d="M15 5h10M18 5v8l-9 15c-1.7 2.9.4 6.5 3.8 6.5h14.4c3.4 0 5.5-3.6 3.8-6.5l-9-15V5" />
+        <path d="M14 27c3.7 2.4 8.3 2.4 12 0" />
+        <circle cx="20" cy="25" r="2.3" />
+      </svg>
+    </span>
+    <span>Catalyst <em>Boardgames</em></span>
+  </a>
+  <ul class="nav-links desktop-nav">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#games">Games</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#community">Community</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#community" class="nav-action">Join</a>
+  <button class="hamburger" id="mobileOpen" type="button" aria-label="Open menu" aria-controls="mobNav" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main id="main">
+  <section class="hero" id="home" aria-labelledby="hero-title">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Catalyst Boardgames</span>
+        <h1 id="hero-title">Boardgames Inspired by Real Life</h1>
+        <p class="hero-subtitle">Strategy. Science. Sustainability.</p>
+        <p class="hero-intro">Premium tabletop worlds built from chemistry, ecological pressure, industrial systems, and the beautiful tension of consequential decisions.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#games">Explore Games</a>
+          <a class="btn btn-secondary" href="#community">Join the Catalyst Community</a>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal delay-2" aria-label="Animated Catalyst flask logo">
+        <div class="reaction-mark">
+          <svg class="brand-animation" viewBox="0 0 360 420" role="img" aria-labelledby="brandMarkTitle brandMarkDesc">
+            <title id="brandMarkTitle">Catalyst Boardgames reaction mark</title>
+            <desc id="brandMarkDesc">A flask outline surrounded by connected particles and a glowing reaction core.</desc>
+            <g class="molecule-lines">
+              <path d="M77 103 L132 76 L188 111 L248 82 L302 124" />
+              <path d="M68 244 L122 205 L184 230 L241 192 L298 220" />
+              <path d="M108 314 L170 279 L233 315" />
+            </g>
+            <g class="molecule-particles">
+              <circle cx="77" cy="103" r="5" />
+              <circle cx="132" cy="76" r="8" />
+              <circle cx="188" cy="111" r="6" />
+              <circle cx="248" cy="82" r="7" />
+              <circle cx="302" cy="124" r="5" />
+              <circle cx="68" cy="244" r="6" />
+              <circle cx="122" cy="205" r="5" />
+              <circle cx="184" cy="230" r="7" />
+              <circle cx="241" cy="192" r="5" />
+              <circle cx="298" cy="220" r="6" />
+              <circle cx="108" cy="314" r="5" />
+              <circle cx="170" cy="279" r="7" />
+              <circle cx="233" cy="315" r="5" />
+            </g>
+            <path class="flask-outline" d="M145 42 H215 M164 42 V132 L79 286 C64 314 84 352 116 352 H244 C276 352 296 314 281 286 L196 132 V42" />
+            <path class="flask-liquid" d="M107 294 C138 268 169 329 203 298 C226 277 247 292 262 309 C255 329 244 336 224 336 H132 C114 336 101 324 107 294 Z" />
+            <g class="meeple-core">
+              <circle cx="180" cy="229" r="18" />
+              <path d="M147 281 C153 249 167 239 180 239 C193 239 207 249 213 281" />
+              <path d="M154 283 H206 L197 315 H163 Z" />
+            </g>
+            <text class="mark-text" x="180" y="392" text-anchor="middle">CATALYST BOARDGAMES</text>
+          </svg>
+        </div>
+        <div class="hero-product-strip" aria-hidden="true">
+          <img src="synthelyst_box.png" alt="" loading="eager">
+          <img src="latherwork_box.png" alt="" loading="eager">
+          <img src="jabir_box.png" alt="" loading="eager">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="signal-strip" aria-label="Catalyst highlights">
+    <div class="signal-item">
+      <span>3</span>
+      <p>Science-led game worlds</p>
+    </div>
+    <div class="signal-item">
+      <span>2</span>
+      <p>Publisher-ready prototypes</p>
+    </div>
+    <div class="signal-item">
+      <span>Oxford</span>
+      <p>Chemistry and design roots</p>
+    </div>
+    <div class="signal-item">
+      <span>Real</span>
+      <p>Systems become strategy</p>
+    </div>
+  </section>
+
+  <section class="section about-section" id="about" aria-labelledby="about-title">
+    <div class="wrap split-intro">
+      <div class="section-heading reveal">
+        <span class="eyebrow">Mission</span>
+        <h2 id="about-title">Curiosity, engineered into play.</h2>
+      </div>
+      <div class="intro-text reveal delay-1">
+        <p>Catalyst creates boardgames inspired by real-world systems, science, innovation, sustainability, and strategic decision-making. Each title starts with a true process, then turns that process into tense, elegant gameplay.</p>
+        <p>Our goal is simple: make players feel the thrill of discovery at the table, while building worlds that are credible enough for educators and exciting enough for serious gamers.</p>
+      </div>
+    </div>
+
+    <div class="wrap principle-grid">
+      <article class="principle-card reveal">
+        <svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="5"/><circle cx="16" cy="20" r="4"/><circle cx="49" cy="18" r="4"/><circle cx="49" cy="47" r="4"/><path d="M20 22l8 7M37 28l9-8M37 37l9 8"/></svg>
+        <h3>Science</h3>
+        <p>Mechanics grounded in chemistry, biology, textiles, materials, and systems thinking.</p>
+      </article>
+      <article class="principle-card reveal">
+        <svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 20l18-10 18 10v24L32 54 14 44z"/><path d="M14 20l18 10 18-10M32 30v24M22 25l20 14M42 25L22 39"/></svg>
+        <h3>Strategy</h3>
+        <p>Meaningful tradeoffs, player tension, planning arcs, and adaptive decision loops.</p>
+      </article>
+      <article class="principle-card reveal">
+        <svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 7l22 13v25L32 57 10 45V20z"/><path d="M22 39c18 1 23-12 20-24C28 16 20 25 22 39z"/><path d="M24 39c5-8 10-13 18-20"/></svg>
+        <h3>Sustainability</h3>
+        <p>Environmental pressure becomes a playable system, not a decorative theme.</p>
+      </article>
+      <article class="principle-card reveal">
+        <svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M24 42h16M26 50h12M23 34c-5-4-7-10-4-17 3-7 10-10 17-8 8 2 13 10 11 18-1 4-3 6-6 9-2 2-3 4-3 6H26c0-3-1-5-3-8z"/><path d="M32 16v8l6 4"/></svg>
+        <h3>Innovation</h3>
+        <p>Novel themes and mechanisms built for players, classrooms, and partners.</p>
+      </article>
+      <article class="principle-card reveal">
+        <svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="33" cy="30" r="13"/><path d="M45 42l9 9M22 51l20-40M16 55h20"/></svg>
+        <h3>Discovery</h3>
+        <p>Every session gives players a new model for understanding the world.</p>
+      </article>
+      <article class="principle-card reveal">
+        <svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 17c8-3 14-2 20 3v33c-6-5-12-6-20-3zM52 17c-8-3-14-2-20 3v33c6-5 12-6 20-3z"/><path d="M20 25h5M20 33h6M39 25h5M38 33h7"/></svg>
+        <h3>Education</h3>
+        <p>Learning appears through play: rules, outcomes, and memorable failures.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section games-section" id="games" aria-labelledby="games-title">
+    <div class="wrap section-heading centered reveal">
+      <span class="eyebrow">Games</span>
+      <h2 id="games-title">A portfolio of playable systems.</h2>
+      <p>Each game transforms a real-life system into a premium tabletop experience.</p>
+    </div>
+    <div class="wrap game-card-grid">
+      <a class="game-card reveal" href="jabir.html">
+        <img src="jabir_box.png" alt="Jabir: The Perfumer board game box art" loading="lazy">
+        <div class="game-card-body">
+          <span>Game 001</span>
+          <h3>Jabir: The Perfumer</h3>
+          <p>Harvest, distill, age, and compose fragrances in a heavy strategy game of real perfumery chemistry.</p>
+          <ul>
+            <li>2-6 players</li>
+            <li>90-150 min</li>
+            <li>Publisher ready</li>
+          </ul>
+        </div>
+      </a>
+      <a class="game-card reveal delay-1" href="synthelyst.html">
+        <img src="synthelyst_box.png" alt="Synthelyst competitive eco-strategy board game box art" loading="lazy">
+        <div class="game-card-body">
+          <span>Game 002</span>
+          <h3>Synthelyst</h3>
+          <p>Race to build bioplastics while keeping Earth alive in a competitive eco-strategy game.</p>
+          <ul>
+            <li>2-5 players</li>
+            <li>60-90 min</li>
+            <li>Publisher ready</li>
+          </ul>
+        </div>
+      </a>
+      <a class="game-card reveal delay-2" href="washwheel.html">
+        <img src="washwheel_box.png" alt="WashWheel fabric science board game box art" loading="lazy">
+        <div class="game-card-body">
+          <span>Game 003</span>
+          <h3>WashWheel</h3>
+          <p>Read fabric chemistry, engineer wash formulas, and master a shifting industrial laundry system.</p>
+          <ul>
+            <li>2-4 players</li>
+            <li>90-120 min</li>
+            <li>In design</li>
+          </ul>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section icon-section" aria-labelledby="icons-title">
+    <div class="wrap section-heading reveal">
+      <span class="eyebrow">Visual Language</span>
+      <h2 id="icons-title">A custom icon system for the Catalyst universe.</h2>
+    </div>
+    <div class="wrap icon-grid">
+      <div class="icon-tile reveal"><svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 32h48M16 18h32M16 46h32M16 18l-8 14 8 14M48 18l8 14-8 14"/><circle cx="20" cy="32" r="3"/><circle cx="32" cy="32" r="3"/><circle cx="44" cy="32" r="3"/></svg><span>Strategy</span></div>
+      <div class="icon-tile reveal"><svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="5"/><ellipse cx="32" cy="32" rx="22" ry="8"/><ellipse cx="32" cy="32" rx="8" ry="22" transform="rotate(35 32 32)"/><ellipse cx="32" cy="32" rx="8" ry="22" transform="rotate(-35 32 32)"/></svg><span>Science</span></div>
+      <div class="icon-tile reveal"><svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 7l22 13v25L32 57 10 45V20z"/><path d="M22 39c16 0 23-11 20-23-13 1-22 10-20 23z"/></svg><span>Sustainability</span></div>
+      <div class="icon-tile reveal"><svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M26 42h12M28 50h8M24 34c-4-4-6-10-3-16s10-9 17-6c6 3 9 10 6 16-1 3-3 5-5 7-2 2-2 4-2 7H27c0-3-1-5-3-8z"/><path d="M32 20v8l5 3"/></svg><span>Innovation</span></div>
+      <div class="icon-tile reveal"><svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="31" cy="29" r="11"/><path d="M42 40l10 10M20 51l22-42M14 55h19"/><path d="M21 29c8-8 13-8 21 0"/></svg><span>Discovery</span></div>
+      <div class="icon-tile reveal"><svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 17c8-3 14-2 20 3v33c-6-5-12-6-20-3zM52 17c-8-3-14-2-20 3v33c6-5 12-6 20-3z"/></svg><span>Education</span></div>
+      <div class="icon-tile reveal"><svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="20" cy="25" r="6"/><circle cx="44" cy="25" r="6"/><circle cx="32" cy="43" r="6"/><path d="M24 29l5 8M40 29l-5 8M26 43h12"/></svg><span>Community</span></div>
+      <div class="icon-tile reveal"><svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M18 20h35l-5 20H22zM14 13h6l3 27M25 50a3 3 0 1 0 0 .1M45 50a3 3 0 1 0 0 .1"/></svg><span>Shop</span></div>
+    </div>
+  </section>
+
+  <section class="section community-section" id="community" aria-labelledby="community-title">
+    <div class="wrap community-grid">
+      <div class="community-copy reveal">
+        <span class="eyebrow">Community</span>
+        <h2 id="community-title">Follow the journey from idea to tabletop.</h2>
+        <p>Join the Catalyst community for prototype updates, playtest news, launch announcements, and behind-the-scenes design notes.</p>
+        <div class="social-links" aria-label="Social links">
+          <a href="https://instagram.com/catalyst.boardgame" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:duo.boardgame.design@gmail.com">Email</a>
+          <a href="#games">Game Library</a>
+        </div>
+      </div>
+      <form class="newsletter reveal delay-1" id="newsletterForm">
+        <label for="email">Join the Catalyst community</label>
+        <div class="newsletter-row">
+          <input id="email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn btn-primary" type="submit">Join</button>
+        </div>
+        <p id="newsletterNote" aria-live="polite">Games that transform curiosity into strategy.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section shop-section" id="shop" aria-labelledby="shop-title">
+    <div class="wrap shop-panel reveal">
+      <div>
+        <span class="eyebrow">Shop</span>
+        <h2 id="shop-title">Launch-ready presence for the next campaign.</h2>
+        <p>Prototype demos, publisher enquiries, classroom pilots, and future Kickstarter updates all route through the Catalyst community.</p>
+      </div>
+      <a class="btn btn-secondary" href="mailto:duo.boardgame.design@gmail.com?subject=Catalyst%20Boardgames%20Enquiry">Contact Catalyst</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer premium-footer" id="contact">
+  <div class="footer-brand-block">
+    <a href="#home" class="footer-brand"><span class="nav-dot"></span>CATALYST BOARDGAMES</a>
+    <p>Games that transform curiosity into strategy.</p>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:duo.boardgame.design@gmail.com">duo.boardgame.design@gmail.com</a>
+    <a href="https://instagram.com/catalyst.boardgame" target="_blank" rel="noopener">@catalyst.boardgame</a>
+  </div>
+  <span class="footer-copy">&copy; 2026 Catalyst Boardgames. All rights reserved.</span>
+</footer>
+
+<script>
+(function(){
+  const nav = document.getElementById('siteNav');
+  const menu = document.getElementById('mobNav');
+  const open = document.getElementById('mobileOpen');
+  const close = document.getElementById('mobileClose');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function setNav(){
+    nav.classList.toggle('stuck', window.scrollY > 28);
+  }
+  setNav();
+  window.addEventListener('scroll', setNav, { passive: true });
+
+  function toggleMenu(force){
+    const active = typeof force === 'boolean' ? force : !menu.classList.contains('open');
+    menu.classList.toggle('open', active);
+    menu.setAttribute('aria-hidden', String(!active));
+    open.setAttribute('aria-expanded', String(active));
+    document.body.classList.toggle('menu-open', active);
+  }
+  open.addEventListener('click', () => toggleMenu());
+  close.addEventListener('click', () => toggleMenu(false));
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+  window.addEventListener('keydown', event => {
+    if(event.key === 'Escape') toggleMenu(false);
+  });
+
+  const reveal = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        reveal.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => reveal.observe(el));
+
+  const form = document.getElementById('newsletterForm');
+  const note = document.getElementById('newsletterNote');
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    note.textContent = 'You are on the Catalyst signal list. We will share launch news soon.';
+    form.reset();
+  });
+
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  let width = 0;
+  let height = 0;
+  let particles = [];
+
+  function resize(){
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+    canvas.width = Math.floor(width * ratio);
+    canvas.height = Math.floor(height * ratio);
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const count = window.innerWidth < 700 ? 34 : 72;
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.24,
+      vy: (Math.random() - 0.5) * 0.24,
+      r: Math.random() * 1.6 + 0.5
+    }));
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if(p.x < 0 || p.x > width) p.vx *= -1;
+      if(p.y < 0 || p.y > height) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(95, 243, 228, 0.58)';
+      ctx.fill();
+    });
+    for(let i = 0; i < particles.length; i++){
+      for(let j = i + 1; j < particles.length; j++){
+        const a = particles[i];
+        const b = particles[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        const max = window.innerWidth < 700 ? 88 : 126;
+        if(d < max){
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = 'rgba(25, 198, 180,' + (0.16 * (1 - d / max)).toFixed(3) + ')';
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  if(!reduced){
+    resize();
+    window.addEventListener('resize', resize);
+    draw();
+  }
+})();
+</script>
+</body>
+</html>
