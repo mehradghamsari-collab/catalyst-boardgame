@@ -9,12 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
 :root{--ac:#22c55e;--ac2:#15803d;--acl:rgba(34,197,94,.08);}
-*{cursor:none!important;}
-#cur{position:fixed;width:10px;height:10px;background:var(--ac);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s;mix-blend-mode:multiply;}
-#cur2{position:fixed;width:36px;height:36px;border:1.5px solid var(--ac);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s;opacity:.5;}
-body.hovering #cur{width:18px;height:18px;}
-body.hovering #cur2{width:56px;height:56px;opacity:.25;}
-.g-hero{height:100svh;position:relative;overflow:hidden;display:flex;align-items:flex-end;background:#fff;}
+body.hovering body.hovering .g-hero{height:100svh;position:relative;overflow:hidden;display:flex;align-items:flex-end;background:#fff;}
 .g-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(34,197,94,.08) 0%,transparent 65%),#fff;}
 .g-hero-box{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:min(38vw,420px);z-index:2;filter:drop-shadow(0 40px 80px rgba(34,197,94,.08)) drop-shadow(0 16px 40px rgba(0,0,0,.1));}
 .g-hero-box img{width:100%;height:auto;object-fit:contain;display:block;}
@@ -79,10 +74,20 @@ body.hovering #cur2{width:56px;height:56px;opacity:.25;}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.25,1,.5,1),transform .8s cubic-bezier(.25,1,.5,1);}
 .rv.on{opacity:1;transform:none;}
 .d1{transition-delay:.1s!important;}.d2{transition-delay:.2s!important;}.d3{transition-delay:.3s!important;}
+
+/* FAQ */
+.faq-item{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#fff;transition:border-color .2s;margin-bottom:2px;}
+.faq-item:hover{border-color:rgba(0,0,0,.15);}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;background:transparent;border:none;cursor:pointer;font-size:14px;font-weight:500;color:var(--black);text-align:left;font-family:inherit;transition:background .15s;}
+.faq-q:hover{background:rgba(0,0,0,.02);}
+.faq-icon{width:22px;height:22px;border:1.5px solid var(--border);border-radius:50%;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--mid);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s;}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--ac);border-color:var(--ac);color:#fff;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.25,1,.5,1);}
+.faq-item.open .faq-a{max-height:280px;}
+.faq-a-inner{padding:0 20px 16px;font-size:14px;color:var(--mid);line-height:1.75;}
 </style>
 </head>
 <body>
-<div id="cur"></div><div id="cur2"></div>
 <nav class="nav" id="siteNav">
   <a href="index.html" class="nav-logo"><img src="catalyst_logo.png" alt="Catalyst"><span class="nav-logo-text">Catalyst</span></a>
   <ul class="nav-links">
@@ -93,7 +98,7 @@ body.hovering #cur2{width:56px;height:56px;opacity:.25;}
     <li><a href="mise-en-scene.html">Mise en Scène</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher+Enquiry:+Synthelyst" class="nav-cta-btn">Enquire →</a>
+  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="nav-cta-btn">Enquire →</a>
   <button class="hamburger" onclick="document.getElementById('mobNav').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 <div class="mob-nav" id="mobNav">
@@ -116,7 +121,7 @@ body.hovering #cur2{width:56px;height:56px;opacity:.25;}
       <div class="gm-item"><div class="gm-n">14+</div><div class="gm-l">Age</div></div>
     </div>
     <div class="g-btns">
-      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher+Enquiry:+Synthelyst" class="apple-btn ab-dark">Publisher enquiry</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Publisher enquiry</a>
       <a href="index.html#contact" class="apple-btn ab-outline">Get in touch</a>
     </div>
   </div>
@@ -169,7 +174,7 @@ body.hovering #cur2{width:56px;height:56px;opacity:.25;}
   <div class="pub-cta rv">
     <h3>Interested in publishing Synthelyst?</h3>
     <p>Interested in publishing Synthelyst? We have prototypes, full design documentation, and science accuracy reports. Let's talk.</p>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher+Enquiry:+Synthelyst&body=Hello+Catalyst,+I+am+interested+in+Synthelyst." class="apple-btn ab-teal">Send publisher enquiry</a>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-teal">Send publisher enquiry</a>
   </div>
 </div>
 </section>
@@ -218,5 +223,7 @@ document.querySelectorAll('.feat-card').forEach(card=>{
   card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(600px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-4px)`;});
   card.addEventListener('mouseleave',()=>{card.style.transform='';});
 });
+function faq(btn){const item=btn.closest('.faq-item');const open=item.classList.contains('open');item.closest('div').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');}
+
 </script>
 </body></html>

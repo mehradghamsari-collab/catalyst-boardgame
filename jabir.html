@@ -10,15 +10,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
 :root{--ac:#e8890c;--ac2:#c96800;--acl:rgba(232,137,12,.08);}
-*{cursor:none!important;}
 /* CUSTOM CURSOR */
-#cur{position:fixed;width:10px;height:10px;background:var(--ac);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s;mix-blend-mode:multiply;}
-#cur2{position:fixed;width:36px;height:36px;border:1.5px solid var(--ac);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s;opacity:.5;}
-body.hovering #cur{width:18px;height:18px;}
-body.hovering #cur2{width:56px;height:56px;opacity:.25;}
-/* HERO */
+body.hovering body.hovering /* HERO */
 .g-hero{
-  height:100svh;position:relative;overflow:hidden;
+  height:100svh;min-height:640px;position:relative;overflow:hidden;
   display:flex;align-items:flex-end;
   background:#fff;
 }
@@ -122,11 +117,20 @@ body.hovering #cur2{width:56px;height:56px;opacity:.25;}
 .rv{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.25,1,.5,1),transform .8s cubic-bezier(.25,1,.5,1);}
 .rv.on{opacity:1;transform:none;}
 .d1{transition-delay:.1s!important;}.d2{transition-delay:.2s!important;}.d3{transition-delay:.3s!important;}
+
+/* FAQ */
+.faq-item{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#fff;transition:border-color .2s;margin-bottom:2px;}
+.faq-item:hover{border-color:rgba(0,0,0,.15);}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;background:transparent;border:none;cursor:pointer;font-size:14px;font-weight:500;color:var(--black);text-align:left;font-family:inherit;transition:background .15s;}
+.faq-q:hover{background:rgba(0,0,0,.02);}
+.faq-icon{width:22px;height:22px;border:1.5px solid var(--border);border-radius:50%;flex-shrink:0;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--mid);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .2s,border-color .2s;}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--ac);border-color:var(--ac);color:#fff;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.25,1,.5,1);}
+.faq-item.open .faq-a{max-height:280px;}
+.faq-a-inner{padding:0 20px 16px;font-size:14px;color:var(--mid);line-height:1.75;}
 </style>
 </head>
 <body>
-<div id="cur"></div>
-<div id="cur2"></div>
 
 <!-- NAV -->
 <nav class="nav" id="siteNav">
@@ -141,7 +145,7 @@ body.hovering #cur2{width:56px;height:56px;opacity:.25;}
     <li><a href="mise-en-scene.html">Mise en Scène</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir" class="nav-cta-btn">Enquire →</a>
+  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="nav-cta-btn">Enquire →</a>
   <button class="hamburger" onclick="document.getElementById('mobNav').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 <div class="mob-nav" id="mobNav">
@@ -168,12 +172,19 @@ body.hovering #cur2{width:56px;height:56px;opacity:.25;}
       <div class="gm-item"><div class="gm-n">14+</div><div class="gm-l">Age</div></div>
     </div>
     <div class="g-btns">
-      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir" class="apple-btn ab-dark">Publisher enquiry</a>
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Publisher enquiry</a>
       <a href="index.html#contact" class="apple-btn ab-outline">Get in touch</a>
     </div>
   </div>
   <div class="scroll-hint"><div class="sh-line" id="shLine"></div><span>Scroll to explore</span></div>
 </section>
+
+<!-- HERO IMAGE STRIP — fills space below hero -->
+<div style="background:#fff;display:flex;gap:0;overflow:hidden;height:260px;border-top:1px solid var(--border);">
+  <div style="flex:1;overflow:hidden;"><img src="jabir_cards_hand.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s;display:block;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''"></div>
+  <div style="flex:1;overflow:hidden;"><img src="jabir_botanicals_hand.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s;display:block;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''"></div>
+  <div style="flex:1;overflow:hidden;"><img src="jabir_flask_detail.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .6s;display:block;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform=''"></div>
+</div>
 
 <!-- WHAT IS IT -->
 <section class="gs">
@@ -265,6 +276,21 @@ body.hovering #cur2{width:56px;height:56px;opacity:.25;}
     <h3>Interested in publishing Jabir?</h3>
     <p>We have prototypes ready, full design documentation, and science accuracy reports. Let's talk.</p>
     <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer." class="apple-btn ab-teal">Send publisher enquiry</a>
+  </div>
+</div>
+</section>
+
+<!-- ═══ FAQ — JABIR ═══ -->
+<section class="gs" style="background:var(--light);">
+<div class="gc">
+  <span class="gs-ey rv">Frequently Asked Questions</span>
+  <h2 class="gs-h rv d1">Everything you need<br>to know about Jabir.</h2>
+  <div style="display:flex;flex-direction:column;gap:4px;margin-top:36px;">
+    <div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>Do I need chemistry knowledge to play?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Not at all. Jabir teaches everything through play. The chemistry is embedded in the mechanics so naturally that players absorb it without realising. By your second game you'll think like a real perfumer.</div></div></div>
+    <div class="faq-item rv d1"><button class="faq-q" onclick="faq(this)"><span>How long does a game take?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">90–150 minutes across 5 rounds. Experienced players finish closer to 90 minutes. A simplified first-play variant reduces this to around 75 minutes.</div></div></div>
+    <div class="faq-item rv d2"><button class="faq-q" onclick="faq(this)"><span>What makes Jabir unique as a eurogame?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">It is the only eurogame built on authentic perfumery chemistry. Every extraction method and fragrance pyramid layer is scientifically accurate. It also has strong co-branding potential with luxury fragrance houses — a commercial opportunity no other strategy game offers.</div></div></div>
+    <div class="faq-item rv d3"><button class="faq-q" onclick="faq(this)"><span>Is Jabir suitable for education?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — this is a deliberate design goal. Jabir covers organic chemistry, biochemistry, and natural extraction processes. Suitable for secondary school chemistry, university outreach, and museum science experiences.</div></div></div>
+    <div class="faq-item rv d4"><button class="faq-q" onclick="faq(this)"><span>What is the current development status?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner">Fully designed — prototype complete, rulebook finalised, final art done. Actively seeking a publishing partner. Press kits and prototype access available immediately on request.</div></div></div>
   </div>
 </div>
 </section>
@@ -381,6 +407,8 @@ document.querySelectorAll('.feat-card').forEach(card=>{
   });
   card.addEventListener('mouseleave',()=>{card.style.transform='';});
 });
+function faq(btn){const item=btn.closest('.faq-item');const open=item.classList.contains('open');item.closest('div').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');}
+
 </script>
 </body>
 </html>
