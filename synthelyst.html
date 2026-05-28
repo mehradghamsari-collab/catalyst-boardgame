@@ -4,162 +4,288 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Synthelyst — Catalyst Board Games</title>
-<meta name="description" content="Synthelyst: A Game of Biomaterial Innovation. Seeking Publisher. Catalyst Board Games, Oxford.">
+<meta name="description" content="Synthelyst: A Game of Biomaterial Innovation. Seeking Publisher · Prototype Ready. Catalyst Board Games, Oxford.">
 <link rel="stylesheet" href="style.css">
 <style>
-:root{--ac:#22c55e;--acl:rgba(34,197,94,.07);}
-.g-hero{ background: radial-gradient(ellipse at 70% 50%, rgba(34,197,94,.06) 0%, transparent 65%), #fff; }
-.faq-item.open .faq-icon{background:#22c55e;border-color:#22c55e;}
+/* ─── GAME PAGE STYLES ─── */
+:root { --ac: #22c55e; --acl: rgba(34,197,94,.06); }
+
+/* HERO */
+.g-hero {
+  position: relative;
+  padding: 100px var(--pad-x) 60px;
+  min-height: 88svh;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
+  background: radial-gradient(ellipse at 75% 50%, rgba(34,197,94,.06) 0%, transparent 60%), #fff;
+}
+@media (min-width: 900px) {
+  .g-hero {
+    grid-template-columns: 1.1fr .9fr;
+    gap: 60px;
+    padding: 120px var(--pad-x) 80px;
+    min-height: 100svh;
+  }
+}
+.g-hero-left { max-width: 560px; }
+.g-back { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--mid); margin-bottom: 22px; }
+.g-back:hover { color: var(--black); }
+.g-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ac); margin-bottom: 14px; display: block; }
+.g-title {
+  font-size: clamp(40px, 7vw, 76px);
+  font-weight: 700; letter-spacing: -.05em; line-height: .95;
+  color: var(--black); margin-bottom: 12px;
+}
+.g-sub { font-size: clamp(15px, 2vw, 18px); color: var(--mid); margin-bottom: 26px; font-style: italic; }
+.g-meta { display: flex; gap: 22px; flex-wrap: wrap; margin-bottom: 24px; }
+.gm-item { display: flex; flex-direction: column; gap: 2px; }
+.gm-n { font-size: 18px; font-weight: 700; letter-spacing: -.02em; color: var(--black); line-height: 1; }
+.gm-l { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--mid); }
+.g-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--acl); border: 1px solid #22c55e;
+  padding: 6px 14px; border-radius: 980px;
+  font-size: 11px; font-weight: 600; color: var(--ac);
+  letter-spacing: .04em; margin-bottom: 24px;
+}
+.g-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ac); animation: pulse 2.5s ease infinite; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 var(--acl); } 70% { box-shadow: 0 0 0 8px transparent; } }
+.g-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.g-hero-right { position: relative; display: flex; align-items: center; justify-content: center; min-height: 320px; }
+@media (min-width: 900px) { .g-hero-right { min-height: 480px; } }
+.g-hero-box {
+  width: min(75%, 280px);
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.15)) drop-shadow(0 8px 24px rgba(0,0,0,.08));
+  animation: heroBob 5.5s ease-in-out infinite;
+}
+@media (min-width: 900px) { .g-hero-box { width: min(80%, 380px); } }
+.g-hero-box img { width: 100%; height: auto; }
+@keyframes heroBob { 0%,100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-14px) rotate(.5deg); } }
+
+/* IMAGE STRIP after hero */
+.g-strip {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  height: 180px;
+}
+@media (min-width: 768px) { .g-strip { height: 260px; } }
+.g-strip-cell { overflow: hidden; position: relative; }
+.g-strip-cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.g-strip-cell:hover img { transform: scale(1.05); }
+
+/* INTRO SECTION */
+.g-section { padding: 80px var(--pad-x); }
+@media (min-width: 768px) { .g-section { padding: 110px var(--pad-x); } }
+.g-section-inner { max-width: var(--max); margin: 0 auto; }
+.g-section.alt { background: var(--light); border-top: 1px solid var(--line); }
+.g-ey { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ac); margin-bottom: 14px; display: block; }
+.g-h { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -.04em; line-height: 1.05; color: var(--black); margin-bottom: 16px; }
+.g-lead { font-size: clamp(18px, 2.4vw, 24px); font-weight: 500; letter-spacing: -.02em; line-height: 1.4; color: var(--black); margin-bottom: 22px; max-width: 760px; }
+.g-body { font-size: 16px; color: var(--mid); line-height: 1.75; margin-bottom: 14px; max-width: 720px; }
+
+/* FEATURE GRID */
+.feat-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 36px; }
+@media (min-width: 640px) { .feat-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .feat-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.feat-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 14px;
+  padding: 22px 20px; transition: box-shadow .3s, transform .3s, border-color .3s;
+}
+.feat-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.07); transform: translateY(-3px); border-color: var(--ac); }
+.fc-title { font-size: 15px; font-weight: 600; color: var(--black); margin-bottom: 8px; letter-spacing: -.02em; }
+.fc-body { font-size: 13px; color: var(--mid); line-height: 1.7; }
+
+/* CINEMATIC STRIP */
+.g-cin { position: relative; height: 360px; overflow: hidden; border-top: 1px solid var(--line); }
+@media (min-width: 768px) { .g-cin { height: 480px; } }
+.g-cin-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.g-cin-tint { position: absolute; inset: 0; }
+.g-cin-body {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; color: #fff; padding: 0 var(--pad-x);
+}
+.g-cin-h { font-size: clamp(24px, 4vw, 44px); font-weight: 700; letter-spacing: -.04em; line-height: 1.1; margin-bottom: 10px; }
+.g-cin-p { font-size: clamp(14px, 1.8vw, 17px); opacity: .8; max-width: 500px; line-height: 1.6; }
+
+/* PUBLISHER CTA */
+.pub-cta {
+  background: var(--black); border-radius: 20px;
+  padding: 48px 28px; text-align: center;
+  margin-top: 56px;
+}
+@media (min-width: 768px) { .pub-cta { padding: 68px 48px; } }
+.pub-cta h3 { font-size: clamp(24px, 3.5vw, 36px); font-weight: 700; color: #fff; letter-spacing: -.04em; margin-bottom: 12px; line-height: 1.15; }
+.pub-cta p { font-size: 15px; color: rgba(255,255,255,.55); max-width: 460px; margin: 0 auto 24px; line-height: 1.65; }
+
+/* TWO-COL PUBLISHER */
+.pub-two { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
+@media (min-width: 900px) { .pub-two { grid-template-columns: 1fr 1fr; gap: 56px; } }
+.pub-two-img { border-radius: var(--radius); overflow: hidden; }
+.pub-two-img img { width: 100%; height: 320px; object-fit: cover; }
+@media (min-width: 900px) { .pub-two-img img { height: 440px; } }
 </style>
 </head>
 <body>
+
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="document.getElementById('mobNav').classList.remove('open')">✕</button>
+  <a href="index.html">Home</a>
+  <a href="index.html#games">All Games</a>
+  <a href="jabir.html">Jabir</a>
+  <a href="synthelyst.html">Synthelyst</a>
+  <a href="washwheel.html">WashWheel</a>
+  <a href="mise-en-scene.html">Mise en Scène</a>
+  <a href="index.html#contact">Contact</a>
+</div>
+
 <nav class="nav" id="siteNav">
-  <a href="index.html" class="nav-logo"><img src="catalyst_logo.png" alt="Catalyst"><span class="nav-logo-text">Catalyst Board Games</span></a>
+  <a href="index.html" class="nav-logo">
+    <img src="catalyst_logo.png" alt="Catalyst">
+    <span class="nav-logo-text">Catalyst Board Games</span>
+  </a>
   <ul class="nav-links">
-    <li><a href="index.html#games">All Games</a></li>
+    <li><a href="index.html#games">Games</a></li>
     <li><a href="jabir.html">Jabir</a></li>
     <li><a href="synthelyst.html">Synthelyst</a></li>
     <li><a href="washwheel.html">WashWheel</a></li>
     <li><a href="mise-en-scene.html">Mise en Scène</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
-  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit%20and%20prototype%20details.%0A%0AThank%20you." class="nav-cta-btn">Enquire →</a>
+  <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="nav-cta-btn">Enquire →</a>
   <button class="hamburger" onclick="document.getElementById('mobNav').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
-<div class="mob-nav" id="mobNav">
-  <button class="mob-close" onclick="document.getElementById('mobNav').classList.remove('open')">✕</button>
-  <a href="index.html" onclick="document.getElementById('mobNav').classList.remove('open')">Home</a>
-  <a href="index.html#games" onclick="document.getElementById('mobNav').classList.remove('open')">All Games</a>
-  <a href="index.html#contact" onclick="document.getElementById('mobNav').classList.remove('open')">Contact</a>
-</div>
 
 <!-- HERO -->
 <section class="g-hero">
   <div class="g-hero-left">
     <a href="index.html" class="g-back">← All games</a>
-    <span class="g-eyebrow" style="color:#22c55e;">Game 002 of 004 · Mid-Heavy Eurogame</span>
-    <h1 class="g-title">Synthe<em style="color:#22c55e;font-style:normal;">lyst</em></h1>
-    <p class="g-sub">A Game of Biomaterial Innovation</p>
-    <div class="g-meta">
+    <span class="g-eyebrow rv">Mid-Heavy Eurogame</span>
+    <h1 class="g-title rv d1">Synthelyst</h1>
+    <p class="g-sub rv d1">A Game of Biomaterial Innovation</p>
+    <div class="g-meta rv d2">
       <div class="gm-item"><div class="gm-n">2–5</div><div class="gm-l">Players</div></div>
       <div class="gm-item"><div class="gm-n">60–90</div><div class="gm-l">Minutes</div></div>
       <div class="gm-item"><div class="gm-n">Mid-Heavy</div><div class="gm-l">Weight</div></div>
       <div class="gm-item"><div class="gm-n">14+</div><div class="gm-l">Age</div></div>
-      <div class="gm-item"><div class="gm-n" style="color:#22c55e;">Seeking Publisher</div><div class="gm-l">Prototype complete and ready to play</div></div>
     </div>
-    <div class="g-btns">
-      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit%20and%20prototype%20details.%0A%0AThank%20you." class="apple-btn ab-dark">Send publisher enquiry</a>
+    <div class="rv d2"><span class="g-status"><span class="g-status-dot"></span>Seeking Publisher · Prototype Ready</span></div>
+    <div class="g-btns rv d3">
+      <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Send publisher enquiry</a>
       <a href="index.html#contact" class="apple-btn ab-outline">Get in touch</a>
     </div>
   </div>
-  <div class="g-hero-right">
-    <div class="g-hero-right-bg" style="background: radial-gradient(ellipse at 70% 50%, rgba(34,197,94,.06) 0%, transparent 65%), #fff;"></div>
-    <div class="g-hero-box" id="heroBox"><img src="synthelyst_box.png" alt="Synthelyst"></div>
+  <div class="g-hero-right rv d2">
+    <div class="g-hero-box"><img src="synthelyst_box.png" alt="Synthelyst"></div>
   </div>
 </section>
 
 <!-- IMAGE STRIP -->
-<div class="img-strip"><div class="img-strip-cell"><img src="synthelyst_spread.png" alt="" loading="lazy"></div><div class="img-strip-cell"><img src="synthelyst_pellets.png" alt="" loading="lazy"></div><div class="img-strip-cell"><img src="synthelyst_board.png" alt="" loading="lazy"></div></div>
+<div class="g-strip">
+  <div class="g-strip-cell"><img src="synthelyst_board.png" alt="" loading="lazy"></div>
+  <div class="g-strip-cell"><img src="synthelyst_card1.png" alt="" loading="lazy"></div>
+  <div class="g-strip-cell"><img src="synthelyst_pellets.png" alt="" loading="lazy"></div>
+</div>
 
 <!-- INTRODUCTION -->
-<section class="gs">
-<div class="gc">
-  <div class="intro-block">
-    <span class="gs-ey rv" style="color:#22c55e;">About the Game</span>
-    <p class="big-p rv d1">A cooperative-competitive eurogame about bioplastics, sustainability, and the price of progress.</p>
-    <p class="body-p rv">Synthelyst places players as CEOs of competing bioplastics companies in 2035 — a near-future world where sustainable materials are both the economic frontier and the last line of ecological defence. Build supply chains, manage clean energy, resolve environmental crises, and outmanoeuvre rivals for market dominance.</p><p class="body-p rv">Designed by Mehrad Niasari, an active bioplastics R&D researcher at Oxford University, Synthelyst is the only strategy game built on the genuine science and economics of bioplastic production. Every feedstock, every energy system, every polymer trade-off is real.</p><p class="body-p rv">What makes Synthelyst commercially exceptional is its dual audience: it is a compelling strategy game for the hobby market and a powerful ESG education tool for corporate training, university programmes, and sustainability initiatives.</p>
-  </div>
+<section class="g-section">
+<div class="g-section-inner">
+  <span class="g-ey rv">About the Game</span>
+  <p class="g-lead rv d1">A cooperative-competitive strategy game about bioplastics, sustainability, and the price of progress — designed by a working bioplastics researcher.</p>
+  <p class="g-body rv d2">Synthelyst places players as CEOs of competing bioplastics companies in 2035, a near-future world where sustainable materials are both the economic frontier and the last line of ecological defence.</p>
+  <p class="g-body rv d2">Designed by Mehrad Niasari, an active bioplastics R&D researcher at Oxford, Synthelyst is unique in the strategy gaming market: a game grounded in genuine science and economics of biomaterial production, with every feedstock, energy system, and polymer trade-off reflecting real industrial practice.</p>
+  <p class="g-body rv d3">What makes Synthelyst commercially exceptional is its dual audience: a compelling strategy game for the hobby market and a documented education tool for corporate ESG training, university programmes, and sustainability initiatives.</p>
 </div>
 </section>
 
-<div class="cin rv">
-  <img src="synthelyst_pellets.png" class="cin-img" alt="" loading="lazy">
-  
+<!-- CINEMATIC 1 -->
+<div class="g-cin">
+  <img class="g-cin-img" src="synthelyst_pellets.png" alt="" loading="lazy">
+  <div class="g-cin-tint" style="background:rgba(0,0,0,.5);"></div>
+  <div class="g-cin-body">
+    <h3 class="g-cin-h rv">Real Bioplastics Science</h3>
+    <p class="g-cin-p rv d1">Designed by an active bioplastics researcher — every feedstock and energy trade-off is grounded in real industrial science, not metaphor.</p>
+  </div>
+</div>
 
-<!-- WHAT MAKES IT UNIQUE -->
-<section class="gs" style="background:var(--light);">
-<div class="gc">
-  <span class="gs-ey rv" style="color:#22c55e;">Key Strengths</span>
-  <h2 class="gs-h rv d1">What makes<br>Synthelyst exceptional.</h2>
+<!-- WHY IT'S EXCEPTIONAL -->
+<section class="g-section alt">
+<div class="g-section-inner">
+  <span class="g-ey rv">For Publishers</span>
+  <h2 class="g-h rv d1">What makes Synthelyst exceptional.</h2>
+  <p class="g-body rv d2">Genuine commercial differentiation. Real IP depth. Documented partnership opportunities. The right publisher will recognise the unique position.</p>
   <div class="feat-grid">
-<div class="feat-card rv"><span class="fc-icon">🌿</span><div class="fc-title">Real Bioplastics Science</div><div class="fc-body">Five real feedstocks — corn, sugarcane, potato, milk protein, algae — each with authentic production profiles, energy requirements, and environmental footprints rooted in actual industrial research.</div></div>
-<div class="feat-card rv"><span class="fc-icon">⚡</span><div class="fc-title">Energy Systems</div><div class="fc-body">Build solar, wind, hydro, and geothermal energy networks to power production. Fossil fuel options exist — but every shortcut accelerates the shared loss condition.</div></div>
-<div class="feat-card rv"><span class="fc-icon">🌍</span><div class="fc-title">Earth Health Mechanic</div><div class="fc-body">A shared loss condition that creates genuine cooperative-competitive tension. Players compete for Victory Points while collectively managing planetary collapse. If Earth Health reaches zero, everyone loses — regardless of score.</div></div>
-<div class="feat-card rv"><span class="fc-icon">🏭</span><div class="fc-title">Asymmetric Companies</div><div class="fc-body">Five distinct company boards with unique strategic identities. Each has a Core ability and a once-per-game Big Bet — creating replayability and genuinely different playstyles.</div></div>
-<div class="feat-card rv"><span class="fc-icon">💼</span><div class="fc-title">ESG Education Potential</div><div class="fc-body">Synthelyst is actively being considered for corporate ESG training programmes, university sustainability modules, and secondary school science curricula. The educational IP is real and documented.</div></div>
-<div class="feat-card rv"><span class="fc-icon">📦</span><div class="fc-title">Prototype Complete</div><div class="fc-body">Full prototype ready to play today. Rulebook finalised. Science accuracy verified by a working bioplastics researcher. All design documentation available immediately.</div></div>
+    <div class="feat-card rv">
+      <div class="fc-title">Authentic Bioplastics Science</div>
+      <p class="fc-body">Designed by a working bioplastics R&D researcher. Every feedstock, energy system, and material trade-off reflects actual industrial science — making this one of the most scientifically grounded games in the hobby.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="fc-title">Cooperative-Competitive Tension</div>
+      <p class="fc-body">A shared loss condition creates genuine strategic tension. Players compete individually for Victory Points while collectively managing planetary outcomes — a uniquely modern mechanical design.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="fc-title">ESG Education Potential</div>
+      <p class="fc-body">Actively being considered for corporate ESG training, university sustainability modules, and secondary school science curricula. The educational IP is real, documented, and ready to license.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="fc-title">Asymmetric Strategic Identities</div>
+      <p class="fc-body">Five distinct company boards, each with unique abilities and strategic paths. High replayability built into the core design — a hallmark of premium eurogame design.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="fc-title">Prototype Complete</div>
+      <p class="fc-body">Full playable prototype available today. Rulebook finalised. Science accuracy documentation included. All design files ready for immediate publisher review.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="fc-title">Aligned with Industry Priorities</div>
+      <p class="fc-body">The game's sustainability narrative aligns with current ESG priorities across multiple industries — creating partnership opportunities with corporate sustainability programmes worldwide.</p>
+    </div>
+
   </div>
 </div>
 </section>
 
-<div class="cin-body"><h3 class="cin-h">The World Board</h3><p class="cin-p">Six global production regions, clean energy infrastructure, and the Earth Health tracker — all on one cinematic table presence.</p></div>
+<!-- CINEMATIC 2 -->
+<div class="g-cin">
+  <img class="g-cin-img" src="synthelyst_board.png" alt="" loading="lazy">
+  <div class="g-cin-tint" style="background:rgba(0,0,0,.55);"></div>
+  <div class="g-cin-body">
+    <h3 class="g-cin-h rv">A Living World Board</h3>
+    <p class="g-cin-p rv d1">Six global production regions, clean energy infrastructure, and a shared Earth Health system — all on one cinematic table presence.</p>
+  </div>
 </div>
 
-<!-- FOR PUBLISHERS -->
-<section class="gs">
-<div class="gc">
-  <div class="pub-cols">
+<!-- TWO-COLUMN PUBLISHER SECTION -->
+<section class="g-section">
+<div class="g-section-inner">
+  <div class="pub-two">
     <div>
-      <span class="gs-ey rv" style="color:#22c55e;">For Publishers</span>
-      <h2 class="gs-h rv d1" style="font-size:clamp(26px,4vw,44px);">A game that teaches what matters.</h2>
-      <p class="gs-p rv d2">Synthelyst is unique in the market: a competitive strategy game that makes players viscerally understand why sustainability is hard — and why it is necessary. No other eurogame occupies this space.</p>
-      <ul class="blist rv d3">
-<li class="blist-item"><div class="blist-dot" style="background:rgba(34,197,94,.07);">📦</div><div><strong>Prototype ready to play — schedule a session today</strong></div></li>
-<li class="blist-item"><div class="blist-dot" style="background:rgba(34,197,94,.07);">📄</div><div><strong>Full rulebook and bioplastics science documentation</strong></div></li>
-<li class="blist-item"><div class="blist-dot" style="background:rgba(34,197,94,.07);">🌿</div><div><strong>ESG education licensing — corporate and university programmes</strong></div></li>
-<li class="blist-item"><div class="blist-dot" style="background:rgba(34,197,94,.07);">🔬</div><div><strong>Science accuracy verified by working bioplastics researcher</strong></div></li>
-<li class="blist-item"><div class="blist-dot" style="background:rgba(34,197,94,.07);">🌍</div><div><strong>Suitable for Spiel Essen, UK Games Expo, Cannes</strong></div></li>
-<li class="blist-item"><div class="blist-dot" style="background:rgba(34,197,94,.07);">💼</div><div><strong>Potential for corporate sustainability branding partnerships</strong></div></li>
-      </ul>
+      <span class="g-ey rv">Available Now</span>
+      <h2 class="g-h rv d1">Ready for the right partner.</h2>
+      <p class="g-body rv d2">Catalyst welcomes serious publisher conversations. Whether you are seeking a prototype-ready title to bring to market or wish to engage with a game still in active development, we are here.</p>
+      <p class="g-body rv d2">All design documentation, science accuracy reports, and press materials are available immediately on request. We are happy to arrange demonstrations at your offices, at international conventions, or via video.</p>
+      <div class="rv d3" style="margin-top:24px;">
+        <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Send publisher enquiry</a>
+      </div>
     </div>
-    <div class="split-img rv" style="min-height:360px;border-radius:var(--radius);overflow:hidden;">
-      <img src="synthelyst_spread.png" alt="Synthelyst" loading="lazy" style="border-radius:var(--radius);">
+    <div class="pub-two-img rv d2">
+      <img src="synthelyst_spread.png" alt="Synthelyst" loading="lazy">
     </div>
   </div>
-</div>
-</section>
 
-<!-- GALLERY -->
-<section class="gs" style="background:var(--light);">
-<div class="gc">
-  <span class="gs-ey rv" style="color:#22c55e;">Game Components</span>
-  <h2 class="gs-h rv d1">See it in detail.</h2>
-  <div class="hgallery rv d2">
-    <div class="hgallery-card"><img src="synthelyst_spread.png" alt="" loading="lazy"><div class="hgallery-lbl">Game Spread</div></div><div class="hgallery-card"><img src="synthelyst_pellets.png" alt="" loading="lazy"><div class="hgallery-lbl">Component Detail</div></div><div class="hgallery-card"><img src="synthelyst_board.png" alt="" loading="lazy"><div class="hgallery-lbl">Cards Detail</div></div>
-  </div>
-</div>
-</section>
-
-<!-- FAQ -->
-<section class="gs">
-<div class="gc">
-  <span class="gs-ey rv" style="color:#22c55e;">Publisher Questions</span>
-  <h2 class="gs-h rv d1">Frequently asked<br>by publishers.</h2>
-  <div class="faq-block">
-<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>What makes Synthelyst commercially distinctive?</span><span class="faq-icon" style="border-color:#22c55e;color:#22c55e;">+</span></button><div class="faq-a"><div class="faq-a-inner">It is the only strategy eurogame built on bioplastics science, with dual market positioning: hobby game market and ESG education. This opens publishing and licensing channels unavailable to any comparable game.</div></div></div>
-<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>What is the ESG education opportunity?</span><span class="faq-icon" style="border-color:#22c55e;color:#22c55e;">+</span></button><div class="faq-a"><div class="faq-a-inner">Synthelyst teaches how collective action problems work, why plastic pollution is structurally difficult to solve, and what bioplastics actually are. Corporate ESG training, university sustainability modules, and school science programmes are all viable licensing targets.</div></div></div>
-<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>Is the prototype available to review?</span><span class="faq-icon" style="border-color:#22c55e;color:#22c55e;">+</span></button><div class="faq-a"><div class="faq-a-inner">Yes — the prototype is complete and ready to play. We can arrange a demonstration at your offices or at a convention. Contact us to schedule.</div></div></div>
-<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>What brand partnership opportunities exist?</span><span class="faq-icon" style="border-color:#22c55e;color:#22c55e;">+</span></button><div class="faq-a"><div class="faq-a-inner">Potential co-branding with sustainable materials companies, environmental organisations, and corporate sustainability initiatives. The game's messaging aligns with current ESG priorities across multiple industries.</div></div></div>
-<div class="faq-item rv"><button class="faq-q" onclick="faq(this)"><span>Who designed Synthelyst?</span><span class="faq-icon" style="border-color:#22c55e;color:#22c55e;">+</span></button><div class="faq-a"><div class="faq-a-inner">Mehrad Niasari, a bioplastics R&D researcher at Oxford University. The science in Synthelyst reflects his actual research — making it one of the most authentically grounded games in the hobby.</div></div></div>
-  </div>
-</div>
-</section>
-
-<!-- CTA -->
-<section class="gs" style="background:var(--light);">
-<div class="gc">
   <div class="pub-cta rv">
-    <h3>Interested in publishing Synthelyst?</h3>
-    <p>Prototype ready, full design documentation, science accuracy verified. ESG education licensing also available. Let's talk.</p>
-    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit%20and%20prototype%20details.%0A%0AThank%20you." class="apple-btn ab-teal">Send publisher enquiry</a>
+    <h3>Let's bring Synthelyst to market.</h3>
+    <p>Reach out today. We respond within 48 hours and welcome conversations with publishers worldwide.</p>
+    <a href="mailto:duo.boardgame.design@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-teal">Send publisher enquiry</a>
   </div>
 </div>
 </section>
 
 <footer>
-<div class="wrap">
   <div class="foot-inner">
-    <a href="index.html" class="foot-brand"><img src="catalyst_logo.png" alt="Catalyst">Catalyst Board Games</a>
+    <a href="index.html" class="foot-brand"><img src="catalyst_logo.png" alt="">Catalyst Board Games</a>
     <ul class="foot-nav">
       <li><a href="index.html">Home</a></li>
       <li><a href="jabir.html">Jabir</a></li>
@@ -169,43 +295,21 @@
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
     <div class="foot-social">
-      <a href="https://instagram.com/catalyst.boardgames" target="_blank">📷</a>
-      <a href="mailto:duo.boardgame.design@gmail.com">✉️</a>
-      <a href="https://wa.me/447541178881" target="_blank">💬</a>
-      <a href="https://t.me/mehrad_nia" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8L17 7l-3.8 12.2-2.9-4.7-4.8-2.7z" fill="#fff"/></svg></a>
+      <a href="https://instagram.com/catalyst.boardgames" target="_blank" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="#1d1d1f"/></svg></a>
+      <a href="mailto:duo.boardgame.design@gmail.com" title="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2" stroke="#1d1d1f" stroke-width="1.6"/><path d="M2.5 7l9.5 6 9.5-6" stroke="#1d1d1f" stroke-width="1.6"/></svg></a>
+      <a href="https://wa.me/447541178881" target="_blank" title="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 21l1.4-5.1A8.9 8.9 0 1 1 8.1 19.6L3 21z" fill="#25D366"/><path d="M16.7 14c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a7 7 0 0 1-3.5-3 .4.4 0 0 1 .1-.5l.6-.8c.1-.2.1-.4 0-.5-.1-.1-.7-1.5-.9-2.1-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.3 5.1 4.5 2.5 1 3 .8 3.6.7.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.6-.3z" fill="#fff"/></svg></a>
+      <a href="https://t.me/mehrad_nia" target="_blank" title="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8l11.6-4.5c.5-.2 1 .1.9.7l-2 9.4c-.1.5-.5.7-1 .4l-2.8-2.1-1.4 1.3c-.2.1-.3.2-.5.2l.2-2.9 5.3-4.8c.2-.2 0-.3-.3-.1l-6.6 4.1-2.8-.9c-.6-.2-.6-.6.1-.8z" fill="#fff"/></svg></a>
     </div>
     <span class="foot-copy">© 2025 Catalyst Board Games · Oxford</span>
   </div>
-</div>
 </footer>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
 <script>
-gsap.registerPlugin(ScrollTrigger);
-window.addEventListener('scroll',()=>{document.getElementById('siteNav').style.boxShadow=scrollY>20?'0 1px 0 #d2d2d7':'none';},{passive:true});
-gsap.from('.g-eyebrow',{opacity:0,y:16,duration:.9,ease:'power3.out',delay:.2});
-gsap.from('.g-title',{opacity:0,y:28,duration:1,ease:'power3.out',delay:.35});
-gsap.from('.g-sub',{opacity:0,y:18,duration:.9,ease:'power3.out',delay:.5});
-gsap.from('.g-meta',{opacity:0,y:16,duration:.8,ease:'power3.out',delay:.65});
-gsap.from('.g-btns',{opacity:0,y:14,duration:.8,ease:'power3.out',delay:.78});
-gsap.to('#heroBox',{y:-16,duration:3,ease:'sine.inOut',yoyo:true,repeat:-1});
-gsap.to('#heroBox',{y:60,ease:'none',scrollTrigger:{trigger:'.g-hero',start:'top top',end:'bottom top',scrub:1}});
-document.querySelectorAll('.cin .cin-img').forEach(img=>{
-  gsap.to(img,{y:70,ease:'none',scrollTrigger:{trigger:img.closest('.cin'),start:'top bottom',end:'bottom top',scrub:1.5}});
-});
-document.querySelectorAll('.split-img img').forEach(img=>{
-  gsap.to(img,{y:50,ease:'none',scrollTrigger:{trigger:img.closest('.split-img'),start:'top bottom',end:'bottom top',scrub:1.5}});
-});
-document.querySelectorAll('.feat-card').forEach(c=>{
-  c.addEventListener('mousemove',e=>{
-    const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-    c.style.transform=`perspective(500px) rotateX(${-y*6}deg) rotateY(${x*6}deg) translateY(-3px)`;
-  });
-  c.addEventListener('mouseleave',()=>c.style.transform='');
-});
-const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*55);});},{threshold:.07});
+window.addEventListener('scroll',()=>{document.getElementById('siteNav').style.boxShadow = scrollY > 20 ? '0 1px 0 rgba(0,0,0,.08)' : 'none';},{passive:true});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+},{threshold:.1,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
-function faq(btn){const item=btn.closest('.faq-item'),open=item.classList.contains('open');item.closest('.faq-block').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');}
 </script>
 </body>
 </html>
