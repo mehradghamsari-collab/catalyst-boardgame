@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catalyst Board Games — Oxford Science Game Studio</title>
+<title>Nardshir Games — Oxford Science Game Studio</title>
 <meta name="description" content="Four real-life inspired strategy board games by Mehrad Niasari & Anita Mansouri. Oxford. Seeking publishers worldwide.">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -23,21 +23,23 @@
   background: var(--light); border-radius: 980px;
   padding: 6px 14px; font-size: 11px; font-weight: 600;
   letter-spacing: .06em; text-transform: uppercase;
-  color: var(--mid); margin-bottom: 18px;
+  color: var(--mid); margin-bottom: 28px;
 }
 .hero-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2.5s ease infinite; }
 @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,201,177,.4); } 70% { box-shadow: 0 0 0 8px rgba(0,201,177,0); } }
-.hero-name {
-  font-size: clamp(52px, 11vw, 132px); font-weight: 700;
-  letter-spacing: -.05em; line-height: .88; color: var(--black);
-  margin-bottom: 6px;
+.hero-logo-mark {
+  width: min(80vw, 520px);
+  margin: 0 auto 12px;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,.06));
+  transition: transform .4s ease;
 }
-.hero-name .grad {
-  display: block;
-  background: linear-gradient(90deg, #00c9b1, #00e5cf 40%, #f5a623);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+.hero-logo-mark:hover { transform: scale(1.02); }
+.hero-logo-mark img {
+  width: 100%; height: auto; display: block;
+  object-fit: contain;
 }
-.hero-studio { font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--mid); margin-bottom: 22px; }
+@media (min-width: 1024px) { .hero-logo-mark { width: min(60vw, 600px); } }
+.hero-studio { font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--mid); margin-bottom: 22px; margin-top: 4px; }
 .hero-tagline { font-size: clamp(15px, 2vw, 19px); color: var(--mid); line-height: 1.6; max-width: 520px; margin: 0 auto 28px; }
 .hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
 
@@ -49,18 +51,7 @@
 @media (min-width: 640px) { .hero-stage { height: 360px; } }
 @media (min-width: 1024px) { .hero-stage { height: 400px; } }
 /* Logo behind */
-.hero-logo-orbit {
-  position: absolute; top: 50%; left: 50%;
-  width: 180px; height: 180px;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  animation: orbit 24s linear infinite;
-  z-index: 0;
-  opacity: .07;
-}
-.hero-logo-orbit img { width: 100%; height: 100%; object-fit: contain; }
-@media (min-width: 640px) { .hero-logo-orbit { width: 240px; height: 240px; } }
-@keyframes orbit { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+
 /* Boxes */
 .fbox {
   position: absolute;
@@ -264,8 +255,7 @@
 
 <nav class="nav" id="siteNav">
   <a href="index.html" class="nav-logo">
-    <img src="catalyst_logo.png" alt="Catalyst">
-    <span class="nav-logo-text">Catalyst Board Games</span>
+    <img src="nardshir_logo.png" alt="Nardshir Games" class="nav-wordmark">
   </a>
   <ul class="nav-links">
     <li><a href="#games">Games</a></li>
@@ -273,24 +263,27 @@
     <li><a href="#publishers">Publishers</a></li>
     <li><a href="#newsletter">Newsletter</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="https://instagram.com/catalyst.boardgames" target="_blank">Instagram</a></li>
+    <li><a href="https://instagram.com/nardshir.games" target="_blank">Instagram</a></li>
   </ul>
-  <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Catalyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20your%20games.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="nav-cta-btn">Publisher enquiry</a>
+  <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Nardshir%20Games&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20your%20games.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="nav-cta-btn">Publisher enquiry</a>
   <button class="hamburger" onclick="document.getElementById('mobNav').classList.toggle('open')"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-pill rv"><span class="hero-pill-dot"></span>Real-Life Inspired Board Games</div>
-  <h1 class="hero-name rv d1">Catalyst<span class="grad">Boardgames</span></h1>
-  <p class="hero-studio rv d2">Oxford Science Game Studio</p>
+  <div class="hero-pill rv"><span class="hero-pill-dot"></span>Boardgames Inspired by Real-Life</div>
+  
+  <div class="hero-logo-mark rv d1">
+    <img src="nardshir_logo.png" alt="Nardshir Games" />
+  </div>
+  
+  <p class="hero-studio rv d2">Oxford Game Studio · Est. 2023</p>
   <p class="hero-tagline rv d3">Four strategy games grounded in real chemistry, ecology, fashion, and materials science. Designed for publishers who value genuine IP.</p>
   <div class="hero-btns rv d4">
     <a href="#games" class="apple-btn ab-dark">Explore the games</a>
-    <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Catalyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20your%20games.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Publisher enquiry</a>
+    <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%20%E2%80%94%20Nardshir%20Games&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20your%20games.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Publisher enquiry</a>
   </div>
   <div class="hero-stage rv d5">
-    <div class="hero-logo-orbit"><img src="catalyst_logo.png" alt=""></div>
     <div class="fbox fb1"><img src="jabir_box.png" alt="Jabir: The Perfumer"></div>
     <div class="fbox fb2"><img src="synthelyst_box.png" alt="Synthelyst"></div>
     <div class="fbox fb3"><img src="washwheel_box.png" alt="WashWheel"></div>
@@ -331,7 +324,7 @@
     <p class="gf-desc rv d2">Step into the workshop of a master perfumer. Harvest real aromatic botanicals, extract essences through authentic chemistry, and compose fragrances that outshine every rival. The only eurogame built on genuine perfumery science.</p>
     <div class="gf-btns rv d3">
       <a href="jabir.html" class="apple-btn ab-dark">View details</a>
-      <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
+      <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir%3A%20The%20Perfumer&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
     </div>
   </div>
 </div>
@@ -348,7 +341,7 @@
     <p class="gf-desc rv d2">You are CEO of a bioplastics firm in 2035. Build sustainable supply chains, manage clean energy networks, and prevent ecological collapse — while outmanoeuvring rivals for market dominance. Every mechanic is grounded in real bioplastics science.</p>
     <div class="gf-btns rv d3">
       <a href="synthelyst.html" class="apple-btn ab-dark">View details</a>
-      <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
+      <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
     </div>
   </div>
 </div>
@@ -365,7 +358,7 @@
     <p class="gf-desc rv d2">Run a professional textile laboratory. The rotating Wash Wheel drives a live resource market. Match detergent chemistry to each garment's real fibre profile — or risk damaging valuable pieces and losing critical points.</p>
     <div class="gf-btns rv d3">
       <a href="washwheel.html" class="apple-btn ab-dark">View details</a>
-      <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20WashWheel.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
+      <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20WashWheel.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
     </div>
   </div>
 </div>
@@ -382,7 +375,7 @@
     <p class="gf-desc rv d2">Step into Paris Fashion Week. Draft iconic fashion pieces, build your outfit tableau, and outscore rivals through harmony, audacity, and trend awareness. One bold Statement piece anchors your look — everything else must serve it.</p>
     <div class="gf-btns rv d3">
       <a href="mise-en-scene.html" class="apple-btn ab-dark">View details</a>
-      <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
+      <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-outline">Enquire</a>
     </div>
   </div>
 </div>
@@ -397,7 +390,7 @@
   <div class="about-grid">
     <div>
       <div class="about-img rv">
-        <img src="lifestyle_play.png" alt="Catalyst games in play" loading="lazy">
+        <img src="lifestyle_play.png" alt="Nardshir Games in play" loading="lazy">
       </div>
       <div class="pillars">
         <div class="pillar rv"><div class="pi-icon">⚗️</div><div class="pi-name">Science</div><div class="pi-desc">Real chemistry</div></div>
@@ -412,7 +405,7 @@
       <span class="eyebrow rv">The Studio</span>
       <h2 class="section-h rv d1">Mehrad &amp; Anita.</h2>
       <p class="about-quote rv d2">Games that transform <em>curiosity</em> into strategy.</p>
-      <p class="about-body rv d3">Catalyst Board Games is an Oxford science game studio founded by a chemist and a statistician. We design for curious adults, board game publishers, and students who haven't yet discovered that science can be thrilling.</p>
+      <p class="about-body rv d3">Nardshir Games is an Oxford science game studio founded by a chemist and a statistician. We design for curious adults, board game publishers, and students who haven't yet discovered that science can be thrilling.</p>
       <p class="about-body rv d3">Mehrad turns real chemistry and scientific research into elegant mechanics. Anita stress-tests every system with statistical rigour. Every game must be both scientifically accurate and genuinely compelling to play.</p>
       <div class="designers">
         <div class="d-pill rv d4">
@@ -434,20 +427,20 @@
 <div class="section-inner">
   <div style="text-align:center;max-width:540px;margin:0 auto 0;">
     <span class="eyebrow rv">For Publishers</span>
-    <h2 class="section-h rv d1">The Catalyst Portfolio.</h2>
+    <h2 class="section-h rv d1">The Nardshir Portfolio.</h2>
     <p class="section-p rv d2" style="margin:0 auto;">Science-driven eurogames with genuine IP depth. Based in Oxford — available for demos, meetings, and conventions worldwide.</p>
   </div>
   <div class="pub-enq-grid rv d3">
-    <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-j">
+    <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%3A%20Jabir&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20Jabir%3A%20The%20Perfumer.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-j">
       <span class="pe-icon">⚗️</span><div><div class="pe-name">Jabir: The Perfumer</div><div class="pe-act">Prototype ready · Enquire</div></div><span class="pe-arr">›</span>
     </a>
-    <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-s">
+    <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%3A%20Synthelyst&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20Synthelyst.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-s">
       <span class="pe-icon">🌿</span><div><div class="pe-name">Synthelyst</div><div class="pe-act">Prototype ready · Enquire</div></div><span class="pe-arr">›</span>
     </a>
-    <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20WashWheel.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-w">
+    <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%3A%20WashWheel&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20WashWheel.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-w">
       <span class="pe-icon">🫧</span><div><div class="pe-name">WashWheel</div><div class="pe-act">In design · Enquire</div></div><span class="pe-arr">›</span>
     </a>
-    <a href="mailto:catalyst.boardgames@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Catalyst%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-m">
+    <a href="mailto:nardshir.games@gmail.com?subject=Publisher%20Enquiry%3A%20Mise%20en%20Scene&body=Hello%20Nardshir%2C%0A%0AI%20am%20interested%20in%20Mise%20en%20Scene.%20Please%20send%20your%20press%20kit.%0A%0AThank%20you." class="pub-enq pe-m">
       <span class="pe-icon">👗</span><div><div class="pe-name">Mise en Scène</div><div class="pe-act">Concepting · Enquire</div></div><span class="pe-arr">›</span>
     </a>
   </div>
@@ -460,7 +453,7 @@
     <div class="offer-item">🔬 Science accuracy documentation included</div>
   </div>
   <div style="text-align:center;margin-top:30px;" class="rv">
-    <a href="mailto:catalyst.boardgames@gmail.com?subject=Press%20Kit%20Request&body=Hello%20Catalyst%2C%0A%0APlease%20send%20me%20your%20full%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Request full press kit</a>
+    <a href="mailto:nardshir.games@gmail.com?subject=Press%20Kit%20Request&body=Hello%20Nardshir%2C%0A%0APlease%20send%20me%20your%20full%20press%20kit.%0A%0AThank%20you." class="apple-btn ab-dark">Request full press kit</a>
   </div>
 </div>
 </section>
@@ -474,9 +467,9 @@
       <h2 class="section-h rv d1">Get in touch.</h2>
       <p class="section-p rv d2">Publishers, educators, brands, and media — we respond within 48 hours.</p>
       <div class="c-links">
-        <a href="mailto:catalyst.boardgames@gmail.com" class="c-link rv d3">
+        <a href="mailto:nardshir.games@gmail.com" class="c-link rv d3">
           <span class="cl-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2" stroke="#1d1d1f" stroke-width="1.6"/><path d="M2.5 7l9.5 6 9.5-6" stroke="#1d1d1f" stroke-width="1.6"/></svg></span>
-          <div><div class="cl-lbl">Email</div><div class="cl-val">catalyst.boardgames@gmail.com</div></div>
+          <div><div class="cl-lbl">Email</div><div class="cl-val">nardshir.games@gmail.com</div></div>
         </a>
         <a href="https://wa.me/447541178881" target="_blank" class="c-link rv d3">
           <span class="cl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 21l1.4-5.1A8.9 8.9 0 1 1 8.1 19.6L3 21z" fill="#25D366"/><path d="M16.7 14c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a7 7 0 0 1-3.5-3 .4.4 0 0 1 .1-.5l.6-.8c.1-.2.1-.4 0-.5-.1-.1-.7-1.5-.9-2.1-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.3 5.1 4.5 2.5 1 3 .8 3.6.7.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.6-.3z" fill="#fff"/></svg></span>
@@ -486,9 +479,9 @@
           <span class="cl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8l11.6-4.5c.5-.2 1 .1.9.7l-2 9.4c-.1.5-.5.7-1 .4l-2.8-2.1-1.4 1.3c-.2.1-.3.2-.5.2l.2-2.9 5.3-4.8c.2-.2 0-.3-.3-.1l-6.6 4.1-2.8-.9c-.6-.2-.6-.6.1-.8z" fill="#fff"/></svg></span>
           <div><div class="cl-lbl">Telegram</div><div class="cl-val">@mehrad_nia</div></div>
         </a>
-        <a href="https://instagram.com/catalyst.boardgames" target="_blank" class="c-link rv d3">
+        <a href="https://instagram.com/nardshir.games" target="_blank" class="c-link rv d3">
           <span class="cl-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="#1d1d1f"/></svg></span>
-          <div><div class="cl-lbl">Instagram</div><div class="cl-val">@catalyst.boardgames</div></div>
+          <div><div class="cl-lbl">Instagram</div><div class="cl-val">@nardshir.games</div></div>
         </a>
       </div>
     </div>
@@ -514,7 +507,7 @@
         <div id="panel-email" class="ch-panel" style="display:none;">
           <button class="ch-back" onclick="reset()">← Back</button>
           <form id="cForm" action="https://formspree.io/f/xeedpvqp" method="POST">
-            <input type="hidden" name="_subject" value="Catalyst Website Enquiry">
+            <input type="hidden" name="_subject" value="Nardshir Website Enquiry">
             <div class="form-row-2">
               <div><label class="form-lbl">Name</label><input class="form-inp" type="text" name="name" required></div>
               <div><label class="form-lbl">Email</label><input class="form-inp" type="email" name="email" required></div>
@@ -589,7 +582,7 @@
 
 <footer>
   <div class="foot-inner">
-    <a href="index.html" class="foot-brand"><img src="catalyst_logo.png" alt="">Catalyst Board Games</a>
+    <a href="index.html" class="foot-brand"><img src="nardshir_logo.png" alt="Nardshir Games" class="nav-wordmark"></a>
     <ul class="foot-nav">
       <li><a href="jabir.html">Jabir</a></li>
       <li><a href="synthelyst.html">Synthelyst</a></li>
@@ -598,12 +591,12 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="foot-social">
-      <a href="https://instagram.com/catalyst.boardgames" target="_blank" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="#1d1d1f"/></svg></a>
-      <a href="mailto:catalyst.boardgames@gmail.com" title="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2" stroke="#1d1d1f" stroke-width="1.6"/><path d="M2.5 7l9.5 6 9.5-6" stroke="#1d1d1f" stroke-width="1.6"/></svg></a>
+      <a href="https://instagram.com/nardshir.games" target="_blank" title="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="#1d1d1f" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1" fill="#1d1d1f"/></svg></a>
+      <a href="mailto:nardshir.games@gmail.com" title="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2" stroke="#1d1d1f" stroke-width="1.6"/><path d="M2.5 7l9.5 6 9.5-6" stroke="#1d1d1f" stroke-width="1.6"/></svg></a>
       <a href="https://wa.me/447541178881" target="_blank" title="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 21l1.4-5.1A8.9 8.9 0 1 1 8.1 19.6L3 21z" fill="#25D366"/><path d="M16.7 14c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a7 7 0 0 1-3.5-3 .4.4 0 0 1 .1-.5l.6-.8c.1-.2.1-.4 0-.5-.1-.1-.7-1.5-.9-2.1-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.3 5.1 4.5 2.5 1 3 .8 3.6.7.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.6-.3z" fill="#fff"/></svg></a>
       <a href="https://t.me/mehrad_nia" target="_blank" title="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2AABEE"/><path d="M5.5 11.8l11.6-4.5c.5-.2 1 .1.9.7l-2 9.4c-.1.5-.5.7-1 .4l-2.8-2.1-1.4 1.3c-.2.1-.3.2-.5.2l.2-2.9 5.3-4.8c.2-.2 0-.3-.3-.1l-6.6 4.1-2.8-.9c-.6-.2-.6-.6.1-.8z" fill="#fff"/></svg></a>
     </div>
-    <span class="foot-copy">© 2025 Catalyst Board Games · Oxford</span>
+    <span class="foot-copy">© 2025 Nardshir Games · Oxford</span>
   </div>
 </footer>
 
@@ -648,8 +641,8 @@ if(cf)cf.addEventListener('submit',async e=>{
   }catch{st.className='form-st er';st.textContent='Something went wrong. Email us directly.';}
   btn.textContent='Send message';btn.disabled=false;
 });
-function sendWA(){const m=document.getElementById('wa-m').value.trim();if(!m)return;const n=document.getElementById('wa-n').value.trim();window.open('https://wa.me/447541178881?text='+encodeURIComponent('Hello Catalyst,'+(n?'\nFrom: '+n:'')+'\n\n'+m),'_blank');}
-function sendTG(){const m=document.getElementById('tg-m').value.trim();if(!m)return;const n=document.getElementById('tg-n').value.trim();window.open('https://t.me/mehrad_nia?text='+encodeURIComponent('Hello Catalyst,'+(n?'\nFrom: '+n:'')+'\n\n'+m),'_blank');}
+function sendWA(){const m=document.getElementById('wa-m').value.trim();if(!m)return;const n=document.getElementById('wa-n').value.trim();window.open('https://wa.me/447541178881?text='+encodeURIComponent('Hello Nardshir,'+(n?'\nFrom: '+n:'')+'\n\n'+m),'_blank');}
+function sendTG(){const m=document.getElementById('tg-m').value.trim();if(!m)return;const n=document.getElementById('tg-n').value.trim();window.open('https://t.me/mehrad_nia?text='+encodeURIComponent('Hello Nardshir,'+(n?'\nFrom: '+n:'')+'\n\n'+m),'_blank');}
 const nl=document.getElementById('nlForm');
 if(nl)nl.addEventListener('submit',async e=>{
   e.preventDefault();
